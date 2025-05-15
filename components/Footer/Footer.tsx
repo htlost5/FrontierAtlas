@@ -1,14 +1,19 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React = require('react');
+import home from "../../assets/images/icons/Footer/home.svg";
+import meter from "../../assets/images/icons/Footer/foots.svg";
+import calendar from "../../assets/images/icons/Footer/calendar.svg";
+import classroom from "../../assets/images/icons/Footer/classroom.svg";
+
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = () => {
     const icons = [
-        {name: 'home', Path: require('D:/htlost5_projects/FrontierAtlas/assets/images/icons/Footer/home.svg')},
-        {name: 'meter', Path: require('D:/htlost5_projects/FrontierAtlas/assets/images/icons/Footer/foots.svg')},
-        {name: 'calendar', Path: require('D:/htlost5_projects/FrontierAtlas/assets/images/icons/Footer/calendar.svg')},
-        {name: 'classroom', Path: require('../../assets/images/icons/Footer/classroom.svg')},
+        {name: 'home', icon: home },
+        {name: 'meter', icon: meter },
+        {name: 'calendar', icon: calendar },
+        {name: 'classroom', icon: classroom },
     ];
 
     return (
