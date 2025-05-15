@@ -5,6 +5,6 @@ const expoConfig = require('eslint-config-expo/flat');
 module.exports = defineConfig([
   expoConfig,
   {
-    ignores: ['dist/*'],
+    ignores: ['dist/*'], // '**/*.svg' を追加して、すべてのサブディレクトリの .svg ファイルを無視
   },
 ]);

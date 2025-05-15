@@ -1,26 +1,26 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import CalendarIcon from "../../assets/images/icons/Footer/calendar.svg";
+import ClassroomIcon from "../../assets/images/icons/Footer/classroom.svg";
+import MeterIcon from "../../assets/images/icons/Footer/foots.svg";
+import HomeIcon from "../../assets/images/icons/Footer/home.svg"; 
 import React = require('react');
-import home from "../../assets/images/icons/Footer/home.svg";
-import meter from "../../assets/images/icons/Footer/foots.svg";
-import calendar from "../../assets/images/icons/Footer/calendar.svg";
-import classroom from "../../assets/images/icons/Footer/classroom.svg";
-
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = () => {
     const icons = [
-        {name: 'home', icon: home },
-        {name: 'meter', icon: meter },
-        {name: 'calendar', icon: calendar },
-        {name: 'classroom', icon: classroom },
+        {name: 'home', icon: HomeIcon }, // コンポーネントを直接指定
+        {name: 'meter', icon: MeterIcon },
+        {name: 'calendar', icon: CalendarIcon },
+        {name: 'classroom', icon: ClassroomIcon },
     ];
 
     return (
         <View style={styles.container}>
             {icons.map((icon, index) => (
                 <View key={index} style={styles.iconContainer}>
-                    <Image source={icon.Path} style={styles.icon} />
+                    {/* Image コンポーネントではなく、SVG コンポーネントをレンダリング */}
+                    <icon.icon width={30} height={30} fill="white"/>
                     <Text style={styles.iconText}>{icon.name}</Text>
                 </View>
             ))}
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     iconContainer: {
         alignItems: 'center',
     },
-    icon: {
-        width: 110,
-        height: 30,
-        resizeMode: 'contain',
+    icon: { // 不要になったため削除またはコメントアウト
+        // width: 110,
+        // height: 30,
+        // resizeMode: 'contain',
     },
     iconText: {
         fontSize: 15,
-        marginTop: 0,
+        marginTop: 5, // アイコンとの間隔を調整
     },
 });
 
