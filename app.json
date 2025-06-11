@@ -4,7 +4,7 @@
     "slug": "FrontierAtlas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/startup/sample4.png",
     "scheme": "frontieratlas",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

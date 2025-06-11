@@ -14,4 +14,4 @@ module.exports = (async () => {
       sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
     },
   };
-})();
+})(); 

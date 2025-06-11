@@ -1,11 +1,12 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CalendarIcon from "../../assets/images/icons/Footer/calendar.svg";
-import ClassroomIcon from "../../assets/images/icons/Footer/classroom.svg";
-import MeterIcon from "../../assets/images/icons/Footer/foots.svg";
-import HomeIcon from "../../assets/images/icons/Footer/home.svg"; 
-import React = require('react');
+import CalendarIcon from '../../assets/images/icons/Footer/calendar.svg';
+import ClassroomIcon from '../../assets/images/icons/Footer/classroom.svg';
+import MeterIcon from '../../assets/images/icons/Footer/foots.svg';
+import HomeIcon from '../../assets/images/icons/Footer/home.svg';
 
-interface FooterProps {}
+
+interface FooterProps{}
 
 const Footer: React.FC<FooterProps> = () => {
     const icons = [
@@ -19,8 +20,7 @@ const Footer: React.FC<FooterProps> = () => {
         <View style={styles.container}>
             {icons.map((icon, index) => (
                 <View key={index} style={styles.iconContainer}>
-                    {/* Image コンポーネントではなく、SVG コンポーネントをレンダリング */}
-                    <icon.icon width={30} height={30} fill="white"/>
+                    <icon.icon></icon.icon>
                     <Text style={styles.iconText}>{icon.name}</Text>
                 </View>
             ))}
