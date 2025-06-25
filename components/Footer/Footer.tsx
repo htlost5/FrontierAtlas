@@ -16,7 +16,7 @@ const Footer: React.FC<FooterProps> = () => {
     const router = useRouter();
     const segments = useSegments();
 
-    const currentSegment = segments[segments.length - 1];
+    const currentSegment: string | undefined = segments[segments.length - 1];
 
     console.log('currentSegment:', currentSegment)
 
@@ -28,7 +28,13 @@ const Footer: React.FC<FooterProps> = () => {
     ];
 
     const handlePress = (path: string) => {
-        router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
+        let targetPath: string
+        if (path === '') {
+            targetPath = '/(tabs)';
+        } else {
+            targetPath = `/(tabs)/${path}`;
+        }
+        router.replace(targetPath);
     }
 
     return (
