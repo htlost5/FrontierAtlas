@@ -18,36 +18,25 @@ const Footer: React.FC<FooterProps> = () => {
 
     const currentSegment = segments[segments.length - 1];
 
-    console.log('currentSegment:', currentSegment)
-
     const icons = [
-        {name: 'home', icon: HomeIcon, path: '', size: 24 }, // コンポーネントを直接指定
-        {name: 'meter', icon: MeterIcon, path: 'meter', size: 26 },
+        {name: 'home', icon: HomeIcon, path: '', size: 28 }, // コンポーネントを直接指定
+        {name: 'meter', icon: MeterIcon, path: 'meter', size: 24 },
         {name: 'calendar', icon: CalendarIcon, path: 'calendar', size: 24 },
         {name: 'classroom', icon: ClassroomIcon, path: 'classroom', size: 24 },
     ];
 
     const handlePress = (path: string) => {
-        router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
+        router.replace(path === '' ? '/(tabs)' : `/(tabs)${path}`);
     }
 
     return (
         <View style={[styles.container, { paddingBottom: insets.bottom + 10 }]}>
             {icons.map((item, index) => {
-                let  isActive = false;
-                if (item.path === '') {
-                    isActive = (
-                        currentSegment === '' ||
-                        currentSegment === 'index' ||
-                        currentSegment === undefined ||
-                        currentSegment === '(tabs)'
-                    );
-                } else {
-                    isActive = currentSegment === item.path;
-                }
-
-                const iconColor = isActive ? '#007bff' : '#6c757d';
+                const isActive = item.path === '' 
+                    ? (currentSegment === '' || currentSegment === 'index' || currentSegment === undefined)
+                    : currentSegment === item.path;
                 
+                    const iconColor = isActive ? '#007bff' : '#6c757d';
                 return(
                     <TouchableOpacity
                         key={index}

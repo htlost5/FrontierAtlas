@@ -1,27 +1,15 @@
 import { Stack } from "expo-router";
-import { StyleSheet } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import React from "react";
 
 export default function RootLayout() {
   return (
-    <SafeAreaView style={styles.SafeAreaContent}>
+    <SafeAreaProvider>
+      <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
       <Stack>
-      <Stack.Screen
-        name='index'
-        options={{
-          headerShown: false,
-          title: 'Welcome',
-        }}
-      />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  SafeAreaContent: {
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-});
