@@ -1,11 +1,11 @@
 import { useRouter, useSegments } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import CalendarIcon from '../../assets/images/icons/Footer/calendar.svg';
 import ClassroomIcon from '../../assets/images/icons/Footer/classroom.svg';
-import MeterIcon from '../../assets/images/icons/Footer/foots.svg';
+import ToolIcon from '../../assets/images/icons/Footer/tools.svg';
 import HomeIcon from '../../assets/images/icons/Footer/home.svg';
 
 
@@ -22,23 +22,40 @@ const Footer: React.FC<FooterProps> = () => {
 
     const icons = [
         {name: 'home', icon: HomeIcon, path: '', size: 24 }, // コンポーネントを直接指定
-        {name: 'meter', icon: MeterIcon, path: 'meter', size: 26 },
+        {name: 'tools', icon: ToolIcon, path: 'tools', size: 26 },
         {name: 'calendar', icon: CalendarIcon, path: 'calendar', size: 24 },
         {name: 'classroom', icon: ClassroomIcon, path: 'classroom', size: 24 },
     ];
 
-    const handlePress = (path: string) => {
-        router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
+    const URLs = {
+        classrom: 'https://classroom.google.com'
+    };
+
+    const handlePress = async (path: string) => {
+        if (path !== "classroom"){
+            router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
+        }else{
+            try{
+                const supported = await Linking.canOpenURL(URLs['classrom']);
+                
+                if (supported) {
+                    await Linking.openURL(URLs["classrom"]);
+                } else {
+                    console.log('指定されたURLを開けません')
+                }
+            } catch (error) {
+                console.error('URLを開く際にエラーが発生しました', error);
+            }
+            
+        };
     }
 
     return (
-        <View style={[styles.container, { paddingBottom: insets.bottom + 10 }]}>
+        <View style={[styles.container, { paddingBottom: insets.bottom }]}>
             {icons.map((item, index) => {
                 let  isActive = false;
                 if (item.path === '') {
                     isActive = (
-                        currentSegment === '' ||
-                        currentSegment === 'index' ||
                         currentSegment === undefined ||
                         currentSegment === '(tabs)'
                     );

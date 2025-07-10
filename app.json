@@ -4,7 +4,7 @@
     "slug": "FrontierAtlas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/startup/sample4.png",
+    "icon": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
     "scheme": "frontieratlas",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.htlost5.FrontierAtlas"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/startup/FrontierAtlasLogo_ver1.PNG",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -38,6 +39,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "1b6e78b6-c7c3-4760-b085-bb85043c0650"
+      }
     }
   }
 }
