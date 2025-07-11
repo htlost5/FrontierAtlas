@@ -7,7 +7,7 @@
     "icon": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
     "scheme": "frontieratlas",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
@@ -27,7 +27,14 @@
     "plugins": [
       "expo-router",
       [
-        "expo-splash-screen",
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 21
+          }
+        }
+      ],
+      ["expo-splash-screen",
         {
           "image": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
           "imageWidth": 200,
