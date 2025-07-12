@@ -16,6 +16,11 @@
         "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
         "backgroundColor": "#ffffff"
       },
+      "splash": {
+        "image": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
       "edgeToEdgeEnabled": true,
       "package": "com.htlost5.FrontierAtlas"
     },
