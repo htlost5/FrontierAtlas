@@ -1,12 +1,13 @@
 import { useRouter, useSegments } from 'expo-router';
 import React from 'react';
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { startActivityAsync, ActivityAction } from 'expo-intent-launcher';
 
 import CalendarIcon from '../../assets/images/icons/Footer/calendar.svg';
 import ClassroomIcon from '../../assets/images/icons/Footer/classroom.svg';
-import ToolIcon from '../../assets/images/icons/Footer/tools.svg';
 import HomeIcon from '../../assets/images/icons/Footer/home.svg';
+import ToolIcon from '../../assets/images/icons/Footer/tools.svg';
 
 
 interface FooterProps{}
@@ -27,8 +28,12 @@ const Footer: React.FC<FooterProps> = () => {
         {name: 'classroom', icon: ClassroomIcon, path: 'classroom', size: 24 },
     ];
 
+    const ANDROID_PACKAGES = {
+        classroom: 'com.google.android.apps.classroom'
+    };
+
     const URLs = {
-        classrom: 'https://classroom.google.com'
+        classrom: 'https://classroom.google.com/'
     };
 
     const handlePress = async (path: string) => {
@@ -36,17 +41,14 @@ const Footer: React.FC<FooterProps> = () => {
             router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
         }else{
             try{
-                const supported = await Linking.canOpenURL(URLs['classrom']);
-                
-                if (supported) {
-                    await Linking.openURL(URLs["classrom"]);
-                } else {
-                    console.log('指定されたURLを開けません')
-                }
-            } catch (error) {
-                console.error('URLを開く際にエラーが発生しました', error);
-            }
-            
+                await startActivityAsync(
+                    android.intent.action.MAIN,
+                    { packageName: ANDROID_PACKAGES.classroom }
+                );
+            } catch(e) {
+                console.log('Failed to open Android app by package name:', e);
+                Linking.openURL(URLs.classrom);
+            };
         };
     }
 
