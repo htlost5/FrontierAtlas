@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "238337449471",
+    "project_id": "frontieratlas-65e41",
+    "storage_bucket": "frontieratlas-65e41.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238337449471:android:d2742558a3b8c3309c1bca",
+        "android_client_info": {
+          "package_name": "com.htlost.FrontierAtlas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238337449471-jd6hmdk9nem108787p3kqn3rtrpjdrhu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.htlost.FrontierAtlas",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "238337449471-9t779fslkasjgrh7gvkbmm9r0m8anq6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABggesAXzY4PGwL18zMdI0vpubM0SrkZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238337449471-9t779fslkasjgrh7gvkbmm9r0m8anq6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
