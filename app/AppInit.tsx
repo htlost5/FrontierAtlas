@@ -19,8 +19,6 @@ export default function AppInit({ children }: Props) {
         // await Font.loadAsync(...);
         // await fetchInitialData();
 
-        await 
-
       } catch (e) {
         console.warn(e);
       } finally {
