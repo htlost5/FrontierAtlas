@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "238337449471-jd6hmdk9nem108787p3kqn3rtrpjdrhu.apps.googleusercontent.com",
+          "client_id": "238337449471-8k0p6k9qfk8abtr4dfgoalju25q5ivm8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.htlost.FrontierAtlas",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "5db3aaa31d4573dcd8695cb919b77186dd1df0c9"
           }
         },
         {
