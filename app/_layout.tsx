@@ -9,7 +9,7 @@ export default function RootLayout() {
   return (
     <AppInit>
       <SafeAreaProvider>
-        <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
+        <StatusBar barStyle="light-content" backgroundColor="#3f15b3ff" />
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
