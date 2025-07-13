@@ -22,7 +22,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.htlost5.FrontierAtlas"
+      "package": "com.htlost.FrontierAtlas"
     },
     "web": {
       "bundler": "metro",
