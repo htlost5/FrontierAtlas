@@ -1,0 +1,181 @@
+1. react native expoの開発環境下で開発したandroidアプリにおいて、グーグル認証機能の実装を行った。その結果、[エラー400: redirect_uri_mismatch リクエストの詳細: flowName=GeneralOAuthFlow]というエラーが出力される。
+2. ログイン認証を開始したときに、アカウントの選択画面へ到達せずに、400エラーが出力される
+3. google cloud platformでは、ウェブクライアントID、アンドロイドクライアントIDにミスがないか、承認済Javascript生成元、承認済みリダイレクトURIに間違いがないかは確認している。
+4. 解析では、エラー原因の特定だけでなく、修正方法も提案してほしい。コードは必要があれば修正を依頼する。
+
+追加情報
+・expoのほかに、アカウント認証構築のため、firebaseも利用している。
+
+gcp情報
+anroid
+クライアントID：238337449471-8k0p6k9qfk8abtr4dfgoalju25q5ivm8.apps.googleusercontent.com
+パッケージ名：com.htlost.FrontierAtlas
+SHAー１ 証明書のフィンガープリント：D7:B2:14:4D:30:56:94:E2:29:3E:6B:01:84:93:BE:30:D1:B6:BC:29
+カスタムURIスキームにはチェックを入れていない
+
+web
+クライアントID：238337449471-9t779fslkasjgrh7gvkbmm9r0m8anq6u.apps.googleusercontent.com
+承認済みの JavaScript 生成元：https://auth.expo.io
+承認済みのリダイレクトURI：https://auth.expo.io/@htlost5/FrontierAtlas
+
+firebase
+ウェブクライアントID：238337449471-9t779fslkasjgrh7gvkbmm9r0m8anq6u.apps.googleusercontent.com
+d7:b2:14:4d:30:56:94:e2:29:3e:6b:01:84:93:be:30:d1:b6:bc:29
+SHA-1
+50:d4:9d:5c:d0:00:be:65:2a:a7:f9:80:18:ef:a0:f9:34:0b:c1:3c:7e:0a:bf:b5:b2:f9:5c:93:fb:0a:01:e3
+SHA-256	
+アプリ ID
+1:238337449471:web:42460ca99bd5c9f29c1bca 
+
+コード
+// components/AppInit.tsx
+import * as Google from "expo-auth-session/providers/google";
+import * as SplashScreen from "expo-splash-screen";
+import * as WebBrowser from "expo-web-browser";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential, User } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Button, StyleSheet, Text, View } from "react-native";
+import { auth, firebaseConfig } from "../firebaseConfig";
+
+const EXPO_PROXY_REDILECT_URI = 'https://auth.expo.io/@htlost5/FrontierAtlas';
+
+console.log("アプリが生成したリダイレクトURI:", EXPO_PROXY_REDILECT_URI);
+
+WebBrowser.maybeCompleteAuthSession();
+console.log("maybeCompleteAuthSession called");
+
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function AppInit({ children }: Props) {
+  const [isReady, setIsReady] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId: firebaseConfig.webClientId,
+    androidClientId: firebaseConfig.androidClientId,
+    redirectUri: EXPO_PROXY_REDILECT_URI
+  })
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsLoadingAuth(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      if (response.authentication && response.authentication.idToken) {
+        const idToken = response.authentication.idToken;
+        const credential = GoogleAuthProvider.credential(idToken);
+        signInWithCredential(auth, credential)
+          .then(() => {
+            console.log("Googleログインに成功しました！");
+          })
+          .catch((error) => {
+            console.error("Googleログインエラー:", error);
+            setIsLoadingAuth(false);
+          });
+      } else {
+        console.error("Google認証は成功しましたが、idTokenが見つかりません。");
+        setIsLoadingAuth(false);
+      }
+    } else if (response?.type === 'cancel' || response?.type === 'dismiss') {
+      console.log("Googleログインがキャンセルされました。");
+      setIsLoadingAuth(false);
+    } else if (response?.type === 'error') {
+      console.error("Google認証エラー", response.error);
+      setIsLoadingAuth(false);
+    }
+  }, [response]);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // スプラッシュ画面を自動非表示しないようにロック
+        await SplashScreen.preventAutoHideAsync();
+
+        // ここでフォントやAPIの初期化をやる（必要に応じて）
+        // await Font.loadAsync(...);
+        // await fetchInitialData();
+
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    prepare();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoadingAuth && isReady) {
+      SplashScreen.hideAsync();
+    }
+  }, [isLoadingAuth, isReady]);
+
+  useEffect(() => {
+    if (!isLoadingAuth) {
+      setIsReady(true);
+    }
+  }, [isLoadingAuth]);
+
+  if (!isReady || isLoadingAuth) {
+    // スプラッシュ画面のまま何も表示しない
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>認証状態を確認中...</Text>
+      </View>
+    );
+  }
+
+  if (!user) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>ログインしてください</Text>
+        <Button
+          title="Googleでログイン"
+          disabled={!request}
+          onPress={() => {
+            setIsLoadingAuth(true);
+            promptAsync().catch(error => {
+              console.error("Google認証プロンプトエラー:", error);
+              setIsLoadingAuth(false);
+            });
+          }}
+        />
+      </View>
+    );
+  }
+
+  // 初期化完了後は通常画面を表示
+  return(
+    <View style={{ flex: 1 }}>
+      {children}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+});
+
