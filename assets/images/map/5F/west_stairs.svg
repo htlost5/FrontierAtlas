@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="82" height="32" viewBox="0 0 82 32" id="west_stairs">
+<path d="M81.75 1.25V30.75H0.25V1.25H81.75Z" />
+<path d="M22 16H42M22 1L42 1M24 16V1M28 16V1M32 16V1M36 16V1M40 16V1" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M24 16H44M24 1L44 1M26 16V1M30 16V1M34 16V1M38 16V1M42 16V1" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M44 16H64M44 1L64 1M46 16V1M50 16V1M54 16V1M58 16V1M62 16V1" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M42 16H62M42 1L62 1M44 16V1M48 16V1M52 16V1M56 16V1M60 16V1" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M22 31H42M22 16H42M24 31V16M28 31V16M32 31V16M36 31V16M40 31V16" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M24 31H44M24 16H44M26 31V16M30 31V16M34 31V16M38 31V16M42 31V16" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M44 31H64M44 16H64M46 31V16M50 31V16M54 31V16M58 31V16M62 31V16" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+<path d="M42 31H62M42 16H62M44 31V16M48 31V16M52 31V16M56 31V16M60 31V16" stroke-linecap="round" stroke-linejoin="round" fill="black"/>
+</svg>
