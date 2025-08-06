@@ -3,12 +3,12 @@ const fs = require('fs');
 const appJsonPath = './app.json';
 const appJson = JSON.parse(fs.readFileSync(appJsonPath, 'utf8'));
 
-const packageJson = require('./package.json');
+const packageJson = require('../package.json');
 const newVersion = packageJson.version;
 
 // andoridのversionCode用に変換（整数型）
 const newVersionParts = newVersion.split(".");
-const newVersionCode = parseInt(newVersionParts[0]) * 100 + parseInt(newVersionParts[1]) * 10 + parseInt(newVersionParts[2])
+const newVersionCode = parseInt(newVersionParts[0]) * 10000 + parseInt(newVersionParts[1]) * 100 + parseInt(newVersionParts[2])
 
 
 // app.jsonのexpo.versionをpackage.jsonのversionに同期

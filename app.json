@@ -12,7 +12,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 000,
+      "versionCode": 0,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
         "backgroundColor": "#ffffff"
