@@ -69,7 +69,7 @@ const nameData = {
 export default function Floor5() {
     return(
         <View>
-            <SvgPanZoom maxScale="10">
+            <SvgPanZoom>
                 <Svg width="644" height="1536" viewBox="-161 -161 512 512">
                     <G transform="translate(0, 0)">
                         <G transform="translate(0, -63)">
