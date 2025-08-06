@@ -1,11 +1,12 @@
 // app/(tabs)/index.tsx (Home Screen)
-import { StyleSheet, Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Floor5 from "../screens/Map/Floors/Floor5";
 
 export default function Home() {
     return(
         <SafeAreaView style={styles.SafeAreaView}>
-            <Text style={styles.textContainer}>Home Screen</Text>
+            <Floor5 />
         </SafeAreaView>
     );
 }

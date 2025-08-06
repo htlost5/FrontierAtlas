@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="71" height="479" viewBox="0 0 71 479" id="corridor">
+<path d="M0 0H20V479H0V0Z" />
+<path d="M20 156H34V319H20V156Z" />
+<path d="M20 420H34V438.754H20V420Z" />
+<path d="M19.8237 470H70.8237V462H19.8237V470Z" />
+<path d="M20 8H71V16H20V8Z" />
+</svg>

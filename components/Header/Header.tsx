@@ -1,10 +1,9 @@
 import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Svg, { Circle } from 'react-native-svg';
 
-import AccountIcon from '../../assets/images/icons/Header/circle.svg'
-import FrontierAtlasLogo from '../../assets/images/startup/FrontierAtlasLogo_ver1.png'; // リネームに合わせて修正
+import AccountIcon from '../../assets/images/icons/Header/circle.svg';
 import MenuIcon from '../../assets/images/icons/Header/Menu.svg'; // Menu.svgを直接コンポーネントとしてインポート
+import FrontierAtlasLogo from '../../assets/images/startup/FrontierAtlasLogo_ver1.png'; // リネームに合わせて修正
 
 interface HeaderProps {}
 
@@ -29,6 +28,8 @@ const Header: React.FC<HeaderProps> = () => {
         </SafeAreaView>
     )
 }
+
+const account_size = '80%';
 
 const styles = StyleSheet.create({
     headerContainer: {
@@ -65,8 +66,8 @@ const styles = StyleSheet.create({
         // // borderColor: 'purple',
     },
     logoStyle: {
-        width: '90%',
-        height: '90%',
+        width: account_size || '80%',
+        height: account_size || '80%',
     },
     menuPlaceHolder: {
         position: 'absolute',
