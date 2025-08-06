@@ -1,7 +1,7 @@
 {
   "name": "frontieratlas",
   "main": "expo-router/entry",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "start": "expo starting",
     "reset-project": "node ./scripts/reset-project.js",
@@ -12,7 +12,6 @@
     "version:major": "npm run version:update -- --release-as major",
     "version:minor": "npm run version:update -- --release-as minor",
     "version:patch": "npm run version:update -- --release-as patch",
-
     "version:update": "standard-version $npm_config_release_as && npx react-native-version && node ./scripts/updateAppJsonVersion.js"
   },
   "expo": {
