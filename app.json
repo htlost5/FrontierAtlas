@@ -2,7 +2,7 @@
   "expo": {
     "name": "FrontierAtlas",
     "slug": "FrontierAtlas",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
     "scheme": "frontieratlas",
@@ -12,6 +12,7 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 000,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
         "backgroundColor": "#ffffff"
