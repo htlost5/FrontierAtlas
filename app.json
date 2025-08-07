@@ -4,7 +4,7 @@
     "slug": "FrontierAtlas",
     "version": "0.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
+    "icon": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
     "scheme": "frontieratlas",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": false,
@@ -14,11 +14,11 @@
     "android": {
       "versionCode": 0,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
+        "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
         "backgroundColor": "#ffffff"
       },
       "splash": {
-        "image": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
+        "image": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
@@ -28,7 +28,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/startup/FrontierAtlasLogo_ver1.png"
+      "favicon": "./assets/images/startup/FrontierAtlasLogo_splash_white.png"
     },
     "plugins": [
       "expo-router",
@@ -44,7 +44,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/startup/FrontierAtlasLogo_ver1.png",
+          "image": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"

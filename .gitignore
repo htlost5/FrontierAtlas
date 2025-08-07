@@ -1,43 +1,62 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# =========================
+# 🌐 General References
+# =========================
+# Learn more: https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# dependencies
+# =========================
+# 📦 Dependencies
+# =========================
 node_modules/
 
-# Expo
+# =========================
+# ⚙️ Expo / React Native
+# =========================
 .expo/
 dist/
 web-build/
 expo-env.d.ts
 
-# Native
+# =========================
+# 📱 Native (Android/iOS)
+# =========================
 .kotlin/
-*.orig.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
 
-# Metro
+# =========================
+# 🧠 Metro (React Native bundler)
+# =========================
 .metro-health-check*
 
-# debug
+# =========================
+# 🐞 Debug & Log Files
+# =========================
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.orig.*
 
-# macOS
-.DS_Store
-*.pem
+# =========================
+# 💻 OS-Specific
+# =========================
+.DS_Store        # macOS
+*.pem            # SSL鍵など（漏洩注意）
 
-# local env files
+# =========================
+# 🔐 Local Environment Variables
+# =========================
 .env*.local
 
-# typescript
+# =========================
+# 🧪 TypeScript
+# =========================
 *.tsbuildinfo
 
-#APK_files
-build_apk
-
-app-example
-build_apk
+# =========================
+# 📦 APK & Build Outputs
+# =========================
+build_apk/
+app-example/
