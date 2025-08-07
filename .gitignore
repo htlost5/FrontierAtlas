@@ -58,5 +58,6 @@ yarn-error.*
 # =========================
 # 📦 APK & Build Outputs
 # =========================
+*.apk
 build_apk/
 app-example/
