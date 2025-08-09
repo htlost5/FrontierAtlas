@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Svg, { G, Text, TSpan } from 'react-native-svg';
-import SvgPanZoom from 'react-native-svg-pan-zoom';
+import { GestureHandlerRootView, Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {useAnimatedStyle, useSharedValue, withSpring} from 'react-native-reanimated';
 
 import data from './map.json';
 
@@ -39,7 +40,6 @@ import West_multipurposeToilet from '../../../../assets/images/map/5F/west_multi
 import West_stairs from '../../../../assets/images/map/5F/west_stairs.svg';
 import West_terrace from '../../../../assets/images/map/5F/west_terrace.svg';
 import West_womenToilet from '../../../../assets/images/map/5F/west_womenToilet.svg';
-
 const nameData = {
     classrooms: {
         "S51": data["5F"].classrooms.S51.name.split("_"),
@@ -67,271 +67,295 @@ const nameData = {
 
 
 export default function Floor5() {
+
+    const translateX = useSharedValue(0);
+    const translateY = useSharedValue(0);
+
+    const drag = Gesture.Pan().onChange((Event) =>  {
+        translateX.value += Event.changeX;
+        translateY.value += Event.changeY;
+    });
+
+    const containerStyle = useAnimatedStyle(() => {
+        return {
+            transform: [
+                {
+                    translateX: translateX.value
+                },
+                {
+                    translateY: translateY.value
+                },
+            ],
+        };
+    });
+
     return(
-        <View>
-            <SvgPanZoom>
-                <Svg width="644" height="1536" viewBox="-161 -161 512 512">
-                    <G transform="translate(0, 0)">
-                        <G transform="translate(0, -63)">
-                            <Classroom_S51 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S51[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S51[1]}</TSpan>
-                            </Text>
+        <GestureHandlerRootView style={{flex: 1}}>
+            <GestureDetector gesture={drag}>
+                <Animated.View style={[containerStyle, { top: -280 }]}>
+                    <Svg width="644" height="1536" viewBox="-161 -161 512 512">
+                        <G transform="translate(0, 0)">
+                            <G transform="translate(0, -63)">
+                                <Classroom_S51 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S51[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S51[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -127)">
+                                <Classroom_S52 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S52[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S52[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -191)">
+                                <Classroom_S53 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S53[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S53[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -255)">
+                                <Classroom_S54 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S54[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S54[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -319)">
+                                <Classroom_S55 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S55[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S55[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -383)">
+                                <Classroom_S56 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S56[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S56[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -447)">
+                                <Classroom_S57 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S57[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S57[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(0, -511)">
+                                <Classroom_S58 width="59" height="64" fill={roomColors.classroom}/>
+                                <Text
+                                    x={ 59 / 2 }
+                                    y={ 64 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S58[0]}</TSpan>
+                                    <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S58[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(59, -494)">
+                                <Corridor fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(59, -15)">
+                                <East_evacuation fill={roomColors.evacuation}/>
+                            </G>
+                            <G transform="translate(79, -32.5)">
+                                <East_menToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(111.5, -70)">
+                                <East_womenToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(89, -55)">
+                                <East_multipurposeToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(93, -81)">
+                                <Elevator fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(79, -111)">
+                                <East_stairs fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(79, -147)">
+                                <East_locker width="82" height="28" fill={roomColors.others}/>
+                                <Text
+                                    x={ 82 / 2 }
+                                    y={ 28 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.east.locker[0]}</TSpan>
+                                    <TSpan x={82 / 2} dy="1.2em">{nameData.sections.east.locker[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(79, -175)">
+                                <East_infoLounge width="82" height="28" fill={roomColors.others}/>
+                                <Text
+                                    x={ 82 / 2 }
+                                    y={ 28 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.east.infoLounge[0]}</TSpan>
+                                    <TSpan x={82 / 2} dy="1.2em">{nameData.sections.east.infoLounge[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(93, -206)">
+                                <East_terrace width="68" height="31" fill={roomColors.terrace}/>
+                                <Text
+                                    x={ 68 / 2 }
+                                    y={ 31 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={68 / 2} dy="-0.5em">{nameData.sections.east.terrace[0]}</TSpan>
+                                    <TSpan x={68 / 2} dy="1.2em">{nameData.sections.east.terrace[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(59, -511)">
+                                <West_evacuation fill={roomColors.evacuation}/>
+                            </G>
+                            <G transform="translate(79, -511)">
+                                <West_menToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(111.5, -478)">
+                                <West_womenToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(89, -478)">
+                                <West_multipurposeToilet fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(79, -455)">
+                                <Vending fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(79, -429)">
+                                <West_stairs fill={roomColors.others}/>
+                            </G>
+                            <G transform="translate(79, -393)">
+                                <West_locker width="82" height="28" fill={roomColors.others}/>
+                                <Text
+                                    x={ 82 / 2 }
+                                    y={ 28 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.west.locker[0]}</TSpan>
+                                    <TSpan x={82 / 2} dy="1.2em">{nameData.sections.west.locker[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(79, -366)">
+                                <West_infoLounge width="82" height="28" fill={roomColors.others}/>
+                                <Text
+                                    x={ 82 / 2 }
+                                    y={ 28 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.west.infoLounge[0]}</TSpan>
+                                    <TSpan x={82 / 2} dy="1.2em">{nameData.sections.west.infoLounge[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(93, -339)">
+                                <West_terrace width="68" height="31" fill={roomColors.terrace}/>
+                                <Text
+                                    x={ 68 / 2 }
+                                    y={ 31 / 2 }
+                                    fontSize={roomText.fontsize}
+                                    fill={roomText.color}
+                                    textAnchor='middle'
+                                    alignmentBaseline='middle'
+                                >
+                                    <TSpan x={68 / 2} dy="-0.5em">{nameData.sections.west.terrace[0]}</TSpan>
+                                    <TSpan x={68 / 2} dy="1.2em">{nameData.sections.west.terrace[1]}</TSpan>
+                                </Text>
+                            </G>
+                            <G transform="translate(79, -55.25)">
+                                <Wall_01 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(118.5, -81)">
+                                <Wall_02 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(79, -81)">
+                                <Wall_03 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(79, -119)">
+                                <Wall_04 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(79, -399)">
+                                <Wall_05 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(124, -440)">
+                                <Wall_06 fill={roomColors.wall}/>
+                            </G>
+                            <G transform="translate(79.18, -478.23)">
+                                <Wall_07 fill={roomColors.wall}/>
+                            </G>
                         </G>
-                        <G transform="translate(0, -127)">
-                            <Classroom_S52 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S52[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S52[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -191)">
-                            <Classroom_S53 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S53[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S53[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -255)">
-                            <Classroom_S54 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S54[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S54[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -319)">
-                            <Classroom_S55 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S55[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S55[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -383)">
-                            <Classroom_S56 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S56[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S56[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -447)">
-                            <Classroom_S57 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S57[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S57[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(0, -511)">
-                            <Classroom_S58 width="59" height="64" fill={roomColors.classroom}/>
-                            <Text
-                                x={ 59 / 2 }
-                                y={ 64 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={59 / 2} dy="-0.5em">{nameData.classrooms.S58[0]}</TSpan>
-                                <TSpan x={59 / 2} dy="1.2em">{nameData.classrooms.S58[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(59, -494)">
-                            <Corridor fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(59, -15)">
-                            <East_evacuation fill={roomColors.evacuation}/>
-                        </G>
-                        <G transform="translate(79, -32.5)">
-                            <East_menToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(111.5, -70)">
-                            <East_womenToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(89, -55)">
-                            <East_multipurposeToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(93, -81)">
-                            <Elevator fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(79, -111)">
-                            <East_stairs fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(79, -147)">
-                            <East_locker width="82" height="28" fill={roomColors.others}/>
-                            <Text
-                                x={ 82 / 2 }
-                                y={ 28 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.east.locker[0]}</TSpan>
-                                <TSpan x={82 / 2} dy="1.2em">{nameData.sections.east.locker[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(79, -175)">
-                            <East_infoLounge width="82" height="28" fill={roomColors.others}/>
-                            <Text
-                                x={ 82 / 2 }
-                                y={ 28 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.east.infoLounge[0]}</TSpan>
-                                <TSpan x={82 / 2} dy="1.2em">{nameData.sections.east.infoLounge[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(93, -206)">
-                            <East_terrace width="68" height="31" fill={roomColors.terrace}/>
-                            <Text
-                                x={ 68 / 2 }
-                                y={ 31 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={68 / 2} dy="-0.5em">{nameData.sections.east.terrace[0]}</TSpan>
-                                <TSpan x={68 / 2} dy="1.2em">{nameData.sections.east.terrace[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(59, -511)">
-                            <West_evacuation fill={roomColors.evacuation}/>
-                        </G>
-                        <G transform="translate(79, -511)">
-                            <West_menToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(111.5, -478)">
-                            <West_womenToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(89, -478)">
-                            <West_multipurposeToilet fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(79, -455)">
-                            <Vending fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(79, -429)">
-                            <West_stairs fill={roomColors.others}/>
-                        </G>
-                        <G transform="translate(79, -393)">
-                            <West_locker width="82" height="28" fill={roomColors.others}/>
-                            <Text
-                                x={ 82 / 2 }
-                                y={ 28 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.west.locker[0]}</TSpan>
-                                <TSpan x={82 / 2} dy="1.2em">{nameData.sections.west.locker[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(79, -366)">
-                            <West_infoLounge width="82" height="28" fill={roomColors.others}/>
-                            <Text
-                                x={ 82 / 2 }
-                                y={ 28 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={82 / 2} dy="-0.5em">{nameData.sections.west.infoLounge[0]}</TSpan>
-                                <TSpan x={82 / 2} dy="1.2em">{nameData.sections.west.infoLounge[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(93, -339)">
-                            <West_terrace width="68" height="31" fill={roomColors.terrace}/>
-                            <Text
-                                x={ 68 / 2 }
-                                y={ 31 / 2 }
-                                fontSize={roomText.fontsize}
-                                fill={roomText.color}
-                                textAnchor='middle'
-                                alignmentBaseline='middle'
-                            >
-                                <TSpan x={68 / 2} dy="-0.5em">{nameData.sections.west.terrace[0]}</TSpan>
-                                <TSpan x={68 / 2} dy="1.2em">{nameData.sections.west.terrace[1]}</TSpan>
-                            </Text>
-                        </G>
-                        <G transform="translate(79, -55.25)">
-                            <Wall_01 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(118.5, -81)">
-                            <Wall_02 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(79, -81)">
-                            <Wall_03 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(79, -119)">
-                            <Wall_04 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(79, -399)">
-                            <Wall_05 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(124, -440)">
-                            <Wall_06 fill={roomColors.wall}/>
-                        </G>
-                        <G transform="translate(79.18, -478.23)">
-                            <Wall_07 fill={roomColors.wall}/>
-                        </G>
-                    </G>
-                </Svg>
-            </SvgPanZoom>
-        </View>
+                    </Svg>
+                </Animated.View>
+            </GestureDetector>
+        </GestureHandlerRootView>
     );
 }
 
