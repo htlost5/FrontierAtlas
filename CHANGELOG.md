@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.6](https://github.com/htlost5/FrontierAtlas/compare/v0.0.5...v0.15.6) (2025-08-09)
+
 ### [0.0.5](https://github.com/htlost5/FrontierAtlas/compare/v0.0.4...v0.0.5) (2025-08-09)
 
 ### [0.0.4](https://github.com/htlost5/FrontierAtlas/compare/v0.0.3...v0.0.4) (2025-08-09)
