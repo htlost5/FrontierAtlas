@@ -8,10 +8,9 @@ import FrontierAtlasLogo from '../../assets/images/appLogo/FrontierAtlasLogo_whi
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-    const insets = useSafeAreaInsets();
 
     return (
-        <SafeAreaView style={[styles.headerContainer, { paddingTop: insets.top }]}>
+        <View style={[styles.headerContainer]}>
             <View style={styles.logoWrapper}>
                 <View style={styles.accountPlaceHolder}>
                     <AccountIcon style={styles.accountStyle} fill='gray' />
@@ -25,7 +24,7 @@ const Header: React.FC<HeaderProps> = () => {
                     <MenuIcon style={styles.menuIconStyle} fill='black' />
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -34,12 +33,13 @@ const account_size = '80%';
 const styles = StyleSheet.create({
     headerContainer: {
         backgroundColor: "white",
-        height: 100,
+        height: 75,
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 20,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderTopColor: '#cccccc',
+        paddingTop: 25,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#000000',
         position: 'relative',
     },
     accountPlaceHolder: {

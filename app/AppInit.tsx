@@ -1,4 +1,10 @@
+// mavigationBarのエラー原因を特定 → 修正 → 一度保留
+// bottomTabの調整
+// topTabの作成
+// 階層メニューの作り方をリサーチ
+
 // components/AppInit.tsx
+// import * as NavigationBar from 'expo-navigation-bar';
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
@@ -17,8 +23,15 @@ export default function AppInit({ children }: Props) {
         await SplashScreen.preventAutoHideAsync();
 
         // 初期化処理をここに（必要に応じて追加）
-        // await loadFonts();
-        // await fetchInitialData();
+
+        // ナビゲーションバーを画面上に重ねる
+        // NavigationBar.setPositionAsync('absolute');
+
+        // // ナビゲーションバーの背景色を透明に設定
+        // NavigationBar.setBackgroundColorAsync('transparent');
+
+        // // ナビゲーションバーのボタンアイコンのスタイルを変更
+        // NavigationBar.setButtonStyleAsync('light');
 
       } catch (e) {
         console.warn("初期化エラー:", e);
@@ -59,3 +72,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+// ステータスバー、ナビゲーションバーの色調整

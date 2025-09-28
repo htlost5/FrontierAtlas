@@ -2,17 +2,18 @@
   "expo": {
     "name": "FrontierAtlas",
     "slug": "FrontierAtlas",
-    "version": "0.0.0",
+    "version": "0.15.6",
     "orientation": "portrait",
     "icon": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
     "scheme": "frontieratlas",
     "userInterfaceStyle": "automatic",
+    "jsEnjine": "hermes",
     "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 0,
+      "versionCode": 1506,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/startup/FrontierAtlasLogo_splash_white.png",
         "backgroundColor": "#ffffff"

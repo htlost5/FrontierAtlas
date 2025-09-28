@@ -1,23 +1,21 @@
 // app/(tabs)/index.tsx (Home Screen)
-import { Text, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Floor5 from "../screens/Map/Floors/Floor5";
+import { View, Text, StyleSheet } from "react-native";
 
-export default function Home() {
+export default function HomeScreen() {
     return(
-        <SafeAreaView style={styles.SafeAreaView}>
-            <Floor5 />
-        </SafeAreaView>
+        <View style={styles.container}>
+            <Text style={styles.textStyle}>Hello Worlld!!</Text>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    SafeAreaView: {
-        flex:1,
+    container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    textContainer: {
+    textStyle: {
         color: "black",
     }
 })

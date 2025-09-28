@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = () => {
 
     const handlePress = async (path: string) => {
         if (path !== "classroom"){
-            router.replace(`/(tabs)/${path ? `/${path}` : ''}`);
+            router.push(`/(tabs)/${path ? `/${path}` : ''}`);
         }else{
             try{
                 await startActivityAsync(

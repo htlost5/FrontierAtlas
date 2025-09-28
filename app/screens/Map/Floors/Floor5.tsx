@@ -67,6 +67,30 @@ const nameData = {
 
 
 export default function Floor5() {
+    const scale = useSharedValue(1);
+    const savedScale = useSharedValue(1);
+    const isZoomed = useSharedValue(false);
+    console.log(isZoomed);
+
+    const pinch = Gesture.Pinch().onUpdate((e) => {
+        scale.value = savedScale.value * e.scale;
+    })
+    .onEnd(() => {
+        savedScale.value = scale.value;
+    });
+
+    const doubleTap = Gesture.Tap().numberOfTaps(2).onStart(() => {
+        if (!isZoomed.value) {
+            scale.value = savedScale.value = 1.5;
+            isZoomed.value = true;
+        } else {
+            scale.value = savedScale.value = 1;
+            isZoomed.value = false;
+        }
+    })
+    .onEnd(() => {
+        savedScale.value = scale.value;
+    });
 
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
@@ -80,6 +104,9 @@ export default function Floor5() {
         return {
             transform: [
                 {
+                    scale: scale.value
+                },
+                {
                     translateX: translateX.value
                 },
                 {
@@ -89,9 +116,11 @@ export default function Floor5() {
         };
     });
 
+    const combined = Gesture.Simultaneous(pinch, drag, doubleTap);
+
     return(
-        <GestureHandlerRootView style={{flex: 1}}>
-            <GestureDetector gesture={drag}>
+        <GestureHandlerRootView style={styles.container}>
+            <GestureDetector gesture={combined}>
                 <Animated.View style={[containerStyle, { top: -280 }]}>
                     <Svg width="644" height="1536" viewBox="-161 -161 512 512">
                         <G transform="translate(0, 0)">
@@ -373,6 +402,9 @@ const roomText = {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     textWrapper: {
         color: 'black',
     },
