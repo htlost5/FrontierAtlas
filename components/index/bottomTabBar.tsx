@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, PlatformAndroidStatic, Linking } from 'react-native';
+import React from "react";
+import { View, StyleSheet, Animated, TouchableOpacity, Linking } from 'react-native';
 import { createBottomTabNavigator, BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import Icon, { Entypo, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { startActivityAsync } from "expo-intent-launcher";
+import { Entypo, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import HomeScreen from "@/app/(tabs)";
 import Tools from "@/app/(tabs)/tools";
 import Calendar from "@/app/(tabs)/calendar";
 import Classroom from "@/app/(tabs)/classroom";
-import { startActivityAsync } from "expo-intent-launcher";
 
 const icons: Record<string, { lib: any; name: string }> = {
     home: { lib: Feather, name: 'home'},
@@ -26,48 +25,119 @@ const appURLs = {
 };
 
 function MyTabBar({ state, navigation }: BottomTabBarProps) {
+    const animatedValuesRef = React.useRef<Animated.Value[]>(
+        state.routes.map(() => new Animated.Value(0))
+    );
+
+    React.useEffect(() => {
+        if (animatedValuesRef.current.length !== state.routes.length) {
+            animatedValuesRef.current = state.routes.map(() => new Animated.Value(0));
+        }
+    }, [state.routes]);
+
     return(
         <View style={styles.tabBar}>
             {state.routes.map((route, index) => {
+                const animatedValue = animatedValuesRef.current[index];
+
+                const iconScale = animatedValue.interpolate({
+                    inputRange: [0, 60, 100],
+                    outputRange: [1, 0.92, 0.85]
+                });
+
+                const textScale = animatedValue.interpolate({
+                    inputRange: [0, 60, 100],
+                    outputRange: [1, 0.95, 0.9]
+                });
+
+                // const interPolateIconSize = animatedValue.interpolate({
+                //     inputRange: [0, 60, 100],
+                //     outputRange: [26, 24, 22]
+                // });
+
+                // const interPolateTextSize = animatedValue.interpolate({
+                //     inputRange: [0, 60, 100],
+                //     outputRange: [12, 11, 10]
+                // });
+
                 const isFocused = state.index === index;
                 const IconComponent = icons[route.name].lib;
                 const iconName = icons[route.name].name;
 
+                const buttonSizeDown = (): Promise<void> => {
+                    return new Promise((resolve) => {
+                        Animated.timing(animatedValue, {
+                            toValue: 100,
+                            duration: 75,
+                            useNativeDriver: true,
+                        }).start();
+                        setTimeout(() => {
+                            resolve()
+                        }, 75)
+                    })
+                }
+
+                const buttonSizeUp = (): Promise<void> => {
+                    return new Promise((resolve) => {
+                        buttonSizeDown().finally(() => {
+                            Animated.timing(animatedValue, {
+                                toValue: 0,
+                                duration: 75,
+                                useNativeDriver: true,
+                            }).start();
+                            setTimeout(() => {
+                                resolve()
+                            }, 75);
+                        })
+                    })
+                }
+
                 const onPress = async() => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true,
-                    });
-
-                    if (route.name === 'classroom') {
-                        event.preventDefault();
-                        try {
-                            await startActivityAsync(
-                                "android.intent.MAIN",
-                                { packageName: ANDROID_PACKAGES.classroom }
-                            );
-                        } catch(e) {
-                            console.log(e);
-                            Linking.openURL(appURLs.classroom);
+                    buttonSizeUp().finally(async() => {
+                        const event = navigation.emit({
+                            type: 'tabPress',
+                            target: route.key,
+                            canPreventDefault: true,
+                        });
+                        
+                        if (route.name === 'classroom') {
+                            event.preventDefault();
+                            try {
+                                await startActivityAsync(
+                                    "android.intent.MAIN",
+                                    { packageName: ANDROID_PACKAGES.classroom }
+                                );
+                            } catch(e) {
+                                console.log(e);
+                                Linking.openURL(appURLs.classroom);
+                            };
+                            return;
                         };
-                        return;
-                    }
-
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name);
-                    };
+                        
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate(route.name);
+                        };
+                    })
                 };
 
                 
                 return (
-                    <TouchableOpacity key={route.key} onPress={onPress} style={{ flex: 1, alignItems: 'center' }}>
-                        <IconComponent
-                            name={iconName}
-                            size={24}
-                            color={isFocused ? 'blue' : 'gray'}
-                        />
-                        <Text style={[styles.textStyle, { color: isFocused ? 'blue' : 'gray' }]}>{route.name}</Text>
+                    <TouchableOpacity key={route.key} onPress={onPress} activeOpacity={1.0} style={{ flex: 1, alignItems: 'center' }}>
+                        <Animated.View style={{ transform: [{ scale: iconScale }], alignItems: 'center', justifyContent: 'center' }}>
+                            <IconComponent
+                                name={iconName}
+                                size={26}
+                                color={isFocused ? 'blue' : 'gray'}
+                            />
+                        </Animated.View>
+                        <Animated.Text
+                            style={[
+                                styles.textStyle,
+                                { color: isFocused ? 'blue' : 'gray', transform: [{ scale: textScale }] },
+                            ]}
+                        >
+                            {route.name}
+                        </Animated.Text>
                     </TouchableOpacity>
                 );
             })}

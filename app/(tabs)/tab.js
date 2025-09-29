@@ -1,5 +1,5 @@
 // import React from 'react';
-// import { Text, View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+// import { Text, View, StyleSheet, TouchableOpacity, StatusBar, Animated } from 'react-native';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,35 +36,78 @@
 //     <View style={styles.tabbar}>
 //       {state.routes.map((route, index) => {
 
+//         const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+//         const AnimatedText = Animated.createAnimatedComponent(Text);
+//         const animatedValue = new Animated.Value(0);
+//         const interPolateIconSize = animatedValue.interpolate({
+//           inputRange: [0, 60, 100],
+//           outputRange: [28, 26, 24],
+//         });
+//         const interPolateTextSize = animatedValue.interpolate({
+//           inputRange: [0, 60, 100],
+//           outputRange: [12, 11, 10],
+//         });
+
 //         const icons = {
 //           Home: 'home',
 //           Settings: 'settings',
 //           Premium: 'spotify',
 //         }
-//         let isFocused = (state.index === index);
+//         let isFocused = (state.index == index);
 
-//         const _onPress = () => {
-//           const event = navigation.emit({
-//             type: 'tabPress',
-//             target: route.key,
-//           });
-//           if (!isFocused && !event.defaultPrevented) {
-//             navigation.navigate(route.name);
-//           };
-//         };
+//         const buttonSizeDown = () => {
+//           return new Promise((resolve) => {
+//             Animated.timing(animatedValue, {
+//               toValue: 100,
+//               duration: 75,
+//               useNativeDriver: false,
+//             }).start();
+//             setTimeout(() => {
+//               resolve()
+//             }, 75)
+//           })
+//         }
+
+//         const buttonSizeUp = () => {
+//           return new Promise((resolve) => {
+//             buttonSizeDown().finally(() => {
+//               Animated.timing(animatedValue, {
+//                 toValue: 0,
+//                 duration: 75,
+//                 useNativeDriver: false,
+//               }).start();
+//               setTimeout(() => {
+//                 resolve()
+//               }, 75);
+//               })
+//             })
+//           }
+
+//           const _onPress = () => {
+//             buttonSizeUp().finally(() => {
+//               const event = navigation.emit({
+//                 type: 'tabPress',
+//                 target: route.key,
+//               });
+//               if (!isFocused && !event.defaultPrevented) {
+//                 navigation.navigate(route.name);
+//               };
+//             })
+//           }
 
 //         return (
 //           <View style={styles.tabButton} key={route.name}>
 //             <TouchableOpacity
 //               onPress={_onPress}
+//               activeOpacity={1.0}
 //               style={{ width:50, height:50, alignItems: 'center', justifyContent: 'center' }}
 //             >
-//               <Icon
-//                 name={(isFocused | (route.name === 'Premium')) ? icons[route.name] : icons[route.name] + '-outline'}
-//                 size={28} color={isFocused ? '#fefdff' : '#b7b4b7'}
-//                 style={styles.tabButtonIcon}
+//               <AnimatedIcon
+//                 name={(isFocused | (route.name == 'Premium')) ? icons[route.name] : icons[route.name] + '-outline'}
+//                 color={isFocused ? '#fefdff' : '#b7b4b7'}
+//                 style={[styles.tabButtonIcon, {fontSize: interPolateIconSize}]}
 //               />
-//               <Text style={[styles.tabLabel, {color: isFocused ? '#fefdff' : '#b7b4b7'}]}>{route.name}</Text>
+//               <AnimatedText style={{color: isFocused ? '#fefdff' : '#b7b4b7', fontSize: interPolateTextSize}}>{route.name}</AnimatedText>
 //             </TouchableOpacity>
 //           </View>
 //         )
