@@ -1,0 +1,48 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-10-11T23:59:03Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/779965463",
+        "building": "yes",
+        "name": "交流棟"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              139.6778375,
+              35.4980148
+            ],
+            [
+              139.6778099,
+              35.4977341
+            ],
+            [
+              139.6789859,
+              35.497657
+            ],
+            [
+              139.6790023,
+              35.4979384
+            ],
+            [
+              139.6787107,
+              35.4979561
+            ],
+            [
+              139.6778375,
+              35.4980148
+            ]
+          ]
+        ]
+      },
+      "id": "way/779965463"
+    }
+  ]
+}

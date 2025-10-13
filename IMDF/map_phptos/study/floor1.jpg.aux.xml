@@ -1,0 +1,104 @@
+<PAMDataset>
+  <Metadata>
+    <MDI key="EXIF_ApertureValue">(1.8)</MDI>
+    <MDI key="EXIF_BrightnessValue">(0)</MDI>
+    <MDI key="EXIF_ColorSpace">1</MDI>
+    <MDI key="EXIF_ComponentsConfiguration">0x01 0x02 0x03 0x00</MDI>
+    <MDI key="EXIF_DateTime">2025:05:08 16:39:51</MDI>
+    <MDI key="EXIF_DateTimeDigitized">2025:05:08 16:39:51</MDI>
+    <MDI key="EXIF_DateTimeOriginal">2025:05:08 16:39:51</MDI>
+    <MDI key="EXIF_DigitalZoomRatio">(1)</MDI>
+    <MDI key="EXIF_ExifVersion">0220</MDI>
+    <MDI key="EXIF_ExposureBiasValue">(0)</MDI>
+    <MDI key="EXIF_ExposureMode">0</MDI>
+    <MDI key="EXIF_ExposureProgram">0</MDI>
+    <MDI key="EXIF_ExposureTime">(0.033326)</MDI>
+    <MDI key="EXIF_Flash">0</MDI>
+    <MDI key="EXIF_FlashpixVersion">0100</MDI>
+    <MDI key="EXIF_FNumber">(1.8)</MDI>
+    <MDI key="EXIF_FocalLength">(4.266)</MDI>
+    <MDI key="EXIF_FocalLengthIn35mmFilm">0</MDI>
+    <MDI key="EXIF_GPSAltitude">(41)</MDI>
+    <MDI key="EXIF_GPSAltitudeRef">0x00</MDI>
+    <MDI key="EXIF_GPSDateStamp">2025:05:08</MDI>
+    <MDI key="EXIF_GPSLatitude">(35) (29) (54.3969)</MDI>
+    <MDI key="EXIF_GPSLatitudeRef">N</MDI>
+    <MDI key="EXIF_GPSLongitude">(139) (40) (41.7114)</MDI>
+    <MDI key="EXIF_GPSLongitudeRef">E</MDI>
+    <MDI key="EXIF_GPSProcessingMethod">0x41 0x53 0x43 0x49 0x49 0x00 0x00 0x00 0x43 0x45 0x4c 0x4c 0x49 0x44 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</MDI>
+    <MDI key="EXIF_GPSTimeStamp">(7) (39) (51)</MDI>
+    <MDI key="EXIF_GPSVersionID">0x02 0x02 0x00 0x00</MDI>
+    <MDI key="EXIF_ImageDescription"></MDI>
+    <MDI key="EXIF_Interoperability_Index">R98</MDI>
+    <MDI key="EXIF_Interoperability_Version">0x30 0x31 0x30 0x30</MDI>
+    <MDI key="EXIF_ISOSpeedRatings">1797</MDI>
+    <MDI key="EXIF_LightSource">255</MDI>
+    <MDI key="EXIF_Make">motorola</MDI>
+    <MDI key="EXIF_MakerNote">MOT</MDI>
+    <MDI key="EXIF_MaxApertureValue">(0)</MDI>
+    <MDI key="EXIF_MeteringMode">2</MDI>
+    <MDI key="EXIF_Model">moto g64 5G</MDI>
+    <MDI key="EXIF_Orientation">1</MDI>
+    <MDI key="EXIF_PixelXDimension">8160</MDI>
+    <MDI key="EXIF_PixelYDimension">4590</MDI>
+    <MDI key="EXIF_RecommendedExposureIndex">0</MDI>
+    <MDI key="EXIF_ResolutionUnit">2</MDI>
+    <MDI key="EXIF_SceneCaptureType">0</MDI>
+    <MDI key="EXIF_SceneType">0x01</MDI>
+    <MDI key="EXIF_SensingMethod">1</MDI>
+    <MDI key="EXIF_SensitivityType">0</MDI>
+    <MDI key="EXIF_ShutterSpeedValue">(0.033326)</MDI>
+    <MDI key="EXIF_Software"></MDI>
+    <MDI key="EXIF_SubSecTime">964</MDI>
+    <MDI key="EXIF_SubSecTime_Digitized">964</MDI>
+    <MDI key="EXIF_SubSecTime_Original">964</MDI>
+    <MDI key="EXIF_WhiteBalance">0</MDI>
+    <MDI key="EXIF_XResolution">(72)</MDI>
+    <MDI key="EXIF_YCbCrPositioning">2</MDI>
+    <MDI key="EXIF_YResolution">(72)</MDI>
+  </Metadata>
+  <Metadata domain="IMAGE_STRUCTURE">
+    <MDI key="SOURCE_COLOR_SPACE">YCbCr</MDI>
+    <MDI key="INTERLEAVE">PIXEL</MDI>
+    <MDI key="COMPRESSION">JPEG</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MINIMUM">3</MDI>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+      <MDI key="STATISTICS_MEAN">115.35918209877</MDI>
+      <MDI key="STATISTICS_STDDEV">70.653172577873</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">100</MDI>
+    </Metadata>
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="2">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MINIMUM">58</MDI>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+      <MDI key="STATISTICS_MEAN">127.99869791667</MDI>
+      <MDI key="STATISTICS_STDDEV">44.000036697715</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">100</MDI>
+    </Metadata>
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="3">
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MINIMUM">32</MDI>
+      <MDI key="STATISTICS_MAXIMUM">252</MDI>
+      <MDI key="STATISTICS_MEAN">132.96055169753</MDI>
+      <MDI key="STATISTICS_STDDEV">25.739504156698</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">100</MDI>
+    </Metadata>
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

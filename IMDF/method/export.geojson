@@ -1,0 +1,94 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-10-11T00:07:10Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/177929686",
+        "addr:block_number": "6",
+        "addr:city": "横浜市",
+        "addr:neighbourhood": "小野 sfh@city.yokohama.jp",
+        "contact:fax": "+81 45 511 3644",
+        "contact:phone": "+81 45 511 3654",
+        "contact:website": "https://www.edu.city.yokohama.lg.jp/school/hs/sfh/",
+        "name": "横浜市立横浜サイエンスフロンティア高等学校",
+        "name:en": "Yokohama Municipal Yokohama Science Frontier High School",
+        "name:ja": "横浜市立横浜サイエンスフロンティア高等学校",
+        "start_date": "2009",
+        "wikidata": "Q11543125",
+        "wikipedia": "ja:横浜市立横浜サイエンスフロンティア高等学校・附属中学校"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+    [
+      [
+        139.6787649,
+        35.499023
+      ],
+      [
+        139.6778261,
+        35.4990776
+      ],
+      [
+        139.6777721,
+        35.4984693
+      ],
+      [
+        139.6777573,
+        35.4982924
+      ],
+      [
+        139.6777711,
+        35.4979482
+      ],
+      [
+        139.6777988,
+        35.4973387
+      ],
+      [
+        139.677974,
+        35.4967537
+      ],
+      [
+        139.6788226,
+        35.4968066
+      ],
+      [
+        139.6789213,
+        35.4964249
+      ],
+      [
+        139.6794251,
+        35.4965053
+      ],
+      [
+        139.6790169,
+        35.4981633
+      ],
+      [
+        139.6788749,
+        35.4987348
+      ],
+      [
+        139.6788346,
+        35.4988822
+      ],
+      [
+        139.6788038,
+        35.4989641
+      ],
+      [
+        139.6787649,
+        35.499023
+      ]
+    ]
+        ]
+      },
+      "id": "way/177929686"
+    }
+  ]
+}
