@@ -1,9 +1,12 @@
 import { Stack } from "expo-router";
+import { enableScreens } from "react-native-screens";
 import React from "react";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import AppInit from "./AppInit";
+
+enableScreens();
 
 export default function RootLayout() {
   return (

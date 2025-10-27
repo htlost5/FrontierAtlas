@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "name": "studyhall4-5",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [139.677913921056, 35.49827660864211],
+            [139.67871826424587, 35.49827660552791],
+            [139.6787182624813, 35.49811281149539],
+            [139.67791392092423, 35.49811281094403],
+            [139.677913921056, 35.49827660864211]
+          ]
+        ]
+      },
+      "properties": {
+        "category": null,
+        "restriction": null,
+        "accessibility": null,
+        "name": {
+          "ja": null,
+          "en": null
+        },
+        "alt_name": null,
+        "display_point": {
+          "type": "Point",
+          "coordinates": [139.67828669200244, 35.49818723680764]
+        },
+        "level_id": null
+      }
+    }
+  ]
+}

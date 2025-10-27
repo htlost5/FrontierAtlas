@@ -10,8 +10,11 @@ module.exports = (async () => {
     },
     resolver: {
       ...defaultConfig.resolver,
-      assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
+      assetExts: [
+        ...defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
+        'geojson'
+      ],
       sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
     },
   };
-})(); 
+})();
