@@ -33,10 +33,9 @@ const account_size = '80%';
 const styles = StyleSheet.create({
     headerContainer: {
         backgroundColor: "white",
-        height: 75,
+        height: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 25,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#000000',
         position: 'relative',

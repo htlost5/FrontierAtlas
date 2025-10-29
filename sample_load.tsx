@@ -1,15 +1,13 @@
-import {
-  Camera,
-  FillLayer,
-  MapView,
-  ShapeSource,
-} from "@maplibre/maplibre-react-native";
 import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+
+import { Camera, FillLayer, MapView, ShapeSource } from "@maplibre/maplibre-react-native";
 
 import { Asset } from "expo-asset";
 import * as FileSystem from "expo-file-system";
 import type { FeatureCollection } from "geojson";
-import { StyleSheet, Text, View } from "react-native";
+
+import floor5 from "@/assets/imdf/studyhall/units/floor5.geojson";
 
 export default function Floor5() {
   const [unitGeoJson, setUnitGeoJson] = useState<FeatureCollection | null>(
@@ -20,9 +18,7 @@ export default function Floor5() {
   useEffect(() => {
     async function loadGeo() {
       try {
-        const asset = Asset.fromModule(
-          require("../../../../IMDF/unit.geojson")
-        );
+        const asset = Asset.fromModule(floor5);
         await asset.downloadAsync(); // アセット取得
         const text = await FileSystem.readAsStringAsync(asset.localUri!);
         const geojson = JSON.parse(text) as FeatureCollection;

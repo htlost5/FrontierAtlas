@@ -12,8 +12,12 @@ export default function RootLayout() {
   return (
     <AppInit>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar barStyle={"light-content"} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <StatusBar
+            barStyle="dark-content"
+            backgroundColor="transparent"
+            translucent={true}
+          />
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>

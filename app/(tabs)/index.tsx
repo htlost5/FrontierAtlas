@@ -1,11 +1,14 @@
 // app/(tabs)/index.tsx (Home Screen)
 import { StyleSheet, View } from "react-native";
-import Floor5 from "../screens/Map/Floors/Floor5";
+
+import MapScreen from "../screens/MapScreen";
+import FloorChange from "@/components/index/FloorChange";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Floor5 />
+      <FloorChange />
+      <MapScreen />
     </View>
   );
 }
@@ -13,5 +16,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+    backgroundColor: "transparent",
+  },
 });
