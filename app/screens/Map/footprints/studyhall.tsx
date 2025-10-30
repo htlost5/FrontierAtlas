@@ -25,7 +25,7 @@ export default function Studyhall() {
     <ShapeSource id="studyhall_source" shape={geoJson}>
       <FillLayer
         id="studyhall-fill"
-        style={{ fillColor: '#ffffffff' }}
+        style={{ fillColor: 'rgba(89, 89, 89, 1)' }}
       />
       <BackgroundLayer
         id="studyhall-back"

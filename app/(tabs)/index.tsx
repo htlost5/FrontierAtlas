@@ -7,8 +7,8 @@ import FloorChange from "@/components/index/FloorChange";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <FloorChange />
       <MapScreen />
+      <FloorChange />
     </View>
   );
 }
@@ -16,6 +16,5 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
   },
 });

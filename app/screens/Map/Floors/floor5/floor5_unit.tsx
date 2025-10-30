@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { BackgroundLayer, FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import { FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
 
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
@@ -26,10 +26,10 @@ export default function Floor5_unit() {
 
   return (
     <ShapeSource id="unit-source" shape={geoJson}>
-      <FillLayer 
-        id="unit-fill" 
+      <FillLayer
+        id="unit-fill"
         style={{
-           fillColor: "rgba(0, 0, 255, 0.5)"
+          fillColor: "rgba(0, 0, 255, 0.5)",
         }}
       />
     </ShapeSource>

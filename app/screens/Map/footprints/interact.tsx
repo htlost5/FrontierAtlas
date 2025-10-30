@@ -25,7 +25,7 @@ export default function Interact() {
     <ShapeSource id="interact_source" shape={geoJson}>
       <FillLayer
         id="interact-fill"
-        style={{ fillColor: '#ffffffff' }}
+        style={{ fillColor: 'rgba(89, 89, 89, 1)' }}
       />
       <BackgroundLayer
         id="interact-back"

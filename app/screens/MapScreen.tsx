@@ -11,6 +11,11 @@ import Interact from "../screens/Map/footprints/interact";
 import Studyhall from "../screens/Map/footprints/studyhall";
 import Venue from "../screens/Map/venue";
 
+const restrict_bound = {
+  ne: [139.677156, 35.496373],
+  sw: [139.679823, 35.499171]
+}
+
 export default function MapScreen() {
   console.log(Floor5);
   console.log(Venue);
@@ -27,8 +32,12 @@ export default function MapScreen() {
         }}
       />
       <Camera
-        zoomLevel={17}
+        zoomLevel={17.2}
+        maxZoomLevel={22}
+        minZoomLevel={17}
         centerCoordinate={[139.6784895108818, 35.49777179199512]}
+        maxBounds={restrict_bound}
+        animationDuration={1000}
       />
       <Venue />
       <Interact />
@@ -40,7 +49,6 @@ export default function MapScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "transparent",
+    flex: 1
   },
 });
