@@ -1,0 +1,27 @@
+[33m7287ecc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmap_preview[m[33m, [m[1;31morigin/map_preview[m[33m)[m HEAD@{0}: reset: moving to 7287ecc3a7bf3e0f75adc1c642e98c718b829bdc
+[33m7287ecc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmap_preview[m[33m, [m[1;31morigin/map_preview[m[33m)[m HEAD@{1}: commit: FloorChange完成/FloorScreen共通化/unit, section選択可
+[33m40d2d0d[m HEAD@{2}: commit: floorScreen共通化前/FloorChange未完成(色の表示に問題有り)
+[33m1ffc60a[m HEAD@{3}: commit: venue,footprint,floor5マップ画面の実装/FloorChangeの簡易実装
+[33mebc27d9[m HEAD@{4}: commit: IMDF-venue構造変更（FeatureCollectionに）/screen用imdf作成/screen-Mapファイル構造大幅変更/loading用カスタムフック作成
+[33m05f75af[m HEAD@{5}: checkout: moving from main to map_preview
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: checkout: moving from map_preview to main
+[33m05f75af[m HEAD@{7}: commit: IMDF用unit,section実装/Floor5.tsxの実装
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{8}: checkout: moving from main to map_preview
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{9}: checkout: moving from map_preview to main
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{10}: checkout: moving from main to map_preview
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{11}: reset: moving to ddb8827374d905354e59c6dd135e86932c763bdd
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{12}: reset: moving to ddb8827374d905354e59c6dd135e86932c763bdd
+[33mddb8827[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{13}: commit: IMDF/geojson作成, WGS及びローカル座標の定義
+[33m4ce8d88[m[33m ([m[1;31morigin/ui-menu[m[33m, [m[1;32mui-menu[m[33m)[m HEAD@{14}: merge ui-menu: Fast-forward
+[33me18174a[m HEAD@{15}: checkout: moving from ui-menu to main
+[33m4ce8d88[m[33m ([m[1;31morigin/ui-menu[m[33m, [m[1;32mui-menu[m[33m)[m HEAD@{16}: commit: bottomTabBarアニメーション実装
+[33mffcc695[m HEAD@{17}: commit: bottomTabBarの作り直し(公式コンポーネントの利用)/Headerの調整、_layout.tsxの整理などなど
+[33mf68f2a1[m[33m ([m[1;33mtag: [m[1;33mv0.15.6[m[33m)[m HEAD@{18}: commit: chore(release): 0.15.6
+[33m3230031[m[33m ([m[1;33mtag: [m[1;33mv0.0.5[m[33m)[m HEAD@{19}: commit: chore(release): 0.0.5
+[33m880db24[m[33m ([m[1;33mtag: [m[1;33mv0.0.4[m[33m)[m HEAD@{20}: commit: chore(release): 0.0.4
+[33mcc7ad7b[m[33m ([m[1;33mtag: [m[1;33mv0.0.3[m[33m)[m HEAD@{21}: commit: chore(release): 0.0.3
+[33m7bf6033[m[33m ([m[1;33mtag: [m[1;33mv0.0.2[m[33m)[m HEAD@{22}: commit: chore(release): 0.0.2
+[33md4768ad[m[33m ([m[1;33mtag: [m[1;33mv0.0.1[m[33m)[m HEAD@{23}: commit: chore(release): 0.0.1
+[33mdc17532[m HEAD@{24}: reset: moving to dc175327ab156efe74545ebd620fa5a14420138e
+[33mdc17532[m HEAD@{25}: commit: function型変更前コミット
+[33m69e9b76[m HEAD@{26}: reset: moving to 69e9b76fba111987548b71d73d7d786b2cd7833c

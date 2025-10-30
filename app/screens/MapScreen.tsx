@@ -6,7 +6,7 @@ import {
   Camera,
   MapView,
 } from "@maplibre/maplibre-react-native";
-import Floor5 from "../screens/Map/Floors/floor5/Floor5";
+import FloorN from "./Map/Floors/floor_n/screen";
 import Interact from "../screens/Map/footprints/interact";
 import Studyhall from "../screens/Map/footprints/studyhall";
 import Venue from "../screens/Map/venue";
@@ -16,9 +16,12 @@ const restrict_bound = {
   sw: [139.679823, 35.499171]
 }
 
-export default function MapScreen() {
-  console.log(Floor5);
-  console.log(Venue);
+type Props = {
+  floor_num: number;
+};
+
+export default function MapScreen({floor_num}: Props) {
+  const num = floor_num;
   return (
     <MapView
       style={[styles.container]}
@@ -42,7 +45,7 @@ export default function MapScreen() {
       <Venue />
       <Interact />
       <Studyhall />
-      <Floor5 />
+      <FloorN floor_num={num} />
     </MapView>
   );
 }
