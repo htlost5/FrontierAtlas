@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
 import interact from '@/assets/imdf/interact/footprints/interact.geojson';
-import { BackgroundLayer, FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import { BackgroundLayer, FillLayer, LineLayer, ShapeSource } from "@maplibre/maplibre-react-native";
 
 export default function Interact() {
   const { geoJson, loading, error } = useLoadGeoJson(interact);
@@ -25,12 +25,15 @@ export default function Interact() {
     <ShapeSource id="interact_source" shape={geoJson}>
       <FillLayer
         id="interact-fill"
-        style={{ fillColor: 'rgba(89, 89, 89, 1)' }}
-      />
-      <BackgroundLayer
-        id="interact-back"
         style={{
-          visibility: 'none',
+          fillColor: '#EDEDED',
+        }}
+      />
+      <LineLayer
+        id="interact-line"
+        style={{
+          lineColor: '#CFCFCF',
+          lineWidth: 1.5
         }}
       />
     </ShapeSource>

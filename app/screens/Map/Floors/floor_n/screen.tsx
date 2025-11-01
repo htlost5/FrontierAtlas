@@ -12,8 +12,8 @@ export default function FloorN({ floor_num }: Props) {
 
   return (
     <>
+      <FloorN_section floor_num={num} />
       <FloorN_unit floor_num={num} />
-      {/* <FloorN_section floor_num={num} /> */}
     </>
   );
 }

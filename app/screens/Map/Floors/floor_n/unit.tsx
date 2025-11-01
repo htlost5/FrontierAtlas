@@ -1,23 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import { FillLayer, LineLayer, ShapeSource } from "@maplibre/maplibre-react-native";
 
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
-import floor1 from '@/assets/imdf/studyhall/units/floor1.geojson';
-import floor2 from '@/assets/imdf/studyhall/units/floor2.geojson';
-import floor3 from '@/assets/imdf/studyhall/units/floor3.geojson';
-import floor4 from '@/assets/imdf/studyhall/units/floor4.geojson';
-import floor5 from '@/assets/imdf/studyhall/units/floor5.geojson';
+import floor1 from "@/assets/imdf/studyhall/units/floor1.geojson";
+import floor2 from "@/assets/imdf/studyhall/units/floor2.geojson";
+import floor3 from "@/assets/imdf/studyhall/units/floor3.geojson";
+import floor4 from "@/assets/imdf/studyhall/units/floor4.geojson";
+import floor5 from "@/assets/imdf/studyhall/units/floor5.geojson";
 
 const unitFiles: Record<number, any> = {
-    1: floor1,
-    2: floor2,
-    3: floor3,
-    4: floor4,
-    5: floor5
-}
+  1: floor1,
+  2: floor2,
+  3: floor3,
+  4: floor4,
+  5: floor5,
+};
 
 type Props = {
   floor_num: number;
@@ -48,7 +48,14 @@ export default function FloorN_unit({ floor_num }: Props) {
       <FillLayer
         id="unit-fill"
         style={{
-          fillColor: "rgba(0, 0, 255, 0.5)",
+          fillColor: "#C7E6A1",
+        }}
+      />
+      <LineLayer
+        id="unit-line"
+        style={{
+          lineColor: "#9BC06A",
+          lineWidth: 1.5,
         }}
       />
     </ShapeSource>

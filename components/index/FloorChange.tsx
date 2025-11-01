@@ -41,6 +41,7 @@ export default function FloorChange({ num, setNum }: Props_change) {
   return (
     <ScrollView
       style={styles.container}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         justifyContent: "center",
         alignItems: "center",
@@ -69,6 +70,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     width: 46,
     height: 200,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4
   },
   block: {
     width: 40,

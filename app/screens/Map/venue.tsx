@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
 import venue from "@/assets/imdf/venue.geojson";
-import { FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import { FillLayer, LineLayer, ShapeSource } from "@maplibre/maplibre-react-native";
 
 export default function Venue() {
   const { geoJson, loading, error } = useLoadGeoJson(venue);
@@ -25,7 +25,16 @@ export default function Venue() {
     <ShapeSource id="venue_source" shape={geoJson}>
       <FillLayer
         id="venue-fill"
-        style={{ fillColor: 'grey' }}
+        style={{
+          fillColor: "#E8F0FF",
+        }}
+      />
+      <LineLayer
+        id="venue-line"
+        style={{
+          lineColor: "#B8D1FF",
+          lineWidth: 1,
+        }}
       />
     </ShapeSource>
   );

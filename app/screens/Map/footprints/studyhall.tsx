@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
-import studyhall from '@/assets/imdf/studyhall/footprints/studyhall.geojson';
-import { BackgroundLayer, FillLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import studyhall from "@/assets/imdf/studyhall/footprints/studyhall.geojson";
+import { FillLayer, LineLayer, ShapeSource } from "@maplibre/maplibre-react-native";
 
 export default function Studyhall() {
   const { geoJson, loading, error } = useLoadGeoJson(studyhall);
@@ -23,14 +23,12 @@ export default function Studyhall() {
 
   return (
     <ShapeSource id="studyhall_source" shape={geoJson}>
-      <FillLayer
-        id="studyhall-fill"
-        style={{ fillColor: 'rgba(89, 89, 89, 1)' }}
-      />
-      <BackgroundLayer
-        id="studyhall-back"
+      <FillLayer id="studyhall-fill" style={{ fillColor: "#EDEDED" }} />
+      <LineLayer
+        id="studyhall-line"
         style={{
-          visibility: 'none',
+          lineColor: "#CFCFCF",
+          lineWidth: 1.5,
         }}
       />
     </ShapeSource>
