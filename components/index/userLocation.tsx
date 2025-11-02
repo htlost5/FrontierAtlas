@@ -14,8 +14,8 @@ export default function UserLocation({ cameraRef }: Props) {
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View style={styles.out1} />
-      <View style={styles.out2}/>
-      <View style={styles.out3}/>
+      <View style={styles.out2} />
+      <View style={styles.out3} />
     </TouchableOpacity>
   );
 }
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 4
+    elevation: 4,
   },
   out1: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: "#6299ffff",
     opacity: 0.5,
     height: 35,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   out2: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: "#ffffff",
     opacity: 1,
     height: 14,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   out3: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: "#0059ff",
     opacity: 1,
     height: 10,

@@ -6,6 +6,7 @@ import {
   Camera,
   CameraRef,
   MapView,
+  MapViewRef,
 } from "@maplibre/maplibre-react-native";
 import Interact from "../screens/Map/footprints/interact";
 import Studyhall from "../screens/Map/footprints/studyhall";
@@ -20,14 +21,17 @@ const restrict_bound = {
 type Props = {
   floor_num: number;
   cameraRef: React.RefObject<CameraRef | null>;
+  mapViewRef: React.RefObject<MapViewRef | null>;
 };
 
-export default function MapScreen({ floor_num, cameraRef }: Props) {
+export default function MapScreen({ floor_num, cameraRef, mapViewRef }: Props) {
   const num = floor_num;
+
   return (
     <MapView
       style={[styles.container]}
       mapStyle="https://api.maptiler.com/maps/jp-mierune-streets/style.json?key=Hg57EtvIfNmVzkBRxAoV"
+      ref={mapViewRef}
     >
       <BackgroundLayer
         id="index-back"

@@ -1,7 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { FillLayer, LineLayer, ShapeSource } from "@maplibre/maplibre-react-native";
+import {
+  FillLayer,
+  LineLayer,
+  ShapeSource,
+} from "@maplibre/maplibre-react-native";
 
 import useLoadGeoJson from "@/hooks/useLoadGeoJson";
 
@@ -44,21 +48,23 @@ export default function FloorN_unit({ floor_num }: Props) {
   }
 
   return (
-    <ShapeSource id="unit-source" shape={geoJson}>
-      <FillLayer
-        id="unit-fill"
-        style={{
-          fillColor: "#C7E6A1",
-        }}
-      />
-      <LineLayer
-        id="unit-line"
-        style={{
-          lineColor: "#9BC06A",
-          lineWidth: 1.5,
-        }}
-      />
-    </ShapeSource>
+    <>
+      <ShapeSource id="unit-source" shape={geoJson}>
+        <FillLayer
+          id="unit-fill"
+          style={{
+            fillColor: "#C7E6A1",
+          }}
+        />
+        <LineLayer
+          id="unit-line"
+          style={{
+            lineColor: "#9BC06A",
+            lineWidth: 1.5,
+          }}
+        />
+      </ShapeSource>
+    </>
   );
 }
 
