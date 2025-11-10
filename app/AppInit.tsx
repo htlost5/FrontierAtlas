@@ -5,6 +5,7 @@
 
 // components/AppInit.tsx
 // import * as NavigationBar from 'expo-navigation-bar';
+import loadAll from "@/functions/splash/cacheMaker";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
@@ -23,16 +24,11 @@ export default function AppInit({ children }: Props) {
         await SplashScreen.preventAutoHideAsync();
 
         // 初期化処理をここに（必要に応じて追加）
-
-        // ナビゲーションバーを画面上に重ねる
-        // NavigationBar.setPositionAsync('absolute');
-
-        // // ナビゲーションバーの背景色を透明に設定
-        // NavigationBar.setBackgroundColorAsync('transparent');
-
-        // // ナビゲーションバーのボタンアイコンのスタイルを変更
-        // NavigationBar.setButtonStyleAsync('light');
-
+        try {
+          await loadAll();
+        } catch(e) {
+          console.warn("初期化エラー", e);
+        }
       } catch (e) {
         console.warn("初期化エラー:", e);
       } finally {
@@ -45,7 +41,7 @@ export default function AppInit({ children }: Props) {
 
   useEffect(() => {
     if (isReady) {
-      SplashScreen.hideAsync();
+      (async () => SplashScreen.hideAsync())();
     }
   }, [isReady]);
 

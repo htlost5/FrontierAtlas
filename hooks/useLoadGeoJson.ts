@@ -5,28 +5,22 @@ import * as FileSystem from "expo-file-system";
 import type { FeatureCollection } from "geojson";
 
 export default function useLoadGeoJson(originGeoJson: any) {
-    const [geoJson, setGeoJson] = useState<FeatureCollection | null >(
-        null
-    );
-    const [error, setError] = useState<Error | null>(null);
-    const [loading, setLoading] = useState(true);
+  const [geoJsonList, setGeoJsonList] = useState<FeatureCollection | null>(null);
 
-    useEffect(() => {
-        async function loadGeo() {
-            try {
-                const asset = Asset.fromModule(originGeoJson);
-                await asset.downloadAsync();
-                const text = await FileSystem.readAsStringAsync(asset.localUri!);
-                const geojson = JSON.parse(text) as FeatureCollection;
-                setGeoJson(geojson);
-            } catch (e: any) {
-                setError(e as Error);
-            } finally {
-                setLoading(false);
-            }
-        }
-        loadGeo();
-    }, [originGeoJson]);
+  useEffect(() => {
+    async function loadAll() {
+      try {
+        const asset = Asset.fromModule(originGeoJson);
+        await asset.downloadAsync();
+        const text = await FileSystem.readAsStringAsync(asset.localUri!);
+        const geojson = JSON.parse(text) as FeatureCollection;
+        setGeoJsonList(geojson);
+      } catch (e: any) {
+        console.error(e);        
+    }
+  }
+    loadAll();
+  }, [originGeoJson]);
 
-    return { geoJson, loading, error };
+  return { geoJsonList };
 }

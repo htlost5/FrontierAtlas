@@ -1,20 +1,25 @@
 // app/(tabs)/index.tsx (Home Screen)
-import React, {useRef, useState} from 'react';
-import { StyleSheet, View } from "react-native";
-import { CameraRef, MapViewRef } from '@maplibre/maplibre-react-native';
+import { CameraRef } from "@maplibre/maplibre-react-native";
+import React, { useRef, useState } from "react";
+import { StyleSheet, View, Platform } from "react-native";
 
-import MapScreen from "../screens/MapScreen";
-import FloorChange from "@/components/index/FloorChange";
-import UserLocation from '@/components/index/userLocation';
+import FloorChange from "@/components/MapComponents/FloorChange";
+import UserLocation from "@/components/MapComponents/userLocation";
+
+import MapScreenNative from "../screens/native/MapScreenNative";
+import MapScreenWeb from "../screens/web/MapScreenWeb";
+
+const MapScreen = Platform.OS === "android" || Platform.OS === "ios"
+  ? MapScreenNative
+  : MapScreenWeb
 
 export default function HomeScreen() {
   const [num, setNum] = useState(5);
   const cameraRef = useRef<CameraRef>(null);
-  const mapViewRef = useRef<MapViewRef>(null);
 
   return (
     <View style={styles.container}>
-      <MapScreen floor_num={num} cameraRef={cameraRef} mapViewRef={mapViewRef}/>
+      <MapScreen floor_num={num} cameraRef={cameraRef} />
       <FloorChange num={num} setNum={setNum} />
       <UserLocation cameraRef={cameraRef} />
     </View>
