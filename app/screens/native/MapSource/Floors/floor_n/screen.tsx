@@ -1,9 +1,7 @@
-import * as FileSystem from "expo-file-system";
 import type { FeatureCollection } from "geojson";
 import React, { useEffect, useRef, useState } from "react";
 
-import parseGeoJsonAsync from "@/functions/jsonParse";
-
+import loadGeoJson from "@/functions/loadGeoJson";
 import FloorN_section from "./section";
 import FloorN_unit from "./unit";
 
@@ -33,23 +31,16 @@ export default function FloorN({ floor_num }: Props) {
 
     async function loadData() {
       try {
-        const cacheDir = `${FileSystem.documentDirectory}geoJson_cache`;
-        const [sourceSection, sourceUnit, sourceStair] = await Promise.all([
-          FileSystem.readAsStringAsync(`${cacheDir}/sections/floor${floor_num}.geojson`),
-          FileSystem.readAsStringAsync(`${cacheDir}/units/floor${floor_num}.geojson`),
-          FileSystem.readAsStringAsync(`${cacheDir}/others/stair.geojson`)
-        ]);
-
-        const [parsedSection, parsedUnit, parsedStair] = await Promise.all([
-          parseGeoJsonAsync(sourceSection),
-          parseGeoJsonAsync(sourceUnit),
-          parseGeoJsonAsync(sourceStair)
+        const [loadSection, loadUnit, loadStair] = await loadGeoJson([
+          { type: "section", feature: `floor${floor_num}` },
+          { type: "unit", feature: `floor${floor_num}` },
+          { type: "others", feature: `stair` },
         ]);
 
         const data: GeoData = {
-          section: parsedSection,
-          unit: parsedUnit,
-          stair: parsedStair
+          section: loadSection,
+          unit: loadUnit,
+          stair: loadStair,
         };
 
         // キャッシュに保存

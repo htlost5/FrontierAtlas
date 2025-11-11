@@ -5,12 +5,11 @@ import {
   CameraRef,
   MapView,
 } from "@maplibre/maplibre-react-native";
-import * as FileSystem from "expo-file-system";
 import type { FeatureCollection } from "geojson";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-import parseGeoJsonAsync from "@/functions/jsonParse";
+import loadGeoJson from "@/functions/loadGeoJson";
 
 import FloorN from "./MapSource/Floors/floor_n/screen";
 import Interact from "./MapSource/footprints/interact";
@@ -22,41 +21,31 @@ type MapScreenProps = {
   cameraRef: React.RefObject<CameraRef | null>;
 };
 
+type GeoData = {
+  venue: FeatureCollection;
+  studyhall: FeatureCollection;
+  interact: FeatureCollection;
+}
+
 const restrict_bound = {
   ne: [139.677156, 35.496373],
   sw: [139.679823, 35.499171],
 };
 
-export default function MapScreenNative({
-  floor_num,
-  cameraRef,
-}: MapScreenProps) {
-  const [parsedData, setParsedData] = useState<{
-    venue?: FeatureCollection;
-    studyhall?: FeatureCollection;
-    interact?: FeatureCollection;
-  }>({});
-
+export default function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
+  const [geoData, setGeoData] = useState<GeoData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const cacheDir = `${FileSystem.documentDirectory}geoJson_cache/venues`;
-
-        const [venueTxt, studyhallTxt, interactTxt] = await Promise.all([
-          FileSystem.readAsStringAsync(`${cacheDir}/venue.geojson`),
-          FileSystem.readAsStringAsync(`${cacheDir}/studyhall.geojson`),
-          FileSystem.readAsStringAsync(`${cacheDir}/interact.geojson`),
+        const [venue, studyhall, interact] = await loadGeoJson([
+          {type: 'venue', feature: 'venue'},
+          {type: 'studyhall', feature: 'studyhall'},
+          {type: 'interact', feature: 'interact'}
         ]);
 
-        const [venue, studyhall, interact] = await Promise.all([
-          parseGeoJsonAsync(venueTxt),
-          parseGeoJsonAsync(studyhallTxt),
-          parseGeoJsonAsync(interactTxt),
-        ]);
-
-        setParsedData({ venue, studyhall, interact });
+        setGeoData({ venue, studyhall, interact });
       } catch (e) {
         console.error("Failed to load GeoJSON:", e);
       } finally {
@@ -96,9 +85,9 @@ export default function MapScreenNative({
         maxBounds={restrict_bound}
         animationDuration={1000}
       />
-      {parsedData.venue && <Venue data={parsedData.venue} />}
-      {parsedData.studyhall && <Studyhall data={parsedData.studyhall} />}
-      {parsedData.interact && <Interact data={parsedData.interact} />}
+      {geoData?.venue && <Venue data={geoData.venue} />}
+      {geoData?.studyhall && <Studyhall data={geoData.studyhall} />}
+      {geoData?.interact && <Interact data={geoData.interact} />}
       <FloorN floor_num={floor_num} />
     </MapView>
   );
