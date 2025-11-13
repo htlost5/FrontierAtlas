@@ -69,20 +69,55 @@ def compute_centroid_from_polygon_rings(rings):
     """
     rings: list of linear rings for a polygon (rings[0] = outer, subsequent = holes)
     returns (cx, cy, area) where area is signed area/2 sum across rings
+
+    数値安定化のため、計算前に座標を局所座標系に平行移動してから計算します。
+    これにより、緯度経度のような大きな絶対値を持つ座標での打ち消し誤差を防ぎます。
     """
+    if not rings or not rings[0]:
+        return None
+
+    # 参照点: 外側輪郭の最初の頂点（閉じている場合はその最初の点）
+    try:
+        refx, refy = rings[0][0]
+    except Exception:
+        return None
+
     total_cross = 0.0
     total_numx = 0.0
     total_numy = 0.0
+
     for ring in rings:
-        cross_sum, numx_sum, numy_sum = _ring_signed_area_and_centroid_sum(ring)
-        total_cross += cross_sum
-        total_numx += numx_sum
-        total_numy += numy_sum
+        # build shifted ring (local coordinates)
+        shifted = []
+        for p in ring:
+            if not (isinstance(p, (list, tuple)) and len(p) >= 2):
+                continue
+            shifted.append((float(p[0]) - refx, float(p[1]) - refy))
+
+        if len(shifted) < 3:
+            continue
+
+        n = len(shifted)
+        for i in range(n):
+            x0, y0 = shifted[i]
+            x1, y1 = shifted[(i + 1) % n]
+            cross = x0 * y1 - x1 * y0
+            total_cross += cross
+            total_numx += (x0 + x1) * cross
+            total_numy += (y0 + y1) * cross
+
     area = total_cross / 2.0
+    # area が非常に小さい（ほぼゼロ）なら退避
     if abs(area) < 1e-12:
         return None  # degenerate
-    cx = total_numx / (6.0 * area)
-    cy = total_numy / (6.0 * area)
+
+    # ローカル座標での重心
+    cx_local = total_numx / (6.0 * area)
+    cy_local = total_numy / (6.0 * area)
+
+    # 元の座標系へ戻す
+    cx = cx_local + refx
+    cy = cy_local + refy
     return (cx, cy, area)
 
 def compute_centroid_from_geometry(geom):
@@ -114,12 +149,11 @@ def compute_centroid_from_geometry(geom):
         for poly in polys:
             res = compute_centroid_from_polygon_rings(poly)
             if res is None:
-                # degenerate polygon: skip or fallback
-                # fallback: compute average of outer ring
-                if poly and len(poly) > 0:
+                # degenerate polygon: try fallback average of outer ring
+                if poly and len(poly) > 0 and poly[0] and len(poly[0]) > 0:
                     avg = average_point(poly[0])
                     if avg:
-                        # approximate very small area
+                        # approximate very small area to include it minimally
                         weighted_x += avg[0] * 1e-9
                         weighted_y += avg[1] * 1e-9
                         total_area += 1e-9
@@ -147,8 +181,8 @@ def average_point(points):
     for p in points:
         if not (isinstance(p, (list, tuple)) and len(p) >= 2):
             continue
-        sx += p[0]
-        sy += p[1]
+        sx += float(p[0])
+        sy += float(p[1])
         n += 1
     if n == 0:
         return None
