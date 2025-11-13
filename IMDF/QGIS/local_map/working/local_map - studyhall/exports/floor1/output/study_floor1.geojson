@@ -35,7 +35,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.676472135292, 35.49776965787786]
+          "coordinates": [139.6779623217597, 35.49814837624064]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -67,7 +67,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6798702015118, 35.49860163883417]
+          "coordinates": [139.67808671417163, 35.49814837604547]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -99,7 +99,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68060218858344, 35.498761881091035]
+          "coordinates": [139.6781881390869, 35.498148376111395]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -133,7 +133,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67916133967213, 35.498375979393465]
+          "coordinates": [139.6782657676638, 35.4981483759028]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -166,7 +166,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6871884434581, 35.500631339249885]
+          "coordinates": [139.67881393084133, 35.498503006243645]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -198,7 +198,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67575532979632, 35.49768569667936]
+          "coordinates": [139.67881393036322, 35.49846302427464]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -231,7 +231,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67575416247146, 35.497419552686736]
+          "coordinates": [139.6786219288913, 35.498148374858204]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -265,7 +265,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6714504807706, 35.49634576545013]
+          "coordinates": [139.67854345835855, 35.49814837482349]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -297,7 +297,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67766604219813, 35.49812179461628]
+          "coordinates": [139.67813525795174, 35.49824104296215]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -329,7 +329,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68250026357478, 35.499317211478925]
+          "coordinates": [139.67826576798123, 35.49824104259606]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -362,7 +362,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67154080886854, 35.4965763134275]
+          "coordinates": [139.67869324666052, 35.49839406939828]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -396,7 +396,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6816084977811, 35.49916752810201]
+          "coordinates": [139.6785651127268, 35.49839407020657]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -429,7 +429,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67802674865365, 35.49841006225396]
+          "coordinates": [139.6779638419415, 35.49839407228949]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -462,7 +462,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67894193182474, 35.498591813060926]
+          "coordinates": [139.67816387583704, 35.49839407185024]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -495,7 +495,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67212263586168, 35.49681415299557]
+          "coordinates": [139.6783392416134, 35.49839407135609]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -527,7 +527,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6729962097419, 35.497022723759244]
+          "coordinates": [139.67839220207782, 35.49839407112855]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -560,7 +560,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6666422711418, 35.49542303990485]
+          "coordinates": [139.67869722259226, 35.49848673630194]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -593,7 +593,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6653305934572, 35.49508936791447]
+          "coordinates": [139.6786367796322, 35.4984710587273]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -627,7 +627,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.69418067210978, 35.50245461376866]
+          "coordinates": [139.67864624974422, 35.49850662400036]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -659,7 +659,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67844867199761, 35.49845758275711]
+          "coordinates": [139.67856335989592, 35.49848673715894]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -692,7 +692,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66444879367586, 35.49491463933836]
+          "coordinates": [139.67850420310612, 35.49848673750619]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -724,7 +724,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66980056325062, 35.496302982133386]
+          "coordinates": [139.67839316662352, 35.4984867380552]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -756,7 +756,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67769988244322, 35.49832352069246]
+          "coordinates": [139.6783420780329, 35.498486738275304]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -792,7 +792,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6795822988145, 35.49884674770831]
+          "coordinates": [139.67816574813332, 35.498486738830486]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -824,7 +824,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67807948919847, 35.49851613348952]
+          "coordinates": [139.67796384207338, 35.498486739220276]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -856,7 +856,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66905940551365, 35.496191761014394]
+          "coordinates": [139.67869172938987, 35.498639765360444]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -889,7 +889,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67931612431227, 35.498825045136684]
+          "coordinates": [139.6785870941563, 35.49863976602726]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -921,7 +921,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67860466086083, 35.49880257503784]
+          "coordinates": [139.67796407611294, 35.498639768241055]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -953,7 +953,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67573768920911, 35.49804844130061]
+          "coordinates": [139.67806438564244, 35.49863976810369]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -985,7 +985,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67652747181006, 35.49821746653978]
+          "coordinates": [139.6781891295445, 35.4986397678039]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1019,7 +1019,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68065472066553, 35.49924082309099]
+          "coordinates": [139.67828967289577, 35.49863976749885]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1052,7 +1052,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6753933869443, 35.49790228554443]
+          "coordinates": [139.67865981365784, 35.49873243394829]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1085,7 +1085,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67999228288173, 35.499102247788215]
+          "coordinates": [139.67853717401175, 35.49873243465927]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1117,7 +1117,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67821964216822, 35.49867678269385]
+          "coordinates": [139.67843861803635, 35.49873243519666]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1149,7 +1149,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6784524451289, 35.498761378184675]
+          "coordinates": [139.67833854195771, 35.49873243546926]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1182,7 +1182,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67740179040447, 35.49855105671224]
+          "coordinates": [139.6781154760144, 35.498732436192725]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1214,7 +1214,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67206575106158, 35.49722959568378]
+          "coordinates": [139.6779320426866, 35.498720509311994]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1247,7 +1247,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67782332955673, 35.49872634432647]
+          "coordinates": [139.67794034316907, 35.498756072796596]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1281,7 +1281,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.70577140160586, 35.50528287870964]
+          "coordinates": [139.67799856405114, 35.49822461149812]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1316,7 +1316,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68904326939025, 35.50106936358258]
+          "coordinates": [139.67792977602127, 35.4982449469287]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1348,7 +1348,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6846194504319, 35.499914607472725]
+          "coordinates": [139.67796746591793, 35.49822405035485]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1383,7 +1383,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6617520335416, 35.49392218943946]
+          "coordinates": [139.67866273125924, 35.498219924163024]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1417,7 +1417,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67308205667354, 35.49682082337994]
+          "coordinates": [139.6786306979535, 35.498230959042935]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1452,7 +1452,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6876662006457, 35.50099094497021]
+          "coordinates": [139.67840117747804, 35.498636276013066]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1485,7 +1485,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66443144750176, 35.49511776576209]
+          "coordinates": [139.67836028717727, 35.4986577410929]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1518,7 +1518,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68001385205142, 35.499078782770574]
+          "coordinates": [139.67833053331285, 35.49865095472565]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1554,7 +1554,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67875142799065, 35.49834539921566]
+          "coordinates": [139.6786418637362, 35.49831755522115]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1592,7 +1592,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.65205604929426, 35.49166999651365]
+          "coordinates": [139.67797070604485, 35.498256043367384]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1630,7 +1630,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67893022655468, 35.49832470595626]
+          "coordinates": [139.67865971563936, 35.498255955492944]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1668,7 +1668,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68177120932364, 35.499493520277156]
+          "coordinates": [139.67835673669188, 35.498625754638184]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1703,7 +1703,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67926879188462, 35.49853472267465]
+          "coordinates": [139.6788079479331, 35.49841760179975]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1737,7 +1737,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.70567143503462, 35.50528862570716]
+          "coordinates": [139.6780041866764, 35.49825718342582]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1771,7 +1771,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.70034474148034, 35.5037772582646]
+          "coordinates": [139.67862504809213, 35.49825734696557]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1803,7 +1803,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.38764517954465, 35.424263612127504]
+          "coordinates": [139.67861749474818, 35.49821182552193]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1835,7 +1835,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.80507790715623, 35.53087608672921]
+          "coordinates": [139.6783602872633, 35.49867131710934]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1869,7 +1869,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.62401014099035, 35.48482151210971]
+          "coordinates": [139.6783252527267, 35.4986254790925]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1901,7 +1901,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67801422264353, 35.49819060710456]
+          "coordinates": [139.6785137299305, 35.498317556000806]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1940,7 +1940,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6766605894677, 35.49793168786761]
+          "coordinates": [139.67817890542514, 35.49831755720262]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -1980,7 +1980,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67794858022683, 35.49850776504571]
+          "coordinates": [139.6781669147382, 35.49856325310608]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2020,7 +2020,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67972460336654, 35.49885419700461]
+          "coordinates": [139.67857980393046, 35.49856325155608]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2055,7 +2055,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67062324609321, 35.49619182823071]
+          "coordinates": [139.67870183672355, 35.49824492790825]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2087,7 +2087,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66428205868584, 35.49473154084231]
+          "coordinates": [139.67796746589673, 35.49820960142969]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2119,7 +2119,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68252317389917, 35.49938136682676]
+          "coordinates": [139.67803628796779, 35.49824104318]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2151,7 +2151,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.66820933343638, 35.4956030320214]
+          "coordinates": [139.67858937026156, 35.49824104105325]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2183,7 +2183,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6712444663464, 35.49661225006632]
+          "coordinates": [139.67795446853876, 35.49831755778403]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2215,7 +2215,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67138427851373, 35.49689346222595]
+          "coordinates": [139.67795446885992, 35.49856325373902]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2247,7 +2247,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6783239761972, 35.4985491792516]
+          "coordinates": [139.67837935781984, 35.49856325261951]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2279,7 +2279,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6881867165567, 35.50097991433479]
+          "coordinates": [139.67867771408618, 35.4985632509392]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2312,7 +2312,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68114641304948, 35.49934368769055]
+          "coordinates": [139.67872631008123, 35.498728622703695]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2350,7 +2350,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67940755102697, 35.49838572459892]
+          "coordinates": [139.67885041598248, 35.49824413643853]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2382,7 +2382,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67646930819112, 35.49766141998774]
+          "coordinates": [139.67841801392152, 35.49815666472415]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2414,7 +2414,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6716547421377, 35.496348099332174]
+          "coordinates": [139.67873848204172, 35.49814837442472]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2446,7 +2446,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.68206567119466, 35.499005966768614]
+          "coordinates": [139.6786912079344, 35.498148374405105]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2478,7 +2478,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6779346151838, 35.49814081509111]
+          "coordinates": [139.67835829354254, 35.4982484895045]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2510,7 +2510,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67753977304662, 35.49810825611528]
+          "coordinates": [139.67787996181477, 35.49819471001443]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2542,7 +2542,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67848426115287, 35.49859398674908]
+          "coordinates": [139.67787996133939, 35.498440405943306]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2574,7 +2574,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.6774954834234, 35.49858838394574]
+          "coordinates": [139.67787996085664, 35.49868610187143]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2606,7 +2606,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67637502843263, 35.49810344868753]
+          "coordinates": [139.67846445460452, 35.498634472766824]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }
@@ -2638,7 +2638,7 @@
         "alt_name": null,
         "display_point": {
           "type": "Point",
-          "coordinates": [139.67636072638018, 35.49795174016261]
+          "coordinates": [139.67846581890757, 35.498486737704326]
         },
         "level_id": "6cb9a84d-fac1-40d1-8fc7-229b1c2469e1"
       }

@@ -1,9 +1,11 @@
 import React from "react";
 
 import {
+  CircleLayer,
   FillLayer,
   LineLayer,
   ShapeSource,
+  SymbolLayer,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
@@ -14,8 +16,17 @@ type Props = {
 };
 
 export default function FloorN_unit({ data, stairData, floor_num }: Props) {
-  
-  if(!data || !stairData) return null;
+  if (!data || !stairData) return null;
+
+  // const processedFeatures = data.features.map((f) => ({
+  //   ...f,
+  //   geometry: f.properties?.display_point,
+  // }));
+
+  // const processedGeoJson = {
+  //   ...data,
+  //   features: processedFeatures,
+  // };
 
   return (
     <>
@@ -33,6 +44,23 @@ export default function FloorN_unit({ data, stairData, floor_num }: Props) {
           style={{
             lineColor: "#9BC06A",
             lineWidth: 1.5,
+          }}
+        />
+        {/* <CircleLayer
+          id="circleLayer"
+          style={{
+            circleColor: "#007AFF", // 青色
+            circleRadius: 8, // ピクセル単位の半径
+            circleStrokeWidth: 2,
+            circleStrokeColor: "#ffffff",
+          }}
+        /> */}
+        <SymbolLayer
+          id="unit-symbol"
+          style={{
+            symbolPlacement: "point",
+            textField: ["get", "ja", ["get", "name"]],
+            textSize: 20,
           }}
         />
       </ShapeSource>

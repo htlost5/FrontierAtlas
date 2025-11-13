@@ -14,7 +14,7 @@ const MapScreen = Platform.OS === "android" || Platform.OS === "ios"
   : MapScreenWeb
 
 export default function HomeScreen() {
-  const [num, setNum] = useState(5);
+  const [num, setNum] = useState(1);
   const cameraRef = useRef<CameraRef>(null);
 
   return (
