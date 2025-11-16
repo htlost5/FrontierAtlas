@@ -1,11 +1,9 @@
 import React from "react";
 
 import {
-  CircleLayer,
   FillLayer,
   LineLayer,
   ShapeSource,
-  SymbolLayer,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
@@ -13,54 +11,73 @@ type Props = {
   data: FeatureCollection | null;
   stairData: FeatureCollection | null;
   floor_num: number;
+  display: boolean;
 };
 
-export default function FloorN_unit({ data, stairData, floor_num }: Props) {
+const excludeList = ["stairs", "concrete", "lobby", "launge", "opentobelow", "courtyard", "terrace"]
+
+export default function FloorN_unit({ data, stairData, floor_num, display }: Props) {  
   if (!data || !stairData) return null;
-
-  // const processedFeatures = data.features.map((f) => ({
-  //   ...f,
-  //   geometry: f.properties?.display_point,
-  // }));
-
-  // const processedGeoJson = {
-  //   ...data,
-  //   features: processedFeatures,
-  // };
 
   return (
     <>
       <ShapeSource id={`unit-source-${floor_num}`} shape={data}>
         <FillLayer
           id="unit-fill"
-          filter={["!=", ["get", "category"], "stairs"]}
+          filter={["!in", "category", ...excludeList] as any}
           style={{
             fillColor: "#C7E6A1",
+            visibility: display ? "visible" : "none"
           }}
         />
         <LineLayer
           id="unit-line"
-          filter={["!=", ["get", "category"], "stairs"]}
+          filter={["!in", "category", ...excludeList] as any}
           style={{
             lineColor: "#9BC06A",
             lineWidth: 1.5,
+            visibility: display ? "visible" : "none"
           }}
         />
-        {/* <CircleLayer
-          id="circleLayer"
+      </ShapeSource>
+      <ShapeSource id={`wall-source-${floor_num}`} shape={data}>
+        <FillLayer
+          id="wall-fill"
+          filter={["==", ["get", "category"], "concrete"]}
           style={{
-            circleColor: "#007AFF", // 青色
-            circleRadius: 8, // ピクセル単位の半径
-            circleStrokeWidth: 2,
-            circleStrokeColor: "#ffffff",
+            fillColor: "#B0B0B0",
+            visibility: display ? "visible" : "none"
           }}
-        /> */}
-        <SymbolLayer
-          id="unit-symbol"
+        />
+        <LineLayer
+          id="wall-line"
+          filter={["==", ["get", "category"], "concrete"]}
           style={{
-            symbolPlacement: "point",
-            textField: ["get", "ja", ["get", "name"]],
-            textSize: 20,
+            lineColor: "rgba(0,0,0,0.2)",
+            lineOpacity: 1.5,
+            visibility: display ? "visible" : "none"
+          }}
+        />
+      </ShapeSource>
+      <ShapeSource id={`open-source-${floor_num}`} shape={data}>
+        <LineLayer
+          id="open-line"
+          filter={["==", ["get", "category"], "opentobelow"]}
+          style={{
+            lineColor: "rgba(0,0,0,0.2)",
+            lineOpacity: 1.5,
+            visibility: display ? "visible" : "none"
+          }}
+        />
+      </ShapeSource>
+      <ShapeSource id={`terrace-source-${floor_num}`} shape={data}>
+        <LineLayer
+          id="terrace-line"
+          filter={["==", ["get", "category"], "terrace"]}
+          style={{
+            lineColor: "rgba(0,0,0,0.2)",
+            lineOpacity: 1.5,
+            visibility: display ? "visible" : "none"
           }}
         />
       </ShapeSource>
@@ -80,6 +97,7 @@ export default function FloorN_unit({ data, stairData, floor_num }: Props) {
               "#FFAE00",
             ],
             lineWidth: ["case", ["==", ["get", "restriction"], "1"], 3, 1.5],
+            visibility: display ? "visible" : "none"
           }}
         />
       </ShapeSource>

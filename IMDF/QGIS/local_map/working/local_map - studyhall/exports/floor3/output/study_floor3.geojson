@@ -418,7 +418,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "vending",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2343,7 +2343,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2450,7 +2450,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2486,7 +2486,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2722,7 +2722,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {

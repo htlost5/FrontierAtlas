@@ -4,6 +4,7 @@ import {
   FillLayer,
   LineLayer,
   ShapeSource,
+  SymbolLayer,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
@@ -27,6 +28,22 @@ export default function Interact({ data }: Props) {
         style={{
           lineColor: "#CFCFCF",
           lineWidth: 1.5,
+        }}
+      />
+      <SymbolLayer
+        id="interact-symbol"
+        style={{
+          textField: "交流棟",
+          textSize: [
+            "interpolate", 
+            ["linear"], ["zoom"], 
+            17.2, 12,
+            21.1, 20
+          ],
+          textAllowOverlap: true, // 他のラベルやアイコンと重なっても表示
+          textIgnorePlacement: true,
+          textColor: "#000000",
+          textFont: ["Noto Sans Regular"],
         }}
       />
     </ShapeSource>

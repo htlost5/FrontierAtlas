@@ -10,9 +10,10 @@ import type { FeatureCollection } from "geojson";
 type Props = {
   data: FeatureCollection | null;
   floor_num: number;
+  display: boolean;
 };
 
-export default function FloorN_section({ data, floor_num }: Props) {
+export default function FloorN_section({ data, floor_num, display }: Props) {
   if (!data) return null;
 
   return (
@@ -21,6 +22,7 @@ export default function FloorN_section({ data, floor_num }: Props) {
         id="section-fill"
         style={{
           fillColor: "#FFF5D9",
+          visibility: display ? "visible" : "none",
         }}
       />
       <LineLayer
@@ -28,6 +30,7 @@ export default function FloorN_section({ data, floor_num }: Props) {
         style={{
           lineColor: "#F0DFAF",
           lineWidth: 1,
+          visibility: display ? "visible" : "none",
         }}
       />
     </ShapeSource>

@@ -521,8 +521,8 @@
         "restriction": null,
         "accessibility": null,
         "name": {
-          "ja": null,
-          "en": null
+          "ja": "倉庫",
+          "en": "store"
         },
         "alt_name": null,
         "display_point": {
@@ -1241,8 +1241,8 @@
         "restriction": null,
         "accessibility": null,
         "name": {
-          "ja": null,
-          "en": null
+          "ja": "倉庫",
+          "en": "store"
         },
         "alt_name": null,
         "display_point": {
@@ -1271,7 +1271,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "vending",
         "restriction": null,
         "accessibility": null,
         "name": {

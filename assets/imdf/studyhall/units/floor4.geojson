@@ -382,7 +382,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "vending",
         "restriction": null,
         "accessibility": null,
         "name": {

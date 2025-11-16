@@ -6,12 +6,13 @@ import {
   MapView,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 import loadGeoJson from "@/functions/loadGeoJson";
 
-import FloorN from "./MapSource/Floors/floor_n/screen";
+import FloorN from "./MapSource/Floors/floor_n/floorN";
+import Symbol from "./MapSource/Floors/floor_n/lavel";
 import Interact from "./MapSource/footprints/interact";
 import Studyhall from "./MapSource/footprints/studyhall";
 import Venue from "./MapSource/venue";
@@ -21,40 +22,109 @@ type MapScreenProps = {
   cameraRef: React.RefObject<CameraRef | null>;
 };
 
-type GeoData = {
+type venueGeoData = {
   venue: FeatureCollection;
   studyhall: FeatureCollection;
   interact: FeatureCollection;
-}
+};
+
+type floorGeoData = {
+  section: FeatureCollection;
+  unit: FeatureCollection;
+  stair: FeatureCollection;
+};
 
 const restrict_bound = {
   ne: [139.677156, 35.496373],
   sw: [139.679823, 35.499171],
 };
 
-export default function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
-  const [geoData, setGeoData] = useState<GeoData | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function MapScreenNative({
+  floor_num,
+  cameraRef,
+}: MapScreenProps) {
+  const [zoom, setZoom] = useState(17.2);
+  const [display, setDisplay] = useState(false);
+  const [venueGeoData, setVenueGeoData] = useState<venueGeoData | null>(null);
+  const [floorGeoData, setFloorGeoData] = useState<floorGeoData | null>(null);
+  const [venueLoading, setVenueLoading] = useState(true);
+  const [floorLoading, setFloorLoading] = useState(true);
+
+  const cacheRef = useRef<{ [key: number]: floorGeoData }>({});
+
+  useEffect(() => {
+    const initCamera = () => {
+      if (!cameraRef.current) {
+        requestAnimationFrame(initCamera);
+        return;
+      }
+
+      cameraRef.current.setCamera({
+        centerCoordinate: [139.6784895108818, 35.49777179199512],
+        zoomLevel: 17.2,
+        animationDuration: 1000,
+      });
+    };
+
+    initCamera();
+  }, [cameraRef]);
 
   useEffect(() => {
     (async () => {
       try {
         const [venue, studyhall, interact] = await loadGeoJson([
-          {type: 'venue', feature: 'venue'},
-          {type: 'studyhall', feature: 'studyhall'},
-          {type: 'interact', feature: 'interact'}
+          { type: "venue", feature: "venue" },
+          { type: "studyhall", feature: "studyhall" },
+          { type: "interact", feature: "interact" },
         ]);
 
-        setGeoData({ venue, studyhall, interact });
+        setVenueGeoData({ venue, studyhall, interact });
       } catch (e) {
         console.error("Failed to load GeoJSON:", e);
       } finally {
-        setLoading(false);
+        setVenueLoading(false);
       }
     })();
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+    // キャッシュがある場合は即座にセット
+    if (cacheRef.current[floor_num]) {
+      setFloorGeoData(cacheRef.current[floor_num]);
+      setFloorLoading(false);
+      return;
+    }
+
+    async function loadData() {
+      try {
+        const [loadSection, loadUnit, loadStair] = await loadGeoJson([
+          { type: "section", feature: `floor${floor_num}` },
+          { type: "unit", feature: `floor${floor_num}` },
+          { type: "others", feature: `stair` },
+        ]);
+
+        const data: floorGeoData = {
+          section: loadSection,
+          unit: loadUnit,
+          stair: loadStair,
+        };
+
+        // キャッシュに保存
+        cacheRef.current[floor_num] = data;
+
+        // state をまとめて更新
+        setFloorGeoData(data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setFloorLoading(false);
+      }
+    }
+
+    loadData();
+  }, [floor_num]);
+
+  if (venueLoading || floorLoading) {
     return (
       <View
         style={[
@@ -68,7 +138,19 @@ export default function MapScreenNative({ floor_num, cameraRef }: MapScreenProps
   }
 
   return (
-    <MapView style={styles.container}>
+    <MapView
+      style={styles.container}
+      onRegionIsChanging={(region) => {
+        const currentZoom = region.properties.zoomLevel;
+        setZoom(currentZoom);
+
+        if (currentZoom >= 17.9) {
+          setDisplay(true);
+        } else {
+          setDisplay(false);
+        }
+      }}
+    >
       <BackgroundLayer
         id="index-back"
         style={{
@@ -77,18 +159,37 @@ export default function MapScreenNative({ floor_num, cameraRef }: MapScreenProps
         }}
       />
       <Camera
-        zoomLevel={17.2}
-        maxZoomLevel={22}
-        minZoomLevel={17}
         ref={cameraRef}
-        centerCoordinate={[139.6784895108818, 35.49777179199512]}
+        maxZoomLevel={21.1}
+        minZoomLevel={17.2}
         maxBounds={restrict_bound}
         animationDuration={1000}
       />
-      {geoData?.venue && <Venue data={geoData.venue} />}
-      {geoData?.studyhall && <Studyhall data={geoData.studyhall} />}
-      {geoData?.interact && <Interact data={geoData.interact} />}
-      <FloorN floor_num={floor_num} />
+      {venueGeoData?.venue && <Venue data={venueGeoData.venue} />}
+      {venueGeoData?.studyhall && (
+        <Studyhall
+          floor_num={floor_num}
+          data={venueGeoData.studyhall}
+          display={display}
+        />
+      )}
+      {venueGeoData?.interact && <Interact data={venueGeoData.interact} />}
+      {floorGeoData && (
+        <FloorN
+          floor_num={floor_num}
+          geoData={floorGeoData}
+          display={display}
+          zoomLevel={zoom}
+        />
+      )}
+      {floorGeoData && (
+        <Symbol
+          floor_num={floor_num}
+          data={floorGeoData.unit}
+          display={display}
+          zoomLevel={zoom}
+        />
+      )}
     </MapView>
   );
 }

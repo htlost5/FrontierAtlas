@@ -454,7 +454,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "vending",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -821,12 +821,12 @@
         ]
       },
       "properties": {
-        "category": "tellace",
+        "category": "terrace",
         "restriction": null,
         "accessibility": null,
         "name": {
           "ja": "テラス",
-          "en": "tellace"
+          "en": "terrace"
         },
         "alt_name": null,
         "display_point": {
