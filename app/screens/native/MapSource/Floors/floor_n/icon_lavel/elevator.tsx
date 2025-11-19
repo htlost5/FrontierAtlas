@@ -18,7 +18,7 @@ export default function Elevator({ data, show }: Props) {
       <Images
         id="elevator-icons"
         images={{
-          elevator: require(`@/assets/images/imdf_elements/elevator/elevator.png`),
+          elevator: require(`@/assets/images/icons/imdf_elements/elevator/elevator.png`),
         }}
       />
       <ShapeSource id="elevator-source" shape={data}>

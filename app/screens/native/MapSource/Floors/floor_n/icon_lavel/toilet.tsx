@@ -18,9 +18,9 @@ export default function Toilet({ data, show }: Props) {
       <Images
         id="toilet-icons"
         images={{
-          male: require(`@/assets/images/imdf_elements/toilet/male.png`),
-          female: require(`@/assets/images/imdf_elements/toilet/female.png`),
-          wheelChair: require(`@/assets/images/imdf_elements/toilet/wheelchair.png`),
+          male: require(`@/assets/images/icons/imdf_elements/toilet/male.png`),
+          female: require(`@/assets/images/icons/imdf_elements/toilet/female.png`),
+          wheelChair: require(`@/assets/images/icons/imdf_elements/toilet/wheelchair.png`),
         }}
       />
       <ShapeSource id="toilets-source" shape={data}>

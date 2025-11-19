@@ -1,5 +1,5 @@
 import {
-  CircleLayer,
+  Images,
   ShapeSource,
   SymbolLayer,
 } from "@maplibre/maplibre-react-native";
@@ -40,8 +40,7 @@ const textExcludeList = [
 
 export default function Symbol({ floor_num, data, display, zoomLevel }: Props) {
   const iconIsVisible = display;
-  const isVisible = display;
-
+  const isTextVisible = display && zoomLevel >= 19.0;
   if (!data) return null;
 
   //   display_point→geometryへ設定
@@ -60,33 +59,59 @@ export default function Symbol({ floor_num, data, display, zoomLevel }: Props) {
       <Toilet data={processedGeoJson} show={iconIsVisible} />
       <Elevator data={processedGeoJson} show={iconIsVisible} />
       <Vending data={processedGeoJson} show={iconIsVisible} />
+      <Images
+        id="map-symbols"
+        images={{
+          pin: require("@/assets/images/icons/map/Pin.png"),
+        }}
+      />
       <ShapeSource id={`lavel-source-${floor_num}`} shape={processedGeoJson}>
-        {/* <CircleLayer
-          id="circleLayer"
+        <SymbolLayer
+          id="pin"
           filter={["!in", "category", ...pointExcludeList] as any}
           style={{
-            circleColor: "#007AFF", // 青色
-            circleRadius: 8, // ピクセル単位の半径
-            circleStrokeWidth: 2,
-            circleStrokeColor: "#ffffff",
-            visibility: isVisible ? "visible" : "none",
+            symbolPlacement: "point",
+            iconImage: "pin",
+            iconSize: 0.1,
+            iconRotationAlignment: "viewport",
+            visibility: iconIsVisible ? "visible" : "none",
+            iconAllowOverlap: true,
+            textIgnorePlacement: true,
           }}
-        /> */}
+        />
         <SymbolLayer
-          id="unit-symbol"
-          filter={["!in", "category", ...textExcludeList] as any}
+          id="unit-symbol-text-point"
+          filter={[
+            "all",
+            ["!in", "category", ...textExcludeList],
+            ["!in", "category", ...pointExcludeList]
+          ] as any}
           style={{
             symbolPlacement: "point",
             textField: ["get", "ja", ["get", "name"]],
-            textSize: [
-              "interpolate",
-              ["linear"],
-              ["zoom"],
-              17.9, 3,
-              21.1, 25,
-            ],
+            textSize: ["interpolate", ["linear"], ["zoom"], 17.9, 3, 21.1, 25],
             textFont: ["Noto Sans Regular"],
-            visibility: isVisible ? "visible" : "none",
+            visibility: isTextVisible ? "visible" : "none",
+            textAllowOverlap: true,
+            iconAllowOverlap: true,
+            textIgnorePlacement: true,
+            textAnchor: 'left',
+            textOffset: [1, 0],
+          }}
+        />
+        <SymbolLayer
+          id="unit-symbol-text"
+          filter={[
+            "all",
+            ["!in", "category", ...textExcludeList],
+            ["in", "category", ...pointExcludeList]
+          ] as any}
+          style={{
+            symbolPlacement: "point",
+            textField: ["get", "ja", ["get", "name"]],
+            textSize: ["interpolate", ["linear"], ["zoom"], 17.9, 3, 21.1, 25],
+            textFont: ["Noto Sans Regular"],
+            visibility: isTextVisible ? "visible" : "none",
             textAllowOverlap: true,
             iconAllowOverlap: true,
             textIgnorePlacement: true,

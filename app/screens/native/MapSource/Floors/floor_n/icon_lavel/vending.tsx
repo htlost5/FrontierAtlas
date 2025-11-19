@@ -18,7 +18,7 @@ export default function Vending({ data, show }: Props) {
       <Images
         id="vending-icons"
         images={{
-          vending: require(`@/assets/images/imdf_elements/vending/vending-machine.png`),
+          vending: require(`@/assets/images/icons/imdf_elements/vending/vending-machine.png`),
         }}
       />
       <ShapeSource id="vending-source" shape={data}>
