@@ -1,3 +1,4 @@
+import LabelView from "../../labels/label";
 import FloorN_section from "./section";
 import FloorN_unit from "./unit";
 import type { FeatureCollection } from "geojson";
@@ -29,6 +30,12 @@ export default function FloorN({ floor_num, geoData, display}: Props) {
         data={geoData.unit}
         stairData={geoData.stair}
         floor_num={floor_num}
+        display={display}
+      />
+      <LabelView
+        featureType="floor"
+        floor_num={floor_num}
+        data={geoData.unit}
         display={display}
       />
     </>

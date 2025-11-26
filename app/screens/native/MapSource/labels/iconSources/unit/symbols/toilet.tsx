@@ -37,7 +37,7 @@ export default function Toilet({ data, show }: Props) {
               21.1, 0.17,
             ],
             iconRotationAlignment: "map",
-            visibility: show ? "visible" : "none",
+            visibility: "visible",
             iconAllowOverlap: true,
             textIgnorePlacement: true,
           }}

@@ -12,7 +12,6 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import loadGeoJson from "@/functions/loadGeoJson";
 
 import FloorN from "./MapSource/Floors/floor_n/floorN";
-import Symbol from "./MapSource/Floors/floor_n/lavel";
 import Interact from "./MapSource/footprints/interact";
 import Studyhall from "./MapSource/footprints/studyhall";
 import Venue from "./MapSource/venue";
@@ -178,14 +177,6 @@ export default function MapScreenNative({
         <FloorN
           floor_num={floor_num}
           geoData={floorGeoData}
-          display={display}
-          zoomLevel={zoom}
-        />
-      )}
-      {floorGeoData && (
-        <Symbol
-          floor_num={floor_num}
-          data={floorGeoData.unit}
           display={display}
           zoomLevel={zoom}
         />
