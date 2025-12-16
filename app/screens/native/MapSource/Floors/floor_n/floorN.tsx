@@ -33,7 +33,6 @@ export default function FloorN({ floor_num, geoData, display}: Props) {
         display={display}
       />
       <LabelView
-        featureType="floor"
         floor_num={floor_num}
         data={geoData.unit}
         display={display}

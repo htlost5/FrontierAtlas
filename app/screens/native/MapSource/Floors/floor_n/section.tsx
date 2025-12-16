@@ -29,7 +29,7 @@ export default function FloorN_section({ data, floor_num, display }: Props) {
         id="section-line"
         style={{
           lineColor: "#F0DFAF",
-          lineWidth: 1,
+          lineWidth: 1.5,
           visibility: display ? "visible" : "none",
         }}
       />

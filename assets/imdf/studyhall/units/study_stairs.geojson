@@ -2621,7 +2621,7 @@
           "ja": "壁",
           "en": "wall"
         },
-        "alt_name": null,
+        "alt_name": "wall",
         "display_point": {
           "type": "Point",
           "coordinates": []

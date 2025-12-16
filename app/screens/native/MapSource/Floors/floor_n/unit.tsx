@@ -14,9 +14,23 @@ type Props = {
   display: boolean;
 };
 
-const excludeList = ["stairs", "concrete", "lobby", "launge", "opentobelow", "courtyard", "terrace"]
+const excludeList = [
+  "stairs",
+  "concrete",
+  "lobby",
+  "launge",
+  "opentobelow",
+  "courtyard",
+  "unclosedarea",
+  "terrace",
+];
 
-export default function FloorN_unit({ data, stairData, floor_num, display }: Props) {  
+export default function FloorN_unit({
+  data,
+  stairData,
+  floor_num,
+  display,
+}: Props) {
   if (!data || !stairData) return null;
 
   return (
@@ -27,16 +41,16 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
           filter={["!in", "category", ...excludeList] as any}
           style={{
             fillColor: "#C7E6A1",
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
         <LineLayer
           id="unit-line"
           filter={["!in", "category", ...excludeList] as any}
           style={{
-            lineColor: "#9BC06A",
+            lineColor: "#A8B996",
             lineWidth: 1.5,
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -46,7 +60,7 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
           filter={["==", ["get", "category"], "concrete"]}
           style={{
             fillColor: "#B0B0B0",
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
         <LineLayer
@@ -55,7 +69,7 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -66,7 +80,26 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
+          }}
+        />
+      </ShapeSource>
+      <ShapeSource id={`open-source-${floor_num}`} shape={data}>
+        <FillLayer
+          id="courtyard-1F-fill"
+          filter={["==", ["get", "category"], "unclosedarea"]}
+          style={{
+            fillColor: "#E6EDD6",
+            visibility: display ? "visible" : "none",
+          }}
+        />
+        <LineLayer
+          id="courtyard-1F-line"
+          filter={["==", ["get", "category"], "unclosedarea"]}
+          style={{
+            lineColor: "#A8B996",
+            lineWidth: 1.5,
+            visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -77,7 +110,7 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -93,11 +126,11 @@ export default function FloorN_unit({ data, stairData, floor_num, display }: Pro
             lineColor: [
               "case",
               ["==", ["get", "alt_name"], "wall"],
-              "#9BC06A",
+              "#A8B996",
               "#FFAE00",
             ],
             lineWidth: ["case", ["==", ["get", "restriction"], "1"], 3, 1.5],
-            visibility: display ? "visible" : "none"
+            visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>

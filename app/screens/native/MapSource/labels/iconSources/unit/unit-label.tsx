@@ -6,16 +6,17 @@ import Vending from "./symbols/vending";
 type Props = {
   pointData: FeatureCollection | null;
   isVisible: boolean;
+  floor_num: number;
 };
 
-export default function UnitSymbol({ pointData, isVisible }: Props) {
+export default function UnitSymbol({ pointData, isVisible, floor_num }: Props) {
   if (!pointData) return null;
 
   return (
     <>
-      <Toilet data={pointData} show={isVisible} />
-      <Elevator data={pointData} show={isVisible} />
-      <Vending data={pointData} show={isVisible} />
+      <Vending data={pointData} isVisible={isVisible} floor_num={floor_num}/>
+      <Toilet data={pointData} isVisible={isVisible} floor_num={floor_num}/>
+      <Elevator data={pointData} isVisible={isVisible} floor_num={floor_num}/>
     </>
   );
 }

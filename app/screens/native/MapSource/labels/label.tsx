@@ -1,23 +1,19 @@
 import {
+  Images,
   ShapeSource,
   SymbolLayer,
-  Images,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
-import { exclude } from "./excludeList";
+import { exclude } from "@/settings/label/excludeList";
 import UnitSymbol from "./iconSources/unit/unit-label";
 
-type IconType = "none" | "floor";
-
 type Props = {
-  featureType: IconType;
   floor_num: number;
   data: FeatureCollection | null;
   display: boolean;
 };
 
 export default function LabelView({
-  featureType,
   floor_num,
   data,
   display,
@@ -37,36 +33,22 @@ export default function LabelView({
 
   const isVisible = display;
 
-  const renderLayers = () => {
-    switch (featureType) {
-      case "floor":
-        return (
-          <UnitSymbol pointData={processedGeoJson} isVisible={isVisible} />
-        );
-      case "none":
-        return null;
-
-      default:
-        return null;
-    }
-  };
-
   return (
     <>
       <Images
         id="map-symbols"
         images={{
-          pin: require("@/assets/images/icons/map/Pin.png"),
+          room: require("@/assets/images/icons/map/room.png"),
         }}
       />
       <ShapeSource id={`lavel-source-${floor_num}`} shape={processedGeoJson}>
         <SymbolLayer
-          id="pin"
+          id="room"
           filter={["!in", "category", ...exclude.floor.POINT] as any}
           style={{
             symbolPlacement: "point",
-            iconImage: "pin",
-            iconSize: 0.1,
+            iconImage: "room",
+            iconSize: 0.05,
             iconRotationAlignment: "viewport",
             visibility: isVisible ? "visible" : "none",
             iconAllowOverlap: true,
@@ -116,9 +98,7 @@ export default function LabelView({
           }}
         />
       </ShapeSource>
-      <ShapeSource id={`${featureType}-symbol`} shape={processedGeoJson}>
-        {renderLayers()}
-      </ShapeSource>
+      <UnitSymbol pointData={processedGeoJson} isVisible={isVisible} floor_num={floor_num}/>
     </>
   );
 }

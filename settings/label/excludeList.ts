@@ -4,7 +4,6 @@ export const exclude = {
       "stairs",
       "concrete",
       "lobby",
-      "lounge",
       "opentobelow",
       "restroom.male",
       "restroom.female",

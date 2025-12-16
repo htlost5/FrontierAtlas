@@ -7,23 +7,22 @@ import type { FeatureCollection } from "geojson";
 
 type Props = {
   data: FeatureCollection;
-  show: boolean;
+  isVisible: boolean;
+  floor_num: number;
 };
 
-export default function Elevator({ data, show }: Props) {
-  if (!data) return null;
-
+export default function Elevator({ data, isVisible, floor_num }: Props) {
   return (
     <>
       <Images
-        id="elevator-icons"
+        id={`elevator_icons-images-${floor_num}`}
         images={{
-          elevator: require(`@/assets/images/icons/imdf_elements/elevator/elevator.png`),
+          elevator: require("@/assets/images/icons/imdf_elements/elevator/elevator.png"),
         }}
       />
-      <ShapeSource id="elevator-source" shape={data}>
+      <ShapeSource id={`elevator-symbol-${floor_num}`} shape={data}>
         <SymbolLayer
-          id="elevator-symbol"
+          id={`elevator-symbol-${floor_num}`}
           filter={["==", ["get", "category"], "elevator"]}
           style={{
             iconImage: "elevator",
@@ -31,11 +30,13 @@ export default function Elevator({ data, show }: Props) {
               "interpolate",
               ["linear"],
               ["zoom"],
-              17.9, 0.016,
-              21.1, 0.11,
+              17.9,
+              0.016,
+              21.1,
+              0.11,
             ],
             iconRotationAlignment: "map",
-            visibility: show ? "visible" : "none",
+            visibility: isVisible ? "visible" : "none",
             textAllowOverlap: true,
             iconAllowOverlap: true,
             textIgnorePlacement: true,
