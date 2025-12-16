@@ -11,7 +11,6 @@ type Props = {
   data: FeatureCollection | null;
   stairData: FeatureCollection | null;
   floor_num: number;
-  display: boolean;
 };
 
 const excludeList = [
@@ -29,7 +28,6 @@ export default function FloorN_unit({
   data,
   stairData,
   floor_num,
-  display,
 }: Props) {
   if (!data || !stairData) return null;
 
@@ -41,7 +39,8 @@ export default function FloorN_unit({
           filter={["!in", "category", ...excludeList] as any}
           style={{
             fillColor: "#C7E6A1",
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
         <LineLayer
@@ -50,7 +49,8 @@ export default function FloorN_unit({
           style={{
             lineColor: "#A8B996",
             lineWidth: 1.5,
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -60,7 +60,8 @@ export default function FloorN_unit({
           filter={["==", ["get", "category"], "concrete"]}
           style={{
             fillColor: "#B0B0B0",
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
         <LineLayer
@@ -69,7 +70,8 @@ export default function FloorN_unit({
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -80,7 +82,8 @@ export default function FloorN_unit({
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -90,7 +93,8 @@ export default function FloorN_unit({
           filter={["==", ["get", "category"], "unclosedarea"]}
           style={{
             fillColor: "#E6EDD6",
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
         <LineLayer
@@ -99,7 +103,8 @@ export default function FloorN_unit({
           style={{
             lineColor: "#A8B996",
             lineWidth: 1.5,
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -110,7 +115,8 @@ export default function FloorN_unit({
           style={{
             lineColor: "rgba(0,0,0,0.2)",
             lineOpacity: 1.5,
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>
@@ -130,7 +136,8 @@ export default function FloorN_unit({
               "#FFAE00",
             ],
             lineWidth: ["case", ["==", ["get", "restriction"], "1"], 3, 1.5],
-            visibility: display ? "visible" : "none",
+            visibility: "visible",
+            // visibility: display ? "visible" : "none",
           }}
         />
       </ShapeSource>

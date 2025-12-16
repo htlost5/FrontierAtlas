@@ -5,25 +5,12 @@ import {
   ShapeSource,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
-import React, { useEffect, useState } from "react";
 
 type Props = {
-  floor_num: number;
   data: FeatureCollection | null;
-  display: boolean;
 };
 
-export default function Studyhall({ floor_num, data, display }: Props) {
-  const [clear, setClear] = useState(false);
-
-  useEffect(() => {
-    if (!(floor_num === 4 || floor_num === 5) && display) {
-      setClear(true);
-    } else {
-      setClear(false);
-    }
-  }, [floor_num, display]);
-
+export default function Studyhall({ data }: Props) {
   if (!data) return null;
 
   return (
@@ -32,7 +19,7 @@ export default function Studyhall({ floor_num, data, display }: Props) {
         id="studyhall-fill"
         style={{
           fillColor: "#EDEDED",
-          fillOpacity: clear ? 0 : 1,
+          fillOpacity: 0,
         }}
       />
       <LineLayer
@@ -40,7 +27,7 @@ export default function Studyhall({ floor_num, data, display }: Props) {
         style={{
           lineColor: "#CFCFCF",
           lineWidth: 1.5,
-          lineOpacity: clear ? 0 : 1,
+          lineOpacity: 0,
         }}
       />
       <SymbolLayer
@@ -57,7 +44,7 @@ export default function Studyhall({ floor_num, data, display }: Props) {
           textIgnorePlacement: true,
           textColor: "#000000",
           textFont: ["Noto Sans Regular"],
-          visibility: display ? "none" : "visible",
+          visibility: "none",
         }}
       />
     </ShapeSource>

@@ -5,7 +5,7 @@ import Vending from "./symbols/vending";
 
 type Props = {
   pointData: FeatureCollection | null;
-  isVisible: boolean;
+  isVisible: number;
   floor_num: number;
 };
 

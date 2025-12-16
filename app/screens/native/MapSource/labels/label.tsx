@@ -1,23 +1,19 @@
+import { exclude } from "@/settings/label/excludeList";
 import {
   Images,
   ShapeSource,
   SymbolLayer,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
-import { exclude } from "@/settings/label/excludeList";
 import UnitSymbol from "./iconSources/unit/unit-label";
 
 type Props = {
   floor_num: number;
   data: FeatureCollection | null;
-  display: boolean;
+  display: number;
 };
 
-export default function LabelView({
-  floor_num,
-  data,
-  display,
-}: Props) {
+export default function LabelView({ floor_num, data, display }: Props) {
   if (!data) return null;
 
   //   display_point→geometryへ設定
@@ -41,20 +37,40 @@ export default function LabelView({
           room: require("@/assets/images/icons/map/room.png"),
         }}
       />
-      <ShapeSource id={`lavel-source-${floor_num}`} shape={processedGeoJson}>
+
+      {/* マップ上 部屋アイコン表示 */}
+      <ShapeSource
+        id={`lavel-source-icon-${floor_num}`}
+        shape={processedGeoJson}
+      >
         <SymbolLayer
           id="room"
           filter={["!in", "category", ...exclude.floor.POINT] as any}
           style={{
             symbolPlacement: "point",
             iconImage: "room",
-            iconSize: 0.05,
+            iconSize: [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              17, 0.035,
+              19, 0.045,
+              21, 0.055,
+            ],
             iconRotationAlignment: "viewport",
             visibility: isVisible ? "visible" : "none",
-            iconAllowOverlap: true,
-            textIgnorePlacement: true,
+            iconAllowOverlap: false,
+            textIgnorePlacement: false,
           }}
         />
+      </ShapeSource>
+
+      {/* マップ上 テキスト表示 */}
+      <ShapeSource
+        id={`lavel-source-text-${floor_num}`}
+        shape={processedGeoJson}
+      >
+        {/* アイコンありテキスト表示 */}
         <SymbolLayer
           id="unit-symbol-text-point"
           filter={
@@ -67,16 +83,24 @@ export default function LabelView({
           style={{
             symbolPlacement: "point",
             textField: ["get", "ja", ["get", "name"]],
-            textSize: ["interpolate", ["linear"], ["zoom"], 17.9, 3, 21.1, 25],
+            textSize: [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              17, 10,
+              19, 12,
+              21, 14,
+            ],
             textFont: ["Noto Sans Regular"],
             visibility: isVisible ? "visible" : "none",
-            textAllowOverlap: true,
-            iconAllowOverlap: true,
-            textIgnorePlacement: true,
+            textAllowOverlap: false,
+            textIgnorePlacement: false,
             textAnchor: "left",
-            textOffset: [1, 0],
+            textOffset: [1.4, 0],
           }}
         />
+
+        {/* アイコンなしテキスト表示 */}
         <SymbolLayer
           id="unit-symbol-text"
           filter={
@@ -89,16 +113,28 @@ export default function LabelView({
           style={{
             symbolPlacement: "point",
             textField: ["get", "ja", ["get", "name"]],
-            textSize: ["interpolate", ["linear"], ["zoom"], 17.9, 3, 21.1, 25],
+            textSize: [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              17, 10,
+              19, 12,
+              21, 14,
+            ],
             textFont: ["Noto Sans Regular"],
-            visibility: isVisible ? "visible" : "none",
-            textAllowOverlap: true,
-            iconAllowOverlap: true,
-            textIgnorePlacement: true,
+            visibility: isVisible === 2 ? "visible" : "none",
+            textAllowOverlap: false,
+            textIgnorePlacement: false,
           }}
         />
       </ShapeSource>
-      <UnitSymbol pointData={processedGeoJson} isVisible={isVisible} floor_num={floor_num}/>
+
+      {/* マップ上アイコン表示 */}
+      <UnitSymbol
+        pointData={processedGeoJson}
+        isVisible={isVisible}
+        floor_num={floor_num}
+      />
     </>
   );
 }

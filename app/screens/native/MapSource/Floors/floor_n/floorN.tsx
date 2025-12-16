@@ -10,7 +10,7 @@ type Props = {
     section: FeatureCollection;
     stair: FeatureCollection;
   };
-  display: boolean;
+  display: number;
   zoomLevel: number;
 };
 
@@ -24,13 +24,11 @@ export default function FloorN({ floor_num, geoData, display}: Props) {
       <FloorN_section
         data={geoData.section}
         floor_num={floor_num}
-        display={display}
       />
       <FloorN_unit
         data={geoData.unit}
         stairData={geoData.stair}
         floor_num={floor_num}
-        display={display}
       />
       <LabelView
         floor_num={floor_num}

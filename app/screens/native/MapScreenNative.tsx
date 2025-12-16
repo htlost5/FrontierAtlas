@@ -21,6 +21,9 @@ type MapScreenProps = {
   cameraRef: React.RefObject<CameraRef | null>;
 };
 
+type DisplayLevel = 0 | 1 | 2;
+// 0: 非表示, 1: 概要表示, 2: 詳細表示
+
 type venueGeoData = {
   venue: FeatureCollection;
   studyhall: FeatureCollection;
@@ -43,7 +46,7 @@ export default function MapScreenNative({
   cameraRef,
 }: MapScreenProps) {
   const [zoom, setZoom] = useState(17.2);
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState<DisplayLevel>(0);
   const [venueGeoData, setVenueGeoData] = useState<venueGeoData | null>(null);
   const [floorGeoData, setFloorGeoData] = useState<floorGeoData | null>(null);
   const [venueLoading, setVenueLoading] = useState(true);
@@ -143,10 +146,12 @@ export default function MapScreenNative({
         const currentZoom = region.properties.zoomLevel;
         setZoom(currentZoom);
 
-        if (currentZoom >= 17.9) {
-          setDisplay(true);
+        if (currentZoom < 17.9) {
+          setDisplay(0);
+        } else if (currentZoom < 19.4) {
+          setDisplay(1);
         } else {
-          setDisplay(false);
+          setDisplay(2);
         }
       }}
     >
@@ -167,9 +172,7 @@ export default function MapScreenNative({
       {venueGeoData?.venue && <Venue data={venueGeoData.venue} />}
       {venueGeoData?.studyhall && (
         <Studyhall
-          floor_num={floor_num}
           data={venueGeoData.studyhall}
-          display={display}
         />
       )}
       {venueGeoData?.interact && <Interact data={venueGeoData.interact} />}

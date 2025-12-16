@@ -7,7 +7,7 @@ import type { FeatureCollection } from "geojson";
 
 type Props = {
   data: FeatureCollection;
-  isVisible: boolean;
+  isVisible: number;
   floor_num: number;
 };
 
