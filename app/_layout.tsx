@@ -19,7 +19,7 @@ export default function RootLayout() {
             translucent={true}
           />
           <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: "none" }} />
           </Stack>
         </SafeAreaView>
       </SafeAreaProvider>

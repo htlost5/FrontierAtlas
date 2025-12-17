@@ -41,7 +41,7 @@ const restrict_bound = {
   sw: [139.679823, 35.499171],
 };
 
-export default function MapScreenNative({
+function MapScreenNative({
   floor_num,
   cameraRef,
 }: MapScreenProps) {
@@ -189,3 +189,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default React.memo(MapScreenNative);

@@ -1,22 +1,14 @@
+import { Entypo, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { startActivityAsync } from "expo-intent-launcher";
+import { usePathname, useRouter } from "expo-router";
 import React from "react";
 import {
-  View,
-  StyleSheet,
   Animated,
-  TouchableOpacity,
   Linking,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import {
-  createBottomTabNavigator,
-  BottomTabBarProps,
-} from "@react-navigation/bottom-tabs";
-import { startActivityAsync } from "expo-intent-launcher";
-import { Entypo, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-
-import HomeScreen from "@/app/(tabs)";
-import Tools from "@/app/(tabs)/tools";
-import Calendar from "@/app/(tabs)/calendar";
-import Classroom from "@/app/(tabs)/classroom";
 
 const icons: Record<string, { lib: any; name: string }> = {
   home: { lib: Feather, name: "home" },
@@ -33,22 +25,100 @@ const appURLs = {
   classroom: "https://classroom.google.com/",
 };
 
-function MyTabBar({ state, navigation }: BottomTabBarProps) {
+const ROUTE_MAP = {
+  home: "/",
+  tools: "/(tabs)/tools",
+  calendar: "/(tabs)/calendar",
+  classroom: "/(tabs)/classroom",
+} as const;
+
+// ルート配列：UI は変えないのでここで固定
+const ROUTES = ["home", "tools", "calendar", "classroom"] as const;
+
+type RouteName = (typeof ROUTES)[number];
+// "home" | "tools" | "calendar" | "classroom"
+
+export default function SelfBottomTabs() {
+  const router = useRouter();
+  const pathname = usePathname() ?? "/";
+
+  // animated values をルート数で管理（UIは変更しない）
   const animatedValuesRef = React.useRef<Animated.Value[]>(
-    state.routes.map(() => new Animated.Value(0))
+    ROUTES.map(() => new Animated.Value(0))
   );
 
   React.useEffect(() => {
-    if (animatedValuesRef.current.length !== state.routes.length) {
-      animatedValuesRef.current = state.routes.map(() => new Animated.Value(0));
+    if (animatedValuesRef.current.length !== ROUTES.length) {
+      animatedValuesRef.current = ROUTES.map(() => new Animated.Value(0));
     }
-  }, [state.routes]);
+  }, []);
+
+  // pathname によってフォーカス判定（home は "/" も許容）
+  const isRouteFocused = (name: RouteName) => {
+    if (name === "home") {
+      return pathname === "/" || pathname.endsWith("/index");
+    }
+    return pathname === `/${name}` || pathname.endsWith(`/${name}`);
+  };
+
+  const buttonSizeDown = (animatedValue: Animated.Value): Promise<void> => {
+    return new Promise((resolve) => {
+      Animated.timing(animatedValue, {
+        toValue: 100,
+        duration: 75,
+        useNativeDriver: true,
+      }).start();
+      setTimeout(() => {
+        resolve();
+      }, 75);
+    });
+  };
+
+  const buttonSizeUp = (animatedValue: Animated.Value): Promise<void> => {
+    return new Promise((resolve) => {
+      buttonSizeDown(animatedValue).finally(() => {
+        Animated.timing(animatedValue, {
+          toValue: 0,
+          duration: 75,
+          useNativeDriver: true,
+        }).start();
+        setTimeout(() => {
+          resolve();
+        }, 75);
+      });
+    });
+  };
+
+  const handlePress = async (name: RouteName, index: number) => {
+    const animatedValue = animatedValuesRef.current[index];
+    // アニメーションは元のまま
+    buttonSizeUp(animatedValue).finally(async () => {
+      if (name === "classroom") {
+        try {
+          await startActivityAsync("android.intent.MAIN", {
+            packageName: ANDROID_PACKAGES.classroom,
+          });
+        } catch (e) {
+          console.log(e);
+          Linking.openURL(appURLs.classroom);
+        }
+        return;
+      }
+
+      // フォーカス済みなら何もしない（元の挙動を模倣）
+      if (!isRouteFocused(name)) {
+        // expo-router による遷移（タブ内部ではなくルート遷移）
+        // ここで /home 等のパスに push する
+        const path = ROUTE_MAP[name];
+        router.push(path);
+      }
+    });
+  };
 
   return (
     <View style={styles.tabBar}>
-      {state.routes.map((route, index) => {
+      {ROUTES.map((routeName, index) => {
         const animatedValue = animatedValuesRef.current[index];
-
         const iconScale = animatedValue.interpolate({
           inputRange: [0, 60, 100],
           outputRange: [1, 0.92, 0.85],
@@ -59,79 +129,14 @@ function MyTabBar({ state, navigation }: BottomTabBarProps) {
           outputRange: [1, 0.95, 0.9],
         });
 
-        // const interPolateIconSize = animatedValue.interpolate({
-        //     inputRange: [0, 60, 100],
-        //     outputRange: [26, 24, 22]
-        // });
-
-        // const interPolateTextSize = animatedValue.interpolate({
-        //     inputRange: [0, 60, 100],
-        //     outputRange: [12, 11, 10]
-        // });
-
-        const isFocused = state.index === index;
-        const IconComponent = icons[route.name].lib;
-        const iconName = icons[route.name].name;
-
-        const buttonSizeDown = (): Promise<void> => {
-          return new Promise((resolve) => {
-            Animated.timing(animatedValue, {
-              toValue: 100,
-              duration: 75,
-              useNativeDriver: true,
-            }).start();
-            setTimeout(() => {
-              resolve();
-            }, 75);
-          });
-        };
-
-        const buttonSizeUp = (): Promise<void> => {
-          return new Promise((resolve) => {
-            buttonSizeDown().finally(() => {
-              Animated.timing(animatedValue, {
-                toValue: 0,
-                duration: 75,
-                useNativeDriver: true,
-              }).start();
-              setTimeout(() => {
-                resolve();
-              }, 75);
-            });
-          });
-        };
-
-        const onPress = async () => {
-          buttonSizeUp().finally(async () => {
-            const event = navigation.emit({
-              type: "tabPress",
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (route.name === "classroom") {
-              event.preventDefault();
-              try {
-                await startActivityAsync("android.intent.MAIN", {
-                  packageName: ANDROID_PACKAGES.classroom,
-                });
-              } catch (e) {
-                console.log(e);
-                Linking.openURL(appURLs.classroom);
-              }
-              return;
-            }
-
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
-            }
-          });
-        };
+        const isFocused = isRouteFocused(routeName);
+        const IconComponent = icons[routeName].lib;
+        const iconName = icons[routeName].name;
 
         return (
           <TouchableOpacity
-            key={route.key}
-            onPress={onPress}
+            key={`${routeName}-tab`}
+            onPress={() => handlePress(routeName, index)}
             activeOpacity={1.0}
             style={{ flex: 1, alignItems: "center" }}
           >
@@ -157,7 +162,7 @@ function MyTabBar({ state, navigation }: BottomTabBarProps) {
                 },
               ]}
             >
-              {route.name}
+              {routeName}
             </Animated.Text>
           </TouchableOpacity>
         );
@@ -165,26 +170,6 @@ function MyTabBar({ state, navigation }: BottomTabBarProps) {
     </View>
   );
 }
-
-const Tab = createBottomTabNavigator();
-
-export default function SelfBottomTabs() {
-  return (
-    <Tab.Navigator
-      tabBar={(props) => <MyTabBar {...props} />}
-      screenOptions={{ headerShown: false }}
-    >
-      <Tab.Screen name="home" component={HomeScreen} />
-      <Tab.Screen name="tools" component={Tools} />
-      <Tab.Screen name="calendar" component={Calendar} />
-      <Tab.Screen name="classroom" component={Classroom} />
-    </Tab.Navigator>
-  );
-}
-
-// タブコンポーネント
-// タップ時に画面偏移
-// タップ時にコンポーネントのアニメーション
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -201,8 +186,3 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 });
-
-// 改めて機能確認
-// タップ時のアニメーション調整
-// スタイルの確認
-// 色合いの調整

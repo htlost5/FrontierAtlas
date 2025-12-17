@@ -1,3 +1,4 @@
+import { router, usePathname } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -9,21 +10,30 @@ import {
   View,
 } from "react-native";
 
-type Props = {
-  focused: boolean;
-  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useSearch } from "@/Context/SearchContext";
 
-export default function SearchBar({ focused, setFocused }: Props) {
+import translation from "@/functions/translation";
+
+export default function SearchBar() {
+  const pathName = usePathname();
+  const focused = pathName.endsWith("/search");
+  const { searchText, setSearchText, setAnswerText } = useSearch();
+
+  console.log(pathName);
+
   return (
     <TouchableOpacity
       style={[
         styles.searchBox,
         {
-          backgroundColor: focused ? "gray" : "white",
+          backgroundColor: focused ? "#E6E6E6" : "#FFFFFF",
         },
       ]}
-      onPress={() => setFocused(true)}
+      onPress={() => {
+        if (!focused) {
+          router.push("/search" as any);
+        }
+      }}
       activeOpacity={1}
     >
       {!focused ? (
@@ -44,21 +54,31 @@ export default function SearchBar({ focused, setFocused }: Props) {
         <>
           <TouchableOpacity
             style={styles.iconWrapping}
-            onPress={() => setFocused(false)}
+            onPress={() => router.back()}
             activeOpacity={1}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
             <Image
               style={styles.appLogo}
-              source={require("@/assets/images/icons/searchVar/back-white.png")}
+              source={require("@/assets/images/icons/searchVar/back-black.png")}
             />
           </TouchableOpacity>
           <View style={styles.inputPlace}>
             <TextInput
+              value={searchText}
+              onChangeText={setSearchText}
+              onSubmitEditing={async() => {
+                console.log("pressed Enter");
+                const converted = await translation(searchText);
+                setAnswerText(converted);
+              }}
+              returnKeyType="search"
               placeholder="部屋を探す"
-              style={[styles.text, { color: "#FFFFFF" }]}
+              style={[
+                styles.text,
+                { color: "#000000", paddingVertical: 0, paddingHorizontal: 0 },
+              ]}
               autoFocus
-              onBlur={() => setFocused(false)}
             />
           </View>
         </>
@@ -92,15 +112,16 @@ const styles = StyleSheet.create({
   },
   iconWrapping: {
     marginLeft: 8,
-    height: 35,
-    width: 35,
+    height: 34,
+    width: 34,
   },
   appLogo: {
     width: "100%",
     height: "100%",
   },
   inputPlace: {
-    marginLeft: 10,
+    position: "absolute",
+    left: 50,
     height: "100%",
     justifyContent: "center",
   },
