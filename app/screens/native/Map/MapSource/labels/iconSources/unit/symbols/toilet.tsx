@@ -17,9 +17,9 @@ export default function Toilet({ data, isVisible, floor_num }: Props) {
       <Images
         id={`toilet_icons-images-${floor_num}`}
         images={{
-          male: require("@/assets/images/icons/imdf_elements/toilet/male.png"),
-          female: require("@/assets/images/icons/imdf_elements/toilet/female.png"),
-          wheelchair: require("@/assets/images/icons/imdf_elements/toilet/wheelchair.png"),
+          male: require("@/assets/images/icons/MapView/imdf_elements/toilet/male.png"),
+          female: require("@/assets/images/icons/MapView/imdf_elements/toilet/female.png"),
+          wheelchair: require("@/assets/images/icons/MapView/imdf_elements/toilet/wheelchair.png"),
         }}
       />
       <ShapeSource id={`toilet-shape-${floor_num}`} shape={data}>
@@ -65,7 +65,11 @@ export default function Toilet({ data, isVisible, floor_num }: Props) {
         />
         <SymbolLayer
           id={`wheelChair-symbol-${floor_num}`}
-          filter={["==", ["get", "category"], "restroom.transgender.wheelchair"]}
+          filter={[
+            "==",
+            ["get", "category"],
+            "restroom.transgender.wheelchair",
+          ]}
           style={{
             iconImage: "wheelchair",
             iconSize: [

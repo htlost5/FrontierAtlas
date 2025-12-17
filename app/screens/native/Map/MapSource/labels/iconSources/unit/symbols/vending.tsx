@@ -13,7 +13,7 @@ export default function Vending({ data, isVisible, floor_num }: Props) {
       <Images
         id={`vending_icons-images-${floor_num}`}
         images={{
-          vending: require("@/assets/images/icons/imdf_elements/vending/vending-machine.png"),
+          vending: require("@/assets/images/icons/MapView/imdf_elements/vending/vending-machine.png"),
         }}
       />
       <ShapeSource id={`vending-shape-${floor_num}`} shape={data}>

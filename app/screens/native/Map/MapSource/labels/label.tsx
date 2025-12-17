@@ -34,7 +34,7 @@ export default function LabelView({ floor_num, data, display }: Props) {
       <Images
         id="map-symbols"
         images={{
-          room: require("@/assets/images/icons/map/room.png"),
+          room: require("@/assets/images/icons/MapView/map/room.png"),
         }}
       />
 

@@ -170,11 +170,7 @@ export default function MapScreenNative({
         animationDuration={1000}
       />
       {venueGeoData?.venue && <Venue data={venueGeoData.venue} />}
-      {venueGeoData?.studyhall && (
-        <Studyhall
-          data={venueGeoData.studyhall}
-        />
-      )}
+      {venueGeoData?.studyhall && <Studyhall data={venueGeoData.studyhall} />}
       {venueGeoData?.interact && <Interact data={venueGeoData.interact} />}
       {floorGeoData && (
         <FloorN

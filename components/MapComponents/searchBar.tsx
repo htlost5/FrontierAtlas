@@ -1,24 +1,111 @@
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-export default function SearchBar() {
+type Props = {
+  focused: boolean;
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function SearchBar({ focused, setFocused }: Props) {
   return (
-    <View style={styles.searchBox}>
-      <Text style={styles.text}>input the room here</Text>
-    </View>
+    <TouchableOpacity
+      style={[
+        styles.searchBox,
+        {
+          backgroundColor: focused ? "gray" : "white",
+        },
+      ]}
+      onPress={() => setFocused(true)}
+      activeOpacity={1}
+    >
+      {!focused ? (
+        <>
+          <View style={styles.iconWrapping}>
+            <Image
+              style={styles.appLogo}
+              source={require("@/assets/images/appLogo/FrontierAtlasLogo_white.png")}
+            />
+          </View>
+          <View style={styles.inputPlace}>
+            <Text style={[styles.text, { color: "#000000", opacity: 0.6 }]}>
+              部屋を探す
+            </Text>
+          </View>
+        </>
+      ) : (
+        <>
+          <TouchableOpacity
+            style={styles.iconWrapping}
+            onPress={() => setFocused(false)}
+            activeOpacity={1}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <Image
+              style={styles.appLogo}
+              source={require("@/assets/images/icons/searchVar/back-white.png")}
+            />
+          </TouchableOpacity>
+          <View style={styles.inputPlace}>
+            <TextInput
+              placeholder="部屋を探す"
+              style={[styles.text, { color: "#FFFFFF" }]}
+              autoFocus
+              onBlur={() => setFocused(false)}
+            />
+          </View>
+        </>
+      )}
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   searchBox: {
-    height: 55,
+    height: 50,
     width: 400,
     backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 100,
+    ...Platform.select({
+      android: {
+        elevation: 6,
+      },
+      ios: {
+        shadowColor: "#000000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.18,
+        shadowRadius: 6,
+      },
+      web: {
+        boxShadow: "0px 4x 12px rgba(0,0,0,0.15)",
+      },
+    }),
+  },
+  iconWrapping: {
+    marginLeft: 8,
+    height: 35,
+    width: 35,
+  },
+  appLogo: {
+    width: "100%",
+    height: "100%",
+  },
+  inputPlace: {
+    marginLeft: 10,
+    height: "100%",
+    justifyContent: "center",
   },
   text: {
-    fontSize: 10,
-    color: "black",
+    fontSize: 22,
+    lineHeight: 50,
   },
 });
