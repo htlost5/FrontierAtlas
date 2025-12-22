@@ -27,11 +27,6 @@ export default function FloorN({ floor_num, geoData, display }: Props) {
         data={geoData.unit}
         stairData={geoData.stair}
       />
-      {/* <FloorN_unit
-        data={geoData.unit}
-        stairData={geoData.stair}
-        floor_num={floor_num}
-      /> */}
       <LabelView floor_num={floor_num} data={geoData.unit} display={display} />
     </>
   );

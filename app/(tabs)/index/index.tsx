@@ -3,8 +3,8 @@ import { CameraRef } from "@maplibre/maplibre-react-native";
 import React, { useRef, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 
-import FloorChange from "@/components/MapComponents/FloorChange";
-import UserLocation from "@/components/MapComponents/userLocation";
+import FloorChange from "@/components/MapUI/interface/FloorChange";
+import UserLocation from "@/components/MapUI/interface/userLocation";
 
 import MapScreenNative from "../../screens/native/Map/MapScreenNative";
 import MapScreenWeb from "../../screens/web/MapScreenWeb";

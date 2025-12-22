@@ -57,7 +57,7 @@
         ]
       },
       "properties": {
-        "category": "firstaid",
+        "category": "first_aid_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -89,7 +89,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "broadcast_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -123,7 +123,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "studio_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -156,7 +156,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "printing_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -188,7 +188,7 @@
         ]
       },
       "properties": {
-        "category": "privatelounge",
+        "category": "private_lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -287,12 +287,12 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "audiovisual_room",
         "restriction": null,
         "accessibility": null,
         "name": {
           "ja": "視聴覚室",
-          "en": "audiovisual room"
+          "en": "audiovisual_room"
         },
         "alt_name": null,
         "display_point": {
@@ -319,7 +319,7 @@
         ]
       },
       "properties": {
-        "category": "office",
+        "category": "staff_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -352,7 +352,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -386,7 +386,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "music_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -485,7 +485,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -517,12 +517,12 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "concrete",
         "restriction": null,
         "accessibility": null,
         "name": {
-          "ja": "倉庫",
-          "en": "store"
+          "ja": null,
+          "en": null
         },
         "alt_name": null,
         "display_point": {
@@ -550,7 +550,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "music_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -583,7 +583,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "music_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -617,7 +617,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "music_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -649,7 +649,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "japanese_style_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -846,7 +846,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1009,7 +1009,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1042,7 +1042,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "sewing_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1075,7 +1075,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "art_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1107,7 +1107,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1139,7 +1139,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "calligraphy_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1172,7 +1172,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "craft_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1204,7 +1204,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "dressing_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1237,12 +1237,12 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "concrete",
         "restriction": null,
         "accessibility": null,
         "name": {
-          "ja": "倉庫",
-          "en": "store"
+          "ja": null,
+          "en": null
         },
         "alt_name": null,
         "display_point": {
@@ -1271,7 +1271,7 @@
         ]
       },
       "properties": {
-        "category": "vending",
+        "category": "vending_area",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1306,7 +1306,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1338,7 +1338,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1373,7 +1373,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": "employeesonly",
         "accessibility": null,
         "name": {
@@ -1442,7 +1442,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1475,7 +1475,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1544,7 +1544,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "dressing_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1582,7 +1582,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.female",
+        "category": "restroom_female",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1620,7 +1620,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.female",
+        "category": "restroom_female",
         "restriction": "employeesonly",
         "accessibility": null,
         "name": {
@@ -1658,7 +1658,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.female",
+        "category": "restroom_female",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1693,7 +1693,7 @@
         ]
       },
       "properties": {
-        "category": "office",
+        "category": "staff_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1891,7 +1891,7 @@
         ]
       },
       "properties": {
-        "category": "unclosedarea",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1930,7 +1930,7 @@
         ]
       },
       "properties": {
-        "category": "unclosedarea",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1970,7 +1970,7 @@
         ]
       },
       "properties": {
-        "category": "unclosedarea",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2010,7 +2010,7 @@
         ]
       },
       "properties": {
-        "category": "unclosedarea",
+        "category": "courtyard",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2045,7 +2045,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": "employeesonly",
         "accessibility": null,
         "name": {
@@ -2302,7 +2302,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "waste_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2340,7 +2340,7 @@
         ]
       },
       "properties": {
-        "category": "office",
+        "category": "staff_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2468,7 +2468,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "information_lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2500,7 +2500,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2532,7 +2532,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2564,7 +2564,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2596,7 +2596,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2628,7 +2628,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {

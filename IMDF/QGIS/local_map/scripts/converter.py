@@ -17,8 +17,8 @@ import json, shutil, sys, math
 
 # ------------------ 設定（ここを編集） ------------------
 CONFIG = {
-    "input_folder": "../working/local_map - studyhall/exports/floor5/input",
-    "output_folder": "../working/local_map - studyhall/exports/floor5/output",
+    "input_folder": "../working/local_map - studyhall/exports/floor1/input",
+    "output_folder": "../working/local_map - studyhall/exports/floor1/output",
     "recursive": True,
     "backup_existing": True,
     "verbose": True,

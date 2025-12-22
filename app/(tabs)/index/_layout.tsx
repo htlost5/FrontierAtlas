@@ -1,16 +1,16 @@
-import SearchBar from "@/components/MapComponents/searchBar";
+import SearchBar from "@/components/MapUI/interface/searchBar";
 import { Stack } from "expo-router";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function IndexLayout() {
-    return (
-        <View style={{flex: 1}}>
-            <View style={styles.searchBarWrapper}>
-                <SearchBar />
-            </View>
-            <Stack screenOptions={{ headerShown: false, animation: "none"}} />
-        </View>
-    )
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={styles.searchBarWrapper}>
+        <SearchBar />
+      </View>
+      <Stack screenOptions={{ headerShown: false, animation: "none" }} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
