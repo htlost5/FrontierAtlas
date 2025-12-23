@@ -17,7 +17,7 @@ export default function Elevator({ data, isVisible, floor_num }: Props) {
       <Images
         id={`elevator_icons-images-${floor_num}`}
         images={{
-          elevator: require("@/assets/images/icons/MapView/imdf_elements/elevator/elevator.png"),
+          elevator: require("@/assets/images/icons/MapView/MapLogo/elevator/elevator.png"),
         }}
       />
       <ShapeSource id={`elevator-symbol-${floor_num}`} shape={data}>
