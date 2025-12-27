@@ -283,7 +283,7 @@
         ]
       },
       "properties": {
-        "category": "glass",
+        "category": "emergency_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -315,7 +315,7 @@
         ]
       },
       "properties": {
-        "category": "glass",
+        "category": "emergency_area",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -382,7 +382,7 @@
         ]
       },
       "properties": {
-        "category": "vending",
+        "category": "vending_area",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -451,7 +451,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.female",
+        "category": "restroom_female",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -483,7 +483,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -519,7 +519,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -718,7 +718,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -755,7 +755,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.female",
+        "category": "restroom_female",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -790,7 +790,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -918,7 +918,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "locker_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -950,7 +950,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "locker_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -982,7 +982,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "information_lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1014,7 +1014,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "information_lounge",
         "restriction": null,
         "accessibility": null,
         "name": {

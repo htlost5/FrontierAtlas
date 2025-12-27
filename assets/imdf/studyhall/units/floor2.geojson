@@ -29,7 +29,7 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "conference_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -63,7 +63,7 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "conference_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -98,7 +98,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "staff_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -131,7 +131,7 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "conferenceconference_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -201,7 +201,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "conference_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -235,7 +235,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "concrete",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -375,7 +375,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -409,7 +409,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -508,7 +508,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -578,7 +578,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -706,7 +706,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "classroom",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -738,7 +738,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "classroom",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -803,7 +803,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -836,7 +836,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -869,7 +869,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -901,7 +901,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -933,7 +933,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1229,7 +1229,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "open_to_below",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1360,7 +1360,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.male",
+        "category": "restroom_male",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1431,7 +1431,7 @@
         ]
       },
       "properties": {
-        "category": "restroom.transgender.wheelchair",
+        "category": "restroom_accessible",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1592,7 +1592,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1624,7 +1624,7 @@
         ]
       },
       "properties": {
-        "category": "storage",
+        "category": "storage_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1656,7 +1656,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1688,7 +1688,7 @@
         ]
       },
       "properties": {
-        "category": "laboratory",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1722,7 +1722,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1754,7 +1754,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "it_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1786,7 +1786,7 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "studio_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1818,7 +1818,7 @@
         ]
       },
       "properties": {
-        "category": "room",
+        "category": "preparation_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -1850,7 +1850,7 @@
         ]
       },
       "properties": {
-        "category": "conferenceroom",
+        "category": "studio_room",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2145,7 +2145,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "open_to_below",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2177,7 +2177,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "open_to_below",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2209,7 +2209,7 @@
         ]
       },
       "properties": {
-        "category": "opentobelow",
+        "category": "open_to_below",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2751,7 +2751,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "information_lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2783,7 +2783,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2815,7 +2815,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2847,7 +2847,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2879,7 +2879,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {
@@ -2911,7 +2911,7 @@
         ]
       },
       "properties": {
-        "category": "launge",
+        "category": "lounge",
         "restriction": null,
         "accessibility": null,
         "name": {

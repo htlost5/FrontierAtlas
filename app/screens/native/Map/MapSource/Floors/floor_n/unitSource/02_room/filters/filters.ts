@@ -52,9 +52,11 @@ const ROOM_CATEGORIES = {
   restroomAccessible: "restroom_accessible",
 
   // その他
+  alumniRoom: "alumni_room",
   emergencyArea: "emergency_area",
   privateLounge: "private_lounge",
   generalRoom: "general_room",
+  opentobelow: "open_to_below",
 };
 
 export const ROOM_FILTERS = filterMaker(ROOM_CATEGORIES);

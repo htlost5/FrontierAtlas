@@ -14,7 +14,7 @@ import calligraphyRoom from "@/assets/images/icons/MapView/map/unitIcons/calligr
 import craftRoom from "@/assets/images/icons/MapView/map/unitIcons/craftRoom.png";
 import sewingRoom from "@/assets/images/icons/MapView/map/unitIcons/sewingRoom.png";
 import cookingRoom from "@/assets/images/icons/MapView/map/unitIcons/cookingRoom.png";
-import audiovisulRoom from "@/assets/images/icons/MapView/map/unitIcons/audiovisualRoom.png";
+import audiovisualRoom from "@/assets/images/icons/MapView/map/unitIcons/audiovisualRoom.png";
 import musicRoom from "@/assets/images/icons/MapView/map/unitIcons/musicRoom.png";
 import japaneseStyleRoom from "@/assets/images/icons/MapView/map/unitIcons/japaneseStyleRoom.png";
 import conferenceRoom from "@/assets/images/icons/MapView/map/unitIcons/conferenceRoom.png";
@@ -67,7 +67,7 @@ export default function LabelView({ floor_num, data, display }: Props) {
           sewingRoom: sewingRoom,
           homeEconomicsRoom: classroom,
           cookingRoom: cookingRoom,
-          audiovisulRoom: audiovisulRoom,
+          audiovisualRoom: audiovisualRoom,
           musicRoom: musicRoom,
           japaneseStyleRoom: japaneseStyleRoom,
           conferenceRoom: conferenceRoom,
