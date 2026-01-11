@@ -51,7 +51,7 @@ async function loadData(data: any) {
  * すべてのGeoJSONファイルをキャッシュディレクトリに読み込む
  * 既存のキャッシュを削除してから新しいデータを書き込む
  */
-export default async function loadAll() {
+export async function loadAll() {
   const cacheDir = `${FileSystem.documentDirectory}geoJson_cache`;
   try {
     await FileSystem.deleteAsync(cacheDir, { idempotent: true });

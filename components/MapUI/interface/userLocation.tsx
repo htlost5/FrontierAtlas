@@ -17,7 +17,7 @@ type Props = {
  * @param cameraRef - マップカメラの参照
  * @returns ユーザー位置ボタン
  */
-export default function UserLocation({ cameraRef }: Props) {
+export function UserLocation({ cameraRef }: Props) {
   const handlePress = () => {
     cameraRef.current?.flyTo([139.6784895108818, 35.49777179199512], 750);
   };

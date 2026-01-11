@@ -9,7 +9,7 @@ import { translateText } from "./googleTranslate";
  * @param originText - 翻訳元のテキスト
  * @returns 英語に翻訳されたテキスト
  */
-export default async function translation(originText: string) {
+export async function translation(originText: string) {
   const convertText = await translateText(originText, "en");
   return convertText;
 }

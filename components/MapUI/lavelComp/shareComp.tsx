@@ -24,7 +24,7 @@ type Props = {
  * @param config - ラベル表示設定
  * @returns SymbolLayerコンポーネント
  */
-export default function LavelLayer({ floor_num, sourceId, config }: Props) {
+export function LavelLayer({ floor_num, sourceId, config }: Props) {
   return (
     <>
       <SymbolLayer

@@ -13,10 +13,10 @@ import {
 
 import { useSearch } from "@/Context/SearchContext";
 
-import translation from "@/functions/translation";
+import { translation } from "@/functions/translation";
 
 // 検索バー本体：フォーカス状態に応じてUI切り替えとテキスト入力を処理
-export default function SearchBar() {
+export function SearchBar() {
   const pathName = usePathname();
   const focused = pathName.endsWith("/search");
   const { searchText, setSearchText, setAnswerText } = useSearch();

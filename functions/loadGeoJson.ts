@@ -38,7 +38,7 @@ async function parseGeoJsonAsync<T = FeatureCollection>(
 
 // 複数のGeoJSONファイルを並列で読み込むメイン関数
 // キャッシュからファイルを読み、失敗時は空のFeatureCollectionを返す
-export default async function loadGeoJson(targets: Props[]) {
+export async function loadGeoJson(targets: Props[]) {
   const tasks = targets.map(async ({ type, feature }) => {
     const path = `${dirs[type]}/${feature}.geojson`;
     try {

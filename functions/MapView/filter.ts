@@ -6,7 +6,7 @@
  * @param categories - カテゴリ名とその値のマッピングオブジェクト
  * @returns カテゴリごとのフィルタ式オブジェクト
  */
-export default function filterMaker<T extends Record<string, string>>(
+export function filterMaker<T extends Record<string, string>>(
   categories: T
 ) {
   // カテゴリの値の型

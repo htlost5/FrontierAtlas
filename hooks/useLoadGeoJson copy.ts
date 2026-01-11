@@ -13,7 +13,7 @@ import type { FeatureCollection } from "geojson";
  * @param originGeoJsons - ロードするGeoJSONアセット（可変長引数）
  * @returns ロードしたGeoJSON配列、ローディング状態、エラー情報
  */
-export default function useLoadGeoJson(...originGeoJsons: any) {
+export function useLoadGeoJson(...originGeoJsons: any) {
   const [geoJsonList, setGeoJsonList] = useState<FeatureCollection[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);

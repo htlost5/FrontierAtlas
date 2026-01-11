@@ -1,7 +1,7 @@
 // タブナビゲーション配下のレイアウトコンポーネント
 // ボトムタブバーの表示制御とSearchContextの提供を担当
 
-import SelfBottomTabs from "@/components/bottomTabBar/bottomTabBar";
+import { SelfBottomTabs } from "@/components/bottomTabBar/bottomTabBar";
 import { Slot, usePathname } from "expo-router";
 import React from "react";
 import { View } from "react-native";

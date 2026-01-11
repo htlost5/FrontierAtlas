@@ -43,7 +43,7 @@ type RouteName = (typeof ROUTES)[number];
 // "home" | "tools" | "calendar" | "classroom"
 
 // カスタムタブバー本体：ルート遷移、フォーカス判定、タップアニメーションを実装
-export default function SelfBottomTabs() {
+export function SelfBottomTabs() {
   const router = useRouter();
   const pathname = usePathname() ?? "/";
 

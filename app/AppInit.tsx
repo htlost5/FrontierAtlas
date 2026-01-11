@@ -1,7 +1,7 @@
 // アプリ起動時の初期化を管理するコンポーネント
 // スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
 
-import loadAll from "@/functions/splash/cacheMaker";
+import { loadAll } from "@/functions/splash/cacheMaker";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
