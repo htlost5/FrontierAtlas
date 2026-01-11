@@ -1,0 +1,814 @@
+--- a/app/_layout.tsx
++++ b/app/_layout.tsx
+@@ -1,3 +1,9 @@
++/**
++ * アプリ全体のルートレイアウトコンポーネント
++ * 初期化処理、セーフエリア対応、ステータスバー設定、ナビゲーションスタックの構築を担当
++ * スクリーン最適化を有効化し、React Navigationの基盤を提供
++ */
++
+ // React Navigationのスクリーン最適化とルーティングをインポート
+ import { Stack } from "expo-router";
+ import React from "react";
+
+--- a/app/AppInit.tsx
++++ b/app/AppInit.tsx
+@@ -1,5 +1,11 @@
+-// アプリ起動時の初期化を管理するコンポーネント
+-// スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
++/**
++ * アプリ起動時の初期化を管理するラッパーコンポーネント
++ * スプラッシュスクリーン制御、カスタムフォント読み込み、GeoJSONキャッシュ作成を担当
++ * 
++ * @remarks
++ * フォント読み込みが完了するまでスプラッシュを表示し続け、
++ * その後GeoJSONキャッシュを作成してから子コンポーネント（アプリ本体）をレンダリング
++ */
+ 
+ import loadAll from "@/functions/splash/cacheMaker";
+ import { useLoadFonts } from "@/hooks/useLoadFonts";
+
+--- a/app/(tabs)/_layout.tsx
++++ b/app/(tabs)/_layout.tsx
+@@ -1,5 +1,10 @@
+-// タブナビゲーション配下のレイアウトコンポーネント
+-// ボトムタブバーの表示制御とSearchContextの提供を担当
++/**
++ * タブナビゲーション配下のレイアウトコンポーネント
++ * ボトムタブバーの表示制御とSearchContextの提供を担当
++ * 
++ * @remarks
++ * 検索画面（/search）では、ボトムタブバーを非表示にする
++ */
+ 
+ import SelfBottomTabs from "@/components/bottomTabBar/bottomTabBar";
+ import { Slot, usePathname } from "expo-router";
+
+--- a/app/(tabs)/index/index.tsx
++++ b/app/(tabs)/index/index.tsx
+@@ -1,4 +1,11 @@
+-// ホーム画面: 屋内マップの表示と階層切り替え、現在位置表示を統合
++/**
++ * ホーム画面（メインマップ）コンポーネント
++ * 屋内マップの表示、階層切り替えUI、現在位置ボタンを統合
++ * 
++ * @remarks
++ * プラットフォームに応じてネイティブ版（Android/iOS）またはWeb版のマップを描画
++ * 階層番号（1～5階）の状態管理とカメラ制御用refを子コンポーネントに渡す
++ */
+ import { CameraRef } from "@maplibre/maplibre-react-native";
+ import React, { useRef, useState } from "react";
+ import { Platform, StyleSheet, View } from "react-native";
+
+--- a/app/(tabs)/index/_layout.tsx
++++ b/app/(tabs)/index/_layout.tsx
+@@ -1,3 +1,10 @@
++/**
++ * インデックス階層のレイアウトコンポーネント
++ * マップ画面上部に検索バーを絶対配置し、Stackナビゲーションを提供
++ * 
++ * @remarks
++ * 検索バーは画面上部中央に固定配置され、常に表示される
++ */
+ import SearchBar from "@/components/MapUI/interface/searchBar";
+ import { Stack } from "expo-router";
+ import { StyleSheet, View } from "react-native";
+
+--- a/app/(tabs)/index/search.tsx
++++ b/app/(tabs)/index/search.tsx
+@@ -1,3 +1,11 @@
++/**
++ * 検索画面コンポーネント
++ * SearchContextから検索テキストと翻訳結果を取得し、部屋情報を表示
++ * 
++ * @remarks
++ * 検索結果として部屋のアイコン、検索テキスト、翻訳結果を縦型レイアウトで表示
++ * 現在は教室アイコンを固定で表示（後にカテゴリに応じて切り替える想定）
++ */
+ import { useSearch } from "@/Context/SearchContext";
+ import { Image, StyleSheet, Text, View } from "react-native";
+ 
+--- a/app/(tabs)/calendar.tsx
++++ b/app/(tabs)/calendar.tsx
+@@ -1,4 +1,9 @@
+-// app/(tabs)/index.tsx (Home Screen)
++/**
++ * カレンダータブ画面（プレースホルダー）
++ * 
++ * @remarks
++ * 現在は仮実装。将来的にはカレンダー機能を実装予定
++ */
+ import { StyleSheet, Text, View } from "react-native";
+ 
+ export default function Calendar() {
+
+--- a/app/(tabs)/classroom.tsx
++++ b/app/(tabs)/classroom.tsx
+@@ -1,4 +1,9 @@
+-// app/(tabs)/index.tsx (Home Screen)
++/**
++ * Classroomタブ画面（プレースホルダー）
++ * 
++ * @remarks
++ * 現在は仮実装。Google Classroomとの統合を想定
++ */
+ import { StyleSheet, Text, View } from "react-native";
+ 
+ export default function Classroom() {
+
+--- a/app/(tabs)/tools.tsx
++++ b/app/(tabs)/tools.tsx
+@@ -1,4 +1,9 @@
+-// app/(tabs)/index.tsx (Home Screen)
++/**
++ * ツールタブ画面（プレースホルダー）
++ * 
++ * @remarks
++ * 現在は仮実装。アプリ設定や各種ツールを配置予定
++ */
+ import { StyleSheet, Text, View } from "react-native";
+ 
+ export default function Tools() {
+
+--- a/app/+not-found.tsx
++++ b/app/+not-found.tsx
+@@ -1,4 +1,9 @@
+-// 存在しないルートにアクセスした際の404エラーページ
++/**
++ * 404エラーページコンポーネント
++ * 存在しないルートにアクセスした際に表示
++ * 
++ * @remarks
++ * 現在はシンプルなテキスト表示のみ。将来的にはより詳細なエラー画面を実装予定
++ */
+ import { Text, View } from "react-native";
+ 
+ export default function notFound() {
+
+--- a/Context/SearchContext.tsx
++++ b/Context/SearchContext.tsx
+@@ -1,5 +1,14 @@
+-// 検索機能用のReact Context: 検索テキストと検索結果をアプリ全体で共有
++/**
++ * 検索機能用のReact Context
++ * 検索テキストと翻訳結果（answerText）をアプリ全体で共有
++ * 
++ * @remarks
++ * SearchProviderで子コンポーネントをラップすることで、
++ * useSearchフックを通じて検索状態にアクセス可能
++ * 主にSearchBarとSearchViewで使用される
++ */
+ import React, { createContext, useContext, useState } from "react";
+ 
++/** 検索Contextの型定義: テキストと結果の状態管理 */
+ // 検索Contextの型定義: テキストと結果の状態管理
+ type SearchContextType = {
+   searchText: string;
+
+--- a/functions/loadGeoJson.ts
++++ b/functions/loadGeoJson.ts
+@@ -1,4 +1,12 @@
+-// キャッシュディレクトリからGeoJSONファイルを読み込むユーティリティ関数
++/**
++ * キャッシュディレクトリからGeoJSONファイルを読み込むユーティリティ関数
++ * アプリ起動時にcacheMakerで生成されたキャッシュデータを読み込む
++ * 
++ * @remarks
++ * 複数のGeoJSONファイルを並列で読み込み、
++ * JSONパースをInteractionManagerで非同期化してUIブロックを回避
++ * ファイル読み込みに失敗した場合は空のFeatureCollectionを返す
++ */
+ import * as FileSystem from "expo-file-system";
+ import type { FeatureCollection } from "geojson";
+ import { InteractionManager } from "react-native";
+
+--- a/functions/translation.ts
++++ b/functions/translation.ts
+@@ -1,6 +1,12 @@
+ /**
+- * 翻訳機能のエントリーポイント
+- * テキストを英語に翻訳するためのラッパー関数
++ * 翻訳機能のエントリーポイント（ラッパー関数）
++ * 検索テキストを英語に翻訳する
++ * 
++ * @param originText - 翻訳元のテキスト（日本語など）
++ * @returns 英語に翻訳されたテキスト
++ * 
++ * @remarks
++ * 内部でgoogleTranslateのtranslateText関数を呼び出す
+  */
+ import { translateText } from "./googleTranslate";
+ 
+--- a/functions/googleTranslate.ts
++++ b/functions/googleTranslate.ts
+@@ -1,6 +1,13 @@
+ /**
+- * Google翻訳APIを使用してテキストを翻訳する関数
++ * Google翻訳非公式APIを使用してテキストを翻訳するユーティリティ関数
++ * 
+  * @param text - 翻訳するテキスト
+- * @param target - ターゲット言語（"en" または "ja"）
+- * @returns 翻訳されたテキスト（エラー時は元のテキスト）
++ * @param target - ターゲット言語コード（"en": 英語, "ja": 日本語）
++ * @returns 翻訳されたテキスト（エラー時は元のテキストをそのまま返す）
++ * 
++ * @remarks
++ * Google翻訳の非公式API（translate_a/single）を使用
++ * 元言語は自動判定（sl=auto）
++ * APIキーは不要だが、レート制限や仕様変更のリスクあり
+  */
+ export async function translateText(text: string, target: "en" | "ja") {
+
+--- a/functions/MapView/filter.ts
++++ b/functions/MapView/filter.ts
+@@ -1,6 +1,14 @@
+ /**
+- * Maplibre用のカテゴリフィルタを生成する関数
+- * カテゴリオブジェクトから型安全なフィルタ式を作成する
++ * Maplibre用のカテゴリフィルタを生成するユーティリティ関数
++ * カテゴリオブジェクトから型安全なMaplibre式を生成
++ * 
++ * @param categories - カテゴリ名とカテゴリ値のマッピングオブジェクト
++ * @returns 各カテゴリに対応するMaplibreフィルタ式オブジェクト
++ * 
++ * @remarks
++ * GeoJSONのproperties.categoryフィールドを基準にフィルタリング
++ * 生成されたフィルタは FillLayer や LineLayer の filter プロパティで使用
++ * 型安全性を保ちながら動的にフィルタを生成する
+  */
+ export default function filterMaker<T extends Record<string, string>>(
+   categories: T
+
+--- a/functions/splash/cacheMaker.ts
++++ b/functions/splash/cacheMaker.ts
+@@ -1,6 +1,13 @@
+ /**
+- * GeoJSONファイルをキャッシュディレクトリに読み込むためのユーティリティ
+- * アプリ起動時にIMDFデータをファイルシステムにキャッシュする
++ * GeoJSONファイルをキャッシュディレクトリにコピーするユーティリティ
++ * アプリ起動時にIMDF（Indoor Mapping Data Format）データをキャッシュ化
++ * 
++ * @remarks
++ * - assets からGeoJSONを読み込み、documentDirectory配下にキャッシュ
++ * - 既存キャッシュは削除してから再生成（冪等性を担保）
++ * - venue（施設全体）、sections（廊下）、units（部屋）、others（階段）をカテゴリ別に配置
++ * - AppInit.tsxから呼び出され、フォント読み込み完了後に実行される
++ * - キャッシュ化により、マップ表示時のファイル読み込みが高速化
+  */
+ import * as FileSystem from "expo-file-system";
+ 
+--- a/hooks/useLoadFonts.ts
++++ b/hooks/useLoadFonts.ts
+@@ -1,6 +1,11 @@
+-// カスタムフォント（Y1LunaChord）を読み込むカスタムフック
+-// フォント読み込み状態を返す（true: 完了, false: 読み込み中）
++/**
++ * カスタムフォント（Y1LunaChord）を読み込むカスタムReactフック
++ * 
++ * @returns フォント読み込み完了状態の配列（[fontsLoaded, error]）
++ * 
++ * @remarks
++ * expo-fontのuseFontsフックをラップし、Y1LunaChordフォントを読み込む
++ * AppInit.tsxで使用され、フォント読み込み完了までスプラッシュを表示
++ */
+ import { useFonts } from "expo-font";
+ 
+ export function useLoadFonts() {
+
+--- a/hooks/useLoadGeoJson copy.ts
++++ b/hooks/useLoadGeoJson copy.ts
+@@ -1,6 +1,14 @@
+ /**
+- * GeoJSONファイルを非同期に読み込むReactフック
+- * 複数のGeoJSONアセットをロードして配列として返す
++ * GeoJSONファイルを非同期に読み込むReactカスタムフック
++ * 複数のGeoJSONアセットをロードして配列として返す（現在は非推奨）
++ * 
++ * @param originGeoJsons - ロードするGeoJSONアセットの可変長引数
++ * @returns GeoJSON配列、ローディング状態、エラー情報を含むオブジェクト
++ * 
++ * @remarks
++ * ファイル名が "copy" となっているため、旧実装または予備実装と推測
++ * 現在は functions/loadGeoJson.ts を使用した実装が主流
++ * このフックはassetsから直接読み込むため、キャッシュ機構を使用しない
+  */
+ import { useEffect, useState } from "react";
+ 
+--- a/components/bottomTabBar/bottomTabBar.tsx
++++ b/components/bottomTabBar/bottomTabBar.tsx
+@@ -1,4 +1,15 @@
+-// アプリ下部のタブバー（Home, Tools, Calendar, Classroom）を描画し、ルート遷移とアニメーションを管理するコンポーネント
++/**
++ * アプリ下部のカスタムタブバーコンポーネント
++ * Home, Tools, Calendar, Classroomの4タブを管理し、ルート遷移とタップアニメーションを実装
++ * 
++ * @remarks
++ * - Expo Routerによる遷移制御（router.push）
++ * - タップ時のボタンスケールアニメーション（Animated API）
++ * - Classroom タブは外部アプリ（Android）または Web ブラウザを起動
++ * - 各タブのアイコンは @expo/vector-icons から取得
++ * - フォーカス判定は pathname に基づき、アクティブタブを視覚的に強調
++ * - ClassroomはAndroidではnativeアプリ起動、それ以外ではWebブラウザで開く
++ */
+ import { Entypo, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+ import { startActivityAsync } from "expo-intent-launcher";
+ import { usePathname, useRouter } from "expo-router";
+
+--- a/components/MapUI/interface/FloorChange.tsx
++++ b/components/MapUI/interface/FloorChange.tsx
+@@ -1,4 +1,13 @@
+-// マップ上で1階から5階までのフロアを切り替えるUIコンポーネント
++/**
++ * マップ上で1階から5階までのフロアを切り替えるUIコンポーネント
++ * 縦スクロール可能な丸型ボタンリストとして左下に配置される
++ * 
++ * @remarks
++ * - 5階から1階まで縦に並んだボタンを表示（降順）
++ * - 現在選択中の階層は青色背景でハイライト
++ * - タップすると親コンポーネント（HomeScreen）に階層番号を通知
++ * - マップ下部50pxのマージンを確保してボトムタブバーと重ならないよう配置
++ */
+ import {
+   Platform,
+   ScrollView,
+
+--- a/components/MapUI/interface/searchBar.tsx
++++ b/components/MapUI/interface/searchBar.tsx
+@@ -1,4 +1,15 @@
+-// マップ画面上部の検索バー：部屋名の入力と検索画面への遷移を管理するコンポーネント
++/**
++ * マップ画面上部の検索バーコンポーネント
++ * 部屋名の入力、検索画面への遷移、翻訳機能を統合
++ * 
++ * @remarks
++ * - 検索画面以外：プレースホルダーとして表示、タップで検索画面へ遷移
++ * - 検索画面：TextInputに切り替わり、テキスト入力と翻訳を実行
++ * - Enter（検索ボタン）で入力テキストを英語に翻訳し、answerTextに保存
++ * - 検索画面では戻るアイコン（back-black.png）を表示、タップで前画面に戻る
++ * - SearchContextで検索テキストと翻訳結果を管理
++ * - 翻訳はfunctions/translationを使用（Google翻訳非公式API）
++ */
+ import { router, usePathname } from "expo-router";
+ import React from "react";
+ import {
+
+--- a/components/MapUI/interface/userLocation.tsx
++++ b/components/MapUI/interface/userLocation.tsx
+@@ -1,4 +1,13 @@
+-// マップ上でユーザーの現在位置に移動するボタンを表示するコンポーネント
++/**
++ * マップ上でユーザーの現在位置（デフォルト座標）に移動するボタンコンポーネント
++ * 右下に配置される丸型ボタンで、タップすると指定座標にカメラが移動
++ * 
++ * @param cameraRef - MapViewのCameraRefオブジェクト（flyToメソッドで移動）
++ * 
++ * @remarks
++ * - 現在は固定座標 [139.6784895108818, 35.49777179199512] にズーム
++ * - 実際のGPS位置情報取得は未実装（将来的にはlocation APIと統合予定）
++ */
+ import React from "react";
+ import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+ 
+--- a/components/MapUI/lavelComp/shareComp.tsx
++++ b/components/MapUI/lavelComp/shareComp.tsx
+@@ -1,3 +1,15 @@
++/**
++ * ラベル（アイコン＋テキスト）を表示する共通レイヤーコンポーネント
++ * LavelConfigに基づいてMaplibreのSymbolLayerを生成
++ * 
++ * @param floor_num - 階層番号（レイヤーIDの一意性確保に使用）
++ * @param sourceId - GeoJSONデータソースID
++ * @param config - ラベル表示設定（フィルタ、アイコン、テキスト表示制御）
++ * 
++ * @remarks
++ * - ズームレベルに応じてアイコンとテキストのサイズを動的に調整（interpolate）
++ * - アイコン表示時はテキストを左側にオフセット配置、非表示時は中央配置
++ */
+ import { SymbolLayer } from "@maplibre/maplibre-react-native";
+ import { LavelConfig } from "./LavelConfig";
+ 
+--- a/components/MapUI/unitComp/shareComp.tsx
++++ b/components/MapUI/unitComp/shareComp.tsx
+@@ -1,4 +1,14 @@
+-// GeoJSONデータから塗りつぶしと枠線を持つポリゴンレイヤーを描画する共通コンポーネント
++/**
++ * GeoJSONデータから塗りつぶしと枠線を持つポリゴンレイヤーを描画する共通コンポーネント
++ * LayerConfigに基づいてFillLayerとLineLayerを生成
++ * 
++ * @param floor_num - 階層番号（レイヤーIDの一意性確保に使用）
++ * @param sourceId - GeoJSONデータソースID
++ * @param config - レイヤー設定（フィルタ、塗りつぶし色、枠線色）
++ * 
++ * @remarks
++ * - 部屋や壁、廊下などのポリゴンを塗りつぶしと枠線でまとめて描画
++ */
+ import { FillLayer, LineLayer } from "@maplibre/maplibre-react-native";
+ import { LayerConfig } from "./LayerConfig";
+ 
+--- a/components/MapUI/lavelComp/LavelConfig.ts
++++ b/components/MapUI/lavelComp/LavelConfig.ts
+@@ -1,4 +1,14 @@
+-// マップ上のラベル（部屋名やアイコン）の表示設定を定義する型
++/**
++ * マップ上のラベル（部屋名やアイコン）の表示設定を定義する型
++ * 
++ * @remarks
++ * - key: ラベルの識別子（部屋タイプなど）
++ * - filter: Maplibreフィルタ式（どのFeatureを表示するか）
++ * - iconVisible: アイコン（画像）を表示するか
++ * - textVisible: テキスト（部屋名）を表示するか
++ * - textColor: テキストの色（オプション、未指定時は黒）
++ * 
++ * lavelConfigs.tsで具体的な設定を定義し、LavelLayerコンポーネントで使用
++ */
+ export type LavelConfig = {
+   key: string;
+   filter: any;
+
+--- a/components/MapUI/unitComp/LayerConfig.ts
++++ b/components/MapUI/unitComp/LayerConfig.ts
+@@ -1,4 +1,14 @@
+-// マップレイヤーの描画設定を定義する型（識別キー、フィルター条件、塗りつぶし色、枠線色）
++/**
++ * マップレイヤーの描画設定を定義する型
++ * 
++ * @remarks
++ * - key: レイヤーの識別子（部屋タイプ、壁、廊下など）
++ * - filter: Maplibreフィルタ式（どのFeatureを表示するか）
++ * - fillColor: ポリゴンの塗りつぶし色（RGB、RGBA、透明可）
++ * - lineColor: ポリゴンの枠線色（オプション、未指定時は枠線なし）
++ * 
++ * roomConfigs.ts や baseConfigs.ts で具体的な設定を定義し、PolygonLayerコンポーネントで使用
++ */
+ export type LayerConfig = {
+   key: string;
+   filter: any;
+
+--- a/app/screens/native/Map/MapScreenNative.tsx
++++ b/app/screens/native/Map/MapScreenNative.tsx
+@@ -1,5 +1,16 @@
+-// Maplibreベースのネイティブマップスクリーンコンポーネント
+-// フロア切り替え、ズームレベル管理、GeoJSONデータのロードとキャッシュを担当
++/**
++ * Maplibreベースのネイティブマップスクリーンコンポーネント（Android/iOS用）
++ * フロア切り替え、ズームレベル管理、GeoJSONデータのロードとキャッシュを担当
++ * 
++ * @param floor_num - 現在表示中の階層番号（1～5）
++ * @param cameraRef - カメラ制御用のrefオブジェクト
++ * 
++ * @remarks
++ * - ズームレベルに応じて表示詳細度（display: 0/1/2）を切り替え
++ * - フロアデータ（section, unit, stair）はキャッシュして高速化
++ * - venue/footprintは初回のみ読み込み（階層切り替え不要）
++ * - カメラの初期位置・ズーム・範囲制限を設定
++ */
+ import {
+   BackgroundLayer,
+   Camera,
+
+--- a/app/screens/native/Map/MapSource/venue.tsx
++++ b/app/screens/native/Map/MapSource/venue.tsx
+@@ -1,3 +1,13 @@
++/**
++ * 施設全体の外枠（venue）を描画するコンポーネント
++ * 敷地境界を淡い青色で塗りつぶし、青色の枠線を表示
++ * 
++ * @param data - 施設全体の外形GeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - IMDFのvenue.geojsonを使用（建物群全体の境界）
++ * - 背景レイヤーとして最初に描画され、他のレイヤー（建物、部屋）より下に配置
++ */
+ import React from "react";
+ 
+ // MapLibreのレイヤーコンポーネントとGeoJSON型をインポート
+
+--- a/app/screens/native/Map/MapSource/footprints/interact.tsx
++++ b/app/screens/native/Map/MapSource/footprints/interact.tsx
+@@ -1,4 +1,14 @@
+-// 交流棟の建物外形（フットプリント）を描画し、建物名ラベルを表示するコンポーネント
++/**
++ * 交流棟の建物外形（フットプリント）を描画し、建物名ラベルを表示するコンポーネント
++ * 
++ * @param data - 交流棟の外形GeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - 建物外形を灰色（#EDEDED）で塗りつぶし、枠線を濃い灰色（#CFCFCF）で描画
++ * - 建物名「交流棟」をSymbolLayerで表示（ズームレベルに応じてサイズ変更）
++ * - textAllowOverlapとtextIgnorePlacementをtrueに設定し、常に表示
++ * - IMDFのinteract/footprints/interact.geojsonを使用
++ */
+ import React from "react";
+ 
+ import {
+
+--- a/app/screens/native/Map/MapSource/footprints/studyhall.tsx
++++ b/app/screens/native/Map/MapSource/footprints/studyhall.tsx
+@@ -1,4 +1,15 @@
+-// 学習棟の建物外形（フットプリント）を描画し、建物名ラベルを表示するコンポーネント
++/**
++ * 学習棟の建物外形（フットプリント）を描画し、建物名ラベルを表示するコンポーネント
++ * 
++ * @param data - 学習棟の外形GeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - 建物外形を灰色で塗りつぶし、枠線を濃い灰色で描画（現在は両方opacity=0で非表示）
++ * - 建物名「学習棟」のSymbolLayerも現在は非表示（visibility: "none"）
++ * - 非表示理由：学習棟のフロア詳細を直接表示するため、外形は不要
++ * - 将来的に遠距離ズームで建物全体を見せる際に表示する可能性あり
++ * - IMDFのstudyhall/footprints/studyhall.geojsonを使用
++ */
+ import {
+   FillLayer,
+   LineLayer,
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/floorN.tsx
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/floorN.tsx
+@@ -1,4 +1,16 @@
+-// 指定されたフロアの全要素（セクション、部屋、ラベル）を統合して表示するコンポーネント
++/**
++ * 指定されたフロアの全要素（セクション、部屋、ラベル）を統合して表示するコンポーネント
++ * 
++ * @param floor_num - 表示する階層番号（1～5）
++ * @param geoData - フロアのGeoJSONデータ（section, unit, stair）
++ * @param display - 表示詳細度（0: 非表示, 1: 概要, 2: 詳細）
++ * 
++ * @remarks
++ * - セクション（廊下・共有エリア）、ユニット（部屋・階段）、ラベル（アイコン・テキスト）を順に描画
++ * - 描画順序は重要：セクション→ユニット→ラベルの順でレイヤーを重ねる
++ * - geoDataがnullの場合は何も描画しない（ローディング中や階層切り替え時）
++ * - MapScreenNativeから呼び出され、階層切り替えに応じて再描画
++ */
+ import type { FeatureCollection } from "geojson";
+ import LabelView from "../../labels/label";
+ import FloorN_section from "./section";
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/section.tsx
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/section.tsx
+@@ -1,4 +1,14 @@
+-// フロア内のセクション（廊下や共有エリア）を塗りつぶしと枠線で描画するコンポーネント
++/**
++ * フロア内のセクション（廊下や共有エリア）を塗りつぶしと枠線で描画するコンポーネント
++ * 
++ * @param data - セクションのGeoJSONデータ（FeatureCollection）
++ * @param floor_num - 階層番号（ソースIDの一意性確保に使用）
++ * 
++ * @remarks
++ * - セクションは廊下や吹き抜けなどの共有スペース（IMDFのsection.geojson）
++ * - 淡い黄色（#FFF5D9）で塗りつぶし、ベージュ（#F0DFAF）の枠線で描画
++ * - 部屋（unit）より先に描画され、背景レイヤーとして機能
++ */
+ import React from "react";
+ 
+ import {
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/unitView.tsx
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/unitView.tsx
+@@ -1,5 +1,15 @@
+-// 部屋（ユニット）と階段の表示を統合するコンポーネント
+-// BaseView（基本レイヤー）とRoomView（部屋レイヤー）を組み合わせる
++/**
++ * 部屋（ユニット）と階段の表示を統合するコンポーネント
++ * BaseView（基本レイヤー：吹き抜け・壁・階段）とRoomView（部屋レイヤー）を組み合わせる
++ * 
++ * @param floor_num - 階層番号
++ * @param data - 部屋のGeoJSONデータ（FeatureCollection）
++ * @param stairData - 階段のGeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - BaseView: 壁、吹き抜け、階段など構造的要素を描画
++ * - RoomView: 教室、トイレ、廊下など機能的空間を描画
++ */
+ import type { FeatureCollection } from "geojson";
+ import BaseView from "./01_base/baseView";
+ import RoomView from "./02_room/roomView";
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/baseView.tsx
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/baseView.tsx
+@@ -1,3 +1,17 @@
++/**
++ * 基本レイヤービュー：吹き抜け、壁、階段を描画するコンポーネント
++ * 
++ * @param floor_num - 階層番号
++ * @param data - 部屋データ（吹き抜けと壁をフィルタで抽出）
++ * @param stairData - 階段のGeoJSONデータ
++ * 
++ * @remarks
++ * - BASE_CONFIGSから吹き抜け（atrium）と壁（wall）の設定を取得
++ * - 吹き抜けは淡い緑色、壁は灰色で描画
++ * - 階段は別コンポーネント（StairLayers）で描画
++ * - 構造的要素を先に描画し、部屋レイヤー（RoomView）の下地となる
++ */
+ import { ShapeSource } from "@maplibre/maplibre-react-native";
+ import type { FeatureCollection } from "geojson";
+ import StairLayers from "./layers/others/StairLayers";
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/roomView.tsx
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/roomView.tsx
+@@ -1,3 +1,17 @@
++/**
++ * 部屋レイヤービュー：教室、トイレ、ロビーなど機能的空間を描画するコンポーネント
++ * 
++ * @param floor_num - 階層番号
++ * @param data - 部屋のGeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - ROOM_CONFIGSから全部屋タイプの設定を取得し、PolygonLayerで描画
++ * - 各部屋タイプ（教室、トイレ、ロビーなど）に応じて色と枠線を変更
++ * - フィルタリングにより、同一GeoJSONから複数のレイヤーを生成
++ * - 透明な部屋（ロビー、ラウンジなど）はoverridesで非表示設定
++ * - BaseViewの上に描画され、構造要素と機能的空間を視覚的に分離
++ */
+ import { PolygonLayer } from "@/components/MapUI/unitComp/shareComp";
+ import { ShapeSource } from "@maplibre/maplibre-react-native";
+ import type { FeatureCollection } from "geojson";
+
+--- a/app/screens/native/Map/MapSource/labels/label.tsx
++++ b/app/screens/native/Map/MapSource/labels/label.tsx
+@@ -1,4 +1,18 @@
+-// MapLibreのImages、GeoJSONデータ型、各種ラベルコンポーネントをインポート
++/**
++ * マップ上のラベル（アイコン＋テキスト）を統合管理するコンポーネント
++ * 部屋タイプごとのアイコン画像を登録し、RoomLabelとUnitSymbolで描画
++ * 
++ * @param floor_num - 階層番号
++ * @param data - 部屋のGeoJSONデータ（FeatureCollection）
++ * @param display - 表示詳細度（0: 非表示, 1: 概要, 2: 詳細）
++ * 
++ * @remarks
++ * - Images コンポーネントで全アイコン画像をMaplibreに一括登録
++ * - RoomLabel: 教室、トイレ、エレベーターなど一般的なラベルを描画
++ * - UnitSymbol: トイレ、エレベーター、自販機など特殊シンボルを描画
++ * - display_point（部屋の中心座標）をgeometryに設定してアイコン位置を決定
++ * - アイコン画像はassetsから読み込み、部屋タイプ名（key）と対応付け
++ */
+ import { Images } from "@maplibre/maplibre-react-native";
+ import type { FeatureCollection } from "geojson";
+ import UnitSymbol from "./iconSources/unit/unit-label";
+
+--- a/app/screens/native/Map/MapSource/labels/lavelUI/lavelView.tsx
++++ b/app/screens/native/Map/MapSource/labels/lavelUI/lavelView.tsx
+@@ -1,3 +1,17 @@
++/**
++ * 指定された階層の部屋ラベル（アイコン・テキスト）をマップ上に描画するコンポーネント
++ * LAVEL_CONFIGSから全ラベルタイプの設定を取得し、LavelLayerで一括描画
++ * 
++ * @param floor_num - 階層番号（データソースIDの一意性確保に使用）
++ * @param data - 部屋のGeoJSONデータ（FeatureCollection）
++ * 
++ * @remarks
++ * - LAVEL_CONFIGSから教室、トイレ、ロビーなどのラベル設定を取得
++ * - 各ラベルタイプに対してLavelLayerコンポーネントを生成
++ * - フィルタリングにより、同一GeoJSONから複数のSymbolLayerを生成
++ * - アイコン表示・テキスト表示の制御はLAVEL_CONFIGSで定義
++ * - ズームレベルに応じてアイコンとテキストのサイズを動的に調整
++ */
+ import LavelLayer from "@/components/MapUI/lavelComp/shareComp";
+ import { ShapeSource } from "@maplibre/maplibre-react-native";
+ import type { FeatureCollection } from "geojson";
+
+--- a/app/screens/native/Map/MapSource/labels/iconSources/unit/unit-label.tsx
++++ b/app/screens/native/Map/MapSource/labels/iconSources/unit/unit-label.tsx
+@@ -1,3 +1,17 @@
++/**
++ * 特殊シンボル（自販機、トイレ、エレベーター）を統合管理するコンポーネント
++ * 
++ * @param pointData - シンボル表示位置のGeoJSONデータ（display_pointを使用）
++ * @param isVisible - 表示詳細度（0: 非表示, 1以上: 表示）
++ * @param floor_num - 階層番号
++ * 
++ * @remarks
++ * - Vending: 自販機シンボル（vendingエリア）
++ * - Toilet: トイレシンボル（男女別・多目的トイレ）
++ * - Elevator: エレベーターシンボル
++ * - 一般的なラベル（RoomLabel）とは別に、特殊な描画ロジックが必要なシンボルをここで管理
++ * - isVisibleにより、ズームレベルに応じた表示制御が可能
++ */
+ import type { FeatureCollection } from "geojson";
+ import Elevator from "./symbols/elevator";
+ import Toilet from "./symbols/toilet";
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/layers/share/baseConfigs.ts
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/layers/share/baseConfigs.ts
+@@ -1,3 +1,16 @@
++/**
++ * 基本レイヤー（吹き抜け、壁）の描画設定を定義
++ * 
++ * @remarks
++ * - atrium（吹き抜け）: 淡い緑色（#C9D2B0）、薄い黒枠線
++ * - wall（壁・柱）: 灰色（#B0B0B0）、薄い黒枠線
++ * 
++ * BASE_FILTERSでcategoryプロパティに基づきフィルタリング：
++ * - atrium: category === "opentobelow"
++ * - wall: category === "concrete"
++ * 
++ * これらの設定はBaseViewコンポーネントで使用され、構造的要素を描画する
++ */
+ import { BASE_FILTERS } from "../../filters/filters";
+ import { LayerConfig } from "@/components/MapUI/unitComp/LayerConfig";
+ 
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/layers/share/roomConfigs.ts
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/layers/share/roomConfigs.ts
+@@ -1,3 +1,24 @@
++/**
++ * 部屋レイヤーの描画設定を定義
++ * ROOM_FILTERSから各部屋タイプのフィルタを取得し、色と枠線を設定
++ * 
++ * @remarks
++ * デフォルト設定:
++ * - fillColor: 淡い緑色（#C7E6A1）
++ * - lineColor: 濃い緑色（#A8B996）
++ * 
++ * オーバーライド設定（overrides）:
++ * - lounge, lobby, informationLounge: 透明（通路として扱う）
++ * - courtyard（中庭）: 淡い緑色（#E6EDD6）、濃い緑枠線
++ * - terrace（テラス）: 透明な塗りつぶし、黒枠線
++ * 
++ * createRoomConfigs関数:
++ * - ROOM_FILTERSの全キーに対してデフォルト設定を適用
++ * - overridesで指定された部屋タイプは設定を上書き
++ * 
++ * 生成されたROOM_CONFIGSはRoomViewコンポーネントで使用され、
++ * 各部屋タイプに応じた色分けとフィルタリングを実現
++ */
+ import { LayerConfig } from "@/components/MapUI/unitComp/LayerConfig";
+ import { ROOM_FILTERS } from "../../filters/filters";
+ 
+--- a/app/screens/native/Map/MapSource/labels/lavelUI/configs/lavelConfigs.ts
++++ b/app/screens/native/Map/MapSource/labels/lavelUI/configs/lavelConfigs.ts
+@@ -1,3 +1,28 @@
++/**
++ * ラベル（アイコン＋テキスト）の表示設定を定義
++ * ROOM_FILTERSから各部屋タイプのフィルタを取得し、表示制御を設定
++ * 
++ * @remarks
++ * デフォルト設定:
++ * - textColor: 黒（#000000）
++ * - iconVisible: true（アイコンを表示）
++ * - textVisible: true（テキストを表示）
++ * 
++ * オーバーライド設定（overrides）:
++ * 
++ * 1. 公共スペース（アイコン非表示、テキストのみ）:
++ *    - lobby, lounge, informationLounge, courtyard
++ * 
++ * 2. 特殊シンボル（アイコン・テキスト両方非表示）:
++ *    - restroomMale, restroomFemale, restroomAccessible
++ *    - elevator, vendingArea
++ *    ※これらは別コンポーネント（UnitSymbol）で専用描画
++ * 
++ * 3. 緊急エリア（アイコン非表示）:
++ *    - emergencyArea
++ * 
++ * 生成されたLAVEL_CONFIGSはLavelViewコンポーネントで使用され、
++ * 各ラベルタイプに応じた表示制御を実現
++ */
+ import { LavelConfig } from "@/components/MapUI/lavelComp/LavelConfig";
+ import { ROOM_FILTERS } from "../../../Floors/floor_n/unitSource/02_room/filters/filters";
+ 
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/filters/filters.ts
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/01_base/filters/filters.ts
+@@ -1,3 +1,16 @@
++/**
++ * 基本レイヤー用のMaplibreフィルタ定義
++ * filterMaker関数を使用して型安全なフィルタ式を生成
++ * 
++ * @remarks
++ * BASE_CATEGORIES:
++ * - atrium（吹き抜け）: category === "opentobelow"
++ * - wall（壁・柱）: category === "concrete"
++ * 
++ * 生成されたBASE_FILTERSはbaseConfigs.tsで使用され、
++ * 吹き抜けと壁のポリゴンをGeoJSONから抽出して描画
++ */
+ import filterMaker from "@/functions/MapView/filter"
+ 
+ const BASE_CATEGORIES = {
+
+--- a/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/filters/filters.ts
++++ b/app/screens/native/Map/MapSource/Floors/floor_n/unitSource/02_room/filters/filters.ts
+@@ -1,3 +1,24 @@
++/**
++ * 部屋レイヤー用のMaplibreフィルタ定義
++ * filterMaker関数を使用して型安全なフィルタ式を生成
++ * 
++ * @remarks
++ * ROOM_CATEGORIES:
++ * - 教室系: classroom, studyRoom, library, laboratory, preparationRoom
++ * - 専門教室: itRoom, artRoom, calligraphyRoom, craftRoom, sewingRoom, cookingRoom, musicRoom等
++ * - 和室・多目的: japaneseStyleRoom, conferenceRoom, broadcastRoom, studioRoom
++ * - 管理・職員: staffRoom, office, nurseOffice, printingRoom
++ * - 更衣・収納: lockerRoom, dressingRoom, storageRoom, wasteRoom
++ * - 共用・動線: lobby, lounge, informationLounge, courtyard, terrace, vendingArea, elevator
++ * - トイレ: restroomMale, restroomFemale, restroomAccessible
++ * - その他: alumniRoom, emergencyArea, privateLounge, generalRoom, opentobelow
++ * 
++ * 各カテゴリはGeoJSONのproperties.categoryフィールドと対応
++ * 
++ * 生成されたROOM_FILTERSは以下で使用される:
++ * - roomConfigs.ts: 部屋レイヤーの色分け設定
++ * - lavelConfigs.ts: ラベル表示設定
++ */
+ import filterMaker from "@/functions/MapView/filter";
+ 
+ const ROOM_CATEGORIES = {

@@ -1,3 +1,4 @@
+// マップ画面上部の検索バー：部屋名の入力と検索画面への遷移を管理するコンポーネント
 import { router, usePathname } from "expo-router";
 import React from "react";
 import {
@@ -14,6 +15,7 @@ import { useSearch } from "@/Context/SearchContext";
 
 import translation from "@/functions/translation";
 
+// 検索バー本体：フォーカス状態に応じてUI切り替えとテキスト入力を処理
 export default function SearchBar() {
   const pathName = usePathname();
   const focused = pathName.endsWith("/search");
@@ -67,7 +69,7 @@ export default function SearchBar() {
             <TextInput
               value={searchText}
               onChangeText={setSearchText}
-              onSubmitEditing={async() => {
+              onSubmitEditing={async () => {
                 console.log("pressed Enter");
                 const converted = await translation(searchText);
                 setAnswerText(converted);

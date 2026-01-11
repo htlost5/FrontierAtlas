@@ -1,3 +1,4 @@
+// アプリ下部のタブバー（Home, Tools, Calendar, Classroom）を描画し、ルート遷移とアニメーションを管理するコンポーネント
 import { Entypo, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { startActivityAsync } from "expo-intent-launcher";
 import { usePathname, useRouter } from "expo-router";
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native";
 
+// 各タブのアイコンライブラリとアイコン名の対応表
 const icons: Record<string, { lib: any; name: string }> = {
   home: { lib: Feather, name: "home" },
   tools: { lib: Entypo, name: "tools" },
@@ -25,6 +27,7 @@ const appURLs = {
   classroom: "https://classroom.google.com/",
 };
 
+// タブ名と実際のルートパスのマッピング
 const ROUTE_MAP = {
   home: "/",
   tools: "/(tabs)/tools",
@@ -35,9 +38,11 @@ const ROUTE_MAP = {
 // ルート配列：UI は変えないのでここで固定
 const ROUTES = ["home", "tools", "calendar", "classroom"] as const;
 
+// ルート名の型定義
 type RouteName = (typeof ROUTES)[number];
 // "home" | "tools" | "calendar" | "classroom"
 
+// カスタムタブバー本体：ルート遷移、フォーカス判定、タップアニメーションを実装
 export default function SelfBottomTabs() {
   const router = useRouter();
   const pathname = usePathname() ?? "/";

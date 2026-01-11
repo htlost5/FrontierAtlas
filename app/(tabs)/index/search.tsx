@@ -1,6 +1,13 @@
+// 検索結果表示画面: 検索文字列と検索結果を表示するビュー
 import { useSearch } from "@/Context/SearchContext";
 import { Image, StyleSheet, Text, View } from "react-native";
 
+/**
+ * 検索結果表示コンポーネント
+ * - SearchContext から検索テキストと結果を取得
+ * - アイコン、検索キーワード、結果を縦に配置
+ * @returns 検索結果を表示するビュー
+ */
 export default function SearchView() {
   const { searchText, answerText } = useSearch();
 

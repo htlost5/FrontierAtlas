@@ -1,11 +1,22 @@
+// ユーザー位置表示ボタン: マップ上で特定座標へカメラをジャンプするコンポーネント
 import React from "react";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
-import * as FileSystem from 'expo-file-system';
 
+/**
+ * ユーザー位置ボタンのプロパティ定義
+ * @property cameraRef - Maplibreのカメラ参照（任意）
+ */
 type Props = {
   cameraRef?: any;
 };
 
+/**
+ * ユーザー位置ボタンコンポーネント
+ * - タップすると指定座標（緯度139.678, 経度35.497）にカメラをジャンプ
+ * - 右下に配置された白い円形ボタン
+ * @param cameraRef - マップカメラの参照
+ * @returns ユーザー位置ボタン
+ */
 export default function UserLocation({ cameraRef }: Props) {
   const handlePress = () => {
     cameraRef.current?.flyTo([139.6784895108818, 35.49777179199512], 750);

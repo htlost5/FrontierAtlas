@@ -1,6 +1,10 @@
-// app/(tabs)/index.tsx (Home Screen)
+// ツール画面: タブバーの「tools」ボタンに対応したダミー画面
 import { StyleSheet, Text, View } from "react-native";
 
+/**
+ * ツール画面コンポーネント
+ * @returns ツール画面用のビュー（現在はプレースホルダー）
+ */
 export default function Tools() {
   return (
     <View style={styles.container}>

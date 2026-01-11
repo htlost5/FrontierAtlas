@@ -1,3 +1,4 @@
+// マップ上で1階から5階までのフロアを切り替えるUIコンポーネント
 import {
   Platform,
   ScrollView,
@@ -6,12 +7,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+// 個別の階層ボタンのプロパティ定義
 type Props = {
   floor: number;
   onPress: (floor: number) => void;
   isFocused: boolean;
 };
 
+// 単一の階層ボタンを描画するコンポーネント（選択状態で背景色を変更）
 export function FloorChoose({ floor, onPress, isFocused }: Props) {
   return (
     <TouchableOpacity
@@ -29,6 +32,7 @@ export function FloorChoose({ floor, onPress, isFocused }: Props) {
     </TouchableOpacity>
   );
 }
+// フロア切り替えコンポーネント全体のプロパティ定義
 type Props_change = {
   num: number;
   setNum: React.Dispatch<React.SetStateAction<number>>;
@@ -36,6 +40,7 @@ type Props_change = {
 
 const floors = [5, 4, 3, 2, 1];
 
+// 全フロアのボタンリストを表示し、選択された階層を管理するメインコンポーネント
 export default function FloorChange({ num, setNum }: Props_change) {
   const handlePress = (floor: number) => {
     if (floor !== num) {

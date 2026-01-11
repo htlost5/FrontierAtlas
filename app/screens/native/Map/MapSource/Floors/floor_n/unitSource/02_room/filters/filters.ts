@@ -1,3 +1,9 @@
+// フィルタ定義ファイル: 部屋タイプ（教室、トイレなど）のMaplibreフィルタを生成
+/**
+ * 部屋タイプのカテゴリマッピング
+ * - 教室系、専門教室、管理・職員、共用スペース、トイレなど
+ * - 各カテゴリ名は GeoJSON の "category" プロパティの値に対応
+ */
 import filterMaker from "@/functions/MapView/filter";
 
 const ROOM_CATEGORIES = {
@@ -59,4 +65,9 @@ const ROOM_CATEGORIES = {
   opentobelow: "open_to_below",
 };
 
+/**
+ * 部屋タイプフィルタ
+ * - filterMaker でカテゴリマッピングから Maplibre フィルタ式を生成
+ * - ROOM_FILTERS[key] でそれぞれの部屋タイプのフィルタを取得可能
+ */
 export const ROOM_FILTERS = filterMaker(ROOM_CATEGORIES);

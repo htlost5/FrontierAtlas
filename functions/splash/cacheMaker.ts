@@ -1,3 +1,7 @@
+/**
+ * GeoJSONファイルをキャッシュディレクトリに読み込むためのユーティリティ
+ * アプリ起動時にIMDFデータをファイルシステムにキャッシュする
+ */
 import * as FileSystem from "expo-file-system";
 
 import venue from "@/assets/imdf/venue.geojson";
@@ -20,6 +24,7 @@ import unit_floor5 from "@/assets/imdf/studyhall/units/floor5.geojson";
 import stairs from "@/assets/imdf/studyhall/units/study_stairs.geojson";
 import { Asset } from "expo-asset";
 
+// キャッシュするGeoJSONファイルの定義
 const dataFiles = {
   venues: { venue: venue, studyhall: studyhall, interact: interact },
   floor1: { section: section_floor1, unit: unit_floor1 },
@@ -30,6 +35,11 @@ const dataFiles = {
   others: { stair: stairs },
 };
 
+/**
+ * アセットからGeoJSONデータを読み込む
+ * @param data - 読み込むアセット
+ * @returns GeoJSONテキスト
+ */
 async function loadData(data: any) {
   const asset = Asset.fromModule(data);
   await asset.downloadAsync();
@@ -37,6 +47,10 @@ async function loadData(data: any) {
   return geoJsonText;
 }
 
+/**
+ * すべてのGeoJSONファイルをキャッシュディレクトリに読み込む
+ * 既存のキャッシュを削除してから新しいデータを書き込む
+ */
 export default async function loadAll() {
   const cacheDir = `${FileSystem.documentDirectory}geoJson_cache`;
   try {

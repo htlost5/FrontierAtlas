@@ -1,3 +1,4 @@
+// セクション描画コンポーネント: 廊下や共有エリアを塗りつぶしと枠線で表示
 import React from "react";
 
 import {
@@ -7,11 +8,24 @@ import {
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
+/**
+ * セクション描画コンポーネントのプロパティ定義
+ * @property data - セクションのGeoJSONデータ
+ * @property floor_num - フロア番号
+ */
 type Props = {
   data: FeatureCollection | null;
   floor_num: number;
 };
 
+/**
+ * フロア内のセクションを描画するコンポーネント
+ * - セクション（廊下や共有スペース）を淡いベージュ色で塗りつぶし
+ * - 枠線で境界を表示
+ * @param data - セクションGeoJSONデータ
+ * @param floor_num - フロア番号
+ * @returns セクションレイヤー（ShapeSource + FillLayer + LineLayer）
+ */
 export default function FloorN_section({ data, floor_num }: Props) {
   if (!data) return null;
 

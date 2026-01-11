@@ -1,3 +1,9 @@
+/**
+ * Google翻訳APIを使用してテキストを翻訳する関数
+ * @param text - 翻訳するテキスト
+ * @param target - ターゲット言語（"en" または "ja"）
+ * @returns 翻訳されたテキスト（エラー時は元のテキスト）
+ */
 export async function translateText(text: string, target: "en" | "ja") {
   try {
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${target}&dt=t&q=${encodeURIComponent(

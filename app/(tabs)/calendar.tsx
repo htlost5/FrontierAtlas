@@ -1,6 +1,10 @@
-// app/(tabs)/index.tsx (Home Screen)
+// カレンダー画面: タブバーの「calendar」ボタンに対応したダミー画面
 import { StyleSheet, Text, View } from "react-native";
 
+/**
+ * カレンダー画面コンポーネント
+ * @returns カレンダー画面用のビュー（現在はプレースホルダー）
+ */
 export default function Calendar() {
   return (
     <View style={styles.container}>

@@ -1,3 +1,4 @@
+// エレベーター表示コンポーネント: エレベーターアイコンをマップ上に表示
 import {
   Images,
   ShapeSource,
@@ -5,12 +6,27 @@ import {
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
+/**
+ * エレベーター表示コンポーネントのプロパティ定義
+ * @property data - エレベーターのポイントGeoJSONデータ
+ * @property isVisible - 表示詳細度レベル（0: 非表示, 1以上: 表示）
+ * @property floor_num - フロア番号
+ */
 type Props = {
   data: FeatureCollection;
   isVisible: number;
   floor_num: number;
 };
 
+/**
+ * エレベーター表示コンポーネント
+ * - エレベーターアイコンをズームレベルに応じたサイズで表示
+ * - isVisible フラグで表示/非表示を制御
+ * @param data - ポイントGeoJSONデータ
+ * @param isVisible - 表示詳細度
+ * @param floor_num - フロア番号
+ * @returns エレベーターシンボルレイヤー
+ */
 export default function Elevator({ data, isVisible, floor_num }: Props) {
   return (
     <>

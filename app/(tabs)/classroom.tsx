@@ -1,6 +1,10 @@
-// app/(tabs)/index.tsx (Home Screen)
+// 教室画面: Google Classroom へのリンク機能を持つ画面（現在はダミー）
 import { StyleSheet, Text, View } from "react-native";
 
+/**
+ * 教室画面コンポーネント
+ * @returns 教室画面用のビュー（Google Classroom へのリンク予定）
+ */
 export default function Classroom() {
   return (
     <View style={styles.container}>

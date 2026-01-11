@@ -13,7 +13,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     name: isDev ? "FrontierAtlas Dev" : "FrontierAtlas Prod",
     slug: "FrontierAtlas",
 
-    version: config.version, // 既存の version を使用（例: 0.15.6）
+    version: config.version, // 既存の version を使用
 
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",

@@ -1,4 +1,5 @@
-// app/(tabs)/index.tsx
+// Maplibreベースのネイティブマップスクリーンコンポーネント
+// フロア切り替え、ズームレベル管理、GeoJSONデータのロードとキャッシュを担当
 import {
   BackgroundLayer,
   Camera,
@@ -16,35 +17,38 @@ import Interact from "./MapSource/footprints/interact";
 import Studyhall from "./MapSource/footprints/studyhall";
 import Venue from "./MapSource/venue";
 
+// マップスクリーンコンポーネントのプロパティ型定義
 type MapScreenProps = {
   floor_num: number;
   cameraRef: React.RefObject<CameraRef | null>;
 };
 
+// マップの表示レベル（ズームに応じて詳細度を変える）
 type DisplayLevel = 0 | 1 | 2;
 // 0: 非表示, 1: 概要表示, 2: 詳細表示
 
+// 施設全体のGeoJSONデータ型定義
 type venueGeoData = {
   venue: FeatureCollection;
   studyhall: FeatureCollection;
   interact: FeatureCollection;
 };
 
+// 各フロアのGeoJSONデータ型定義（セクション、部屋、階段）
 type floorGeoData = {
   section: FeatureCollection;
   unit: FeatureCollection;
   stair: FeatureCollection;
 };
 
+// マップ表示の地理的制約範囲（学校施設周辺に限定）
 const restrict_bound = {
   ne: [139.677156, 35.496373],
   sw: [139.679823, 35.499171],
 };
 
-function MapScreenNative({
-  floor_num,
-  cameraRef,
-}: MapScreenProps) {
+// ネイティブマップスクリーンのメインコンポーネント
+function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
   const [zoom, setZoom] = useState(17.2);
   const [display, setDisplay] = useState<DisplayLevel>(0);
   const [venueGeoData, setVenueGeoData] = useState<venueGeoData | null>(null);

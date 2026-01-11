@@ -1,9 +1,18 @@
+/**
+ * GeoJSONファイルを非同期に読み込むReactフック
+ * 複数のGeoJSONアセットをロードして配列として返す
+ */
 import { useEffect, useState } from "react";
 
 import { Asset } from "expo-asset";
 import * as FileSystem from "expo-file-system";
 import type { FeatureCollection } from "geojson";
 
+/**
+ * GeoJSONファイルをロードするカスタムフック
+ * @param originGeoJsons - ロードするGeoJSONアセット（可変長引数）
+ * @returns ロードしたGeoJSON配列、ローディング状態、エラー情報
+ */
 export default function useLoadGeoJson(...originGeoJsons: any) {
   const [geoJsonList, setGeoJsonList] = useState<FeatureCollection[]>([]);
   const [error, setError] = useState<Error | null>(null);

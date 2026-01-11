@@ -1,36 +1,37 @@
-// mavigationBarのエラー原因を特定 → 修正 → 一度保留
-// bottomTabの調整
-// topTabの作成
-// 階層メニューの作り方をリサーチ
+// アプリ起動時の初期化を管理するコンポーネント
+// スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
 
-// components/AppInit.tsx
-// import * as NavigationBar from 'expo-navigation-bar';
 import loadAll from "@/functions/splash/cacheMaker";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
+// 子コンポーネント（アプリ本体）をラップするProps型
 type Props = {
   children: React.ReactNode;
 };
 
+// アプリ起動時の初期化処理を行うラッパーコンポーネント
+// フォント読み込み完了後、GeoJSONキャッシュを作成し、準備完了でスプラッシュを非表示
 export default function AppInit({ children }: Props) {
   const [isReady, setIsReady] = useState(false);
 
+  // カスタムフォント（Y1LunaChord）の読み込み
   const fontsLoaded = useLoadFonts();
 
-  // スプラッシュ画面を自動で閉じないように
+  // スプラッシュスクリーンを自動で非表示にしないよう制御
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
-  },[]);
+  }, []);
 
+  // フォント読み込み完了後、GeoJSONキャッシュを作成
   useEffect(() => {
     if (!fontsLoaded) return;
 
     async function prepare() {
       try {
-        // すべてのマップスクリーン読み込み
+        // すべてのマップGeoJSONデータをキャッシュディレクトリにコピー
         await loadAll();
       } catch (e) {
         console.warn("初期化エラー", e);
@@ -41,12 +42,14 @@ export default function AppInit({ children }: Props) {
     prepare();
   }, [fontsLoaded]);
 
+  // 初期化完了後にスプラッシュスクリーンを非表示
   useEffect(() => {
     if (isReady) {
       (async () => SplashScreen.hideAsync())();
     }
   }, [isReady]);
 
+  // 初期化中はローディングインジケーターを表示
   if (!isReady) {
     return (
       <View style={styles.loadingContainer}>
@@ -56,6 +59,7 @@ export default function AppInit({ children }: Props) {
     );
   }
 
+  // 初期化完了後、子コンポーネント（アプリ本体）をレンダリング
   return <View style={{ flex: 1 }}>{children}</View>;
 }
 
