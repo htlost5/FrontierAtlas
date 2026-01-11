@@ -3,7 +3,7 @@
  * マップに表示されるラベルタイプの型定義（ROOM_FILTERS のキーに対応）
  */
 import { LavelConfig } from "@/components/MapUI/lavelComp/LavelConfig";
-import { ROOM_FILTERS } from "../../../Floors/floor_n/unitSource/02_room/filters/filters";
+import { ROOM_FILTERS } from "../../../floorView/unitSource/02_room/filters/filters";
 
 export type LavelKey = keyof typeof ROOM_FILTERS;
 

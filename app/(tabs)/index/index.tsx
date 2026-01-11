@@ -1,19 +1,16 @@
 // ホーム画面: 屋内マップの表示と階層切り替え、現在位置表示を統合
 import { CameraRef } from "@maplibre/maplibre-react-native";
 import React, { useRef, useState } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import FloorChange from "@/components/MapUI/interface/FloorChange";
 import UserLocation from "@/components/MapUI/interface/userLocation";
 
 import MapScreenNative from "../../screens/native/Map/MapScreenNative";
-import MapScreenWeb from "../../screens/web/MapScreenWeb";
+// web実装時、ここにMapScreenWebを実装
 
-// プラットフォームに応じてマップコンポーネントを選択（Android/iOS: Native, Web: Web版）
-const MapScreen =
-  Platform.OS === "android" || Platform.OS === "ios"
-    ? MapScreenNative
-    : MapScreenWeb;
+// web実装時、MapScreenをプラットフォームにより選択可能に
+const MapScreen = MapScreenNative;
 
 // マップホーム画面: 階層選択と地図表示を統合したメイン画面
 export default function HomeScreen() {

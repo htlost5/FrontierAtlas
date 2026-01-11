@@ -1,7 +1,7 @@
 // フロアレイヤー統合コンポーネント: 指定フロアのセクション、部屋、ラベルを統合表示
 import type { FeatureCollection } from "geojson";
-import LabelView from "../../labels/label";
-import FloorN_section from "./section";
+import LabelView from "../labels/label";
+import { SectionView } from "./section";
 import UnitView from "./unitSource/unitView";
 
 /**
@@ -34,14 +34,14 @@ type Props = {
  * @param display - 表示詳細度
  * @returns フロア全体のレイヤー群
  */
-export default function FloorN({ floor_num, geoData, display }: Props) {
+export default function FloorView({ floor_num, geoData, display }: Props) {
   if (!geoData) {
     return null; // ローディング中は null でも可、スピナーを入れても良い
   }
 
   return (
     <>
-      <FloorN_section floor_num={floor_num} data={geoData.section} />
+      <SectionView floor_num={floor_num} data={geoData.section} />
       <UnitView
         floor_num={floor_num}
         data={geoData.unit}

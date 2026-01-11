@@ -26,7 +26,7 @@ type Props = {
  * @param floor_num - フロア番号
  * @returns セクションレイヤー（ShapeSource + FillLayer + LineLayer）
  */
-export default function FloorN_section({ data, floor_num }: Props) {
+export function SectionView({ data, floor_num }: Props) {
   if (!data) return null;
 
   return (

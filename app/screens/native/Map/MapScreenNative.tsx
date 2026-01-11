@@ -12,7 +12,7 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 import loadGeoJson from "@/functions/loadGeoJson";
 
-import FloorN from "./MapSource/Floors/floor_n/floorN";
+import FloorView from "./MapSource/floorView/floorN";
 import Interact from "./MapSource/footprints/interact";
 import Studyhall from "./MapSource/footprints/studyhall";
 import Venue from "./MapSource/venue";
@@ -177,7 +177,7 @@ function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
       {venueGeoData?.studyhall && <Studyhall data={venueGeoData.studyhall} />}
       {venueGeoData?.interact && <Interact data={venueGeoData.interact} />}
       {floorGeoData && (
-        <FloorN
+        <FloorView
           floor_num={floor_num}
           geoData={floorGeoData}
           display={display}
