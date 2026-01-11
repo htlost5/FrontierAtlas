@@ -29,7 +29,7 @@ const appURLs = {
 
 // タブ名と実際のルートパスのマッピング
 const ROUTE_MAP = {
-  home: "/",
+  home: "/(tabs)/home",
   tools: "/(tabs)/tools",
   calendar: "/(tabs)/calendar",
   classroom: "/(tabs)/classroom",
@@ -45,7 +45,7 @@ type RouteName = (typeof ROUTES)[number];
 // カスタムタブバー本体：ルート遷移、フォーカス判定、タップアニメーションを実装
 export function SelfBottomTabs() {
   const router = useRouter();
-  const pathname = usePathname() ?? "/";
+  const pathname = usePathname() ?? "/(tabs)/home";
 
   // animated values をルート数で管理（UIは変更しない）
   const animatedValuesRef = React.useRef<Animated.Value[]>(
@@ -61,9 +61,9 @@ export function SelfBottomTabs() {
   // pathname によってフォーカス判定（home は "/" も許容）
   const isRouteFocused = (name: RouteName) => {
     if (name === "home") {
-      return pathname === "/" || pathname.endsWith("/index");
+      return pathname === "/(tabs)/home" || pathname.endsWith("/home");
     }
-    return pathname === `/${name}` || pathname.endsWith(`/${name}`);
+    return pathname === `/(tabs)/${name}` || pathname.endsWith(`/${name}`);
   };
 
   const buttonSizeDown = (animatedValue: Animated.Value): Promise<void> => {
