@@ -1,6 +1,7 @@
 // アプリ起動時の初期化を管理するコンポーネント
 // スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
 
+import { AppInitContext } from "@/Context/AppInitContext";
 import { loadAll } from "@/functions/splash/cacheMaker";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
 import * as SplashScreen from "expo-splash-screen";
@@ -33,10 +34,9 @@ export default function AppInit({ children }: Props) {
       try {
         // すべてのマップGeoJSONデータをキャッシュディレクトリにコピー
         await loadAll();
+        setIsReady(true);
       } catch (e) {
         console.warn("初期化エラー", e);
-      } finally {
-        setIsReady(true);
       }
     }
     prepare();
@@ -60,7 +60,11 @@ export default function AppInit({ children }: Props) {
   }
 
   // 初期化完了後、子コンポーネント（アプリ本体）をレンダリング
-  return <View style={{ flex: 1 }}>{children}</View>;
+  return (
+    <AppInitContext.Provider value={{ ready: true }}>
+      <View style={{ flex: 1 }}>{children}</View>
+    </AppInitContext.Provider>
+  );
 }
 
 const styles = StyleSheet.create({

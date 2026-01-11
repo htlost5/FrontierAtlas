@@ -47,6 +47,29 @@ async function loadData(data: any) {
   return geoJsonText;
 }
 
+async function waitForFileExists(
+  path: string,
+  options: {
+    intervalMs?: number;
+    timeoutMs?: number;
+  }
+) {
+  const interbal = options?.intervalMs || 100;
+  const timeout = options?.timeoutMs || 5000;
+  const start = Date.now();
+
+  while (true) {
+    const info = await FileSystem.getInfoAsync(path);
+    if (info.exists) {
+      return;
+    }
+    if (Date.now() - start > timeout) {
+      throw new Error(`Timeout waiting for file: ${path}`);
+    }
+    await new Promise((resolve) => setTimeout(resolve, interbal));
+  }
+}
+
 /**
  * すべてのGeoJSONファイルをキャッシュディレクトリに読み込む
  * 既存のキャッシュを削除してから新しいデータを書き込む
@@ -132,6 +155,10 @@ export async function loadAll() {
       }
     }
   }
+  await waitForFileExists(`${cacheDir}/venues/venue.geojson`, {
+     intervalMs: 100,
+     timeoutMs: 5000,
+  });
 }
 
 // dataSet => convert(string) => input convertData to cacheFiles
