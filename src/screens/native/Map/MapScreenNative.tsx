@@ -7,8 +7,10 @@ import {
   MapView,
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+
+import { AppInitContext } from "@/Context/AppInitContext";
 
 import { loadGeoJson } from "@/functions/loadGeoJson";
 
@@ -49,6 +51,8 @@ const restrict_bound = {
 
 // ネイティブマップスクリーンのメインコンポーネント
 function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
+  const { cacheReady } = useContext(AppInitContext);
+
   const [zoom, setZoom] = useState(17.2);
   const [display, setDisplay] = useState<DisplayLevel>(0);
   const [venueGeoData, setVenueGeoData] = useState<venueGeoData | null>(null);
@@ -130,7 +134,7 @@ function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
     loadData();
   }, [floor_num]);
 
-  if (venueLoading || floorLoading) {
+  if (venueLoading || floorLoading || !cacheReady) {
     return (
       <View
         style={[

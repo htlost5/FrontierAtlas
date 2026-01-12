@@ -27,54 +27,68 @@ import { Asset } from "expo-asset";
 // キャッシュするGeoJSONファイルの定義
 const dataFiles = {
   venues: { venue: venue, studyhall: studyhall, interact: interact },
-  floor1: { section: section_floor1, unit: unit_floor1 },
-  floor2: { section: section_floor2, unit: unit_floor2 },
-  floor3: { section: section_floor3, unit: unit_floor3 },
-  floor4: { section: section_floor4, unit: unit_floor4 },
-  floor5: { section: section_floor5, unit: unit_floor5 },
+  floors: {
+    floor1: { section: section_floor1, unit: unit_floor1 },
+    floor2: { section: section_floor2, unit: unit_floor2 },
+    floor3: { section: section_floor3, unit: unit_floor3 },
+    floor4: { section: section_floor4, unit: unit_floor4 },
+    floor5: { section: section_floor5, unit: unit_floor5 },
+  },
   others: { stair: stairs },
 };
+
+type FloorKey = keyof typeof dataFiles.floors;
+
+async function atomicWrite(filePath: string, content: string) {
+  const tempPath = `${filePath}.tmp`;
+
+  // 事前に tmp を確実に消す
+  await FileSystem.deleteAsync(tempPath, { idempotent: true });
+
+  // tmpに書き込み
+  await FileSystem.writeAsStringAsync(tempPath, content);
+
+  const tmpInfo = await FileSystem.getInfoAsync(tempPath);
+  if (!tmpInfo.exists || tmpInfo.size === 0) {
+    throw new Error(`atomicWrite: tmp write failed ${tempPath}`)
+  }
+
+  // 既存ファイル削除
+  await FileSystem.deleteAsync(filePath, { idempotent: true });
+
+  try {
+    await FileSystem.copyAsync({ from: tempPath, to: filePath });
+
+    // optonal: verify
+    const finalInfo = await FileSystem.getInfoAsync(filePath);
+    if (!finalInfo.exists || (finalInfo.size !== undefined && finalInfo.size === 0)) {
+      throw new Error(`copy verification failed for ${filePath}`);
+    }
+  } finally {
+    await FileSystem.deleteAsync(tempPath, { idempotent: true });
+  }
+}
 
 /**
  * アセットからGeoJSONデータを読み込む
  * @param data - 読み込むアセット
  * @returns GeoJSONテキスト
  */
-async function loadData(data: any) {
+async function loadDataSafe(data: any) {
   const asset = Asset.fromModule(data);
   await asset.downloadAsync();
-  const geoJsonText = await FileSystem.readAsStringAsync(asset.localUri!);
+
+  const uri = asset.localUri ?? asset.uri;
+  if (!uri) throw new Error("Asset has no URI");
+  const geoJsonText = await FileSystem.readAsStringAsync(uri);
   return geoJsonText;
-}
-
-async function waitForFileExists(
-  path: string,
-  options: {
-    intervalMs?: number;
-    timeoutMs?: number;
-  }
-) {
-  const interbal = options?.intervalMs || 100;
-  const timeout = options?.timeoutMs || 5000;
-  const start = Date.now();
-
-  while (true) {
-    const info = await FileSystem.getInfoAsync(path);
-    if (info.exists) {
-      return;
-    }
-    if (Date.now() - start > timeout) {
-      throw new Error(`Timeout waiting for file: ${path}`);
-    }
-    await new Promise((resolve) => setTimeout(resolve, interbal));
-  }
 }
 
 /**
  * すべてのGeoJSONファイルをキャッシュディレクトリに読み込む
  * 既存のキャッシュを削除してから新しいデータを書き込む
  */
-export async function loadAll() {
+export async function loadAllImproved() {
   const cacheDir = `${FileSystem.documentDirectory}geoJson_cache`;
   try {
     await FileSystem.deleteAsync(cacheDir, { idempotent: true });
@@ -83,82 +97,72 @@ export async function loadAll() {
   }
 
   try {
-    await FileSystem.makeDirectoryAsync(`${cacheDir}/venues`, {
-      intermediates: true,
-    });
-    await FileSystem.makeDirectoryAsync(`${cacheDir}/sections`, {
-      intermediates: true,
-    });
-    await FileSystem.makeDirectoryAsync(`${cacheDir}/units`, {
-      intermediates: true,
-    });
-    await FileSystem.makeDirectoryAsync(`${cacheDir}/others`, {
-      intermediates: true,
-    });
+    // create dirs
+    await Promise.all([
+      FileSystem.makeDirectoryAsync(`${cacheDir}/venues`, {
+        intermediates: true,
+      }),
+      FileSystem.makeDirectoryAsync(`${cacheDir}/sections`, {
+        intermediates: true,
+      }),
+      FileSystem.makeDirectoryAsync(`${cacheDir}/units`, {
+        intermediates: true,
+      }),
+      FileSystem.makeDirectoryAsync(`${cacheDir}/others`, {
+        intermediates: true,
+      }),
+    ]);
   } catch (e) {
     console.warn("make error:", e);
   }
 
-  for (const info of Object.keys(dataFiles) as (keyof typeof dataFiles)[]) {
-    if (info === "venues") {
-      const { venue, studyhall, interact } = dataFiles[info] as {
-        venue: any;
-        studyhall: any;
-        interact: any;
-      };
-      if (venue) {
-        const convertVenue = await loadData(venue);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/venues/venue.geojson`,
-          convertVenue
-        );
-      }
-      if (studyhall) {
-        const convertStudyhall = await loadData(studyhall);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/venues/studyhall.geojson`,
-          convertStudyhall
-        );
-      }
-      if (interact) {
-        const convertInteract = await loadData(interact);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/venues/interact.geojson`,
-          convertInteract
-        );
-      }
-    } else if (info.match(/^floor\d+$/)) {
-      const { section, unit } = dataFiles[info] as { section: any; unit: any };
-      if (section) {
-        const convertSection = await loadData(section);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/sections/${info}.geojson`,
-          convertSection
-        );
-      }
-      if (unit) {
-        const convertUnit = await loadData(unit);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/units/${info}.geojson`,
-          convertUnit
-        );
-      }
-    } else if (info === "others") {
-      for (const item of Object.keys(
-        dataFiles.others
-      ) as (keyof typeof dataFiles.others)[]) {
-        const convertItem = await loadData(dataFiles.others[item]);
-        await FileSystem.writeAsStringAsync(
-          `${cacheDir}/others/${item}.geojson`,
-          convertItem
-        );
-      }
+  async function writeFile(path: string, assetModule: any) {
+    const text = await loadDataSafe(assetModule);
+    await atomicWrite(path, text);
+  }
+
+  async function writeFileSafe(path: string, assetModule: any) {
+    try {
+      await writeFile(path, assetModule);
+    } catch (e) {
+      console.warn("write failed:", path, e);
+      throw e;
     }
   }
-  await waitForFileExists(`${cacheDir}/venues/venue.geojson`, {
-     intervalMs: 100,
-     timeoutMs: 5000,
-  });
+
+  if (dataFiles.venues) {
+    const v = dataFiles.venues;
+    if (v.venue)
+      await writeFileSafe(`${cacheDir}/venues/venue.geojson`, v.venue);
+    if (v.studyhall)
+      await writeFileSafe(`${cacheDir}/venues/studyhall.geojson`, v.studyhall);
+    if (v.interact)
+      await writeFileSafe(`${cacheDir}/venues/interact.geojson`, v.interact);
+  }
+
+  for (const floor of Object.keys(dataFiles.floors) as FloorKey[]) {
+    const entry = dataFiles.floors[floor];
+
+    if (entry.section) {
+      await writeFileSafe(
+        `${cacheDir}/sections/${floor}.geojson`,
+        entry.section
+      );
+    }
+
+    if (entry.unit) {
+      await writeFileSafe(`${cacheDir}/units/${floor}.geojson`, entry.unit);
+    }
+  }
+
+  if (dataFiles.others) {
+    for (const key of Object.keys(dataFiles.others)) {
+      await writeFileSafe(
+        `${cacheDir}/others/${key}.geojson`,
+        (dataFiles.others as any)[key]
+      );
+    }
+  }
 }
 
 // dataSet => convert(string) => input convertData to cacheFiles

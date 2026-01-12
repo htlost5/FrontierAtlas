@@ -21,8 +21,6 @@ export function SearchBar() {
   const focused = pathName.endsWith("/search");
   const { searchText, setSearchText, setAnswerText } = useSearch();
 
-  console.log(pathName);
-
   return (
     <TouchableOpacity
       style={[
@@ -70,7 +68,6 @@ export function SearchBar() {
               value={searchText}
               onChangeText={setSearchText}
               onSubmitEditing={async () => {
-                console.log("pressed Enter");
                 const converted = await translation(searchText);
                 setAnswerText(converted);
               }}

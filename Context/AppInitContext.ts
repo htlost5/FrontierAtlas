@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-export const AppInitContext = createContext<{ ready: boolean }>({
-  ready: false,
+export const AppInitContext = createContext<{ cacheReady: boolean }>({
+  cacheReady: false,
 });

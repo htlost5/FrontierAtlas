@@ -45,7 +45,6 @@ export function FloorChange({ num, setNum }: Props_change) {
   const handlePress = (floor: number) => {
     if (floor !== num) {
       setNum(floor);
-      console.log(`floor${floor} pressed!`);
     }
   };
 
