@@ -3,10 +3,10 @@ import { CameraRef } from "@maplibre/maplibre-react-native";
 import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-import { FloorChange } from "@/components/MapUI/interface/FloorChange";
-import { UserLocation } from "@/components/MapUI/interface/userLocation";
+import { FloorChange } from "@/src/features/home/map/components/controls/FloorChange";
+import { UserLocation } from "@/src/features/home/map/components/controls/userLocation";
 
-import MapScreenNative from "../../../src/screens/native/Map/MapScreenNative";
+import MapScreenNative from "../../../src/features/home/map/MapScreen";
 // web実装時、ここにMapScreenWebを実装
 
 // web実装時、MapScreenをプラットフォームにより選択可能に

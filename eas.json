@@ -9,23 +9,23 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "ios": {
+        "simulator": false
       }
     },
-    "standalone-apk": {
-      "android": {
-        "buildType": "apk"
-      },
-      "distribution": "internal",
-      "autoIncrement": true
-    },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "extends": "production"
     },
     "production": {
+      "autoIncrement": true,
       "android": {
         "buildType": "apk"
       },
-      "autoIncrement": true
+      "ios": {
+        "simulator": false
+      }
     }
   },
   "submit": {

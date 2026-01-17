@@ -20,6 +20,7 @@
     "src/**/*",
     "svg.d.ts",
     "assets/**/*",
-    "types/**/*"
+    "types/**/*",
+    "src/features/source/views/floor/unit/unitComp"
   ]
 }

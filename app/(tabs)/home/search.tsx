@@ -1,5 +1,5 @@
 // 検索結果表示画面: 検索文字列と検索結果を表示するビュー
-import { useSearch } from "@/Context/SearchContext";
+import { useSearch } from "@/src/features/home/search/Context/SearchContext";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 /**

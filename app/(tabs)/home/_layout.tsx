@@ -1,5 +1,5 @@
 // インデックスレイアウト: ホーム画面（マップ）と検索画面を統合したレイアウト
-import { SearchBar } from "@/components/MapUI/interface/searchBar";
+import { SearchBar } from "@/src/features/home/map/components/controls/searchBar";
 import { Stack } from "expo-router";
 import { StyleSheet, View } from "react-native";
 

@@ -1,4 +1,4 @@
-import { AppInitContext } from "@/Context/AppInitContext";
+import { AppInitContext } from "@/src/AppInit/AppInitContext";
 import { Redirect } from "expo-router";
 import { useContext } from "react";
 
@@ -7,6 +7,6 @@ export default function TabsIndex() {
   if (!cacheReady) {
     return null;
   }
-  
+
   return <Redirect href="/(tabs)/home" />;
 }
