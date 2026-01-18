@@ -6,7 +6,7 @@ import React from "react";
 import { ROUTE_MAP } from "../../navigation/routeMap";
 import { RouteName, ROUTES } from "../../navigation/routes";
 import { launchApp } from "../../services/launchExternalApp";
-import { useTabAnimatedValues } from "./useTabAnimetedValues";
+import { useTabAnimatedValues } from "./useTabAnimatedValues";
 
 import { TabBar } from "./TabBar";
 
