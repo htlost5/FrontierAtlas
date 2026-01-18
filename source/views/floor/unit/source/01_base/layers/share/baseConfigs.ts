@@ -1,5 +1,5 @@
 // 基本レイヤー設定: アトリウムと壁の塗りつぶし色・枠線色を定義
-import { LayerConfig } from "@/src/features/source/views/floor/unit/unitComp/LayerConfig";
+import { LayerConfig } from "@/source/views/floor/unit/unitComp/LayerConfig";
 import { BASE_FILTERS } from "../../filters/filters";
 
 /**

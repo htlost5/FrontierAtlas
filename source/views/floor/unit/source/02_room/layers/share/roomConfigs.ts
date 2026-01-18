@@ -2,7 +2,7 @@
 /**
  * 部屋タイプの型定義（ROOM_FILTERS のキーに対応）
  */
-import { LayerConfig } from "@/src/features/source/views/floor/unit/unitComp/LayerConfig";
+import { LayerConfig } from "@/source/views/floor/unit/unitComp/LayerConfig";
 import { ROOM_FILTERS } from "../../filters/filters";
 
 export type RoomKey = keyof typeof ROOM_FILTERS;
@@ -50,7 +50,7 @@ function createRoomConfigs(): Record<RoomKey, LayerConfig> {
         lineColor: "#A8B996", // デフォルト枠線色（深い緑）
         ...overrides[key], // overrides が存在すればデフォルト値を上書き
       },
-    ])
+    ]),
   ) as Record<RoomKey, LayerConfig>;
 }
 

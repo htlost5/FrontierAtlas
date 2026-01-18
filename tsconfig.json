@@ -21,6 +21,6 @@
     "svg.d.ts",
     "assets/**/*",
     "types/**/*",
-    "src/features/source/views/floor/unit/unitComp"
+    "source/views/floor/unit/unitComp"
   ]
 }

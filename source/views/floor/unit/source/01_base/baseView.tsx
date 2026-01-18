@@ -1,5 +1,5 @@
 // 基本レイヤーコンポーネント: アトリウムと壁のレイヤーを描画
-import { PolygonLayer } from "@/src/features/source/views/floor/unit/unitComp/shareComp";
+import { PolygonLayer } from "@/source/views/floor/unit/unitComp/shareComp";
 import { ShapeSource } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { StairLayers } from "./layers/others/StairLayers";

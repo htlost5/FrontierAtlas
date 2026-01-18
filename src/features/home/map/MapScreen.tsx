@@ -14,10 +14,10 @@ import { AppInitContext } from "@/src/AppInit/AppInitContext";
 
 import { loadGeoJson } from "@/src/features/home/map/services/loadGeoJson";
 
-import { FloorView } from "../../source/views/floor/floorN";
-import { Venue } from "../../source/views/ground/ground";
-import { Interact } from "../../source/views/venue/interact";
-import { Studyhall } from "../../source/views/venue/studyhall";
+import { FloorView } from "../../../../source/views/floor/floorN";
+import { Venue } from "../../../../source/views/ground/ground";
+import { Interact } from "../../../../source/views/venue/interact";
+import { Studyhall } from "../../../../source/views/venue/studyhall";
 
 // マップスクリーンコンポーネントのプロパティ型定義
 type MapScreenProps = {
@@ -150,6 +150,7 @@ function MapScreenNative({ floor_num, cameraRef }: MapScreenProps) {
   return (
     <MapView
       style={styles.container}
+      attributionEnabled={false}
       onRegionIsChanging={(region) => {
         const currentZoom = region.properties.zoomLevel;
         setZoom(currentZoom);

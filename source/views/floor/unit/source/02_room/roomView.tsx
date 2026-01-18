@@ -1,5 +1,5 @@
 // 部屋レイヤーコンポーネント: ROOM_CONFIGS で定義されたすべての部屋タイプを描画
-import { PolygonLayer } from "@/src/features/source/views/floor/unit/unitComp/shareComp";
+import { PolygonLayer } from "@/source/views/floor/unit/unitComp/shareComp";
 import { ShapeSource } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { ROOM_CONFIGS, RoomKey } from "./layers/share/roomConfigs";
