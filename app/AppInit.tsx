@@ -3,7 +3,7 @@
 
 import { AppInitContext } from "@/src/AppInit/AppInitContext";
 import { useLoadFonts } from "@/src/AppInit/useLoadFonts";
-import { loadAllImproved } from "@/src/infra/AppInit/functions/cacheMake/cacheMaker";
+import { loadAllImproved } from "@/src/infra/cacheMaker";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
