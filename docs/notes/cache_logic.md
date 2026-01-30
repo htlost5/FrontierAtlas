@@ -2,7 +2,7 @@
 id: ta0o9y69hl5l3m01m2z86ew
 title: Cache_logic
 desc: ""
-updated: 1769695838895
+updated: 1769695939370
 created: 1769068935058
 ---
 
@@ -93,6 +93,6 @@ created: 1769068935058
    - 再度buildManifestとcacheManifestの一致確認
    - 完了後、.tmpの削除
    - 初期化完了を知らせる
-   1. 補助ロジックファイル構築
+   2. 補助ロジックファイル構築
    - buildManifest / cacheManifestの一致確認処理
    - リスト受け取り、キャッシュ保存処理
