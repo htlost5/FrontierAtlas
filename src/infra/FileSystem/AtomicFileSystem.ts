@@ -1,16 +1,24 @@
-import { exists, move, remove, write } from "./expofilesystem";
+import { expoExists, expoMove, expoRemove, expoWrite } from "./expofilesystem";
 
-async function atomicWrite(path: string, data: string) {
+export function atomicWrite(path: string, data: string) {
   const tmpPath = `${path}.tmp`;
 
   // 念の為、古い tmpファイル を削除
-  if (await exists(tmpPath)) {
-    await remove(tmpPath);
+  if (expoExists(tmpPath)) {
+    expoRemove(tmpPath);
   }
 
   // 1. tmpファイルへ書き込み
-  write(tmpPath, data);
+  expoWrite(tmpPath, data);
 
-  // 2. 本フォルダへ移動
-  move(tmpPath, path);
+  // 2. 本体があれば削除
+  if (expoExists(path)) {
+    expoRemove(path);
+  }
+
+  // 3. 本フォルダへ移動
+  expoMove(tmpPath, path);
 }
+
+// path指定例
+// settings/config.json

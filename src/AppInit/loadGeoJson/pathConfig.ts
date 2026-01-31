@@ -1,0 +1,1 @@
+const CACHE_MANIFEST_PATH = "";

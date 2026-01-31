@@ -1,26 +1,42 @@
-import * as FileSystem from "expo-file-system";
+import { File } from "expo-file-system";
+import { BASEDIR_PATH } from "./FileConfig";
 
-async function expoRead(path: string): Promise<string> {
-  return FileSystem.readAsStringAsync(path);
+export async function expoRead(path: string): Promise<string> {
+  const file = new File(BASEDIR_PATH, path);
+  if (!file.exists) throw new Error(`File not found: ${file.uri}`);
+  return await file.text();
 }
 
 // atomicロジックではない単純書き込み
-async function expoWrite(path: string, data: string): Promise<void> {
-  await FileSystem.writeAsStringAsync(path, data);
+export function expoWrite(path: string, data: string): void {
+  const file = new File(BASEDIR_PATH, path);
+  // 親ディレクトリ保証
+  file.parentDirectory.create({ intermediates: true, idempotent: true });
+
+  file.write(data);
 }
 
-async function expoMove(from: string, to: string): Promise<void> {
-  await FileSystem.moveAsync({ from: from, to: to });
+export function expoMove(from: string, to: string): void {
+  const fromFile = new File(BASEDIR_PATH, from);
+  const toFile = new File(BASEDIR_PATH, to);
+
+  // 移動先のディレクトリを保証
+  toFile.parentDirectory.create({ intermediates: true, idempotent: true });
+
+  // 移動先にすでに存在する場合削除
+  if (toFile.exists) {
+    toFile.delete();
+  }
+
+  fromFile.move(toFile);
 }
 
-async function expoRemove(path: string): Promise<void> {
-  await FileSystem.deleteAsync(path, { idempotent: true });
+export function expoRemove(path: string): void {
+  const file = new File(BASEDIR_PATH, path);
+  if (file.exists) file.delete();
 }
 
-async function expoExists(path: string): Promise<boolean> {
-  const info = await FileSystem.getInfoAsync(path);
-  return info.exists;
+export function expoExists(path: string): boolean {
+  const file = new File(BASEDIR_PATH, path);
+  return file.exists;
 }
-
-export { expoExists, expoMove, expoRead, expoRemove, expoWrite };
-
