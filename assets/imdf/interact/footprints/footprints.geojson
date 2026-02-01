@@ -20,10 +20,7 @@
       "properties": {
         "category": "ground",
         "name": null,
-        "building_ids": [
-          "624e3073-6e26-45ed-a7b6-b93009fbd2bc",
-          "b1abbe62-8b0b-4dbb-a189-c641a8c99b75"
-        ]
+        "building_ids": ["a1df2a1e-9838-458f-ab73-33d77c56d4db"]
       }
     }
   ]
