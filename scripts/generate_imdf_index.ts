@@ -1,24 +1,13 @@
 #!/usr/bin/env ts-node
 /*
- generate_imdf_index.ts
+ generate_imdf_index.ts (modified)
 
- - POSIXパスに正規化
- - size は JSON.stringify(<parsed>) を一度テンポラリに書き出してから取得
-   - Expo 環境であれば expo-file-system の writeAsStringAsync / getInfoAsync を使用
-   - Node 環境ではローカルの ./tmp/... に書いて fs.stat でサイズ取得
- - buildManifest.json 自体は走査対象から除外
+ 変更点:
+ - 出力に files のみを含める（byRelativePath を削除）
+ - sha256 を測定・書き込みしない
+ - 各ファイルが JSON の場合、ルートの "version" プロパティを読み取って files 情報に追加する
 
- 使い方（例）:
-   npx ts-node --transpile-only ./generate_imdf_index.ts
-   npx ts-node --transpile-only ./generate_imdf_index.ts ./assets/imdf --out ./assets/imdf/buildManifest.json
-   npx ts-node --transpile-only ./generate_imdf_index.ts --generatedBy htlost5 --language ja-JP --version 1.0.0
-
- 注意:
- - Expo の API を使う場合はこのスクリプトを Expo 環境（実機や Expo Go）で実行する必要があります。
- - Node 実行時は代替のローカルファイル書き込み経由でサイズを取得します。
-
- References:
- - expo-file-system (writeAsStringAsync / getInfoAsync): https://docs.expo.dev/versions/latest/sdk/filesystem/ 
+ その他のロジックは可能な限り元のまま維持しています。
 */
 
 import fs from "fs";
@@ -62,17 +51,6 @@ function genLogicalId(relativePosix: string) {
   id = id.replace(/_+/g, "_");
   id = id.replace(/^_+|_+$/g, "");
   return id.toLowerCase();
-}
-
-async function fileSha256(filePath: string) {
-  return new Promise<string>((resolve, reject) => {
-    const crypto = require("crypto");
-    const hash = crypto.createHash("sha256");
-    const rs = fs.createReadStream(filePath);
-    rs.on("error", reject);
-    rs.on("data", (chunk) => hash.update(chunk));
-    rs.on("end", () => resolve(hash.digest("hex")));
-  });
 }
 
 async function ensureDirFor(filePath: string) {
@@ -159,7 +137,6 @@ async function buildIndex(
   const files = await walkDir(root, exclude);
 
   const byLogicalId: Record<string, any> = {};
-  const byRelativePath: Record<string, any> = {};
 
   for (const full of files) {
     const relative = path.relative(root, full);
@@ -179,13 +156,20 @@ async function buildIndex(
     // 読み込み & canonical stringify
     const raw = await fs.promises.readFile(full, "utf8");
     let canonical = raw;
+    let parsed: any = null;
     try {
-      const parsed = JSON.parse(raw);
+      parsed = JSON.parse(raw);
       canonical = JSON.stringify(parsed);
     } catch (e) {
       // JSON parse error -> use raw string
       canonical = raw;
     }
+
+    // version を JSON のルートから読み取る（存在しなければ undefined）
+    const versionFromJson =
+      parsed && Object.prototype.hasOwnProperty.call(parsed, "version")
+        ? parsed.version
+        : undefined;
 
     // size を取得（expo があれば Expo を使う）
     let size: number;
@@ -203,26 +187,16 @@ async function buildIndex(
       size = await computeSizeViaNodeTmp(root, relativePosix, canonical);
     }
 
-    // sha256 (from actual file bytes)
-    const sha256 = await fileSha256(full);
-
     const entry = {
       logicalId,
       relativePath: relativePosix,
       absolutePath,
       fileName,
       size,
-      sha256,
+      version: versionFromJson,
     };
 
     byLogicalId[logicalId] = entry;
-    byRelativePath[relativePosix] = {
-      logicalId,
-      absolutePath,
-      fileName,
-      size,
-      sha256,
-    };
   }
 
   const out = {
@@ -234,7 +208,6 @@ async function buildIndex(
     root: rootPosix,
     count: Object.keys(byLogicalId).length,
     files: byLogicalId,
-    byRelativePath,
   };
 
   const outPath = options.outFile || path.join(root, "buildManifest.json");
