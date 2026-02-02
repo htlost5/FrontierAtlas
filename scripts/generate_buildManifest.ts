@@ -6,8 +6,10 @@
  - 出力に files のみを含める（byRelativePath を削除）
  - sha256 を測定・書き込みしない
  - 各ファイルが JSON の場合、ルートの "version" プロパティを読み取って files 情報に追加する
-
- その他のロジックは可能な限り元のまま維持しています。
+ - absolutePath 関連ロジックをすべて削除（要求どおり）
+ - 出力オブジェクトから root 書き込みを削除（今回の変更）
+ - generatedAt と language の書き込みロジックを削除
+ - fileName を出力から削除（今回の変更）
 */
 
 import fs from "fs";
@@ -108,14 +110,12 @@ async function buildIndex(
   rootArg: string,
   options: {
     generatedBy: string;
-    language: string;
     version: string;
     outFile?: string;
   },
 ) {
   // rootArg can be absolute or relative; script's base is __dirname
   const root = path.resolve(__dirname, rootArg);
-  const rootPosix = toPosix(root);
   const relBuildManifest = "buildManifest.json";
   const exclude = new Set<string>([relBuildManifest]);
 
@@ -141,8 +141,6 @@ async function buildIndex(
   for (const full of files) {
     const relative = path.relative(root, full);
     const relativePosix = toPosix(relative);
-    const absolutePath = toPosix(path.resolve(full));
-    const fileName = path.basename(full);
     const logicalIdBase = genLogicalId(relativePosix);
 
     // 同じ論理IDがある場合は _1, _2... を付与
@@ -190,8 +188,6 @@ async function buildIndex(
     const entry = {
       logicalId,
       relativePath: relativePosix,
-      absolutePath,
-      fileName,
       size,
       version: versionFromJson,
     };
@@ -203,9 +199,6 @@ async function buildIndex(
     version: options.version,
     created: new Date().toISOString(),
     generated_by: options.generatedBy,
-    language: options.language,
-    generatedAt: Date.now(),
-    root: rootPosix,
     count: Object.keys(byLogicalId).length,
     files: byLogicalId,
   };
@@ -215,12 +208,11 @@ async function buildIndex(
   return outPath;
 }
 
-async function main() {
+export async function generateBuildManifest() {
   const argv = process.argv.slice(2);
   let rootArg = "../assets/imdf"; // relative to scripts dir
   let outArg: string | undefined;
   let genBy = "htlost5";
-  let language = "ja-JP";
   let version = "1.0.0";
 
   for (let i = 0; i < argv.length; i++) {
@@ -239,11 +231,6 @@ async function main() {
       i++;
       continue;
     }
-    if (a === "--language" && argv[i + 1]) {
-      language = argv[i + 1];
-      i++;
-      continue;
-    }
     if (a === "--version" && argv[i + 1]) {
       version = argv[i + 1];
       i++;
@@ -251,11 +238,9 @@ async function main() {
     }
   }
 
-  const root = path.resolve(__dirname, rootArg);
   try {
     const outPath = await buildIndex(rootArg, {
       generatedBy: genBy,
-      language,
       version,
       outFile: outArg,
     });
@@ -265,5 +250,3 @@ async function main() {
     process.exit(1);
   }
 }
-
-main();

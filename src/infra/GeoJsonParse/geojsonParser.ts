@@ -1,6 +1,4 @@
-import type { FeatureCollection } from "geojson";
-
-function stringifyGeoJson(data: FeatureCollection): string {
+function stringifyJson(data: any): string {
   try {
     return JSON.stringify(data);
   } catch (e) {
@@ -8,7 +6,7 @@ function stringifyGeoJson(data: FeatureCollection): string {
   }
 }
 
-function parseGeoJson(data: string): FeatureCollection {
+function parseJson(data: any): any {
   try {
     return JSON.parse(data);
   } catch (e) {
@@ -16,5 +14,5 @@ function parseGeoJson(data: string): FeatureCollection {
   }
 }
 
-export { parseGeoJson, stringifyGeoJson };
+export { parseJson, stringifyJson };
 

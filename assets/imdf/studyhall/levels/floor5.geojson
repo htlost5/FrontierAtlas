@@ -1,5 +1,6 @@
 {
   "type": "FeatureCollection",
+  "version": "1.0.0",
   "features": [
     {
       "id": "ca6ee856-de65-4d37-bd75-3ec7762d8234",

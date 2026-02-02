@@ -1,5 +1,6 @@
 {
   "type": "FeatureCollection",
+  "version": "1.0.0",
   "name": "floor5_section",
   "crs": {
     "type": "name",

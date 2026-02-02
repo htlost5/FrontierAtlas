@@ -1,5 +1,6 @@
 {
   "type": "FeatureCollection",
+  "version": "1.0.0",
   "name": "study_floor3",
   "crs": {
     "type": "name",

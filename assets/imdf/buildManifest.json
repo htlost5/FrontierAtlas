@@ -1,165 +1,140 @@
 {
   "version": "1.0.0",
-  "created": "2026-02-02T08:45:09.505Z",
+  "created": "2026-02-02T14:37:05.927Z",
   "generated_by": "htlost5",
-  "language": "ja-JP",
-  "generatedAt": 1770021909507,
-  "root": "D:/htlost5_projects/FrontierAtlas/assets/imdf",
   "count": 22,
   "files": {
     "address": {
       "logicalId": "address",
       "relativePath": "address.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/address.geojson",
-      "fileName": "address.geojson",
-      "size": 276
+      "size": 294,
+      "version": "1.0.0"
     },
     "interact_buildings_buildings": {
       "logicalId": "interact_buildings_buildings",
       "relativePath": "interact/buildings/buildings.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/interact/buildings/buildings.geojson",
-      "fileName": "buildings.geojson",
-      "size": 395
+      "size": 413,
+      "version": "1.0.0"
     },
     "interact_footprints_footprints": {
       "logicalId": "interact_footprints_footprints",
       "relativePath": "interact/footprints/footprints.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/interact/footprints/footprints.geojson",
-      "fileName": "footprints.geojson",
-      "size": 478
+      "size": 496,
+      "version": "1.0.0"
     },
     "studyhall_buildings_buildings": {
       "logicalId": "studyhall_buildings_buildings",
       "relativePath": "studyhall/buildings/buildings.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/buildings/buildings.geojson",
-      "fileName": "buildings.geojson",
-      "size": 393
+      "size": 411,
+      "version": "1.0.0"
     },
     "studyhall_footprints_footprint": {
       "logicalId": "studyhall_footprints_footprint",
       "relativePath": "studyhall/footprints/footprint.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/footprints/footprint.geojson",
-      "fileName": "footprint.geojson",
-      "size": 981
+      "size": 999,
+      "version": "1.0.0"
     },
     "studyhall_levels_floor1": {
       "logicalId": "studyhall_levels_floor1",
       "relativePath": "studyhall/levels/floor1.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/levels/floor1.geojson",
-      "fileName": "floor1.geojson",
-      "size": 1191
+      "size": 1209,
+      "version": "1.0.0"
     },
     "studyhall_levels_floor2": {
       "logicalId": "studyhall_levels_floor2",
       "relativePath": "studyhall/levels/floor2.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/levels/floor2.geojson",
-      "fileName": "floor2.geojson",
-      "size": 1191
+      "size": 1209,
+      "version": "1.0.0"
     },
     "studyhall_levels_floor3": {
       "logicalId": "studyhall_levels_floor3",
       "relativePath": "studyhall/levels/floor3.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/levels/floor3.geojson",
-      "fileName": "floor3.geojson",
-      "size": 1191
+      "size": 1209,
+      "version": "1.0.0"
     },
     "studyhall_levels_floor4": {
       "logicalId": "studyhall_levels_floor4",
       "relativePath": "studyhall/levels/floor4.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/levels/floor4.geojson",
-      "fileName": "floor4.geojson",
-      "size": 683
+      "size": 701,
+      "version": "1.0.0"
     },
     "studyhall_levels_floor5": {
       "logicalId": "studyhall_levels_floor5",
       "relativePath": "studyhall/levels/floor5.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/levels/floor5.geojson",
-      "fileName": "floor5.geojson",
-      "size": 683
+      "size": 701,
+      "version": "1.0.0"
     },
     "studyhall_sections_floor1": {
       "logicalId": "studyhall_sections_floor1",
       "relativePath": "studyhall/sections/floor1.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/sections/floor1.geojson",
-      "fileName": "floor1.geojson",
-      "size": 4974
+      "size": 4992,
+      "version": "1.0.0"
     },
     "studyhall_sections_floor2": {
       "logicalId": "studyhall_sections_floor2",
       "relativePath": "studyhall/sections/floor2.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/sections/floor2.geojson",
-      "fileName": "floor2.geojson",
-      "size": 8839
+      "size": 8857,
+      "version": "1.0.0"
     },
     "studyhall_sections_floor3": {
       "logicalId": "studyhall_sections_floor3",
       "relativePath": "studyhall/sections/floor3.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/sections/floor3.geojson",
-      "fileName": "floor3.geojson",
-      "size": 8019
+      "size": 8037,
+      "version": "1.0.0"
     },
     "studyhall_sections_floor4": {
       "logicalId": "studyhall_sections_floor4",
       "relativePath": "studyhall/sections/floor4.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/sections/floor4.geojson",
-      "fileName": "floor4.geojson",
-      "size": 2294
+      "size": 2312,
+      "version": "1.0.0"
     },
     "studyhall_sections_floor5": {
       "logicalId": "studyhall_sections_floor5",
       "relativePath": "studyhall/sections/floor5.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/sections/floor5.geojson",
-      "fileName": "floor5.geojson",
-      "size": 2560
+      "size": 2578,
+      "version": "1.0.0"
     },
     "studyhall_units_floor1": {
       "logicalId": "studyhall_units_floor1",
       "relativePath": "studyhall/units/floor1.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/floor1.geojson",
-      "fileName": "floor1.geojson",
-      "size": 52441
+      "size": 52459,
+      "version": "1.0.0"
     },
     "studyhall_units_floor2": {
       "logicalId": "studyhall_units_floor2",
       "relativePath": "studyhall/units/floor2.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/floor2.geojson",
-      "fileName": "floor2.geojson",
-      "size": 57694
+      "size": 57712,
+      "version": "1.0.0"
     },
     "studyhall_units_floor3": {
       "logicalId": "studyhall_units_floor3",
       "relativePath": "studyhall/units/floor3.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/floor3.geojson",
-      "fileName": "floor3.geojson",
-      "size": 59211
+      "size": 59229,
+      "version": "1.0.0"
     },
     "studyhall_units_floor4": {
       "logicalId": "studyhall_units_floor4",
       "relativePath": "studyhall/units/floor4.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/floor4.geojson",
-      "fileName": "floor4.geojson",
-      "size": 20663
+      "size": 20681,
+      "version": "1.0.0"
     },
     "studyhall_units_floor5": {
       "logicalId": "studyhall_units_floor5",
       "relativePath": "studyhall/units/floor5.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/floor5.geojson",
-      "fileName": "floor5.geojson",
-      "size": 25354
+      "size": 25372,
+      "version": "1.0.0"
     },
     "studyhall_units_study_stairs": {
       "logicalId": "studyhall_units_study_stairs",
       "relativePath": "studyhall/units/study_stairs.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/studyhall/units/study_stairs.geojson",
-      "fileName": "study_stairs.geojson",
-      "size": 40621
+      "size": 40639,
+      "version": "1.0.0"
     },
     "venue_venue": {
       "logicalId": "venue_venue",
       "relativePath": "venue/venue.geojson",
-      "absolutePath": "D:/htlost5_projects/FrontierAtlas/assets/imdf/venue/venue.geojson",
-      "fileName": "venue.geojson",
-      "size": 958
+      "size": 976,
+      "version": "1.0.0"
     }
   }
 }

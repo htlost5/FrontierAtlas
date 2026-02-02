@@ -2,7 +2,7 @@
 id: ta0o9y69hl5l3m01m2z86ew
 title: Cache_logic
 desc: ""
-updated: 1769695939370
+updated: 1770022775655
 created: 1769068935058
 ---
 
@@ -39,8 +39,9 @@ created: 1769068935058
 
 ### キャッシュの存在確認に関して
 
-1. manifest.jsonを読み、各ファイルのバージョン、サイズが一致するかを確認
-2. 一致しないもの、manifestにあるのにキャッシュにないものをリスト化
+1. manifest.jsonを読み、cacheManifestのversionと一致しているかを確認
+2. バージョンが一致しない場合はすべてのgeojsonを再度読み込む
+3. バージョンが一致している場合は、差分で不足しているgeojsonを追加で入れる
 
 データ構造
 
