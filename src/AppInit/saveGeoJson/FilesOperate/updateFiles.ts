@@ -1,7 +1,8 @@
-import { expoRemove, expoWrite } from "@/src/infra/FileSystem/expofilesystem";
+import { atomicWrite } from "@/src/infra/FileSystem/AtomicFileSystem";
+import { expoRemove } from "@/src/infra/FileSystem/expofilesystem";
 import { stringifyJson } from "@/src/infra/GeoJsonParse/geojsonParser";
 import { OperateFile } from "../diff/types";
-import { geoJsonMap } from "../geojsonRegistry";
+import { geoJsonMap } from "../geojsonAssetMap";
 import { IMDF_BASE_DIR } from "../pathConfig";
 
 export function updateFiles(updateList: OperateFile[]): void {
@@ -12,6 +13,6 @@ export function updateFiles(updateList: OperateFile[]): void {
     const file = geoJsonMap[f.logicalId];
     if (!file) throw new Error(`GeoJSON not found: ${f.logicalId}`);
 
-    expoWrite(targetPath, stringifyJson(file.content));
+    atomicWrite(targetPath, stringifyJson(file.content));
   });
 }

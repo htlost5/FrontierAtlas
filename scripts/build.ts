@@ -1,9 +1,9 @@
 import { generateBuildManifest } from "./generate_buildManifest";
-import { generateGeojsonRegistry } from "./generate_geojsonRegistry";
+import { generateGeojsonAssetMap } from "./generate_geojsonAssetMap";
 
 async function buildAll() {
-    await generateBuildManifest();
-    generateGeojsonRegistry();
+  await generateBuildManifest();
+  generateGeojsonAssetMap();
 }
 
 buildAll();

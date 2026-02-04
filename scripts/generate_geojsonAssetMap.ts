@@ -6,7 +6,7 @@
  *
  * usage:
  *  npx ts-node --transpile-only ./tools/generate-geojson-registry.ts
- *  npx ts-node --transpile-only ./tools/generate-geojson-registry.ts ./assets/imdf/buildManifest.json ./src/domain/imdf/geojsonRegistry.ts
+ *  npx ts-node --transpile-only ./tools/generate-geojson-registry.ts ./assets/imdf/buildManifest.json ./src/domain/imdf/geojsonAssetMap.ts
  *
  * 注意:
  * - 出力先ファイルを上書きするので注意してね。
@@ -19,7 +19,7 @@ import path from "path";
 const [, , typeImportArg] = process.argv;
 
 const manifestPath = path.resolve("../assets/imdf/buildManifest.json");
-const outPath = path.resolve("../src/Appinit/loadGeoJson/geojsonRegistry.ts");
+const outPath = path.resolve("../src/Appinit/saveGeoJson/geojsonAssetMap.ts");
 // 型定義 import パス（生成ファイル内で使う相対／エイリアスパス）
 const manifestTypeImport = typeImportArg || "./Manifest/manifestType";
 
@@ -119,7 +119,7 @@ function generate(manifest: any) {
   return body;
 }
 
-export function generateGeojsonRegistry() {
+export function generateGeojsonAssetMap() {
   try {
     const manifest = readManifest(manifestPath);
     const out = generate(manifest);

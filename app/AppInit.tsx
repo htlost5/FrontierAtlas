@@ -2,8 +2,8 @@
 // スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
 
 import { AppInitContext } from "@/src/AppInit/AppInitContext";
+import { loadAllGeoJson } from "@/src/AppInit/saveGeoJson";
 import { useLoadFonts } from "@/src/AppInit/useLoadFonts";
-import { loadAllImproved } from "@/src/infra/cacheMaker";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
@@ -33,7 +33,7 @@ export default function AppInit({ children }: Props) {
     async function prepare() {
       try {
         // すべてのマップGeoJSONデータをキャッシュディレクトリにコピー
-        await loadAllImproved();
+        await loadAllGeoJson();
         setIsReady(true);
       } catch (e) {
         console.warn("初期化エラー", e);

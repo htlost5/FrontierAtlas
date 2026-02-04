@@ -5,9 +5,10 @@ import type { CameraRef } from "@maplibre/maplibre-react-native";
 import React, { useCallback, useContext, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { MapContainer } from "./components/MapContainer";
+import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
+import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 import { useDisplayLevel } from "./hooks/useDisplayLevel";
 import { useMapCamera } from "./hooks/useMapCamera";
-import { useMapGeoData } from "./hooks/useMapGeoData";
 
 type Props = {
   floor_num: number;
@@ -16,8 +17,8 @@ type Props = {
 
 export function MapScreen({ floor_num, cameraRef }: Props) {
   const { cacheReady } = useContext(AppInitContext);
-  const { venueGeoData, floorGeoData, venueLoading, floorLoading } =
-    useMapGeoData(floor_num);
+  const { venue, studyhall, interact, mapLoading, mapError } = useMapGeoData();
+  const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
 
   const [zoom, setZoom] = useState(17.2);
   const display = useDisplayLevel(zoom);
@@ -32,7 +33,7 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
     [zoom],
   );
 
-  if (venueLoading || floorLoading || !cacheReady) {
+  if (mapLoading || floorLoading || !cacheReady) {
     return (
       <View
         style={[
@@ -44,25 +45,36 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
       </View>
     );
   }
+
+  if (!venue || !studyhall || !interact) return null;
+  if (
+    !floorGeoData ||
+    !floorGeoData.units ||
+    !floorGeoData.sections ||
+    !floorGeoData.stairs
+  )
+    return null;
+
+  const floorViewGeoData = {
+    unit: floorGeoData.units,
+    section: floorGeoData.sections,
+    stair: floorGeoData.stairs,
+  };
+
   return (
     <MapContainer
       cameraRef={cameraRef}
       onRegionIsChanging={handleRegionIsChanging}
     >
-      {venueGeoData?.venue && <Venue data={venueGeoData.venue} />}
-      {venueGeoData?.studyhall && <Venue data={venueGeoData.studyhall} />}
-      {venueGeoData?.interact && <Venue data={venueGeoData.interact} />}
-      {floorGeoData &&
-        floorGeoData.unit &&
-        floorGeoData.section &&
-        floorGeoData.stair && (
-          <FloorView
-            floor_num={floor_num}
-            geoData={floorGeoData}
-            display={display}
-            zoomLevel={zoom}
-          />
-        )}
+      <Venue data={venue} />
+      <Venue data={studyhall} />
+      <Venue data={interact} />
+      <FloorView
+        floor_num={floor_num}
+        geoData={floorViewGeoData}
+        display={display}
+        zoomLevel={zoom}
+      />
     </MapContainer>
   );
 }

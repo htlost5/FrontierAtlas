@@ -22,7 +22,7 @@ import data_studyhall_units_floor2 from "@/assets/imdf/studyhall/units/floor2.ge
 import data_studyhall_units_floor3 from "@/assets/imdf/studyhall/units/floor3.geojson";
 import data_studyhall_units_floor4 from "@/assets/imdf/studyhall/units/floor4.geojson";
 import data_studyhall_units_floor5 from "@/assets/imdf/studyhall/units/floor5.geojson";
-import data_studyhall_units_study_stairs from "@/assets/imdf/studyhall/units/study_stairs.geojson";
+import data_studyhall_units_stairs from "@/assets/imdf/studyhall/units/stairs.geojson";
 import data_venue_venue from "@/assets/imdf/venue/venue.geojson";
 
 export const geoJsonMap: Record<string, ManifestFileEnrty & { content?: any }> = {
@@ -166,12 +166,12 @@ export const geoJsonMap: Record<string, ManifestFileEnrty & { content?: any }> =
     size: 25372,
     content: data_studyhall_units_floor5,
   },
-  studyhall_units_study_stairs: {
-    logicalId: "studyhall_units_study_stairs",
-    relativePath: "studyhall/units/study_stairs.geojson",
+  studyhall_units_stairs: {
+    logicalId: "studyhall_units_stairs",
+    relativePath: "studyhall/units/stairs.geojson",
     version: "1.0.0",
     size: 40639,
-    content: data_studyhall_units_study_stairs,
+    content: data_studyhall_units_stairs,
   },
   venue_venue: {
     logicalId: "venue_venue",

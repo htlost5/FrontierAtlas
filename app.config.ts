@@ -20,7 +20,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     scheme: "frontieratlas",
     userInterfaceStyle: "automatic",
     jsEngine: "hermes",
-    newArchEnabled: false,
+    newArchEnabled: true,
 
     ios: {
       ...config.ios,
@@ -78,7 +78,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       [
         "expo-router",
         {
-          root: "./app"
+          root: "./app",
         },
       ],
       [

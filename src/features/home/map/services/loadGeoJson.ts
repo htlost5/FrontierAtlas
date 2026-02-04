@@ -1,78 +1,18 @@
-// キャッシュディレクトリからGeoJSONファイルを読み込むユーティリティ関数
-import * as FileSystem from "expo-file-system";
-import type { FeatureCollection } from "geojson";
-import { InteractionManager } from "react-native";
+import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
+import { parseJson } from "@/src/infra/GeoJsonParse/geojsonParser";
+import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 
-// キャッシュディレクトリのルートパス
-const cacheDir = `${FileSystem.documentDirectory}geoJson_cache`;
+export async function loadGeoJson(id: string, path: string) {
+  // 1. メモリをチェック
+  const cached = geojsonRegistry.get(id);
+  if (cached) return cached;
 
-// 各データタイプごとのキャッシュディレクトリパス
-const dirs = {
-  venue: `${cacheDir}/venues`,
-  studyhall: `${cacheDir}/venues`,
-  interact: `${cacheDir}/venues`,
-  section: `${cacheDir}/sections`,
-  unit: `${cacheDir}/units/`,
-  others: `${cacheDir}/others`,
-};
+  // 2. ない場合ディスクから読む
+  const text = await expoRead(path);
+  const parsed = parseJson(text);
 
-// ディレクトリキーの型
-type DirKey = keyof typeof dirs;
+  // 3. メモリに保存
+  geojsonRegistry.set(id, parsed);
 
-// GeoJSON読み込みリクエストのパラメータ型
-type Props = {
-  type: DirKey;
-  feature: string;
-};
-
-// JSONパースをInteractionManagerで非同期化し、UIブロックを回避
-async function parseGeoJsonAsync<T = FeatureCollection>(
-  text: string
-): Promise<T> {
-  return new Promise<T>((resolve) => {
-    InteractionManager.runAfterInteractions(() => {
-      resolve(JSON.parse(text) as T);
-    });
-  });
-}
-
-const retries = 5;
-const delayMs = 200;
-
-// 複数のGeoJSONファイルを並列で読み込むメイン関数
-// キャッシュからファイルを読み、失敗時は空のFeatureCollectionを返す
-export async function loadGeoJson(
-  targets: Props[]
-): Promise<FeatureCollection[]> {
-  const tasks = targets.map(async ({ type, feature }) => {
-    const path = `${dirs[type]}/${feature}.geojson`;
-    for (let i = 0; i < retries; i++) {
-      try {
-        const info = await FileSystem.getInfoAsync(path);
-        if (!info.exists) throw new Error(`not_exists:${path}`);
-        if (info.size !== undefined && info.size === 0) {
-          throw new Error(`empty:${path}`);
-        }
-
-        const text = await FileSystem.readAsStringAsync(path);
-        return await parseGeoJsonAsync(text);
-      } catch (e) {
-        if (i === retries - 1) {
-          console.warn(e);
-          return {
-            type: "FeatureCollection",
-            features: [],
-          } as FeatureCollection;
-        }
-      }
-      await new Promise((res) => setTimeout(res, delayMs));
-    }
-    return {
-      type: "FeatureCollection",
-      features: [],
-    } as FeatureCollection;
-  });
-
-  const parsedDatas = await Promise.all(tasks);
-  return parsedDatas;
+  return parsed;
 }
