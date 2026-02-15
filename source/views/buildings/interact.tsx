@@ -1,6 +1,4 @@
 // 交流棟描画コンポーネント: 建物外形と建物名ラベルを表示
-import React from "react";
-
 import {
   FillLayer,
   LineLayer,

@@ -1,7 +1,7 @@
 // ユーザー位置表示ボタン: マップ上で特定座標へカメラをジャンプするコンポーネント
 import React from "react";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
-import { useMapContext } from "../../hooks/MapContext/useMapContext";
+import { useMapContext } from "../../hooks/state/useMapContext";
 
 export function UserLocation() {
   const { cameraRef } = useMapContext();

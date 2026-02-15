@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { useMapContext } from "../../hooks/MapContext/useMapContext";
+import { useMapContext } from "../../hooks/state/useMapContext";
 
 // 個別の階層ボタンのプロパティ定義
 type Props = {

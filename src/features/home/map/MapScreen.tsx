@@ -1,18 +1,18 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
 import { MapContainer } from "./components/MapContainer";
-import { mapConfig } from "./constants/mapConfig";
 
-import { useMapContext } from "./hooks/MapContext/useMapContext";
-import { useDisplayLevel } from "./hooks/MapDisplay/useDisplayLevel";
+import { useDisplayLevel } from "./hooks/state/useDisplayLevel";
+import { useMapContext } from "./hooks/state/useMapContext";
 
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
 import { FloorView } from "@/source/views/floor/floorN";
-import { Venue } from "@/source/views/ground/ground";
+import { Venue } from "./layers/venue";
+import { useZoomBoundary } from "./hooks/camera/useZoomBoundary";
 
 type Props = {
   floor_num: number;
@@ -27,28 +27,8 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
   const { venue, studyhall, interact, mapLoading, mapError } = useMapGeoData();
   const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
 
-  // maxとmin到達時のモーション
-  const handleRegionIsChanging = useCallback(
-    (region: any) => {
-      const z = region?.properties?.zoomLevel;
-      if (!cameraRef.current || typeof z !== "number") return;
-
-      if (z < mapConfig.zoom.softMin) {
-        cameraRef.current.setCamera({
-          zoomLevel: mapConfig.zoom.softMin,
-          animationDuration: 250,
-        });
-      }
-
-      if (z > mapConfig.zoom.softMax) {
-        cameraRef.current.setCamera({
-          zoomLevel: mapConfig.zoom.softMax,
-          animationDuration: 150,
-        });
-      }
-    },
-    [cameraRef],
-  );
+  // maxとmin到達時のモーション受け取り
+  const handleRegionIsChanging = useZoomBoundary(cameraRef);
 
   // エラー出力 -> エラー時のスクリーンを実装する（フォールバック）
   useEffect(() => {

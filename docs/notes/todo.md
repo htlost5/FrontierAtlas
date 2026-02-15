@@ -2,7 +2,7 @@
 id: a2efvfrppx7goovxerps67g
 title: Todo
 desc: ""
-updated: 1770817612279
+updated: 1771164065154
 created: 1770817461222
 ---
 
@@ -12,3 +12,5 @@ created: 1770817461222
 - AppInitの設計確認 -> 不要ファイルの削除
 - フォールバック用viewの実装（？）
 - componentやスクリーンのstyle定義整理（隠れているcompあり）
+
+- interact/studyhallの共通化
