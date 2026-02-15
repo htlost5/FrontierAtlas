@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useMapContext } from "../../hooks/MapContext/useMapContext";
 
 // 個別の階層ボタンのプロパティ定義
 type Props = {
@@ -32,19 +33,16 @@ function FloorChoose({ floor, onPress, isFocused }: Props) {
     </TouchableOpacity>
   );
 }
-// フロア切り替えコンポーネント全体のプロパティ定義
-type Props_change = {
-  num: number;
-  setNum: React.Dispatch<React.SetStateAction<number>>;
-};
 
 const floors = [5, 4, 3, 2, 1];
 
 // 全フロアのボタンリストを表示し、選択された階層を管理するメインコンポーネント
-export function FloorChange({ num, setNum }: Props_change) {
-  const handlePress = (floor: number) => {
-    if (floor !== num) {
-      setNum(floor);
+export function FloorChange() {
+  const { floor, setFloor } = useMapContext();
+
+  const handlePress = (f: number) => {
+    if (f !== floor) {
+      setFloor(f);
     }
   };
 
@@ -57,12 +55,12 @@ export function FloorChange({ num, setNum }: Props_change) {
         alignItems: "center",
       }}
     >
-      {floors.map((data) => (
+      {floors.map((f) => (
         <FloorChoose
-          key={data}
-          floor={data}
+          key={f}
+          floor={f}
           onPress={handlePress}
-          isFocused={data === num} // 選択中かどうか
+          isFocused={f === floor} // 選択中かどうか
         />
       ))}
     </ScrollView>

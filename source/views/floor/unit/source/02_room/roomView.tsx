@@ -23,7 +23,7 @@ type Props = {
  * @returns 部屋タイプ別のPolyonLayerリスト
  */
 export function RoomView({ floor_num, data }: Props) {
-  const roomSourceId = `roomView-${floor_num}`;
+  const roomSourceId = `roomView`;
 
   return (
     <ShapeSource id={roomSourceId} shape={data}>

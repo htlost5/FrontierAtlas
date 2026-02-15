@@ -13,13 +13,10 @@ module.exports = (async () => {
       ...defaultConfig.resolver,
       assetExts: [
         ...defaultConfig.resolver.assetExts.filter((ext) => ext !== "svg"),
-        "geojson",
       ],
       sourceExts: [
         ...defaultConfig.resolver.sourceExts,
         "svg",
-        "native.ts",
-        "native.tsx",
       ],
     },
   };

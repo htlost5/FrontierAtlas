@@ -31,14 +31,14 @@ export function Vending({ data, isVisible, floor_num }: Props) {
   return (
     <>
       <Images
-        id={`vending_icons-images-${floor_num}`}
+        id={`vending_icons-images`}
         images={{
           vending: require("@/assets/images/icons/MapView/MapLogo/vending/vending-machine.png"),
         }}
       />
-      <ShapeSource id={`vending-shape-${floor_num}`} shape={data}>
+      <ShapeSource id={`vending-shape`} shape={data}>
         <SymbolLayer
-          id={`vending-symbol-${floor_num}`}
+          id={`vending-symbol`}
           filter={["==", ["get", "category"], "vending_area"]}
           style={{
             iconImage: "vending",

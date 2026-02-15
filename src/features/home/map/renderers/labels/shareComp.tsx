@@ -28,7 +28,7 @@ export function LavelLayer({ floor_num, sourceId, config }: Props) {
   return (
     <>
       <SymbolLayer
-        id={`${config.key}-symbol-${floor_num}`}
+        id={`${config.key}-symbol`}
         sourceID={sourceId}
         filter={config.filter}
         style={{

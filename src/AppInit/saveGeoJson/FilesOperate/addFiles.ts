@@ -10,5 +10,6 @@ export function addFiles(addList: OperateFile[]): void {
     if (!file) throw new Error(`GeoJSON not found: ${f.logicalId}`);
 
     atomicWrite(IMDF_BASE_DIR + file.relativePath, stringifyJson(file.content));
+    // console.log(file.content);
   });
 }

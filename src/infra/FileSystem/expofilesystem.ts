@@ -12,6 +12,7 @@ export function expoWrite(path: string, data: string): void {
   const file = new File(BASEDIR_PATH, path);
   // 親ディレクトリ保証
   file.parentDirectory.create({ intermediates: true, idempotent: true });
+  if (!data) console.log("data not found");
 
   file.write(data);
 }

@@ -47,7 +47,7 @@ export function FloorView({ floor_num, geoData, display }: Props) {
         data={geoData.unit}
         stairData={geoData.stair}
       />
-      <LabelView floor_num={floor_num} data={geoData.unit} display={display} />
+      {/* <LabelView floor_num={floor_num} data={geoData.unit} display={display} /> */}
     </>
   );
 }

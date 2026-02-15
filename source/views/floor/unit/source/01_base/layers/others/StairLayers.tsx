@@ -23,9 +23,9 @@ type Props = {
  */
 export function StairLayers({ data, floor_num }: Props) {
   return (
-    <ShapeSource id={`stairLayers-source-${floor_num}`} shape={data}>
+    <ShapeSource id={`stairLayers-source`} shape={data}>
       <LineLayer
-        id={`stairs-line-${floor_num}`}
+        id={`stairs-line`}
         filter={
           floor_num === 4 || floor_num === 5
             ? ["==", ["get", "category"], "4-5"]

@@ -1,138 +1,138 @@
 {
   "version": "1.0.0",
-  "created": "2026-02-04T11:00:38.509Z",
+  "created": "2026-02-15T13:15:44.848Z",
   "generated_by": "htlost5",
   "count": 22,
   "files": {
     "address": {
       "logicalId": "address",
-      "relativePath": "address.geojson",
+      "relativePath": "address.json",
       "size": 294,
       "version": "1.0.0"
     },
     "interact_buildings_buildings": {
       "logicalId": "interact_buildings_buildings",
-      "relativePath": "interact/buildings/buildings.geojson",
+      "relativePath": "interact/buildings/buildings.json",
       "size": 413,
       "version": "1.0.0"
     },
     "interact_footprints_footprints": {
       "logicalId": "interact_footprints_footprints",
-      "relativePath": "interact/footprints/footprints.geojson",
+      "relativePath": "interact/footprints/footprints.json",
       "size": 496,
       "version": "1.0.0"
     },
     "studyhall_buildings_buildings": {
       "logicalId": "studyhall_buildings_buildings",
-      "relativePath": "studyhall/buildings/buildings.geojson",
+      "relativePath": "studyhall/buildings/buildings.json",
       "size": 411,
       "version": "1.0.0"
     },
-    "studyhall_footprints_footprint": {
-      "logicalId": "studyhall_footprints_footprint",
-      "relativePath": "studyhall/footprints/footprint.geojson",
+    "studyhall_footprints_footprints": {
+      "logicalId": "studyhall_footprints_footprints",
+      "relativePath": "studyhall/footprints/footprints.json",
       "size": 999,
       "version": "1.0.0"
     },
     "studyhall_levels_floor1": {
       "logicalId": "studyhall_levels_floor1",
-      "relativePath": "studyhall/levels/floor1.geojson",
+      "relativePath": "studyhall/levels/floor1.json",
       "size": 1209,
       "version": "1.0.0"
     },
     "studyhall_levels_floor2": {
       "logicalId": "studyhall_levels_floor2",
-      "relativePath": "studyhall/levels/floor2.geojson",
+      "relativePath": "studyhall/levels/floor2.json",
       "size": 1209,
       "version": "1.0.0"
     },
     "studyhall_levels_floor3": {
       "logicalId": "studyhall_levels_floor3",
-      "relativePath": "studyhall/levels/floor3.geojson",
+      "relativePath": "studyhall/levels/floor3.json",
       "size": 1209,
       "version": "1.0.0"
     },
     "studyhall_levels_floor4": {
       "logicalId": "studyhall_levels_floor4",
-      "relativePath": "studyhall/levels/floor4.geojson",
+      "relativePath": "studyhall/levels/floor4.json",
       "size": 701,
       "version": "1.0.0"
     },
     "studyhall_levels_floor5": {
       "logicalId": "studyhall_levels_floor5",
-      "relativePath": "studyhall/levels/floor5.geojson",
+      "relativePath": "studyhall/levels/floor5.json",
       "size": 701,
       "version": "1.0.0"
     },
     "studyhall_sections_floor1": {
       "logicalId": "studyhall_sections_floor1",
-      "relativePath": "studyhall/sections/floor1.geojson",
+      "relativePath": "studyhall/sections/floor1.json",
       "size": 4992,
       "version": "1.0.0"
     },
     "studyhall_sections_floor2": {
       "logicalId": "studyhall_sections_floor2",
-      "relativePath": "studyhall/sections/floor2.geojson",
+      "relativePath": "studyhall/sections/floor2.json",
       "size": 8857,
       "version": "1.0.0"
     },
     "studyhall_sections_floor3": {
       "logicalId": "studyhall_sections_floor3",
-      "relativePath": "studyhall/sections/floor3.geojson",
+      "relativePath": "studyhall/sections/floor3.json",
       "size": 8037,
       "version": "1.0.0"
     },
     "studyhall_sections_floor4": {
       "logicalId": "studyhall_sections_floor4",
-      "relativePath": "studyhall/sections/floor4.geojson",
+      "relativePath": "studyhall/sections/floor4.json",
       "size": 2312,
       "version": "1.0.0"
     },
     "studyhall_sections_floor5": {
       "logicalId": "studyhall_sections_floor5",
-      "relativePath": "studyhall/sections/floor5.geojson",
+      "relativePath": "studyhall/sections/floor5.json",
       "size": 2578,
       "version": "1.0.0"
     },
     "studyhall_units_floor1": {
       "logicalId": "studyhall_units_floor1",
-      "relativePath": "studyhall/units/floor1.geojson",
+      "relativePath": "studyhall/units/floor1.json",
       "size": 52459,
       "version": "1.0.0"
     },
     "studyhall_units_floor2": {
       "logicalId": "studyhall_units_floor2",
-      "relativePath": "studyhall/units/floor2.geojson",
+      "relativePath": "studyhall/units/floor2.json",
       "size": 57712,
       "version": "1.0.0"
     },
     "studyhall_units_floor3": {
       "logicalId": "studyhall_units_floor3",
-      "relativePath": "studyhall/units/floor3.geojson",
+      "relativePath": "studyhall/units/floor3.json",
       "size": 59229,
       "version": "1.0.0"
     },
     "studyhall_units_floor4": {
       "logicalId": "studyhall_units_floor4",
-      "relativePath": "studyhall/units/floor4.geojson",
+      "relativePath": "studyhall/units/floor4.json",
       "size": 20681,
       "version": "1.0.0"
     },
     "studyhall_units_floor5": {
       "logicalId": "studyhall_units_floor5",
-      "relativePath": "studyhall/units/floor5.geojson",
+      "relativePath": "studyhall/units/floor5.json",
       "size": 25372,
       "version": "1.0.0"
     },
     "studyhall_units_stairs": {
       "logicalId": "studyhall_units_stairs",
-      "relativePath": "studyhall/units/stairs.geojson",
+      "relativePath": "studyhall/units/stairs.json",
       "size": 40639,
       "version": "1.0.0"
     },
     "venue_venue": {
       "logicalId": "venue_venue",
-      "relativePath": "venue/venue.geojson",
+      "relativePath": "venue/venue.json",
       "size": 976,
       "version": "1.0.0"
     }

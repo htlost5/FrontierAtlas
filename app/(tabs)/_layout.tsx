@@ -7,6 +7,7 @@ import { View } from "react-native";
 
 import { SearchProvider } from "@/src/features/home/search/Context/SearchContext";
 
+import { MapRoot } from "@/src/features/home/map/MapRoot";
 import { ScreenFC } from "@/src/shared/components";
 
 // タブレイアウト: 検索画面以外でボトムタブを表示
@@ -15,9 +16,14 @@ export default function TabLayout() {
     // 検索機能用のContext Providerでラップ
     <SearchProvider>
       <View style={{ flex: 1 }}>
-        {/* 子ルート（タブ配下の各画面）を表示 */}
-        <Slot />
-        <ScreenFC visible="bottom" />
+        {/* Map をタブ全体で常駐 */}
+        <MapRoot>
+          {/* 子ルート（タブ配下の各画面）を表示 */}
+          <Slot />
+
+          {/* ヘッダ・ボトム UI */}
+          <ScreenFC visible="bottom" />
+        </MapRoot>
       </View>
     </SearchProvider>
   );

@@ -1,14 +1,18 @@
-import { FloorView } from "@/source/views/floor/floorN";
-import { Venue } from "@/source/views/ground/ground";
-import { AppInitContext } from "@/src/AppInit/AppInitContext";
+import React, { useCallback, useEffect } from "react";
+
 import type { CameraRef } from "@maplibre/maplibre-react-native";
-import React, { useCallback, useContext, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+
 import { MapContainer } from "./components/MapContainer";
+import { mapConfig } from "./constants/mapConfig";
+
+import { useMapContext } from "./hooks/MapContext/useMapContext";
+import { useDisplayLevel } from "./hooks/MapDisplay/useDisplayLevel";
+
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
-import { useDisplayLevel } from "./hooks/useDisplayLevel";
-import { useMapCamera } from "./hooks/useMapCamera";
+
+import { FloorView } from "@/source/views/floor/floorN";
+import { Venue } from "@/source/views/ground/ground";
 
 type Props = {
   floor_num: number;
@@ -16,71 +20,82 @@ type Props = {
 };
 
 export function MapScreen({ floor_num, cameraRef }: Props) {
-  const { cacheReady } = useContext(AppInitContext);
+  const { zoom } = useMapContext();
+  const display = useDisplayLevel(zoom);
+
+  // キャッシュからデータロード
   const { venue, studyhall, interact, mapLoading, mapError } = useMapGeoData();
   const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
 
-  const [zoom, setZoom] = useState(17.2);
-  const display = useDisplayLevel(zoom);
-
-  useMapCamera(cameraRef);
-
+  // maxとmin到達時のモーション
   const handleRegionIsChanging = useCallback(
     (region: any) => {
-      const currentZoom = region.properties?.zoomLevel ?? zoom;
-      setZoom(currentZoom);
+      const z = region?.properties?.zoomLevel;
+      if (!cameraRef.current || typeof z !== "number") return;
+
+      if (z < mapConfig.zoom.softMin) {
+        cameraRef.current.setCamera({
+          zoomLevel: mapConfig.zoom.softMin,
+          animationDuration: 250,
+        });
+      }
+
+      if (z > mapConfig.zoom.softMax) {
+        cameraRef.current.setCamera({
+          zoomLevel: mapConfig.zoom.softMax,
+          animationDuration: 150,
+        });
+      }
     },
-    [zoom],
+    [cameraRef],
   );
 
-  if (mapLoading || floorLoading || !cacheReady) {
-    return (
-      <View
-        style={[
-          styles.container,
-          { justifyContent: "center", alignItems: "center" },
-        ]}
-      >
-        <ActivityIndicator size={"large"} color={"#007AFF"} />
-      </View>
-    );
-  }
+  // エラー出力 -> エラー時のスクリーンを実装する（フォールバック）
+  useEffect(() => {
+    if (floorError) {
+      console.error("Floor Error:", floorError);
+    }
+  }, [floorError]);
 
-  if (!venue || !studyhall || !interact) return null;
-  if (
-    !floorGeoData ||
-    !floorGeoData.units ||
-    !floorGeoData.sections ||
-    !floorGeoData.stairs
-  )
-    return null;
+  useEffect(() => {
+    if (mapError) {
+      console.error("Map Error:", mapError);
+    }
+  }, [mapError]);
 
-  const floorViewGeoData = {
-    unit: floorGeoData.units,
-    section: floorGeoData.sections,
-    stair: floorGeoData.stairs,
-  };
+  const isVenueReady = !mapLoading && venue && studyhall && interact;
+
+  const isFloorReady =
+    !floorLoading &&
+    floorGeoData?.units &&
+    floorGeoData?.sections &&
+    floorGeoData?.stairs;
 
   return (
     <MapContainer
       cameraRef={cameraRef}
       onRegionIsChanging={handleRegionIsChanging}
     >
-      <Venue data={venue} />
-      <Venue data={studyhall} />
-      <Venue data={interact} />
-      <FloorView
-        floor_num={floor_num}
-        geoData={floorViewGeoData}
-        display={display}
-        zoomLevel={zoom}
-      />
+      {isVenueReady && (
+        <>
+          <Venue data={venue} />
+          <Venue data={studyhall} />
+          <Venue data={interact} />
+        </>
+      )}
+
+      {isFloorReady && (
+        <FloorView
+          floor_num={floor_num}
+          geoData={{
+            unit: floorGeoData.units!,
+            section: floorGeoData.sections!,
+            stair: floorGeoData.stairs!,
+          }}
+          display={display}
+          zoomLevel={zoom}
+        />
+      )}
     </MapContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

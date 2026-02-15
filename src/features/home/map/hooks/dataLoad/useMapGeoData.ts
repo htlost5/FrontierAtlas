@@ -18,6 +18,8 @@ export function useMapGeoData(): MapGeoData {
   const studyhall = useGeoDataByLogicalId(studyhallId);
   const interact = useGeoDataByLogicalId(interactId);
 
+  // console.log(venue.data);
+
   return {
     venue: venue.data,
     studyhall: studyhall.data,

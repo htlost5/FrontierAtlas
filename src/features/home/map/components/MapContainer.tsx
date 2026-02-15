@@ -6,6 +6,7 @@ import {
 } from "@maplibre/maplibre-react-native";
 import React from "react";
 import { StyleSheet } from "react-native";
+import { mapConfig } from "../constants/mapConfig";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
@@ -30,9 +31,12 @@ export function MapContainer({
       />
       <Camera
         ref={cameraRef}
-        maxZoomLevel={21.1}
-        minZoomLevel={17.2}
-        animationDuration={1000}
+        defaultSettings={{
+          centerCoordinate: mapConfig.default.center,
+          zoomLevel: mapConfig.default.zoom,
+        }}
+        maxZoomLevel={mapConfig.zoom.max}
+        minZoomLevel={mapConfig.zoom.min}
       />
       {children}
     </MapView>

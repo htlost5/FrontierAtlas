@@ -24,7 +24,7 @@ type Props = {
  */
 export function RoomLabel({ floor_num, data }: Props) {
   // 階層ごとにユニークなデータソースIDを生成
-  const labelSourceId = `lavelView-${floor_num}`;
+  const labelSourceId = `lavelView`;
 
   return (
     <>

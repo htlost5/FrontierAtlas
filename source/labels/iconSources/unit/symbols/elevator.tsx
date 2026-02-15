@@ -31,14 +31,14 @@ export function Elevator({ data, isVisible, floor_num }: Props) {
   return (
     <>
       <Images
-        id={`elevator_icons-images-${floor_num}`}
+        id={`elevator_icons-images`}
         images={{
           elevator: require("@/assets/images/icons/MapView/MapLogo/elevator/elevator.png"),
         }}
       />
-      <ShapeSource id={`elevator-symbol-${floor_num}`} shape={data}>
+      <ShapeSource id={`elevator-symbol`} shape={data}>
         <SymbolLayer
-          id={`elevator-symbol-${floor_num}`}
+          id={`elevator-symbol`}
           filter={["==", ["get", "category"], "elevator"]}
           style={{
             iconImage: "elevator",

@@ -27,7 +27,7 @@ type Props = {
  * @returns 基本レイヤー（アトリウム、壁、階段）
  */
 export function BaseView({ floor_num, data, stairData }: Props) {
-  const baseSourceId = `baseView-${floor_num}`;
+  const baseSourceId = `baseView`;
 
   return (
     <>

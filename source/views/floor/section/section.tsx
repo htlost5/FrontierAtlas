@@ -30,7 +30,7 @@ export function SectionView({ data, floor_num }: Props) {
   if (!data) return null;
 
   return (
-    <ShapeSource id={`section-source-${floor_num}`} shape={data}>
+    <ShapeSource id={`section-source`} shape={data}>
       <FillLayer
         id="section-fill"
         style={{

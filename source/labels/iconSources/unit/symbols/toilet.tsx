@@ -22,16 +22,16 @@ export function Toilet({ data, isVisible, floor_num }: Props) {
   return (
     <>
       <Images
-        id={`toilet_icons-images-${floor_num}`}
+        id={`toilet_icons-images`}
         images={{
           male: require("@/assets/images/icons/MapView/MapLogo/toilet/male.png"),
           female: require("@/assets/images/icons/MapView/MapLogo/toilet/female.png"),
           wheelchair: require("@/assets/images/icons/MapView/MapLogo/toilet/wheelchair.png"),
         }}
       />
-      <ShapeSource id={`toilet-shape-${floor_num}`} shape={data}>
+      <ShapeSource id={`toilet-shape`} shape={data}>
         <SymbolLayer
-          id={`male-symbol-${floor_num}`}
+          id={`male-symbol`}
           filter={["==", ["get", "category"], "restroom_male"]}
           style={{
             iconImage: "male",
@@ -51,7 +51,7 @@ export function Toilet({ data, isVisible, floor_num }: Props) {
           }}
         />
         <SymbolLayer
-          id={`female-symbol-${floor_num}`}
+          id={`female-symbol`}
           filter={["==", ["get", "category"], "restroom_female"]}
           style={{
             iconImage: "female",
@@ -71,7 +71,7 @@ export function Toilet({ data, isVisible, floor_num }: Props) {
           }}
         />
         <SymbolLayer
-          id={`wheelChair-symbol-${floor_num}`}
+          id={`wheelChair-symbol`}
           filter={["==", ["get", "category"], "restroom_accessible"]}
           style={{
             iconImage: "wheelchair",

@@ -27,7 +27,7 @@ export function PolygonLayer({ floor_num, sourceId, config }: Props) {
   return (
     <>
       <FillLayer
-        id={`${config.key}-fill-${floor_num}`}
+        id={`${config.key}-fill`}
         sourceID={sourceId}
         filter={config.filter}
         style={{
@@ -36,7 +36,7 @@ export function PolygonLayer({ floor_num, sourceId, config }: Props) {
         }}
       />
       <LineLayer
-        id={`${config.key}-line-${floor_num}`}
+        id={`${config.key}-line`}
         sourceID={sourceId}
         filter={config.filter}
         style={{
