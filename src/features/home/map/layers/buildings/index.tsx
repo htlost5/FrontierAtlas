@@ -11,7 +11,8 @@ export function BuildingsView({ data }: BuildingsProps) {
 
         return (
           <PolygonLayer
-            key={`building_${key}`}
+            key={key}
+            prefixId={`building_${key}`}
             data={value}
             fillStyle={buildingsFillStyle}
             lineStyle={buildingsLineStyle}
