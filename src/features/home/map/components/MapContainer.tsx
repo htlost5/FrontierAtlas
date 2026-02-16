@@ -35,6 +35,7 @@ export function MapContainer({
           centerCoordinate: mapConfig.default.center,
           zoomLevel: mapConfig.default.zoom,
         }}
+        maxBounds={mapConfig.restrict.bounds}
         maxZoomLevel={mapConfig.zoom.max}
         minZoomLevel={mapConfig.zoom.min}
       />

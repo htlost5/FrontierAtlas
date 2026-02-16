@@ -15,12 +15,12 @@ export function useZoomBoundary(cameraRef: React.RefObject<CameraRef | null>) {
         });
       }
 
-      if (z > mapConfig.zoom.softMax) {
-        cameraRef.current.setCamera({
-          zoomLevel: mapConfig.zoom.softMax,
-          animationDuration: 150,
-        });
-      }
+      // if (z > mapConfig.zoom.softMax) {
+      //   cameraRef.current.setCamera({
+      //     zoomLevel: mapConfig.zoom.softMax,
+      //     animationDuration: 150,
+      //   });
+      // }
     },
     [cameraRef],
   );

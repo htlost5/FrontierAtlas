@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     flexDirection: "column",
     marginVertical: 15,
-    bottom: 50,
+    bottom: 65,
     backgroundColor: "white",
     left: 20,
     borderRadius: 100,

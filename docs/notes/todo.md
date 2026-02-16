@@ -2,7 +2,7 @@
 id: a2efvfrppx7goovxerps67g
 title: Todo
 desc: ""
-updated: 1771164065154
+updated: 1771253262233
 created: 1770817461222
 ---
 
@@ -13,4 +13,7 @@ created: 1770817461222
 - フォールバック用viewの実装（？）
 - componentやスクリーンのstyle定義整理（隠れているcompあり）
 
-- interact/studyhallの共通化
+- interact/studyhallの共通化 完了
+
+- unitの移行
+- mapControl系のスタイル定義再確認

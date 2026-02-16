@@ -2,8 +2,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import { FloorChange } from "@/src/features/home/map/components/controls/FloorChange";
-import { UserLocation } from "@/src/features/home/map/components/controls/userLocation";
+import { MapControlsFC } from "@/src/features/home/map/components/controls";
 
 // web実装時、ここにMapScreenWebを実装
 
@@ -13,10 +12,7 @@ import { UserLocation } from "@/src/features/home/map/components/controls/userLo
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      {/* 階層切り替えUIコンポーネント（左下の縦型ボタン） */}
-      <FloorChange />
-      {/* 現在位置ボタン（右下） */}
-      <UserLocation />
+      <MapControlsFC />
     </View>
   );
 }

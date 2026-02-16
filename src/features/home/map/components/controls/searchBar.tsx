@@ -88,6 +88,9 @@ export function SearchBar() {
 
 const styles = StyleSheet.create({
   searchBox: {
+    position: "absolute",
+    top: 25,
+    alignSelf: "center",
     height: 50,
     width: 400,
     backgroundColor: "white",
