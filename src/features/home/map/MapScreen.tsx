@@ -12,6 +12,7 @@ import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
 import { FloorView } from "@/source/views/floor/floorN";
 import { Venue } from "./layers/venue";
+import { Buildings } from "./layers/buildings";
 import { useZoomBoundary } from "./hooks/camera/useZoomBoundary";
 
 type Props = {
@@ -24,7 +25,7 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
   const display = useDisplayLevel(zoom);
 
   // キャッシュからデータロード
-  const { venue, studyhall, interact, mapLoading, mapError } = useMapGeoData();
+  const { venue, buildings, mapLoading, mapError } = useMapGeoData();
   const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
 
   // maxとmin到達時のモーション受け取り
@@ -43,7 +44,8 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
     }
   }, [mapError]);
 
-  const isVenueReady = !mapLoading && venue && studyhall && interact;
+  const isVenueReady = !mapLoading && venue && buildings;
+
 
   const isFloorReady =
     !floorLoading &&
@@ -59,8 +61,7 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
       {isVenueReady && (
         <>
           <Venue data={venue} />
-          <Venue data={studyhall} />
-          <Venue data={interact} />
+          <Buildings data={buildings} />
         </>
       )}
 
