@@ -1,7 +1,6 @@
 // フロアレイヤー統合コンポーネント: 指定フロアのセクション、部屋、ラベルを統合表示
+import { SectionView } from "@/src/features/home/map/layers/floor/section";
 import type { FeatureCollection } from "geojson";
-import { LabelView } from "../../labels/label";
-import { SectionView } from "./section/section";
 import { UnitView } from "./unit/unitView";
 
 /**
@@ -41,7 +40,7 @@ export function FloorView({ floor_num, geoData, display }: Props) {
 
   return (
     <>
-      <SectionView floor_num={floor_num} data={geoData.section} />
+      <SectionView data={geoData.section} />
       <UnitView
         floor_num={floor_num}
         data={geoData.unit}

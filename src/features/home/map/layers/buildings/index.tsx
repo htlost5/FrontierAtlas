@@ -1,12 +1,8 @@
-import {
-    FillLayer,
-    LineLayer,
-    ShapeSource,
-} from "@maplibre/maplibre-react-native";
-import { buildingsFillLayer, buildingsLineLayer } from "./style";
+import { PolygonLayer } from "../../components/mapComp/PolygonLayer";
+import { buildingsFillStyle, buildingsLineStyle } from "./style";
 import { BUILDING_KEYS, BuildingsProps } from "./types";
 
-export function Buildings({ data }: BuildingsProps) {
+export function BuildingsView({ data }: BuildingsProps) {
   return (
     <>
       {BUILDING_KEYS.map((key) => {
@@ -14,10 +10,12 @@ export function Buildings({ data }: BuildingsProps) {
         if (!value) return null;
 
         return (
-          <ShapeSource key={key} id={`shapeSource_${key}`} shape={value}>
-            <FillLayer id={`fillLayer_${key}`} style={buildingsFillLayer} />
-            <LineLayer id={`lineLayer_${key}`} style={buildingsLineLayer} />
-          </ShapeSource>
+          <PolygonLayer
+            key={`building_${key}`}
+            data={value}
+            fillStyle={buildingsFillStyle}
+            lineStyle={buildingsLineStyle}
+          />
         );
       })}
     </>

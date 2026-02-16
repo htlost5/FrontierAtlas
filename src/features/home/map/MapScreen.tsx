@@ -11,9 +11,9 @@ import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
 import { FloorView } from "@/source/views/floor/floorN";
-import { Venue } from "./layers/venue";
-import { Buildings } from "./layers/buildings";
 import { useZoomBoundary } from "./hooks/camera/useZoomBoundary";
+import { BuildingsView } from "./layers/buildings";
+import { VenueView } from "./layers/venue";
 
 type Props = {
   floor_num: number;
@@ -46,7 +46,6 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
 
   const isVenueReady = !mapLoading && venue && buildings;
 
-
   const isFloorReady =
     !floorLoading &&
     floorGeoData?.units &&
@@ -60,22 +59,24 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
     >
       {isVenueReady && (
         <>
-          <Venue data={venue} />
-          <Buildings data={buildings} />
+          <VenueView data={venue} />
+          <BuildingsView data={buildings} />
         </>
       )}
 
       {isFloorReady && (
-        <FloorView
-          floor_num={floor_num}
-          geoData={{
-            unit: floorGeoData.units!,
-            section: floorGeoData.sections!,
-            stair: floorGeoData.stairs!,
-          }}
-          display={display}
-          zoomLevel={zoom}
-        />
+        <>
+          <FloorView
+            floor_num={floor_num}
+            geoData={{
+              unit: floorGeoData.units!,
+              section: floorGeoData.sections!,
+              stair: floorGeoData.stairs!,
+            }}
+            display={display}
+            zoomLevel={zoom}
+          />
+        </>
       )}
     </MapContainer>
   );
