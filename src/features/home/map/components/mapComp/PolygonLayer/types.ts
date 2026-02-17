@@ -1,9 +1,9 @@
 import {
-    Expression,
-    FillLayerStyle,
-    LineLayerStyle,
+  Expression,
+  FillLayerStyle,
+  LineLayerStyle,
 } from "@maplibre/maplibre-react-native";
-import type { FeatureCollection } from "geojson";
+import { GeoLayerProps } from "../../../types";
 
 export type LayerConfig = {
   filter?: Expression;
@@ -14,5 +14,5 @@ export type LayerConfig = {
 export type PolygonProps = {
   key?: string;
   prefixId: string;
-  data: FeatureCollection;
-} & LayerConfig;
+} & GeoLayerProps &
+  LayerConfig;

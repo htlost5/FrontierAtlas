@@ -1,17 +1,17 @@
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
-import { BASE_CONFIGS } from "./configs";
+import { ROOM_CONFIGS } from "./configs";
 
-export function BaseView({ data }: GeoLayerProps) {
+export function RoomView({ data }: GeoLayerProps) {
   if (!data) return null;
 
   return (
     <>
-      {Object.entries(BASE_CONFIGS).map(([key, config]) => {
+      {Object.entries(ROOM_CONFIGS).map(([key, config]) => {
         return (
           <PolygonLayer
             key={key}
-            prefixId={`units_base_${key}`}
+            prefixId={`units_room_${key}`}
             data={data}
             filter={config.filter}
             fillStyle={config.fillStyle}

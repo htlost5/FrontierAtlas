@@ -2,7 +2,7 @@ import type { FillLayerStyle, LineLayerStyle } from "@maplibre/maplibre-react-na
 
 export const buildingsFillStyle: FillLayerStyle = {
     fillColor: "#EDEDED",
-    fillOpacity: 1,
+    fillOpacity: 0.8,
 }
 
 export const buildingsLineStyle: LineLayerStyle = {

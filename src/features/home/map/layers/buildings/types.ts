@@ -1,12 +1,13 @@
-import type { FeatureCollection } from "geojson";
+import { GeoLayerProps } from "../../types";
 
 export const BUILDING_KEYS = ["studyhall", "interact"] as const;
 
 export type BuildingsData = Record<
   (typeof BUILDING_KEYS)[number],
-  FeatureCollection | null
+  GeoLayerProps["data"]
 >;
 
 export type BuildingsProps = {
   data: BuildingsData;
+  visible: GeoLayerProps["visible"]
 };

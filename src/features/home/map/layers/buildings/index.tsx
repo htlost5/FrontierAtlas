@@ -2,7 +2,7 @@ import { PolygonLayer } from "../../components/mapComp/PolygonLayer";
 import { buildingsFillStyle, buildingsLineStyle } from "./style";
 import { BUILDING_KEYS, BuildingsProps } from "./types";
 
-export function BuildingsView({ data }: BuildingsProps) {
+export function BuildingsView({ data, visible }: BuildingsProps) {
   return (
     <>
       {BUILDING_KEYS.map((key) => {
@@ -14,6 +14,7 @@ export function BuildingsView({ data }: BuildingsProps) {
             key={key}
             prefixId={`building_${key}`}
             data={value}
+            visible={visible}
             fillStyle={buildingsFillStyle}
             lineStyle={buildingsLineStyle}
           />

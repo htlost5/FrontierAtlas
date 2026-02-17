@@ -1,6 +1,6 @@
 import { SectionView } from "./section";
 import { FloorProps } from "./types";
-import { BaseView } from "./unit/bases";
+import { UnitView } from "./unit";
 
 export function FloorView({ data }: FloorProps) {
   if (!data) return null;
@@ -8,7 +8,7 @@ export function FloorView({ data }: FloorProps) {
   return (
     <>
       <SectionView data={data.sections} />
-      <BaseView data={data.units} />
+      <UnitView data={data.units} />
     </>
   );
 }

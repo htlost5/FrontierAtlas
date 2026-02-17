@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
@@ -10,7 +10,9 @@ import { useMapContext } from "./hooks/state/useMapContext";
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
-import { useZoomBoundary } from "./hooks/camera/useZoomBoundary";
+import { useCameraController } from "./hooks/camera/useCameraController";
+import { CameraRegion } from "./hooks/camera/useCameraController/types";
+import { zoomBoundary } from "./hooks/camera/useCameraController/zoomBound";
 import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
@@ -21,15 +23,30 @@ type Props = {
 };
 
 export function MapScreen({ floor_num, cameraRef }: Props) {
-  const { zoom } = useMapContext();
-  const display = useDisplayLevel(zoom);
+  const { zoom, setZoom } = useMapContext();
+  const displayMode = useDisplayLevel(zoom);
+
+  // modeのboolean変換
+  const showBuildings = displayMode === "building";
 
   // キャッシュからデータロード
   const { venue, buildings, mapLoading, mapError } = useMapGeoData();
   const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
 
   // maxとmin到達時のモーション受け取り
-  const handleRegionIsChanging = useZoomBoundary(cameraRef);
+  const handleCamera = useCameraController(cameraRef, [zoomBoundary], zoom);
+
+  const handleRegionIsChanging = useCallback(
+    (region: CameraRegion) => {
+      const z = region?.properties?.zoomLevel;
+      if (typeof z === "number") {
+        setZoom(z);
+      }
+
+      handleCamera(region);
+    },
+    [handleCamera, setZoom],
+  );
 
   // エラー出力 -> エラー時のスクリーンを実装する（フォールバック）
   useEffect(() => {
@@ -57,16 +74,11 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
       cameraRef={cameraRef}
       onRegionIsChanging={handleRegionIsChanging}
     >
-      {isVenueReady && (
+      {isVenueReady && isFloorReady && (
         <>
           <VenueView data={venue} />
-          <BuildingsView data={buildings} />
-        </>
-      )}
-
-      {isFloorReady && (
-        <>
           <FloorView data={floorGeoData} />
+          <BuildingsView data={buildings} visible={showBuildings} />
         </>
       )}
     </MapContainer>

@@ -1,10 +1,23 @@
 import { useMemo } from "react";
 
-export function useDisplayLevel(zoom: number) {
-  const display = useMemo(() => {
-    if (zoom < 17.9) return 0 as const;
-    if (zoom < 19.4) return 1 as const;
-    return 2 as const;
+export const DisplayMode = {
+  BUILDING: "building",
+  ENTRANCE: "entrance",
+  DETAIL: "detail",
+};
+
+export type DisplayModeType = (typeof DisplayMode)[keyof typeof DisplayMode];
+
+export function useDisplayLevel(zoom: number): DisplayModeType {
+  const displayMode = useMemo(() => {
+    // 建物ラベル表示
+    if (zoom < 17.9) return DisplayMode.BUILDING;
+
+    // 入口アイコン表示
+    if (zoom < 19.4) return DisplayMode.ENTRANCE;
+
+    // 詳細表示
+    return DisplayMode.DETAIL;
   }, [zoom]);
-  return display;
+  return displayMode;
 }

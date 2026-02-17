@@ -1,8 +1,8 @@
 import { PolygonLayer } from "../../../components/mapComp/PolygonLayer";
+import { GeoLayerProps } from "../../../types";
 import { sectionFillStyle, sectionLineStyle } from "./style";
-import { SectionProps } from "./types";
 
-export function SectionView({ data }: SectionProps) {
+export function SectionView({ data }: GeoLayerProps) {
   if (!data) return null;
 
   return (

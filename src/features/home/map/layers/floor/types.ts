@@ -1,12 +1,11 @@
-import type { FeatureCollection } from "geojson";
+import { GeoLayerProps } from "../../types";
 
 export const FLOOR_KEYS = ["units", "sections"];
 
-export type FloorData = FeatureCollection | null;
-
 export type FloorProps = {
   data: {
-    units: FloorData;
-    sections: FloorData;
+    units: GeoLayerProps["data"];
+    sections: GeoLayerProps["data"];
+    stairs: GeoLayerProps["data"];
   };
 };
