@@ -10,9 +10,9 @@ import { useMapContext } from "./hooks/state/useMapContext";
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
-import { FloorView } from "@/source/views/floor/floorN";
 import { useZoomBoundary } from "./hooks/camera/useZoomBoundary";
 import { BuildingsView } from "./layers/buildings";
+import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
 
 type Props = {
@@ -66,16 +66,7 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
 
       {isFloorReady && (
         <>
-          <FloorView
-            floor_num={floor_num}
-            geoData={{
-              unit: floorGeoData.units!,
-              section: floorGeoData.sections!,
-              stair: floorGeoData.stairs!,
-            }}
-            display={display}
-            zoomLevel={zoom}
-          />
+          <FloorView data={floorGeoData} />
         </>
       )}
     </MapContainer>
