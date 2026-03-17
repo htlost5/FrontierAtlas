@@ -1,7 +1,7 @@
 const zoom = {
-  max: 21.1,
-  min: 17.0,
-  buffer: 0.2,
+  max: 20.4,
+  min: 17.1,
+  buffer: 0.1,
 };
 
 export const mapConfig = {

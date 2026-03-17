@@ -1,17 +1,30 @@
 import { geoJsonMap } from "@/src/AppInit/saveGeoJson/geojsonAssetMap";
+import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
+import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
+import { parseJson } from "@/src/infra/GeoJsonParse/geojsonParser";
 import type { FeatureCollection } from "geojson";
-import { loadGeoJson } from "./loadGeoJson";
 
-export async function getGeoDataByLogicalId(id: string): Promise<FeatureCollection> {
-  // パス解決 id -> path
+export async function getGeoDataByLogicalId(
+  id: string,
+): Promise<FeatureCollection> {
+  // 1. メモリキャッシュを確認
+  const cached = geojsonRegistry.get(id);
+  if (cached) return cached;
+
+  // 2. バンドル済みコンテンツを確認（ディスクI/O不要）
+  const bundled = geoJsonMap[id]?.content;
+  if (bundled) {
+    geojsonRegistry.set(id, bundled);
+    return bundled;
+  }
+
+  // 3. フォールバック：ディスクから読む
   const path = geoJsonMap[id]?.relativePath;
+  if (!path) throw new Error(`GeoJSON not foundL ${id}`);
 
-  if (!path) console.log(`${id}: ${path}`);
+  const text = await expoRead("imdf/" + path);
+  const parsed = parseJson(text);
+  geojsonRegistry.set(id, parsed);
 
-  // id, path から geoData取得
-  const GeoData = await loadGeoJson(id, path);
-
-  // console.log(GeoData);
-
-  return GeoData;
+  return parsed;
 }

@@ -10,43 +10,45 @@ import { useMapContext } from "./hooks/state/useMapContext";
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
-import { useCameraController } from "./hooks/camera/useCameraController";
 import { CameraRegion } from "./hooks/camera/useCameraController/types";
-import { zoomBoundary } from "./hooks/camera/useCameraController/zoomBound";
 import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
 
 type Props = {
-  floor_num: number;
   cameraRef: React.RefObject<CameraRef | null>;
 };
 
-export function MapScreen({ floor_num, cameraRef }: Props) {
-  const { zoom, setZoom } = useMapContext();
+export function MapScreen({ cameraRef }: Props) {
+  const { floor, zoom, setZoom } = useMapContext();
   const displayMode = useDisplayLevel(zoom);
 
   // modeのboolean変換
   const showBuildings = displayMode === "building";
 
   // キャッシュからデータロード
-  const { venue, buildings, mapLoading, mapError } = useMapGeoData();
-  const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor_num);
+  const { venue, buildings, stairs, mapLoading, mapError } = useMapGeoData();
+  const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor);
 
-  // maxとmin到達時のモーション受け取り
-  const handleCamera = useCameraController(cameraRef, [zoomBoundary], zoom);
-
+  // ズーム変更時の値更新
   const handleRegionIsChanging = useCallback(
     (region: CameraRegion) => {
       const z = region?.properties?.zoomLevel;
       if (typeof z === "number") {
         setZoom(z);
       }
-
-      handleCamera(region);
     },
-    [handleCamera, setZoom],
+    [setZoom],
   );
+
+  // 操作完了後の動作
+  // const handleCamera = useCameraController(cameraRef, [zoomBoundary]);
+  // const handleRegionDidChange = useCallback(
+  //   (region: CameraRegion) => {
+  //     handleCamera(region);
+  //   },
+  //   [handleCamera],
+  // );
 
   // エラー出力 -> エラー時のスクリーンを実装する（フォールバック）
   useEffect(() => {
@@ -64,22 +66,21 @@ export function MapScreen({ floor_num, cameraRef }: Props) {
   const isVenueReady = !mapLoading && venue && buildings;
 
   const isFloorReady =
-    !floorLoading &&
-    floorGeoData?.units &&
-    floorGeoData?.sections &&
-    floorGeoData?.stairs;
+    !floorLoading && floorGeoData?.units && floorGeoData?.sections && stairs;
 
   return (
     <MapContainer
       cameraRef={cameraRef}
       onRegionIsChanging={handleRegionIsChanging}
     >
-      {isVenueReady && isFloorReady && (
-        <>
-          <VenueView data={venue} />
-          <FloorView data={floorGeoData} />
-          <BuildingsView data={buildings} visible={showBuildings} />
-        </>
+      {isVenueReady && <VenueView data={venue} />}
+
+      {isFloorReady && (
+        <FloorView floorData={floorGeoData} stairsData={stairs} />
+      )}
+      
+      {isVenueReady && (
+        <BuildingsView data={buildings} visible={showBuildings} />
       )}
     </MapContainer>
   );

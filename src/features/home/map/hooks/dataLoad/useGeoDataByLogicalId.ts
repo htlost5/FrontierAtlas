@@ -1,6 +1,8 @@
 import type { FeatureCollection } from "geojson";
 import { useEffect, useState } from "react";
 import { getGeoDataByLogicalId } from "../../services/getGeoDataByLogicalId";
+import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
+import geoJsonMap from "@/src/AppInit/saveGeoJson/geojsonAssetMap";
 
 type GeoDataByLogicalId = {
   data: FeatureCollection | null;
@@ -9,8 +11,10 @@ type GeoDataByLogicalId = {
 };
 
 export function useGeoDataByLogicalId(id: string): GeoDataByLogicalId {
+  const isCached = geojsonRegistry.has(id) || !!geoJsonMap[id]?.content;
+
   const [data, setData] = useState<FeatureCollection | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(!isCached);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {

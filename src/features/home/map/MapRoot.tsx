@@ -30,7 +30,7 @@ const MapRootBase = ({ children }: Props) => {
       <View style={styles.root}>
         {/* Map は完全に背景 */}
         <View style={StyleSheet.absoluteFill}>
-          <MapScreen floor_num={floor} cameraRef={cameraRef} />
+          <MapScreen cameraRef={cameraRef} />
         </View>
 
         {/* タブ・UI を上に重ねる */}

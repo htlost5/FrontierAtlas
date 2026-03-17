@@ -6,7 +6,7 @@ updated: 1770813263759
 created: 1770809478343
 ---
 
-## MapScree構築方法
+## MapScreen構築方法
 
 ### 責務分離
 

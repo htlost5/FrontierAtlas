@@ -1,0 +1,70 @@
+{
+  "name": "req-generator",
+  "displayName": "要件定義書ジェネレーター",
+  "description": "機能ごとの要件定義フォルダ・ファイルを自動生成する",
+  "version": "1.0.0",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "req.newFeature",
+        "title": "要件定義：ルート機能フォルダを生成",
+        "category": "Req"
+      },
+      {
+        "command": "req.newSubFeature",
+        "title": "要件定義：サブ機能フォルダを生成",
+        "category": "Req"
+      },
+      {
+        "command": "req.newPhaseFiles",
+        "title": "要件定義：フェーズファイルのみ生成（load/render等）",
+        "category": "Req"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "req.newSubFeature",
+          "when": "explorerResourceIsFolder",
+          "group": "req@1"
+        },
+        {
+          "command": "req.newPhaseFiles",
+          "when": "explorerResourceIsFolder",
+          "group": "req@2"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "req.newFeature",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r"
+      },
+      {
+        "command": "req.newSubFeature",
+        "key": "ctrl+shift+alt+r",
+        "mac": "cmd+shift+alt+r"
+      }
+    ],
+    "configuration": {
+      "title": "要件定義ジェネレーター",
+      "properties": {
+        "reqGenerator.baseDir": {
+          "type": "string",
+          "default": "docs/requirements",
+          "description": "要件定義書のベースディレクトリ"
+        },
+        "reqGenerator.defaultFiles": {
+          "type": "array",
+          "default": ["main", "config", "paths", "errors"],
+          "description": "生成するファイル一覧（.md は自動付与）"
+        }
+      }
+    }
+  }
+}

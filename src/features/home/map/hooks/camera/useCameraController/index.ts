@@ -5,7 +5,6 @@ import { CameraAction, CameraRegion } from "./types";
 export function useCameraController(
   cameraRef: React.RefObject<CameraRef | null>,
   actions: CameraAction[],
-  zoom: number,
 ) {
   return useCallback(
     (region: CameraRegion) => {

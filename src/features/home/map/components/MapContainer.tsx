@@ -11,12 +11,14 @@ import { mapConfig } from "../constants/mapConfig";
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
   onRegionIsChanging?: (region: any) => void;
+  onRegionDidChange?: (region: any) => void;
   children?: React.ReactNode;
 };
 
 export function MapContainer({
   cameraRef,
   onRegionIsChanging,
+  onRegionDidChange,
   children,
 }: Props) {
   return (
@@ -24,6 +26,8 @@ export function MapContainer({
       style={styles.container}
       attributionEnabled={false}
       onRegionIsChanging={onRegionIsChanging}
+      onRegionDidChange={onRegionDidChange}
+      regionDidChangeDebounceTime={50}
     >
       <BackgroundLayer
         id="index-back"
