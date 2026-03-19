@@ -1,36 +1,15 @@
----
-id: ta0o9y69hl5l3m01m2z86ew
-title: Cache_logic
-desc: ""
-updated: 1770022775655
-created: 1769068935058
----
-
-# cacheロジックに関して
-
-## cache動作
-
-### 全体のステップ
-
-1. アプリ起動
-2. .tmpファイルの検出＆削除
-3. cacheManifestの存在有無確認
-4. buildManifestとcacheManifestを比較 -> リスト化
-5. 4の処理で確認した不足分に対してキャッシュ処理
-6. 読み込んだデータをキャッシュに保存
-7. 成功ごとに、cacheManifestを更新
-8. 再度すべてbuildManifestとcacheManifestの一致確認
-9. ロジック完全終了後、.tmpを検出し完全に削除する
-10. 初期化完了を知らせる
-
-※初期化処理は全体の処理で上限５として、ファイルが完全確認できるまで行う
+{
+  originData: 書き込みを行うデータ
+}
 
 ### データ書き込みに関して
-
-1. GeoJsonからデータセットを取得
-2. json -> text形式に変換
-3. expo-file-systemを利用して.tmpファイルに一度書き込み
+1. originDataを準備
+2. react-native-fsで.tmpファイルに一度書き込み
+3. sha
 4. .tmpへの書き込み完了後、これを本キャッシュフォルダへ移動（この際、他のファイルに対しての処理は行わせない）
+
+
+
 
 ### データ読み込みに関して
 
@@ -97,3 +76,23 @@ created: 1769068935058
    2. 補助ロジックファイル構築
    - buildManifest / cacheManifestの一致確認処理
    - リスト受け取り、キャッシュ保存処理
+
+
+# cacheロジックに関して
+
+## cache動作
+
+### 全体のステップ
+
+1. アプリ起動
+2. .tmpファイルの検出＆削除
+3. cacheManifestの存在有無確認
+4. buildManifestとcacheManifestを比較 -> リスト化
+5. 4の処理で確認した不足分に対してキャッシュ処理
+6. 読み込んだデータをキャッシュに保存
+7. 成功ごとに、cacheManifestを更新
+8. 再度すべてbuildManifestとcacheManifestの一致確認
+9. ロジック完全終了後、.tmpを検出し完全に削除する
+10. 初期化完了を知らせる
+
+※初期化処理は全体の処理で上限５として、ファイルが完全確認できるまで行う

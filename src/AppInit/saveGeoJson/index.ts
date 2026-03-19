@@ -11,7 +11,7 @@ import { Manifest } from "./Manifest/manifestType";
 export async function loadAllGeoJson() {
   // .tmpファイルの検出＆削除
   await cleanupTmpFiles();
-
+  
   // Manifest定義
   const buildManifest: Manifest = rawBuildManifest;
   let cacheManifest: Manifest | null = null;

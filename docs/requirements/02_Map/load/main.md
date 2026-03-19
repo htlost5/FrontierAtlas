@@ -1,25 +1,24 @@
-## what??
+## 概要
 
 - データ更新、ファイルサイズに柔軟に対応した、マップロード機能の実装
 
-## why??
+## 目的
 
 ### 現状の問題
-
 
 - マップ更新の際、アプリを更新、再配布する必要がある
 - 読み込みの際に明らかな遅延がある
 - ロードの仕組みが不明瞭
 - イベントに対応できない
 
-### 目的
+### 理想状態
 
 - 問題点のクリア
   - 仕組みを明確にする
   - 再配布をしなくても更新できるようにする
   - ロード時の遅延をなくす -> 一括で表示されるように
 
-## How??
+## 実装手法
 
 ### 主に利用するもの
 
@@ -27,7 +26,7 @@
 - github pages: マップアセットの配置
 - supabase: イベント開催時の追加情報、付加
 - github actions: 開発時のjson, イベント自動更新
-- react-native-fs: 読み込んだファイルの保存先
+- expo-file-system: 読み込んだファイルの保存先
 
 ### 仕組み
 
@@ -49,8 +48,8 @@ server
     }
   }
 
-  相対パス: デフォルトの親ディレクトリからの相対パス
-  相対ID： 相対パスを "/" ではなく "_" にしたもの (拡張子省く)
+   相対パス: デフォルトの親ディレクトリからの相対パス
+   相対ID： 相対パスを "/" ではなく "_" にしたもの (拡張子省く)
 
   例：
   パス：imdf/interact/footprints/footprints.json
@@ -66,39 +65,204 @@ server
    github pages: push 検知時に、manifest.jsonの自動生成と更新された地物データの格納 / ローカルで削除されたgeojsonは同様にgithub pages側も削除
    supabase: イベント準備期間に、地物データのIDと対応した、イベント時のみの特殊名称や、時間、説明などのデータベースを付加 -> 本体のマップアプリ側では検知しない
 
+#### github actions実装
+1. manifest.jsonの生成
+   - 
+2. 
+
 local
 
-初回起動時
-0. あらかじめ初版のアセットを配置しておく
+ファイル構造
 
-オフラインの場合
-1. アセットからファイル取得、react-native-fsに保存
-2. 保存完了後、manifest.jsonに情報を追加
-3. これを繰り返す
-4. データロード完了後react-native-fsに保存されたすべての地物データをアプリ側のレジストリに渡す
+local-fs
+親：assets/imdf
+
+子: {
+   manifest.json
+   
+}
+
+github pages
+manifest.json
+
+
+
+### 起動シーケンス
+0. ローカルファイルcleanup
+   - .tmpファイルの検知
+   - 対応するエントリを探す
+   - ある場合のみ -> status = "failed"に
+   - ファイル削除
+
+1. 初期検証
+   - local-manifest.jsonがあるかを検証
+   - なければ新規でlocal-manifest.json = {}を作成
+
+2. remote manifest 取得
+   - 試行: fetch remote-manifest.json (github pagesから)
+   - 成功 -> mode = online, 失敗 -> mode = offline (asset/local-manifest.jsonを使用)
+
+3. 差分検出
+   - 比較ルール (remote or local)
+     - remoteに存在 && localに存在
+       - if !size/sha256 -> update
+       - else -> skip
+     - remoteに存在 && localになし -> add
+     - localに存在 && remoteになし -> delete
+   - 差分をupdatePlanに格納
+
+4. 実行
+   - updatePlanを実行 (先にadd / update -> delete)
+
+5. 完了後
+   - アプリレジストリにcompleteのアセットを渡す
+
+
+### status管理
+- "pending": ローカルにキューとして登録済み
+- "downloading": tmpにダウンロード中
+- "downloaded": tmpにダウンロード完了（検証前）
+- "verifying": size / sha256を検証中
+- "installing": tmp -> 本体へ移動中
+- "complete": 正式に local-manifest へ登録済
+
+
+### ファイル単位の遷移
+
+1. キューを登録
+   - 基本情報とstatusの書き込み
+  "{相対ID}": {
+      "logicalId": "{相対ID}",
+      "relativePath: "{相対パス}.json",
+      "status": "pending"
+      "sha256": "",
+      "size": ""
+  }
+2. 
+
+
+3. 対象を決定（パスの取得など）
+
+4. manifestにエントリ作成
+   "{相対ID}": {
+      "logicalId": "{相対ID}",
+      "relativePath: "{相対パス}.json",
+      "status": "pending"
+      "sha256": "",
+      "size": ""
+  }
+
+1. status = "downloading" に更新
+
+2. アセットからファイル取得
+
+3. tmpファイルに書き込み
+
+4. hash / size検証 (tmpに対して)
+
+5. rename (tmp → 本ファイル)
+
+6. hash / sizeを書き込み
+
+7.  status = "complete" に更新
+
+8.  すべての地物データをアプリ側のレジストリに渡す
+
 
 オンラインの場合
 1. github pagesからmanifest.jsonをfetch
-2. 地物データをgithub pagesからfetch
-3. 一時パスに保存
-4. 地物ファイルのSHA256の検証、一致したら、正規パスへ
-6. 最後にlocal側のmanifest.jsonへ記録
+
+2. local-manifest.jsonを作成
+
+3. 対象を決定
+
+4. manifestにエントリ作成
+   "{相対ID}": {
+      "logicalId": "{相対ID}",
+      "relativePath: "{相対パス}.json",
+      "status": "pending"
+      "sha256": "",
+      "size": ""
+  }
+
+5. status = "downloading"に更新
+
+6. 地物データをgithub pagesからfetch
+
+7. tmpファイルに書き込み
+
+8. 地物ファイルのsizeの検証
+
+9.  地物ファイルのsha256検証
+
+10. hash / sizeを書き込み
+
+11. status = "complete"に更新
+
+12. すべての地物データをアプリ側のレジストリに渡す
+
+※fetchを失敗した場合、アセットからロードしたものを配置
 
 
 初回以降
-オフラインの場合：ファイルが十分にあることを検証
-1. react-native-fsのmanifest.jsonを取得
-2. manifest.jsonのファイルが十分にあるかを確認
+オフラインの場合
+1. アプリ側のレジストリに対して、必要な地物があるかを確認
+2. ない場合は、expo-file-systemを確認しあればロード、ない場合は更にアセットからexpo-file-systemへ保存したうえで、ロード
+3. すべてのロードが完了後マップのロードを終了する
+※expo-file-systemへのデータ追加時は、manifest.jsonに上書き記録
 
-react-native-fsにない場合（初回起動時）
+オンラインの場合
+1. github pagesのmanifest.jsonを取得する
+2. ローカルのmanifest.jsonとgithub pagesのmanifest.jsonを比較し、次を実行
+   - {size, SHA256}に相違がある場合 -> 差分として、削除＆ロード
+   - github pages側にはあるのにローカルには存在しない場合 -> 新規でロード
+   - github pages側にはないのにローカルに存在する場合 -> 削除する
+  
+  変更するファイル名は、updateListに格納
+  
+  ロード手順
+   1. fetch -> tempとして保存
+   2. tempのsha256がリモートのmanifest.jsonにあるsha256と一致するかを確認
+   3. 確認完了後、実ファイルとして保存
+   4. manifest.jsonに追記
+
+   削除手順
+   5. ローカルで対象のファイルが有るかを確認
+   6. 削除する
+   7. manifest.jsonに登録された情報を削除
+
+
+   削除＆ロードの場合
+   1. fetch -> tempとして保存
+   2. tempのsha256を検証
+   3. 旧ファイルを削除
+   4. 正規ファイルとして保存
+   5. アプリ側のupdateFiles.updateに追記
+
+   新規でロードの場合
+   6. ロード手順を実施
+   7. アプリ側のuppdateFile.updateに追記
+
+   削除のみの場合
+   8. 削除手順を実施
+   9.  アプリ側のupdateFiles.deleteに追記
+   
+3. アプリ側でupdateFiles.deleteに登録されたレジストリに保存されているファイルをすべて削除
+4. 同様に、updateFiles.updateに登録されたレジストリに保存されているファイルを削除し、ロード
+
+※manifest.jsonがないのにローカルにデータが存在する場合は、expo-file-systemに保存されているすべての地物データ情報をロードして新規でmanifest.jsonを作成する
+
+？：hashを入れる場合、size情報は不要か？
+
+expo-file-systemにない場合（初回起動時）
 1. 
 
-react-native-fsにある場合
+expo-file-systemにある場合
 1. github pagesのmanifest.jsonをfetch
 2. native_manifestとgithub_manifestを比較し、
 
 
-5. react-native-fsにファイルが存在するかを確認
+5. expo-file-systemにファイルが存在するかを確認
    -> ない場合 -> ネットワークの接続を確認したうえでgithub pagesからすべてを取得
    -> ある場合 -> 2へ
 6. バージョンとSHA256ハッシュを確認
