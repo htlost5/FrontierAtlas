@@ -22,20 +22,37 @@ if (!version) {
 const BASE_URL = "https://htlost5.github.io/geo-data-repo/releases";
 const ZIP_URL = `${BASE_URL}/${version}/imdf-${version}.zip`;
 
+const storagePath = path.join(__dirname, "../assets", "data")
+
+async function resetDir() {
+  if (fs.existsSync(storagePath)) {
+    fs.rmSync(storagePath, {recursive: true, force: true});
+    console.log(`[RESET] ${storagePath} deleted`);
+  }
+  fs.mkdirSync(storagePath, {recursive: true});
+}
+
 async function getData() {
   const response = await fetch(ZIP_URL);
   if (!response.ok) throw new Error(`Failed to fetch ${ZIP_URL}`);
 
   const buffer = Buffer.from(await response.arrayBuffer());
 
-  // 上書きするパス
-  const extractPath = path.join(__dirname, "../assets");
-
   // zip回答
   const directory = await unzipper.Open.buffer(buffer);
-  await directory.extract({ path: extractPath, concurrency: 5 });
+  await directory.extract({ path: storagePath, concurrency: 5 });
 
   console.log("Assets updated successfully");
 }
 
-getData().catch(console.error);
+async function main() {
+  try {
+    await resetDir();
+    await getData();
+  } catch(e) {
+    console.error(e);
+    process.exit(1);
+  }
+}
+
+main()
