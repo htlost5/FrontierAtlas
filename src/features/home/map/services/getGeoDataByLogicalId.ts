@@ -1,7 +1,7 @@
 import { geoJsonMap } from "@/src/data/geojson/geojsonAssetMap";
 import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
-import { parseJson } from "@/src/infra/GeoJsonParse/geojsonParser";
+import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import type { FeatureCollection } from "geojson";
 
 export async function getGeoDataByLogicalId(

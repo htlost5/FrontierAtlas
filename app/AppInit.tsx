@@ -12,8 +12,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-// アプリ起動時の初期化処理を行うラッパーコンポーネント
-// フォント読み込み完了後、GeoJSONキャッシュを作成し、準備完了でスプラッシュを非表示
+// 初期化処理 -> 完了後childrenを描画
 export default function AppInit({ children }: Props) {
   return <InitSetup>{children}</InitSetup>;
 }

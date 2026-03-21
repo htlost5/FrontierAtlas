@@ -8,13 +8,31 @@ export async function expoRead(path: string): Promise<string> {
 }
 
 // atomicロジックではない単純書き込み
-export function expoWrite(path: string, data: string): void {
+function logicWrite(path: string, data: string) {
   const file = new File(BASEDIR_PATH, path);
-  // 親ディレクトリ保証
   file.parentDirectory.create({ intermediates: true, idempotent: true });
-  if (!data) console.log("data not found");
+  if (!data) console.error("WriteError: Data Not Found");
 
   file.write(data);
+}
+
+export function expoWrite(path: string, data: string): void {
+  const tmpPath = `${path}.tmp`;
+
+  // 古いtmpファイルの削除
+  if (expoExists(tmpPath)) {
+    expoRemove(tmpPath);
+  }
+
+  // 1. tmpファイルへ書き込み
+  logicWrite(tmpPath, data);
+
+  // 2. 本体があれば削除
+  if (expoExists(path)) {
+    expoRemove(path);
+  }
+
+  expoMove(tmpPath, path);
 }
 
 export function expoMove(from: string, to: string): void {

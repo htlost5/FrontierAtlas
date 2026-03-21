@@ -1,6 +1,6 @@
 import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
-import { parseJson } from "@/src/infra/GeoJsonParse/geojsonParser";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
+import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 
 export async function loadGeoJson(id: string, path: string) {
   // 1. メモリをチェック
@@ -8,7 +8,7 @@ export async function loadGeoJson(id: string, path: string) {
   if (cached) return cached;
 
   // 2. ない場合ディスクから読む
-  const text = await expoRead('imdf/' + path); // -> エラー場所
+  const text = await expoRead("imdf/" + path); // -> エラー場所
   // console.log(text);
   const parsed = parseJson(text);
 
