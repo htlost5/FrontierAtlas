@@ -1,4 +1,4 @@
-import { geoJsonMap } from "@/src/AppInit/saveGeoJson/geojsonAssetMap";
+import { geoJsonMap } from "@/src/AppInit/loadAllGeoJson/geojsonAssetMap";
 import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import { parseJson } from "@/src/infra/GeoJsonParse/geojsonParser";

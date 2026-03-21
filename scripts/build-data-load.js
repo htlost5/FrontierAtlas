@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import unzipper from "unzipper";
 import { Buffer } from "buffer";
-
 import { fileURLToPath } from "url";
+
+import { generateGeojsonAssetMap } from "./generate_geojsonAssetMap.js";
 
 const versionConfig = JSON.parse(
   fs.readFileSync(new URL("../config/geo-data-version.json", import.meta.url))
@@ -12,15 +13,26 @@ const versionConfig = JSON.parse(
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const { version } = versionConfig;
+let { version } = versionConfig;
 
 if (!version) {
   console.error("GetError: version情報を記載してください");
   process.exit(1);
 }
 
-const BASE_URL = "https://htlost5.github.io/geo-data-repo/releases";
-const ZIP_URL = `${BASE_URL}/${version}/imdf-${version}.zip`;
+const BASE_URL = "https://htlost5.github.io/geo-data-repo";
+
+if (version === "latest") {
+  const LATEST_URL = `${BASE_URL}/meta/latest.json`
+  const latestRes = await fetch(LATEST_URL);
+  if (!latestRes.ok) {
+    throw new Error(`Failed to fetch ${LATEST_URL}`)
+  }
+  const latestConfig = await latestRes.json();
+  version = latestConfig.version;
+}
+
+const ZIP_URL = `${BASE_URL}/releases/${version}/imdf-${version}.zip`;
 
 const storagePath = path.join(__dirname, "../assets", "data")
 
@@ -49,6 +61,7 @@ async function main() {
   try {
     await resetDir();
     await getData();
+    await generateGeojsonAssetMap();
   } catch(e) {
     console.error(e);
     process.exit(1);

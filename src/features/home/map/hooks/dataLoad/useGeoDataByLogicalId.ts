@@ -1,8 +1,8 @@
+import geoJsonMap from "@/src/AppInit/loadAllGeoJson/geojsonAssetMap";
+import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import type { FeatureCollection } from "geojson";
 import { useEffect, useState } from "react";
 import { getGeoDataByLogicalId } from "../../services/getGeoDataByLogicalId";
-import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
-import geoJsonMap from "@/src/AppInit/saveGeoJson/geojsonAssetMap";
 
 type GeoDataByLogicalId = {
   data: FeatureCollection | null;

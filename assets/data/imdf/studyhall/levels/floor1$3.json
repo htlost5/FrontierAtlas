@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "name": "floor1-3",
+  "name": "floor1$3",
   "crs": {
     "type": "name",
     "properties": {

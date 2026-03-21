@@ -2,7 +2,7 @@
 // スプラッシュスクリーン制御、フォント読み込み、GeoJSONキャッシュ作成を担当
 
 import { AppInitContext } from "@/src/AppInit/AppInitContext";
-import { loadAllGeoJson } from "@/src/AppInit/saveGeoJson";
+import { loadAllGeoJson } from "@/src/AppInit/loadAllGeoJson";
 import { useLoadFonts } from "@/src/AppInit/useLoadFonts";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";

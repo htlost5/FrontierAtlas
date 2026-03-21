@@ -28,14 +28,14 @@
 - github actions: 開発時のjson, イベント自動更新
 - expo-file-system: 読み込んだファイルの保存先
 
-### 仕組み
+## ①server側挙動
 
-server
 1. github pagesに次のデータを格納
    - 各地物ファイル（geojson形式、拡張子は.json）
    - manifest.json（manifest自体のバージョン、各地物ファイルのハッシュ・サイズ）
 
-  <!-- manifest.json -->
+  <manifest.json>
+  ``` 
   {
     "version": "2026-3-15",
     "files": {
@@ -47,47 +47,52 @@ server
       }
     }
   }
+  ```
 
    相対パス: デフォルトの親ディレクトリからの相対パス
+
    相対ID： 相対パスを "/" ではなく "_" にしたもの (拡張子省く)
 
   例：
   パス：imdf/interact/footprints/footprints.json
+
   相対パス: interact/footprints/footprints.json
+  
   相対ID: interact_footprints_footprints
 
-2. supabaseで追加情報の管理
+1. supabaseで追加情報の管理
+   
    イベント時の "event_name", "time", "description"など
+   
    イベント時にのみ運用（普段は利用しない）
+   
    実装タイミングは、基本のgithub pagesとアプリ側でのロードのロジックの実装完了後
 
-3. ライフサイクル -> github actionsで管理
+2. ライフサイクル -> github actionsで管理
    github pages: push 検知時に、manifest.jsonの自動生成と更新された地物データの格納 / ローカルで削除されたgeojsonは同様にgithub pages側も削除
+   
    supabase: イベント準備期間に、地物データのIDと対応した、イベント時のみの特殊名称や、時間、説明などのデータベースを付加 -> 本体のマップアプリ側では検知しない
 
 #### github actions実装
-1. manifest.jsonの生成
-   - 
-2. 
+1. QGISでデータ作成
+2. pyスクリプトでエクスポート
+3. CIにわたす
 
-local
+CIの挙動:
 
-ファイル構造
+1. exports/base | exports/buildから、.jsonのみのディレクトリ構築
+2. release用のファイル作成、（data / zip）
+3. gh-pagesブランチにプッシュ
 
-local-fs
-親：assets/imdf
-
-子: {
-   manifest.json
-   
-}
-
-github pages
-manifest.json
+データは、gh-pagesに保管
 
 
+## ②アプリ側挙動
 
 ### 起動シーケンス
+
+< loadAllGeojson() >
+
 0. ローカルファイルcleanup
    - .tmpファイルの検知
    - 対応するエントリを探す
