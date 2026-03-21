@@ -16,7 +16,7 @@ const [, , typeImportArg] = process.argv;
 // JSでは型は不要
 const manifestPath = path.resolve("../assets/data/manifest.json");
 const outPath = path.resolve(
-  "../src/AppInit/loadAllGeoJson/geojsonAssetMap.ts",
+  "../src/data/geojson/geojsonAssetMap.ts",
 );
 // 型定義 import パスはコメント化
 const manifestTypeImport = typeImportArg || "./Manifest/manifestType";
