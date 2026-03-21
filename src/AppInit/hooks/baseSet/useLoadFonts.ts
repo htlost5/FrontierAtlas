@@ -10,8 +10,10 @@ import { useFonts } from "expo-font";
  * Y1LunaChord フォントを読み込むカスタムフック
  * @returns フォント読み込み完了フラグ
  */
-export function useLoadFonts() {
-  return useFonts({
+export function useLoadFonts(): boolean {
+  const [loaded] = useFonts({
     Y1LunaChord: require("@/assets/fonts/Y1LunaChord.otf"),
   });
+
+  return loaded;
 }

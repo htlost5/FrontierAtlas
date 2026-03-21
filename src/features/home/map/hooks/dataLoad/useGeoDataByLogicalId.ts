@@ -1,4 +1,4 @@
-import geoJsonMap from "@/src/AppInit/loadAllGeoJson/geojsonAssetMap";
+import geoJsonMap from "@/src/data/geojson/geojsonAssetMap";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import type { FeatureCollection } from "geojson";
 import { useEffect, useState } from "react";
