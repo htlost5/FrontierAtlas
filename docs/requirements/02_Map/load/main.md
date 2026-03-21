@@ -139,9 +139,9 @@ CIの挙動:
   "{相対ID}": {
       "logicalId": "{相対ID}",
       "relativePath: "{相対パス}.json",
-      "status": "pending"
       "sha256": "",
-      "size": ""
+      "size": "",
+      "status": "pending"
   }
 2. 
 
@@ -152,9 +152,9 @@ CIの挙動:
    "{相対ID}": {
       "logicalId": "{相対ID}",
       "relativePath: "{相対パス}.json",
-      "status": "pending"
       "sha256": "",
-      "size": ""
+      "size": "",
+      "status": "pending"
   }
 
 1. status = "downloading" に更新
@@ -185,9 +185,9 @@ CIの挙動:
    "{相対ID}": {
       "logicalId": "{相対ID}",
       "relativePath: "{相対パス}.json",
-      "status": "pending"
       "sha256": "",
-      "size": ""
+      "size": "",
+      "status": "pending"
   }
 
 5. status = "downloading"に更新

@@ -1,4 +1,4 @@
-import { expoRead } from "@/src/infra/FileSystem/expofilesystem";
+import { expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 

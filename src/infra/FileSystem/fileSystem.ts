@@ -1,5 +1,6 @@
 import { File } from "expo-file-system";
 import { BASEDIR_PATH } from "./FileConfig";
+import expoWalk from "./walk";
 
 export async function expoRead(path: string): Promise<string> {
   const file = new File(BASEDIR_PATH, path);
@@ -50,12 +51,20 @@ export function expoMove(from: string, to: string): void {
   fromFile.move(toFile);
 }
 
+export function expoExists(path: string): boolean {
+  const file = new File(BASEDIR_PATH, path);
+  return file.exists;
+}
+
 export function expoRemove(path: string): void {
   const file = new File(BASEDIR_PATH, path);
   if (file.exists) file.delete();
 }
 
-export function expoExists(path: string): boolean {
-  const file = new File(BASEDIR_PATH, path);
-  return file.exists;
+export function expoAllRemove(path: string, ext?: string) {
+  const fileList = expoWalk(path, ext);
+
+  for (const filePath of fileList) {
+    expoRemove(filePath);
+  }
 }
