@@ -2,8 +2,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import { MapControlsFC } from "@/src/features/home/map/components/controls";
-
 // web実装時、ここにMapScreenWebを実装
 
 // web実装時、MapScreenをプラットフォームにより選択可能に
@@ -12,7 +10,7 @@ import { MapControlsFC } from "@/src/features/home/map/components/controls";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <MapControlsFC />
+      {/* <MapControlsFC /> */}
     </View>
   );
 }

@@ -13,8 +13,6 @@ import {
 
 import { useSearch } from "@/src/features/home/search/Context/SearchContext";
 
-import { translation } from "../../../search/services/translation";
-
 // 検索バー本体：フォーカス状態に応じてUI切り替えとテキスト入力を処理
 export function SearchBar() {
   const pathName = usePathname();
@@ -67,10 +65,6 @@ export function SearchBar() {
             <TextInput
               value={searchText}
               onChangeText={setSearchText}
-              onSubmitEditing={async () => {
-                const converted = await translation(searchText);
-                setAnswerText(converted);
-              }}
               returnKeyType="search"
               placeholder="部屋を探す"
               style={[
