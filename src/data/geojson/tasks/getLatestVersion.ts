@@ -7,9 +7,15 @@ type VersionConfig = {
 };
 
 export default async function getLatestVersion(): Promise<string | null> {
-  const versionConfig = await fetchJsonWithRetry<VersionConfig>(LATEST_URL);
-  
-  if (!versionConfig) return null;
+  try {
+    const versionConfig = await fetchJsonWithRetry<VersionConfig>(LATEST_URL);
+    if (!versionConfig) {
+      throw new Error("Failed to fetch versionConfig");
+    }
 
-  return versionConfig.version;
+    return versionConfig.version;
+
+  } catch (e) {
+    throw new Error("unknown fetch latest error");
+  }
 }

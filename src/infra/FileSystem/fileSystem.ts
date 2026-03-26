@@ -9,46 +9,35 @@ export async function expoRead(path: string): Promise<string> {
 }
 
 // atomicロジックではない単純書き込み
-function logicWrite(path: string, data: string) {
-  const file = new File(BASEDIR_PATH, path);
-  file.parentDirectory.create({ intermediates: true, idempotent: true });
-  if (!data) console.error("WriteError: Data Not Found");
+export function expoWrite(path: string, data: string) {
+  try {
+    const file = new File(BASEDIR_PATH, path);
+    file.parentDirectory.create({ intermediates: true, idempotent: true });
+    if (!data) console.error("WriteError: Data Not Found");
 
-  file.write(data);
-}
-
-export function expoWrite(path: string, data: string): void {
-  const tmpPath = `${path}.tmp`;
-
-  // 古いtmpファイルの削除
-  if (expoExists(tmpPath)) {
-    expoRemove(tmpPath);
+    file.write(data);
+  } catch (e) {
+    console.error(`[WriteError]: ${e}`);
   }
-
-  // 1. tmpファイルへ書き込み
-  logicWrite(tmpPath, data);
-
-  // 2. 本体があれば削除
-  if (expoExists(path)) {
-    expoRemove(path);
-  }
-
-  expoMove(tmpPath, path);
 }
 
 export function expoMove(from: string, to: string): void {
-  const fromFile = new File(BASEDIR_PATH, from);
-  const toFile = new File(BASEDIR_PATH, to);
+  try {
+    const fromFile = new File(BASEDIR_PATH, from);
+    const toFile = new File(BASEDIR_PATH, to);
 
-  // 移動先のディレクトリを保証
-  toFile.parentDirectory.create({ intermediates: true, idempotent: true });
+    // 移動先のディレクトリを保証
+    toFile.parentDirectory.create({ intermediates: true, idempotent: true });
 
-  // 移動先にすでに存在する場合削除
-  if (toFile.exists) {
-    toFile.delete();
+    // 移動先にすでに存在する場合削除
+    if (toFile.exists) {
+      toFile.delete();
+    }
+
+    fromFile.move(toFile);
+  } catch (e) {
+    console.error(`[moveError]: ${e}`);
   }
-
-  fromFile.move(toFile);
 }
 
 export function expoExists(path: string): boolean {
@@ -57,13 +46,22 @@ export function expoExists(path: string): boolean {
 }
 
 export function expoSize(path: string): number {
-  const file = new File(BASEDIR_PATH, path);
-  return file.size;
+  try {
+    const file = new File(BASEDIR_PATH, path);
+    return file.size;
+  } catch (e) {
+    console.error(`[sizecheckError]: ${e}`);
+    return 0;
+  }
 }
 
 export function expoRemove(path: string): void {
-  const file = new File(BASEDIR_PATH, path);
-  if (file.exists) file.delete();
+  try {
+    const file = new File(BASEDIR_PATH, path);
+    if (file.exists) file.delete();
+  } catch (e) {
+    console.error(`[removeError]: ${e}`);
+  }
 }
 
 export function expoAllRemove(path: string, ext?: string) {
