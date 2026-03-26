@@ -5,5 +5,10 @@ export async function safeFetch(url: string, options?: RequestInit) {
     throw new Error("Simulated offline network error");
   }
 
-  return fetch(url, options);
+  const overrideOption: RequestInit = {
+    cache: "no-cache",
+    ...options,
+  };
+
+  return fetch(url, overrideOption);
 }
