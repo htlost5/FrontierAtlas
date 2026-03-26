@@ -56,6 +56,11 @@ export function expoExists(path: string): boolean {
   return file.exists;
 }
 
+export function expoSize(path: string): number {
+  const file = new File(BASEDIR_PATH, path);
+  return file.size;
+}
+
 export function expoRemove(path: string): void {
   const file = new File(BASEDIR_PATH, path);
   if (file.exists) file.delete();
