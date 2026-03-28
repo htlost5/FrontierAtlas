@@ -1,18 +1,28 @@
+import { MapId } from "../../geojsonAssetMap";
 import { Manifest } from "../../manifestType";
-import { addDetect } from "./addDetect";
-import { deleteDetect } from "./deleteDetect";
+import { addDetect } from "./detect/addDetect";
+import { deleteDetect } from "./detect/deleteDetect";
+import { updateDetect } from "./detect/updateDetect";
 import { UpdateType } from "./types";
-import { updateDetect } from "./updateDetect";
 
 export default function setUpdatePlan(
   buildManifest: Manifest,
-  localManifest: Manifest,
+  localManifest: Manifest | null,
 ): UpdateType {
   const buildFiles = buildManifest.files;
-  const localFiles = localManifest.files;
+  const buildIds = Object.keys(buildFiles) as MapId[];
 
-  const buildIds = Object.keys(buildFiles);
-  const localIds = Object.keys(localFiles);
+  if (!localManifest) {
+    const updateList: UpdateType = {
+      update: [],
+      add: buildIds,
+      delete: [],
+    };
+    return updateList;
+  }
+
+  const localFiles = localManifest.files;
+  const localIds = Object.keys(localFiles) as MapId[];
 
   const updateList = updateDetect(buildFiles, localFiles);
   const addList = addDetect(buildIds, localIds);

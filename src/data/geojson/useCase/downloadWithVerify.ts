@@ -1,0 +1,68 @@
+import {
+  Sha256MismatchError,
+  SizeMismatchError,
+} from "@/src/domain/ManifestErrors";
+import { NetworkError } from "@/src/domain/NetworkErrors";
+import {
+  expoExists,
+  expoMove,
+  expoRemove,
+  expoSize,
+  expoWrite,
+} from "@/src/infra/FileSystem/fileSystem";
+import { fetchTextWithRetry } from "@/src/infra/network/fetchJson";
+import { sha256 } from "@/src/infra/sha256/hashCheck";
+
+export type DownloadVerifyOptions = {
+  url: string;
+  tmpPath: string;
+  finalPath: string;
+  expectedSize: number;
+  expectedSha256: string;
+  maxRetry: number;
+};
+
+export async function downloadWithVerify({
+  url,
+  tmpPath,
+  finalPath,
+  expectedSize,
+  expectedSha256,
+  maxRetry,
+}: DownloadVerifyOptions): Promise<string> {
+  let lastError: Error | null = null;
+
+  for (let i = 0; i < maxRetry; i++) {
+    try {
+      const txt = await fetchTextWithRetry(url);
+      if (!txt) throw new NetworkError("fetch failed");
+
+      expoWrite(tmpPath, txt);
+
+      // size check
+      const size = expoSize(tmpPath);
+      if (size !== expectedSize) {
+        throw new SizeMismatchError();
+      }
+
+      // sha256 check
+      const hash = sha256(txt);
+      if (hash !== expectedSha256) {
+        throw new Sha256MismatchError();
+      }
+
+      expoMove(tmpPath, finalPath);
+
+      return txt;
+    } catch (e) {
+      if (expoExists(tmpPath)) {
+        expoRemove(tmpPath);
+      }
+      lastError = e as Error;
+
+      await new Promise((r) => setTimeout(r, 2 ** i * 100));
+    }
+  }
+
+  throw lastError ?? new NetworkError("Download failed after retries");
+}

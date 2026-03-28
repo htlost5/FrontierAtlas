@@ -1,9 +1,9 @@
 import { expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import { Manifest } from "./manifestType";
-import cleanupTmp from "./tasks/cleanupTmp";
-import getLatestVersion from "./tasks/getLatestVersion";
-import setBuildManifest from "./tasks/setBuildManifest";
+import cleanupTmp from "./useCase/cleanupTmp";
+import getLatestVersion from "./useCase/getLatestVersion";
+import setBuildManifest from "./useCase/setBuildManifest";
 
 import assetManifest from "@/assets/data/manifest.json";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import expoWalk from "@/src/infra/FileSystem/walk";
+import { runUpdatePlan } from "./tasks/dataUpdate";
 import setUpdatePlan from "./tasks/setUpdatePlan";
 import { UpdateType } from "./tasks/setUpdatePlan/types";
 
@@ -48,7 +49,6 @@ export default async function loadAllGeoJson() {
 
   console.log(`version: ${version}`);
 
-
   // buildManifest定義
   if (!version) {
     buildManifest = assetManifest;
@@ -75,5 +75,11 @@ export default async function loadAllGeoJson() {
   }
 
   // 差分検出
-  // const updatePlan: UpdateType = setUpdatePlan(buildManifest, localManifest);
+  const updatePlan: UpdateType = setUpdatePlan(buildManifest, localManifest);
+
+  // updatePlan（アセットorリモート取得 -> ローカルへ）
+  runUpdatePlan(updatePlan, version, buildManifest);
+
+  console.log("all succeed");
+  // アプリレジストリへの登録
 }

@@ -1,5 +1,7 @@
+import type { MapId } from "../../geojsonAssetMap";
+
 export type UpdateType = {
-  update: string[];
-  add: string[];
-  delete: string[];
+  add: MapId[];
+  update: MapId[];
+  delete: MapId[];
 };

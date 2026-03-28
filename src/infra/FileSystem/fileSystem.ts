@@ -8,7 +8,6 @@ export async function expoRead(path: string): Promise<string> {
   return await file.text();
 }
 
-// atomicロジックではない単純書き込み
 export function expoWrite(path: string, data: string) {
   try {
     const file = new File(BASEDIR_PATH, path);
@@ -19,6 +18,12 @@ export function expoWrite(path: string, data: string) {
   } catch (e) {
     console.error(`[WriteError]: ${e}`);
   }
+}
+
+export function atomicWrite(path: string, data: string) {
+  const tmpPath = `${path}.tmp`;
+  expoWrite(tmpPath, data);
+  expoMove(tmpPath, path);
 }
 
 export function expoMove(from: string, to: string): void {
