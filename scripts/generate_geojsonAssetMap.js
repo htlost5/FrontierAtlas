@@ -108,6 +108,9 @@ function generate(manifest) {
     `};`,
     "",
     `export default geoJsonMap;`,
+    "",
+    "// オブジェクトのunion型定義",
+    "export type MapId = keyof typeof geoJsonMap;",
   ].join("\n");
 }
 
