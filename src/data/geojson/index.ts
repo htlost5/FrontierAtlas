@@ -17,6 +17,7 @@ import expoWalk from "@/src/infra/FileSystem/walk";
 import { runUpdatePlan } from "./tasks/dataUpdate";
 import setUpdatePlan from "./tasks/setUpdatePlan";
 import { UpdateType } from "./tasks/setUpdatePlan/types";
+import { updateRegistry } from "./tasks/updateRegistry";
 
 export default async function loadAllGeoJson() {
   let localManifest: Manifest | null = null;
@@ -80,6 +81,10 @@ export default async function loadAllGeoJson() {
   // updatePlan（アセットorリモート取得 -> ローカルへ）
   runUpdatePlan(updatePlan, version, buildManifest);
 
-  console.log("all succeed");
   // アプリレジストリへの登録
+  updateRegistry(buildManifest);
+
+  console.log("all succeed");
 }
+
+// 保存時に書き込むlocal-manifestは？？

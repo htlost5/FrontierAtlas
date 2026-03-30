@@ -28,7 +28,7 @@ export default function InitSetup({ children }: Props) {
       </View>
     );
 
-  // return <View style={{ flex: 1 }}>{children}</View>;
+  return <View style={{ flex: 1 }}>{children}</View>;
 }
 
 // 初期設計：base -> data の処理を順に行う（直列型）

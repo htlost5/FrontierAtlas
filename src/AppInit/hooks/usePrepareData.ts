@@ -1,4 +1,5 @@
 import loadAllGeoJson from "@/src/data/geojson";
+import expoWalk from "@/src/infra/FileSystem/walk";
 import { useEffect, useState } from "react";
 
 export default function usePrepareData(baseReady: boolean) {
@@ -6,6 +7,8 @@ export default function usePrepareData(baseReady: boolean) {
 
   useEffect(() => {
     if (!baseReady) return;
+
+    console.log(`files: ${expoWalk('data/imdf')}`)
 
     let cancelled = false;
 

@@ -12,11 +12,13 @@ export function expoWrite(path: string, data: string) {
   try {
     const file = new File(BASEDIR_PATH, path);
     file.parentDirectory.create({ intermediates: true, idempotent: true });
-    if (!data) console.error("WriteError: Data Not Found");
+    if (!data) {
+      throw new Error("Data not found!!");
+    }
 
     file.write(data);
   } catch (e) {
-    console.error(`[WriteError]: ${e}`);
+    throw new Error(`[WriteError]: ${e}`);
   }
 }
 
@@ -41,7 +43,7 @@ export function expoMove(from: string, to: string): void {
 
     fromFile.move(toFile);
   } catch (e) {
-    console.error(`[moveError]: ${e}`);
+    throw new Error(`[moveError]: ${e}`);
   }
 }
 
@@ -55,8 +57,7 @@ export function expoSize(path: string): number {
     const file = new File(BASEDIR_PATH, path);
     return file.size;
   } catch (e) {
-    console.error(`[sizecheckError]: ${e}`);
-    return 0;
+    throw new Error(`[sizecheckError]: ${e}`);
   }
 }
 
@@ -65,7 +66,7 @@ export function expoRemove(path: string): void {
     const file = new File(BASEDIR_PATH, path);
     if (file.exists) file.delete();
   } catch (e) {
-    console.error(`[removeError]: ${e}`);
+    throw new Error(`[removeError]: ${e}`);
   }
 }
 
