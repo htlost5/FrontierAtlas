@@ -2,8 +2,8 @@ import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
 import { stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import geoJsonMap, { MapId } from "../geojsonAssetMap";
 import {
-    DownloadVerifyOptions,
-    downloadWithVerify,
+  DownloadVerifyOptions,
+  downloadWithVerify,
 } from "./downloadWithVerify";
 
 type SaveOptions = DownloadVerifyOptions & {
@@ -18,9 +18,9 @@ export async function saveJsonWithFallback({
   expectedSize,
   expectedSha256,
   maxRetry,
-}: SaveOptions) {
+}: SaveOptions): Promise<{ size: number; hash: string }> {
   try {
-    await downloadWithVerify({
+    const { size, hash } = await downloadWithVerify({
       url,
       tmpPath,
       finalPath,
@@ -28,6 +28,7 @@ export async function saveJsonWithFallback({
       expectedSha256,
       maxRetry,
     });
+    return { size, hash };
   } catch (e) {
     // ローカルのアセットから取得したデータをローカルへ保存する
     const originData = geoJsonMap[id].content;

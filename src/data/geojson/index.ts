@@ -1,6 +1,6 @@
 import { expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
-import { Manifest } from "./manifestType";
+import { BuildManifest, LocalManifest } from "./manifestType";
 import cleanupTmp from "./useCase/cleanupTmp";
 import getLatestVersion from "./useCase/getLatestVersion";
 import setBuildManifest from "./useCase/setBuildManifest";
@@ -13,16 +13,15 @@ import {
   VersionMismatchError,
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
-import expoWalk from "@/src/infra/FileSystem/walk";
-import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
-import { runUpdatePlan } from "./tasks/dataUpdate";
+import { sha256 } from "@/src/infra/sha256/hashCheck";
+import { applyUpdatePlan } from "./tasks/dataUpdate";
 import setUpdatePlan from "./tasks/setUpdatePlan";
 import { UpdateType } from "./tasks/setUpdatePlan/types";
 import { updateRegistry } from "./tasks/updateRegistry";
 
 export default async function loadAllGeoJson() {
-  let localManifest: Manifest | null = null;
-  let buildManifest: Manifest;
+  let localManifest: LocalManifest | null = null;
+  let buildManifest: BuildManifest;
 
   try {
     const text = await expoRead("data/manifest.json");
@@ -32,10 +31,10 @@ export default async function loadAllGeoJson() {
   }
 
   // ディレクトリ内ファイル確認
-  console.log(`files: ${expoWalk("data/imdf")}`);
+  // console.log(`files: ${expoWalk("data/imdf")}`);
 
   // tmpファイルのクリーンアップ
-  cleanupTmp(localManifest);
+  cleanupTmp();
 
   let networkAvailable = true;
 
@@ -48,7 +47,6 @@ export default async function loadAllGeoJson() {
     networkAvailable = false;
     version = null;
   }
-
   console.log(`version: ${version}`);
 
   // buildManifest定義
@@ -76,11 +74,26 @@ export default async function loadAllGeoJson() {
     }
   }
 
+  // localManifestの初期設定
+  if (!localManifest) {
+    localManifest = {
+      version: buildManifest.version,
+      files: {},
+      totalSize: 0,
+      totalSha256: sha256(""),
+    };
+  }
+
   // 差分検出
   const updatePlan: UpdateType = setUpdatePlan(buildManifest, localManifest);
 
-  // updatePlan（アセットorリモート取得 -> ローカルへ）
-  runUpdatePlan(updatePlan, version, buildManifest);
+  // updatePlan（アセットorリモート取得 -> ローカルへ） / localManifest更新
+  localManifest = await applyUpdatePlan(
+    updatePlan,
+    version,
+    buildManifest,
+    localManifest,
+  );
 
   // アプリレジストリへの登録
   await updateRegistry(buildManifest);

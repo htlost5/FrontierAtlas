@@ -1,13 +1,13 @@
 import { expoExists } from "@/src/infra/FileSystem/fileSystem";
 import { MapId } from "../../../geojsonAssetMap";
-import { Manifest } from "../../../manifestType";
+import { BuildManifest } from "../../../manifestType";
 import { resolveFileInfo } from "../../../useCase/resolveFileInfo";
 import { saveJsonWithFallback } from "../../../useCase/saveWithVerify";
 
 export async function dataUpdate(
   updateList: MapId[],
   DATA_SOURCE_URL: string,
-  buildManifest: Manifest,
+  buildManifest: BuildManifest,
 ) {
   for (const id of updateList) {
     const info = resolveFileInfo(id, DATA_SOURCE_URL, buildManifest);

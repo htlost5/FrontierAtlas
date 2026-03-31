@@ -4,6 +4,7 @@ import {
   LineLayer,
   LineLayerStyle,
   ShapeSource,
+  SymbolLayer,
 } from "@maplibre/maplibre-react-native";
 import { PolygonProps } from "./types";
 
@@ -45,6 +46,13 @@ export function PolygonLayer({
         id={`lineLayer_${prefixId}`}
         filter={filter}
         style={finalLineStyle}
+      />
+      <SymbolLayer
+        id={`symbolLayer_${prefixId}`}
+        style={{
+          textField: ["get", "name_en"],
+          textSize: 12,
+        }}
       />
     </ShapeSource>
   );

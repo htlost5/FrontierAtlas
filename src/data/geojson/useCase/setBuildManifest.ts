@@ -1,11 +1,11 @@
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import { RELEASES_URL } from "../../urls";
-import { Manifest } from "../manifestType";
+import { BuildManifest } from "../manifestType";
 
+import { downloadWithVerify } from "@/src/data/geojson/useCase/downloadWithVerify";
 import { VersionMismatchError } from "@/src/domain/ManifestErrors";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import { fetchJsonWithRetry } from "@/src/infra/network/fetchJson";
-import { downloadWithVerify } from "@/src/data/geojson/useCase/downloadWithVerify";
 
 type VersionInfo = {
   version: string;
@@ -15,7 +15,7 @@ type VersionInfo = {
 
 export default async function setBuildManifest(
   version: string,
-): Promise<Manifest> {
+): Promise<BuildManifest> {
   let versionInfo: VersionInfo | null = null;
 
   const VERSIONINFO_URL = `${RELEASES_URL}/${version}/data/version.json`;
@@ -30,7 +30,7 @@ export default async function setBuildManifest(
     throw new NetworkError("Failed to fetch versionInfo");
   }
 
-  const manifestText = await downloadWithVerify({
+  const { manifestText } = await downloadWithVerify({
     url: MANIFEST_URL,
     tmpPath: MANIFEST_TMP_PATH,
     finalPath: MANIFEST_PATH,
@@ -39,7 +39,7 @@ export default async function setBuildManifest(
     maxRetry: 3,
   });
 
-  const remoteManifest: Manifest = parseJson(manifestText);
+  const remoteManifest: BuildManifest = parseJson(manifestText);
 
   // version 一致確認
 

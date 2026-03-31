@@ -13,6 +13,7 @@ const ROOM_CATEGORIES = {
   artRoom: "art_room",
   calligraphyRoom: "calligraphy_room",
   craftRoom: "craft_room",
+  metalWoodWorkingRoom: "metal_woodworking_room",
   sewingRoom: "sewing_room",
   homeEconomicsRoom: "home_economics_room",
   cookingRoom: "kitchen",

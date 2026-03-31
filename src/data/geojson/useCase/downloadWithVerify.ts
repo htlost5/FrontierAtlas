@@ -22,6 +22,12 @@ export type DownloadVerifyOptions = {
   maxRetry: number;
 };
 
+type Result = {
+  manifestText: string;
+  size: number;
+  hash: string;
+};
+
 export async function downloadWithVerify({
   url,
   tmpPath,
@@ -29,7 +35,7 @@ export async function downloadWithVerify({
   expectedSize,
   expectedSha256,
   maxRetry,
-}: DownloadVerifyOptions): Promise<string> {
+}: DownloadVerifyOptions): Promise<Result> {
   let lastError: Error | null = null;
 
   for (let i = 0; i < maxRetry; i++) {
@@ -53,7 +59,11 @@ export async function downloadWithVerify({
 
       expoMove(tmpPath, finalPath);
 
-      return txt;
+      return {
+        manifestText: txt,
+        size: size,
+        hash: hash,
+      };
     } catch (e) {
       if (expoExists(tmpPath)) {
         expoRemove(tmpPath);

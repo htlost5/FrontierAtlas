@@ -1,37 +1,36 @@
 import type { Feature, FeatureCollection } from "geojson";
 
-export type AssetItem = {
-  logicalId: String;
-  relativePath: string;
-  content: Feature | FeatureCollection;
-}
-export type AssetFiles = Record<string, AssetItem>;
-
-
+// 共通 ManifestItem
 export type ManifestItem = {
-  logicalId: string;
   relativePath: string;
-  sha256: string;
   size: number;
+  sha256: string;
 };
-
-export type ManifestFiles = Record<string, ManifestItem>;
 
 // buildManifest
-export type Manifest = {
+export type BuildManifestFiles = Record<string, ManifestItem>;
+
+export type BuildManifest = {
   version: string;
-  count?: number;
   totalSize: number;
-  files: ManifestFiles;
+  files: BuildManifestFiles;
 };
 
-// // localManifest
-// export type LocalManifest = {
-//   version: string;
-//   totalSize: number;
-//   files: ManifestFiles
-// }
+// localManifest
+export type LocalManifestFiles = Record<string, ManifestItem>;
 
+export type LocalManifest = {
+  version: string;
+  totalSize: number;
+  totalSha256: string;
+  files: LocalManifestFiles;
+};
 
-// localManifest / buildManifestのプロパティをそれぞれ何にするか定義
-// buildManifest github参照
+// assetManifest
+export type AssetItem = {
+  logicalId: string;
+  relativePath: string;
+  content: Feature | FeatureCollection;
+};
+
+export type AssetFiles = Record<string, AssetItem>;

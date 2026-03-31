@@ -1,5 +1,5 @@
 import { MapId } from "../geojsonAssetMap";
-import { Manifest } from "../manifestType";
+import { BuildManifest } from "../manifestType";
 
 type FileInfo = {
   url: string;
@@ -12,7 +12,7 @@ type FileInfo = {
 export function resolveFileInfo(
   id: MapId,
   DATA_SOURCE_URL: string,
-  buildManifest: Manifest,
+  buildManifest: BuildManifest,
 ): FileInfo {
   const baseId = buildManifest.files[id];
   if (!baseId) {

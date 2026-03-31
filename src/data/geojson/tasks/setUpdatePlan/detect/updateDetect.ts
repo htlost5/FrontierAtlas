@@ -1,9 +1,12 @@
 import { MapId } from "../../../geojsonAssetMap";
-import { ManifestFiles } from "../../../manifestType";
+import {
+  BuildManifestFiles,
+  LocalManifestFiles
+} from "../../../manifestType";
 
 export function updateDetect(
-  buildFiles: ManifestFiles,
-  localFiles: ManifestFiles,
+  buildFiles: BuildManifestFiles,
+  localFiles: LocalManifestFiles,
 ): MapId[] {
   const updateList: MapId[] = [];
 

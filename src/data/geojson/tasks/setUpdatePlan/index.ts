@@ -1,13 +1,13 @@
 import { MapId } from "../../geojsonAssetMap";
-import { Manifest } from "../../manifestType";
+import { BuildManifest, LocalManifest } from "../../manifestType";
 import { addDetect } from "./detect/addDetect";
 import { deleteDetect } from "./detect/deleteDetect";
 import { updateDetect } from "./detect/updateDetect";
 import { UpdateType } from "./types";
 
 export default function setUpdatePlan(
-  buildManifest: Manifest,
-  localManifest: Manifest | null,
+  buildManifest: BuildManifest,
+  localManifest: LocalManifest | null,
 ): UpdateType {
   const buildFiles = buildManifest.files;
   const buildIds = Object.keys(buildFiles) as MapId[];

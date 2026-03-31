@@ -2,9 +2,9 @@ import { expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import { MapId } from "../../geojsonAssetMap";
-import { Manifest } from "../../manifestType";
+import { BuildManifest } from "../../manifestType";
 
-export async function updateRegistry(buildManifest: Manifest) {
+export async function updateRegistry(buildManifest: BuildManifest) {
   // 1. registryのデータクリア
   geojsonRegistry.clear();
 
@@ -16,6 +16,6 @@ export async function updateRegistry(buildManifest: Manifest) {
     const sourceTxt = await expoRead(`data/imdf/${baseFiles[id].relativePath}`);
     const data = parseJson(sourceTxt);
 
-    geojsonRegistry.set(baseFiles[id].logicalId, data);
+    geojsonRegistry.set(id, data);
   }
 }
