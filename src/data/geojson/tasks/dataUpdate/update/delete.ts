@@ -8,7 +8,7 @@ export function dataDelete(
   localManifest: LocalManifest,
 ): LocalManifest {
   for (const id of deleteList) {
-    const baseId = buildManifest.files[id];
+    const baseId = localManifest.files[id];
     if (!baseId) continue;
 
     const relativePath = baseId.relativePath;

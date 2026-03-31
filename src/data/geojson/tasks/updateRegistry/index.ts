@@ -13,7 +13,7 @@ export async function updateRegistry(buildManifest: BuildManifest) {
   const ids = Object.keys(baseFiles) as MapId[];
   for (const id of ids) {
     // 今後、try catch でデータがない場合の実装
-    const sourceTxt = await expoRead(`data/imdf/${baseFiles[id].relativePath}`);
+    const sourceTxt = await expoRead(baseFiles[id].relativePath);
     const data = parseJson(sourceTxt);
 
     geojsonRegistry.set(id, data);

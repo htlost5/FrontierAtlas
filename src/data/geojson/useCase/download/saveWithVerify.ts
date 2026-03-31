@@ -2,8 +2,8 @@ import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
 import { stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import geoJsonMap, { MapId } from "../../geojsonAssetMap";
 import {
-    DownloadVerifyOptions,
-    downloadWithVerify,
+  DownloadVerifyOptions,
+  downloadWithVerify,
 } from "./downloadWithVerify";
 
 type SaveOptions = DownloadVerifyOptions & {
@@ -30,13 +30,20 @@ export async function saveJsonWithFallback({
     });
     return { size, hash };
   } catch (e) {
-    // ローカルのアセットから取得したデータをローカルへ保存する
-    const originData = geoJsonMap[id].content;
-    const originTxt = stringifyJson(originData);
+    try {
+      // ローカルのアセットから取得したデータをローカルへ保存する
+      const originData = geoJsonMap[id].content;
+      const originTxt = stringifyJson(originData);
 
-    // atomic write
-    atomicWrite(finalPath, originTxt);
+      // atomic write
+      atomicWrite(finalPath, originTxt);
 
-    throw e;
+      return {
+        size: originTxt.length,
+        hash: "fallback-from-asset",
+      };
+    } catch (fallbackError) {
+      throw fallbackError;
+    }
   }
 }

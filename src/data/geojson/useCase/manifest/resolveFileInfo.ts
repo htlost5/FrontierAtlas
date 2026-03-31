@@ -23,8 +23,8 @@ export function resolveFileInfo(
 
   return {
     url: `${DATA_SOURCE_URL}/${relativePath}`,
-    tmpPath: `data/imdf/${relativePath}.tmp`,
-    finalPath: `data/imdf/${relativePath}`,
+    tmpPath: `${relativePath}.tmp`,
+    finalPath: `${relativePath}`,
     expectedSize: baseId.size,
     expectedSha256: baseId.sha256,
   };

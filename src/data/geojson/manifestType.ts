@@ -20,7 +20,7 @@ export type BuildManifest = {
 export type LocalManifestFiles = Record<string, ManifestItem>;
 
 export type LocalManifest = {
-  version: string;
+  version: string | null;
   files: LocalManifestFiles;
 };
 

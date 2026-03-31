@@ -23,6 +23,8 @@ export default async function loadAllGeoJson() {
   let localManifest: LocalManifest | null = null;
   let buildManifest: BuildManifest;
 
+  let manifestSource: "remote" | "asset";
+
   try {
     const text = await expoRead(LOCAL_MANFEST_PATH);
     localManifest = parseJson(text);
@@ -36,15 +38,12 @@ export default async function loadAllGeoJson() {
   // tmpファイルのクリーンアップ
   cleanupTmp();
 
-  let networkAvailable = true;
-
   let version: string | null;
 
   // latestバージョン取得
   try {
     version = await getLatestVersion();
   } catch (e) {
-    networkAvailable = false;
     version = null;
   }
   console.log(`version: ${version}`);
@@ -52,19 +51,22 @@ export default async function loadAllGeoJson() {
   // buildManifest定義
   if (!version) {
     buildManifest = assetManifest;
+    manifestSource = "asset";
   } else {
     try {
       buildManifest = await setBuildManifest(version);
+      manifestSource = "remote";
     } catch (e) {
       if (e instanceof NetworkError) {
-        networkAvailable = false;
         buildManifest = assetManifest;
+        manifestSource = "asset";
       } else if (
         e instanceof SizeMismatchError ||
         e instanceof Sha256MismatchError ||
         e instanceof ValidationError
       ) {
         buildManifest = assetManifest;
+        manifestSource = "asset";
       } else if (e instanceof VersionMismatchError) {
         console.error("Server version mismatch. Abort.");
         throw e;
@@ -77,7 +79,7 @@ export default async function loadAllGeoJson() {
   // localManifestの初期設定
   if (!localManifest) {
     localManifest = {
-      version: buildManifest.version,
+      version: null,
       files: {},
     };
   }
@@ -92,6 +94,9 @@ export default async function loadAllGeoJson() {
     buildManifest,
     localManifest,
   );
+
+  // version更新
+  localManifest.version = buildManifest.version;
 
   const localManifestData = stringifyJson(localManifest);
   atomicWrite(LOCAL_MANFEST_PATH, localManifestData);
