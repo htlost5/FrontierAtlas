@@ -1,7 +1,7 @@
 import { MapId } from "../../../geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "../../../manifestType";
-import { resolveFileInfo } from "../../../useCase/resolveFileInfo";
-import { saveJsonWithFallback } from "../../../useCase/saveWithVerify";
+import { saveJsonWithFallback } from "../../../useCase/download/saveWithVerify";
+import { resolveFileInfo } from "../../../useCase/manifest/resolveFileInfo";
 
 export async function dataAdd(
   addList: MapId[],
@@ -17,6 +17,12 @@ export async function dataAdd(
       ...info,
       maxRetry: 3,
     });
+
+    localManifest.files[id] = {
+      relativePath: buildManifest.files[id].relativePath,
+      size: size,
+      sha256: hash,
+    };
   }
 
   return localManifest;

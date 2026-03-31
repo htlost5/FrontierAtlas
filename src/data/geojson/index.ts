@@ -1,9 +1,8 @@
-import { expoRead } from "@/src/infra/FileSystem/fileSystem";
-import { parseJson } from "@/src/infra/jsonParse/jsonParser";
+import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
+import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import { BuildManifest, LocalManifest } from "./manifestType";
-import cleanupTmp from "./useCase/cleanupTmp";
-import getLatestVersion from "./useCase/getLatestVersion";
-import setBuildManifest from "./useCase/setBuildManifest";
+import cleanupTmp from "./useCase/file/cleanupTmp";
+import setBuildManifest from "./useCase/manifest/setBuildManifest";
 
 import assetManifest from "@/assets/data/manifest.json";
 import {
@@ -13,18 +12,19 @@ import {
   VersionMismatchError,
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
-import { sha256 } from "@/src/infra/sha256/hashCheck";
+import { LOCAL_MANFEST_PATH } from "../paths";
 import { applyUpdatePlan } from "./tasks/dataUpdate";
 import setUpdatePlan from "./tasks/setUpdatePlan";
 import { UpdateType } from "./tasks/setUpdatePlan/types";
 import { updateRegistry } from "./tasks/updateRegistry";
+import getLatestVersion from "./useCase/version/getLatestVersion";
 
 export default async function loadAllGeoJson() {
   let localManifest: LocalManifest | null = null;
   let buildManifest: BuildManifest;
 
   try {
-    const text = await expoRead("data/manifest.json");
+    const text = await expoRead(LOCAL_MANFEST_PATH);
     localManifest = parseJson(text);
   } catch (e) {
     localManifest = null;
@@ -79,8 +79,6 @@ export default async function loadAllGeoJson() {
     localManifest = {
       version: buildManifest.version,
       files: {},
-      totalSize: 0,
-      totalSha256: sha256(""),
     };
   }
 
@@ -95,9 +93,11 @@ export default async function loadAllGeoJson() {
     localManifest,
   );
 
+  const localManifestData = stringifyJson(localManifest);
+  atomicWrite(LOCAL_MANFEST_PATH, localManifestData);
+
   // アプリレジストリへの登録
   await updateRegistry(buildManifest);
+
   console.log("all succeed");
 }
-
-// 保存時に書き込むlocal-manifestは？？

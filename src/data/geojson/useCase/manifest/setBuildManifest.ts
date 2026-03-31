@@ -1,8 +1,8 @@
 import { NetworkError } from "@/src/domain/NetworkErrors";
-import { RELEASES_URL } from "../../urls";
-import { BuildManifest } from "../manifestType";
+import { RELEASES_URL } from "../../../urls";
+import { BuildManifest } from "../../manifestType";
 
-import { downloadWithVerify } from "@/src/data/geojson/useCase/downloadWithVerify";
+import { downloadWithVerify } from "@/src/data/geojson/useCase/download/downloadWithVerify";
 import { VersionMismatchError } from "@/src/domain/ManifestErrors";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import { fetchJsonWithRetry } from "@/src/infra/network/fetchJson";

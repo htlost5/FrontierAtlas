@@ -1,5 +1,5 @@
+import { LATEST_URL } from "@/src/data/urls";
 import { fetchJsonWithRetry } from "@/src/infra/network/fetchJson";
-import { LATEST_URL } from "../../urls";
 
 type VersionConfig = {
   version: string;
@@ -14,7 +14,6 @@ export default async function getLatestVersion(): Promise<string | null> {
     }
 
     return versionConfig.version;
-
   } catch (e) {
     throw new Error("unknown fetch latest error");
   }

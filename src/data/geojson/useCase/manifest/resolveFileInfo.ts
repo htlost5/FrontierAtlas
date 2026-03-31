@@ -1,5 +1,5 @@
-import { MapId } from "../geojsonAssetMap";
-import { BuildManifest } from "../manifestType";
+import { MapId } from "../../geojsonAssetMap";
+import { BuildManifest } from "../../manifestType";
 
 type FileInfo = {
   url: string;

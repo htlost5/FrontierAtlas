@@ -21,8 +21,6 @@ export type LocalManifestFiles = Record<string, ManifestItem>;
 
 export type LocalManifest = {
   version: string;
-  totalSize: number;
-  totalSha256: string;
   files: LocalManifestFiles;
 };
 

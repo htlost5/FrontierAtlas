@@ -1,9 +1,9 @@
 import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
 import { stringifyJson } from "@/src/infra/jsonParse/jsonParser";
-import geoJsonMap, { MapId } from "../geojsonAssetMap";
+import geoJsonMap, { MapId } from "../../geojsonAssetMap";
 import {
-  DownloadVerifyOptions,
-  downloadWithVerify,
+    DownloadVerifyOptions,
+    downloadWithVerify,
 } from "./downloadWithVerify";
 
 type SaveOptions = DownloadVerifyOptions & {

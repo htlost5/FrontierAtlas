@@ -1,8 +1,12 @@
 import { expoExists, expoRemove } from "@/src/infra/FileSystem/fileSystem";
 import { MapId } from "../../../geojsonAssetMap";
-import { BuildManifest } from "../../../manifestType";
+import { BuildManifest, LocalManifest } from "../../../manifestType";
 
-export function dataDelete(deleteList: MapId[], buildManifest: BuildManifest) {
+export function dataDelete(
+  deleteList: MapId[],
+  buildManifest: BuildManifest,
+  localManifest: LocalManifest,
+): LocalManifest {
   for (const id of deleteList) {
     const baseId = buildManifest.files[id];
     if (!baseId) continue;
@@ -13,5 +17,9 @@ export function dataDelete(deleteList: MapId[], buildManifest: BuildManifest) {
     if (expoExists(TARGET_PATH)) {
       expoRemove(TARGET_PATH);
     }
+
+    delete localManifest.files[id];
   }
+
+  return localManifest;
 }
