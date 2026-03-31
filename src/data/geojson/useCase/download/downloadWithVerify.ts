@@ -40,7 +40,7 @@ export async function downloadWithVerify({
 
   try {
     const txt = await fetchTextWithRetry(url, maxRetry);
-    if (!txt) throw new NetworkError("fetch failed");
+    if (txt === null) throw new NetworkError("fetch failed");
 
     expoWrite(tmpPath, txt);
 
