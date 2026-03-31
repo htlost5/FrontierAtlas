@@ -1,5 +1,6 @@
 import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
 import { stringifyJson } from "@/src/infra/jsonParse/jsonParser";
+import { sha256 } from "@/src/infra/sha256/hashCheck";
 import geoJsonMap, { MapId } from "../../geojsonAssetMap";
 import {
   DownloadVerifyOptions,
@@ -40,7 +41,7 @@ export async function saveJsonWithFallback({
 
       return {
         size: originTxt.length,
-        hash: "fallback-from-asset",
+        hash: sha256(originTxt),
       };
     } catch (fallbackError) {
       throw fallbackError;
