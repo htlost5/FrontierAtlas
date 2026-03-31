@@ -1,6 +1,6 @@
 import type { FeatureCollection } from "geojson";
 
-const registry = new Map<string, FeatureCollection>();
+export const registry = new Map<string, FeatureCollection>();
 
 export const geojsonRegistry = {
   get(id: string): FeatureCollection | undefined {

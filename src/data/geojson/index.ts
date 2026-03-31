@@ -14,6 +14,7 @@ import {
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import expoWalk from "@/src/infra/FileSystem/walk";
+import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import { runUpdatePlan } from "./tasks/dataUpdate";
 import setUpdatePlan from "./tasks/setUpdatePlan";
 import { UpdateType } from "./tasks/setUpdatePlan/types";
@@ -82,8 +83,7 @@ export default async function loadAllGeoJson() {
   runUpdatePlan(updatePlan, version, buildManifest);
 
   // アプリレジストリへの登録
-  updateRegistry(buildManifest);
-
+  await updateRegistry(buildManifest);
   console.log("all succeed");
 }
 

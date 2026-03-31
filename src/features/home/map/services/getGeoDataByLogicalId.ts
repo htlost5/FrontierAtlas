@@ -1,30 +1,19 @@
-import { geoJsonMap } from "@/src/data/geojson/geojsonAssetMap";
-import { expoRead } from "@/src/infra/FileSystem/fileSystem";
+import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
-import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 import type { FeatureCollection } from "geojson";
 
 export async function getGeoDataByLogicalId(
-  id: string,
+  id: MapId,
 ): Promise<FeatureCollection> {
-  // 1. メモリキャッシュを確認
-  const cached = geojsonRegistry.get(id);
-  if (cached) return cached;
-
-  // 2. バンドル済みコンテンツを確認（ディスクI/O不要）
-  const bundled = geoJsonMap[id]?.content;
-  if (bundled) {
-    geojsonRegistry.set(id, bundled);
-    return bundled;
+  if (!geojsonRegistry.has(id)) {
+    throw new Error(`Not found ${id} in registry`)
+  }
+  
+  const data = geojsonRegistry.get(id);
+  
+  if (!data) {
+    throw new Error(`Failed to get ${id} from registry`)
   }
 
-  // 3. フォールバック：ディスクから読む
-  const path = geoJsonMap[id]?.relativePath;
-  if (!path) throw new Error(`GeoJSON not foundL ${id}`);
-
-  const text = await expoRead("imdf/" + path);
-  const parsed = parseJson(text);
-  geojsonRegistry.set(id, parsed);
-
-  return parsed;
+  return data;
 }

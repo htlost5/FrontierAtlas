@@ -13,9 +13,9 @@ type MapGeoData = {
 
 export function useMapGeoData(): MapGeoData {
   const venueId = `venue_venue`;
-  const studyhallId = `studyhall_footprints_footprints`;
-  const interactId = `interact_footprints_footprints`;
-  const stairId = `studyhall_units_stairs`;
+  const studyhallId = `studyhall_footprint`;
+  const interactId = `interact_footprint`;
+  const stairId = `studyhall_stairs`;
 
   const venue = useGeoDataByLogicalId(venueId);
   const studyhall = useGeoDataByLogicalId(studyhallId);

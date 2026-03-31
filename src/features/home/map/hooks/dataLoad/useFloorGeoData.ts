@@ -1,3 +1,4 @@
+import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import type { FeatureCollection } from "geojson";
 import { useGeoDataByLogicalId } from "./useGeoDataByLogicalId";
 
@@ -11,8 +12,8 @@ type FloorGeoData = {
 };
 
 export function useFloorGeoData(floor_num: number): FloorGeoData {
-  const unitId = `studyhall_units_floor${floor_num}`;
-  const sectionId = `studyhall_sections_floor${floor_num}`;
+  const unitId = `studyhall_units_floor${floor_num}` as MapId;
+  const sectionId = `studyhall_sections_floor${floor_num}` as MapId;
 
   const units = useGeoDataByLogicalId(unitId);
   const sections = useGeoDataByLogicalId(sectionId);
