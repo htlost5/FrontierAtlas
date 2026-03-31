@@ -1,3 +1,4 @@
+import { NetworkError } from "@/src/domain/NetworkErrors";
 import { safeFetch } from "./fetchWrapper";
 
 export async function fetchJsonWithRetry<T>(
@@ -27,10 +28,10 @@ export async function fetchJsonWithRetry<T>(
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 
-    await new Promise((r) => setTimeout(r, 300 * (i + 1)));
+    await new Promise((r) => setTimeout(r, 300 * 2 ** i));
   }
 
-  return null;
+  throw new NetworkError(`Failed to fetch ${url}`);
 }
 
 export async function fetchTextWithRetry(
@@ -60,8 +61,8 @@ export async function fetchTextWithRetry(
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 
-    await new Promise((r) => setTimeout(r, 300 * (i + 1)));
+    await new Promise((r) => setTimeout(r, 300 * 2 ** i));
   }
 
-  return null;
+  throw new NetworkError(`Failed to fetch ${url}`);
 }
