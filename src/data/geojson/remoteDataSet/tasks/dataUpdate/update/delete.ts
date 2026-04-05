@@ -1,10 +1,9 @@
 import { expoExists, expoRemove } from "@/src/infra/FileSystem/fileSystem";
 import { MapId } from "../../../../geojsonAssetMap";
-import { BuildManifest, LocalManifest } from "../../../../manifestType";
+import { LocalManifest } from "../../../../manifestType";
 
-export function dataDelete(
+export function remoteDataDelete(
   deleteList: MapId[],
-  buildManifest: BuildManifest,
   localManifest: LocalManifest,
 ): LocalManifest {
   for (const id of deleteList) {
@@ -12,10 +11,9 @@ export function dataDelete(
     if (!baseId) continue;
 
     const relativePath = baseId.relativePath;
-    const TARGET_PATH = `data/imdf/${relativePath}`;
 
-    if (expoExists(TARGET_PATH)) {
-      expoRemove(TARGET_PATH);
+    if (expoExists(relativePath)) {
+      expoRemove(relativePath);
     }
 
     delete localManifest.files[id];

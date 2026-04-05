@@ -1,10 +1,4 @@
-import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
-import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
-import { BuildManifest, LocalManifest } from "./manifestType";
-import cleanupTmp from "./useCase/file/cleanupTmp";
-import setBuildManifest from "./useCase/manifest/setBuildManifest";
-
-import assetManifest from "@/assets/data/manifest.json";
+import { DataSource } from "@/src/AppInit/hooks/usePrepareData";
 import {
   Sha256MismatchError,
   SizeMismatchError,
@@ -12,97 +6,43 @@ import {
   VersionMismatchError,
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
-import { LOCAL_MANFEST_PATH } from "../paths";
-import { applyUpdatePlan } from "./tasks/dataUpdate";
-import setUpdatePlan from "./tasks/setUpdatePlan";
-import { UpdateType } from "./tasks/setUpdatePlan/types";
-import { updateRegistry } from "./tasks/updateRegistry";
-import getLatestVersion from "./useCase/version/getLatestVersion";
+import { loadAssetGeoJson } from "./assetDataSet";
+import loadRemoteGeoJson from "./remoteDataSet";
 
-export default async function loadAllGeoJson() {
-  let localManifest: LocalManifest | null = null;
-  let buildManifest: BuildManifest;
-
-  let manifestSource: "remote" | "asset";
-
-  try {
-    const text = await expoRead(LOCAL_MANFEST_PATH);
-    localManifest = parseJson(text);
-  } catch (e) {
-    localManifest = null;
+export async function loadAllGeoJson(
+  isOffline: boolean,
+  onSourceChange?: (source: DataSource) => void,
+) {
+  // 最初にネットを確認　-> offlineだったらアセットから読み込み
+  if (isOffline) {
+    await loadAssetGeoJson();
+    onSourceChange?.("asset");
+    return;
   }
 
-  // ディレクトリ内ファイル確認
-  // console.log(`files: ${expoWalk("data/imdf")}`);
-
-  // tmpファイルのクリーンアップ
-  cleanupTmp();
-
-  let version: string | null;
-
-  // latestバージョン取得
   try {
-    version = await getLatestVersion();
+    await loadRemoteGeoJson();
+    onSourceChange?.("remote");
   } catch (e) {
-    version = null;
-  }
-  console.log(`version: ${version}`);
-
-  // buildManifest定義
-  if (!version) {
-    buildManifest = assetManifest;
-    manifestSource = "asset";
-  } else {
-    try {
-      buildManifest = await setBuildManifest(version);
-      manifestSource = "remote";
-    } catch (e) {
-      if (e instanceof NetworkError) {
-        buildManifest = assetManifest;
-        manifestSource = "asset";
-      } else if (
-        e instanceof SizeMismatchError ||
-        e instanceof Sha256MismatchError ||
-        e instanceof ValidationError
-      ) {
-        buildManifest = assetManifest;
-        manifestSource = "asset";
-      } else if (e instanceof VersionMismatchError) {
-        console.error("Server version mismatch. Abort.");
-        throw e;
-      } else {
-        throw e;
-      }
+    console.error("remote load failed:", e);
+    if (
+      e instanceof NetworkError ||
+      e instanceof SizeMismatchError ||
+      e instanceof Sha256MismatchError ||
+      e instanceof ValidationError
+    ) {
+      await loadAssetGeoJson();
+      onSourceChange?.("asset");
+    } else if (e instanceof VersionMismatchError) {
+      console.error("Server version mismatch. Abort.");
+      throw e;
+    } else {
+      console.error("Unexpected error: ", e);
+      throw e;
     }
   }
-
-  // localManifestの初期設定
-  if (!localManifest) {
-    localManifest = {
-      version: null,
-      files: {},
-    };
-  }
-
-  // 差分検出
-  const updatePlan: UpdateType = setUpdatePlan(buildManifest, localManifest);
-
-  // updatePlan（アセットorリモート取得 -> ローカルへ） / localManifest更新
-  localManifest = await applyUpdatePlan(
-    updatePlan,
-    version,
-    buildManifest,
-    localManifest,
-  );
-
-  // version更新
-  localManifest.version = buildManifest.version;
-
-  const localManifestData = stringifyJson(localManifest);
-  atomicWrite(LOCAL_MANFEST_PATH, localManifestData);
-
-  // アプリレジストリへの登録
-  await updateRegistry(buildManifest);
-
-  console.log("all succeed");
 }
+
+// geoDataloader 別関数を作る
+// network, datasource, lastUpdateの情報を保持
+// 必要となったときにのみ更新する

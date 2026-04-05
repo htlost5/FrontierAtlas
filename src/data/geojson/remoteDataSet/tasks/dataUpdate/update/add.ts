@@ -3,7 +3,7 @@ import { BuildManifest, LocalManifest } from "../../../../manifestType";
 import { saveJson } from "../../../useCase/download/saveWithVerify";
 import { resolveFileInfo } from "../../../useCase/manifest/resolveFileInfo";
 
-export async function dataAdd(
+export async function remoteDataAdd(
   addList: MapId[],
   DATA_SOURCE_URL: string,
   buildManifest: BuildManifest,

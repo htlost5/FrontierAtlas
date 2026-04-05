@@ -1,10 +1,9 @@
-import { expoExists } from "@/src/infra/FileSystem/fileSystem";
 import { MapId } from "../../../../geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "../../../../manifestType";
 import { saveJson } from "../../../useCase/download/saveWithVerify";
 import { resolveFileInfo } from "../../../useCase/manifest/resolveFileInfo";
 
-export async function dataUpdate(
+export async function remoteDataUpdate(
   updateList: MapId[],
   DATA_SOURCE_URL: string,
   buildManifest: BuildManifest,
@@ -12,8 +11,6 @@ export async function dataUpdate(
 ): Promise<LocalManifest> {
   for (const id of updateList) {
     const info = resolveFileInfo(id, DATA_SOURCE_URL, buildManifest);
-
-    if (!expoExists(info.finalPath)) continue;
 
     const { size, hash } = await saveJson({
       ...info,
@@ -26,6 +23,7 @@ export async function dataUpdate(
       sha256: hash,
     };
   }
+  
   return localManifest;
 }
 

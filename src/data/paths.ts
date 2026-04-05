@@ -1,1 +1,2 @@
-export const LOCAL_MANFEST_PATH = `data/imdf/localManifest.json`;
+export const basePath = `data/imdf`;
+export const LOCAL_MANFEST_PATH = `${basePath}/localManifest.json`;

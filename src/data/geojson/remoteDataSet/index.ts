@@ -12,8 +12,6 @@ import { remoteApplyUpdatePlan } from "./tasks/dataUpdate";
 import getLatestVersion from "./useCase/version/getLatestVersion";
 
 export default async function loadRemoteGeoJson() {
-  let lastError: Error;
-
   let localManifest: LocalManifest | null = null;
   let buildManifest: BuildManifest;
 
@@ -25,7 +23,7 @@ export default async function loadRemoteGeoJson() {
   }
 
   // ディレクトリ内ファイル確認
-  // console.log(`files: ${expoWalk("data/imdf")}`);
+  // console.log(`files: ${expoWalk(basePath)}`);
 
   // tmpファイルのクリーンアップ
   cleanupTmp();
@@ -41,11 +39,7 @@ export default async function loadRemoteGeoJson() {
   console.log(`version: ${version}`);
 
   // buildManifest定義
-  try {
-    buildManifest = await setBuildManifest(version);
-  } catch (e) {
-    throw e;
-  }
+  buildManifest = await setBuildManifest(version);
 
   // localManifestの初期設定
   if (!localManifest) {
@@ -58,7 +52,7 @@ export default async function loadRemoteGeoJson() {
   // 差分検出
   const updatePlan: UpdateType = setUpdatePlan(buildManifest, localManifest);
 
-  // updatePlan（アセットorリモート取得 -> ローカルへ） / localManifest更新
+  // updatePlan（リモート取得 -> ローカルへ） / localManifest更新
   localManifest = await remoteApplyUpdatePlan(
     updatePlan,
     version,
@@ -69,13 +63,13 @@ export default async function loadRemoteGeoJson() {
   // version更新
   localManifest.version = buildManifest.version;
 
-  const localManifestData = stringifyJson(localManifest);
-  atomicWrite(LOCAL_MANFEST_PATH, localManifestData);
+  const localManifestTxt = stringifyJson(localManifest);
+  atomicWrite(LOCAL_MANFEST_PATH, localManifestTxt);
 
   // アプリレジストリへの登録
   await updateRegistry(buildManifest);
 
-  console.log("all succeed");
+  console.log("remote all succeed");
 }
 
 /* 

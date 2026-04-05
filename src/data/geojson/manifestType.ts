@@ -1,14 +1,13 @@
 import type { Feature, FeatureCollection } from "geojson";
 
-// 共通 ManifestItem
-export type ManifestItem = {
+// buildManifest
+export type BuildManifestItem = {
   relativePath: string;
   size: number;
   sha256: string;
 };
 
-// buildManifest
-export type BuildManifestFiles = Record<string, ManifestItem>;
+export type BuildManifestFiles = Record<string, BuildManifestItem>;
 
 export type BuildManifest = {
   version: string;
@@ -17,7 +16,13 @@ export type BuildManifest = {
 };
 
 // localManifest
-export type LocalManifestFiles = Record<string, ManifestItem>;
+export type LocalManifestItem = {
+  relativePath: string;
+  size?: number;
+  sha256?: string;
+};
+
+export type LocalManifestFiles = Record<string, LocalManifestItem>;
 
 export type LocalManifest = {
   version: string | null;
