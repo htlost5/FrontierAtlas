@@ -6,7 +6,7 @@ export function stringifyJson(data: any): string {
   }
 }
 
-export function parseJson(data: any): any {
+export function parseJson(data: string): any {
   try {
     return JSON.parse(data);
   } catch (e) {

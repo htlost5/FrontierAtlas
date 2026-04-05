@@ -1,7 +1,7 @@
 import geoJsonMap, { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "@/src/data/geojson/manifestType";
 import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
-import { parseJson } from "@/src/infra/jsonParse/jsonParser";
+import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 
 export function assetDataUpdate(
   updateList: MapId[],
@@ -13,11 +13,11 @@ export function assetDataUpdate(
     const relativePath = baseId.relativePath;
 
     // アセット取得
-    const sourceTxt = geoJsonMap[id].content;
-    const data = parseJson(sourceTxt);
+    const data = geoJsonMap[id].content;
+    const dataTxt = stringifyJson(data);
 
     // ローカルに保存
-    atomicWrite(relativePath, data);
+    atomicWrite(relativePath, dataTxt);
 
     localManifest.files[id] = {
       relativePath: baseId.relativePath,
