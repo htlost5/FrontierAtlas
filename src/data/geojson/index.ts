@@ -6,6 +6,9 @@ import {
   VersionMismatchError,
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
+import { VersionFetchError } from "@/src/domain/VersionErrors";
+import expoWalk from "@/src/infra/FileSystem/walk";
+import { basePath } from "../paths";
 import { loadAssetGeoJson } from "./assetDataSet";
 import loadRemoteGeoJson from "./remoteDataSet";
 
@@ -13,6 +16,9 @@ export async function loadAllGeoJson(
   isOffline: boolean,
   onSourceChange?: (source: DataSource) => void,
 ) {
+  // ディレクトリ内ファイル確認
+  console.log(`files: ${expoWalk(basePath)}`);
+
   // 最初にネットを確認　-> offlineだったらアセットから読み込み
   if (isOffline) {
     await loadAssetGeoJson();
@@ -24,9 +30,10 @@ export async function loadAllGeoJson(
     await loadRemoteGeoJson();
     onSourceChange?.("remote");
   } catch (e) {
-    console.error("remote load failed:", e);
+    console.warn("remote load failed:", e);
     if (
       e instanceof NetworkError ||
+      e instanceof VersionFetchError ||
       e instanceof SizeMismatchError ||
       e instanceof Sha256MismatchError ||
       e instanceof ValidationError

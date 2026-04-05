@@ -10,6 +10,7 @@ import { UpdateType } from "../tasks/setUpdatePlan/types";
 import { updateRegistry } from "../tasks/updateRegistry";
 import { remoteApplyUpdatePlan } from "./tasks/dataUpdate";
 import getLatestVersion from "./useCase/version/getLatestVersion";
+import { VersionFetchError } from "@/src/domain/VersionErrors";
 
 export default async function loadRemoteGeoJson() {
   let localManifest: LocalManifest | null = null;
@@ -22,9 +23,6 @@ export default async function loadRemoteGeoJson() {
     localManifest = null;
   }
 
-  // ディレクトリ内ファイル確認
-  // console.log(`files: ${expoWalk(basePath)}`);
-
   // tmpファイルのクリーンアップ
   cleanupTmp();
 
@@ -34,7 +32,7 @@ export default async function loadRemoteGeoJson() {
   try {
     version = await getLatestVersion();
   } catch (e) {
-    throw new Error("version fetch failed");
+    throw new VersionFetchError();
   }
   console.log(`version: ${version}`);
 

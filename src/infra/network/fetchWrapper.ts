@@ -1,4 +1,4 @@
-const SIMULATE_OFFLINE = true;
+const SIMULATE_OFFLINE = false;
 
 export async function safeFetch(url: string, options?: RequestInit) {
   if (SIMULATE_OFFLINE) {
