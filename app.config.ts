@@ -2,18 +2,23 @@ import "dotenv/config";
 import { ConfigContext, ExpoConfig } from "expo/config";
 
 export default ({ config }: ConfigContext): ExpoConfig => {
-  // 現在のビルドプロファイルを判定
   const profile = process.env.EAS_BUILD_PROFILE;
+
   const isDev = profile === "development";
+  const isDebug = profile === "standaloneDev";
   const isProd = profile === "production";
 
   return {
     ...config,
-    // アプリ名と slug
-    name: isDev ? "FrontierAtlas Dev" : "FrontierAtlas Prod",
-    slug: "FrontierAtlas",
 
-    version: config.version, // 既存の version を使用
+    name: isDev
+      ? "FrontierAtlas Dev"
+      : isDebug
+        ? "FrontierAtlas Debug"
+        : "FrontierAtlas Prod",
+
+    slug: "FrontierAtlas",
+    version: config.version,
 
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
@@ -27,15 +32,19 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       supportsTablet: true,
       bundleIdentifier: isDev
         ? "com.htlost.frontieratlas.dev"
-        : "com.htlost.frontieratlas.prod",
+        : isDebug
+          ? "com.htlost.frontieratlas.debug"
+          : "com.htlost.frontieratlas.prod",
     },
 
     android: {
-      // プロファイルごとに package と versionCode を切り替え
       package: isDev
         ? "com.htlost.frontieratlas.dev"
-        : "com.htlost.frontieratlas.prod",
-      versionCode: isProd ? 1507 : 1506, // 必要に応じて数字を調整
+        : isDebug
+          ? "com.htlost.frontieratlas.debug"
+          : "com.htlost.frontieratlas.prod",
+
+      versionCode: isProd ? 1507 : 1506,
 
       adaptiveIcon: {
         foregroundImage:
@@ -44,6 +53,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       },
 
       edgeToEdgeEnabled: true,
+
+      /**
+       * 🔥 ここが重要
+       * standaloneDev だけデバッグ可能にする
+       */
+      ...(isDebug && {
+        debuggable: true,
+      }),
     },
 
     splash: {
@@ -87,6 +104,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           android: {
             compileSdkVersion: 35,
             targetSdkVersion: 35,
+
+            /**
+             * optional: debugビルドの安定化
+             */
+            ...(isDebug && {
+              buildToolsVersion: "35.0.0",
+            }),
           },
         },
       ],
@@ -120,6 +144,12 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     updates: {
       url: "https://u.expo.dev/1b6e78b6-c7c3-4760-b085-bb85043c0650",
+      /**
+       * standaloneDevではOTA無効にするのも推奨
+       */
+      ...(isDebug && {
+        enabled: false,
+      }),
     },
   };
 };

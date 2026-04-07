@@ -14,9 +14,14 @@
         "simulator": false
       }
     },
-    "preview": {
+    "standaloneDev": {
       "distribution": "internal",
-      "extends": "production"
+      "developmentClient": false,
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug",
+        "withoutCredentials": true
+      }
     },
     "production": {
       "autoIncrement": true,
