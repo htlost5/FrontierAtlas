@@ -61,8 +61,3 @@ yarn-error.*
 *.apk
 build_apk/
 app-example/
-
-# =========================
-# 🗺️ IMDF_explanation
-# =========================
-IMDF_explanation/
