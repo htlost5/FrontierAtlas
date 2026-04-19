@@ -124,6 +124,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       "@maplibre/maplibre-react-native",
+      "expo-asset",
+      "expo-image",
+      "expo-web-browser",
     ],
 
     experiments: {
