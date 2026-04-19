@@ -20,7 +20,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     name: appName,
 
-    slug: "frontieratlas",
+    slug: "FrontierAtlas",
     scheme: "frontieratlas",
     version: config.version || "1.0.0",
 
