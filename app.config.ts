@@ -1,72 +1,48 @@
-import "dotenv/config";
 import { ConfigContext, ExpoConfig } from "expo/config";
 
 export default ({ config }: ConfigContext): ExpoConfig => {
-  const profile = process.env.EAS_BUILD_PROFILE;
+  const profile = process.env.EAS_BUILD_PROFILE || "development";
 
   const isDev = profile === "development";
-  const isDebug = profile === "standaloneDev";
+  const isPreview = profile === "preview";
   const isProd = profile === "production";
+
+  const bundleSuffix = isDev ? ".dev" : isPreview ? ".preview" : "";
+
+  const appName = isDev
+    ? "FrontierAtlas (Dev)"
+    : isPreview
+      ? "FrontierAtlas (Preview)"
+      : "FrontierAtlas";
 
   return {
     ...config,
 
-    name: isDev
-      ? "FrontierAtlas Dev"
-      : isDebug
-        ? "FrontierAtlas Debug"
-        : "FrontierAtlas Prod",
+    name: appName,
 
-    slug: "FrontierAtlas",
-    version: config.version,
+    slug: "frontieratlas",
+    scheme: "frontieratlas",
+    version: config.version || "1.0.0",
 
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
-    scheme: "frontieratlas",
     userInterfaceStyle: "automatic",
     jsEngine: "hermes",
-    newArchEnabled: true,
 
     ios: {
       ...config.ios,
       supportsTablet: true,
-      bundleIdentifier: isDev
-        ? "com.htlost.frontieratlas.dev"
-        : isDebug
-          ? "com.htlost.frontieratlas.debug"
-          : "com.htlost.frontieratlas.prod",
+      bundleIdentifier: `com.htlost.frontieratlas${bundleSuffix}`,
     },
 
     android: {
-      package: isDev
-        ? "com.htlost.frontieratlas.dev"
-        : isDebug
-          ? "com.htlost.frontieratlas.debug"
-          : "com.htlost.frontieratlas.prod",
-
-      versionCode: isProd ? 1507 : 1506,
-
+      ...config.android,
+      package: `com.htlost.frontieratlas${bundleSuffix}`,
       adaptiveIcon: {
         foregroundImage:
           "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
         backgroundColor: "#ffffff",
       },
-
-      edgeToEdgeEnabled: true,
-
-      /**
-       * 🔥 ここが重要
-       * standaloneDev だけデバッグ可能にする
-       */
-      ...(isDebug && {
-        debuggable: true,
-      }),
-    },
-
-    splash: {
-      image: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff",
     },
 
     web: {
@@ -93,24 +69,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       [
-        "expo-router",
-        {
-          root: "./app",
-        },
-      ],
-      [
         "expo-build-properties",
         {
           android: {
             compileSdkVersion: 35,
             targetSdkVersion: 35,
-
-            /**
-             * optional: debugビルドの安定化
-             */
-            ...(isDebug && {
-              buildToolsVersion: "35.0.0",
-            }),
           },
         },
       ],
@@ -121,12 +84,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           imageWidth: 200,
           resizeMode: "contain",
           backgroundColor: "#ffffff",
+          dark: {
+            image: "./assets/images/startup/FrontierAtlasLogo_Splash_black.png",
+            backgroundColor: "#000000",
+          },
         },
       ],
-      "@maplibre/maplibre-react-native",
-      "expo-asset",
-      "expo-image",
-      "expo-web-browser",
+      [
+        "expo-router",
+        {
+          root: "./app",
+        },
+      ],
     ],
 
     experiments: {
@@ -147,12 +116,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     updates: {
       url: "https://u.expo.dev/1b6e78b6-c7c3-4760-b085-bb85043c0650",
-      /**
-       * standaloneDevではOTA無効にするのも推奨
-       */
-      ...(isDebug && {
-        enabled: false,
-      }),
+      enabled: isProd || isPreview,
     },
   };
 };
