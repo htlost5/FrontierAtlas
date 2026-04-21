@@ -55,7 +55,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       [
         "expo-font",
         {
-          fonts: ["./assets/fonts/Y1LunaChord-ExtraBold.otf"],
+          fonts: ["./assets/fonts/Y1LunaChord.otf"],
         },
       ],
       [
