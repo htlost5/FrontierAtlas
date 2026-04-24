@@ -11,13 +11,9 @@
 import fs from "fs";
 import path from "path";
 
-const [, , typeImportArg] = process.argv;
-
 // JSでは型は不要
 const manifestPath = path.resolve("../assets/data/manifest.json");
 const outPath = path.resolve("../src/data/geojson/geojsonAssetMap.ts");
-// 型定義 import パスはコメント化
-const manifestTypeImport = typeImportArg || "./Manifest/manifestType";
 
 function toPosix(p) {
   return p.split(path.sep).join("/");
@@ -106,8 +102,6 @@ function generate(manifest) {
     `export const geoJsonMap = {`,
     ...mapEntries,
     `};`,
-    "",
-    `export default geoJsonMap;`,
     "",
     "// オブジェクトのunion型定義",
     "export type MapId = keyof typeof geoJsonMap;",
