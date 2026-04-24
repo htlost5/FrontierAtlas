@@ -99,7 +99,7 @@ function generate(manifest) {
     header,
     // JSでは型 import は不要
     // `import { ManifestFileEnrty } from "${manifestTypeImport}";`,
-    `import { Feature, FeatureCollection, Geometry } from "geojson"`,
+    `import type { Feature, FeatureCollection, Geometry } from "geojson"`,
     "",
     ...imports,
     "",

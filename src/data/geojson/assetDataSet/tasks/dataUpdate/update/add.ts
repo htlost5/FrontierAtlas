@@ -1,4 +1,4 @@
-import geoJsonMap, { MapId } from "@/src/data/geojson/geojsonAssetMap";
+import { geoJsonMap, MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "@/src/data/geojson/manifestType";
 import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";
 import { stringifyJson } from "@/src/infra/jsonParse/jsonParser";
