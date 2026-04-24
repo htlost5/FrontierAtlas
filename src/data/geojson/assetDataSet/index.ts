@@ -16,7 +16,7 @@ export async function loadAssetGeoJson() {
   try {
     const text = await expoRead(LOCAL_MANFEST_PATH);
     localManifest = parseJson(text);
-  } catch (e) {
+  } catch {
     localManifest = null;
   }
 

@@ -24,7 +24,7 @@ export async function fetchJsonWithRetry<T>(
       } else {
         return null;
       }
-    } catch (e) {
+    } catch {
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 
@@ -57,7 +57,7 @@ export async function fetchTextWithRetry(
       } else {
         return null;
       }
-    } catch (e) {
+    } catch {
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 

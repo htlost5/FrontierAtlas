@@ -19,7 +19,7 @@ export default async function loadRemoteGeoJson() {
   try {
     const text = await expoRead(LOCAL_MANFEST_PATH);
     localManifest = parseJson(text);
-  } catch (e) {
+  } catch {
     localManifest = null;
   }
 
@@ -31,7 +31,7 @@ export default async function loadRemoteGeoJson() {
   // latestバージョン取得
   try {
     version = await getLatestVersion();
-  } catch (e) {
+  } catch {
     throw new VersionFetchError();
   }
   console.log(`version: ${version}`);

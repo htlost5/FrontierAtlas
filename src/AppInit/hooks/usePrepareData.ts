@@ -10,7 +10,7 @@ export default function usePrepareData(baseReady: boolean) {
   const [ready, setReady] = useState(false);
 
   const { isOffline } = useNetwork();
-  const [geoDataSource, setGeoDataSource] = useState<DataSource>();
+  const [, setGeoDataSource] = useState<DataSource>();
 
   useEffect(() => {
     if (!baseReady) return;

@@ -17,7 +17,7 @@ import { useSearch } from "@/src/features/home/search/Context/SearchContext";
 export function SearchBar() {
   const pathName = usePathname();
   const focused = pathName.endsWith("/search");
-  const { searchText, setSearchText, setAnswerText } = useSearch();
+  const { searchText, setSearchText } = useSearch();
 
   return (
     <TouchableOpacity
