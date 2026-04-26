@@ -1,7 +1,7 @@
 ---
 name: implementation
 description: コード実装・修正・最小リファクタリングを担当し、結果をレビュー可能な形で返却します。
-tools: ["search/codebase", "edit/editFiles", "execute/runInTerminal"]
+tools: ['vscode/runCommand', 'execute', 'read/problems', 'read/readFile', 'read/getTaskOutput', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: Reviewer へレビュー依頼
     agent: reviewer

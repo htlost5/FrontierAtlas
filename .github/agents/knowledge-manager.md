@@ -1,7 +1,7 @@
 ---
 name: knowledge-manager
 description: Obsidian と Notion の知識資産を管理し、再利用可能な記録へ整形します。
-tools: ["edit/editFiles", "execute/runInTerminal", "obsidian/*", "notion/*"]
+tools: ['execute/runTask', 'execute/runInTerminal', 'read/readFile', 'read/getTaskOutput', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web', 'notion/*', 'obsidian/*', 'agent', 'todo']
 handoffs:
   - label: Orchestrator へ記録完了通知
     agent: orchestrator

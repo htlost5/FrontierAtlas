@@ -1,7 +1,7 @@
 ---
 name: debugger
 description: エラー再現と原因分析に特化し、修正案を構造化して返却します（コード修正は実施しません）。
-tools: ["search/codebase", "edit/editFiles", "execute/runInTerminal", "search"]
+tools: ['execute/testFailure', 'execute/runTask', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/runTests', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: Implementation へ修正依頼
     agent: implementation

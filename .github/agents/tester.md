@@ -1,7 +1,7 @@
 ---
 name: tester
 description: テストケース設計と実行を担当し、バグ報告を再現可能な形式で返却します。
-tools: ["search/codebase", "edit/editFiles", "execute/runInTerminal"]
+tools: ['execute/testFailure', 'execute/runTask', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/runTests', 'read/readFile', 'read/getTaskOutput', 'read/terminalSelection', 'read/terminalLastCommand', 'edit/editFiles', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: Debugger へバグ連携
     agent: debugger

@@ -1,7 +1,7 @@
 ---
 name: orchestrator
 description: タスクを分解して最適なサブエージェントへ委譲し、結果を統合して報告します。
-tools: ["search", "search/codebase", "edit/editFiles", "execute/runInTerminal"]
+tools: ['execute/runInTerminal', 'execute/runTask', 'read/readFile', 'read/getTaskOutput', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: Implementation へ委譲
     agent: implementation

@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: コード品質・設計整合・規約準拠をレビューし、判定結果を返却します（直接修正は行いません）。
-tools: ["search", "search/codebase"]
+tools: ['execute/runTask', 'execute/createAndRunTask', 'read/readFile', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: Implementation へ修正依頼
     agent: implementation
