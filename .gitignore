@@ -4,6 +4,11 @@
 # Learn more: https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # =========================
+# ENV
+# =========================
+.env
+
+# =========================
 # 📦 Dependencies
 # =========================
 node_modules/
