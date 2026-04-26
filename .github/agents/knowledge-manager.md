@@ -1,7 +1,7 @@
 ---
 name: knowledge-manager
 description: Obsidian と Notion の知識資産を管理し、再利用可能な記録へ整形します。
-tools: ["edit/editFiles", "execute/runInTerminal"]
+tools: ["edit/editFiles", "execute/runInTerminal", "obsidian/*", "notion/*"]
 handoffs:
   - label: Orchestrator へ記録完了通知
     agent: orchestrator
@@ -13,6 +13,19 @@ handoffs:
 
 このファイルは、知識管理を担当するエージェント定義です。  
 `knowledge-manager` は Obsidian（開発知識）と Notion（公式ドキュメント）を運用します。
+
+## MCP Access Scope
+
+`knowledge-manager` は、Obsidian および Notion の MCP サーバーが公開する全ツールへ直接アクセスできる唯一のエージェントです。
+
+- 読み取り（ノート・ページ・データベースの取得、検索）
+- 書き込み・更新（既存ノートやページの編集）
+- 新規作成（ノート・ページ・データベースエントリの作成）
+- 削除・アーカイブ（コンテンツの削除またはアーカイブ）
+- 一覧取得・検索（コンテンツの列挙とクエリ）
+- Obsidian および Notion の MCP サーバーが公開するその他すべてのツール
+
+上記は `tools` の `obsidian/*` と `notion/*` によって包括的に許可されます。
 
 ## Workflow
 
