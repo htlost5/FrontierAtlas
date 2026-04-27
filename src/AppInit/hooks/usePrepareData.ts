@@ -10,7 +10,7 @@ export default function usePrepareData(baseReady: boolean) {
   const [ready, setReady] = useState(false);
 
   const { isOffline } = useNetwork();
-  const [, setGeoDataSource] = useState<DataSource>();
+  const [geoDataSource, setGeoDataSource] = useState<DataSource>();
 
   useEffect(() => {
     if (!baseReady) return;
@@ -22,6 +22,7 @@ export default function usePrepareData(baseReady: boolean) {
     (async () => {
       try {
         await loadAllGeoJson(isOffline, setGeoDataSource);
+        console.log(geoDataSource);
         if (!cancelled) setReady(true);
       } catch (e) {
         console.error("Failed to load geo data:", e);
@@ -32,7 +33,7 @@ export default function usePrepareData(baseReady: boolean) {
     return () => {
       cancelled = true;
     };
-  }, [baseReady, isOffline]);
+  }, [baseReady, isOffline, geoDataSource]);
 
   return ready;
 }
