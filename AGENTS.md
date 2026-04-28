@@ -38,8 +38,7 @@
 
 ## Obsidian vault 設定
 
-- 優先設定: 環境変数 `OBSIDIAN_VAULT_PATH`
-- API 利用時: Obsidian Local REST API を優先し、未利用時のみファイル直接操作を許可
+- Obsidian MCPをそのまま利用
 
 ## Notion ワークスペース構成方針
 

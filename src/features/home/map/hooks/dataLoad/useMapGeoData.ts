@@ -1,39 +1,46 @@
+// マップ描画に必要な GeoJSON を logicalId 単位で取得し、画面用データへ集約する Hook です。
 import type { FeatureCollection } from "geojson";
-import { useGeoDataByLogicalId } from "./useGeoDataByLogicalId";
 import { BuildingsData } from "../../layers/buildings/types";
+import { useGeoDataByLogicalId } from "./useGeoDataByLogicalId";
+
+const MAP_LOGICAL_IDS = {
+  venue: "venue_venue",
+  studyhall: "studyhall_footprint",
+  interact: "interact_footprint",
+  stair: "studyhall_stairs",
+} as const;
 
 type MapGeoData = {
   venue: FeatureCollection | null;
   buildings: BuildingsData;
   stairs: FeatureCollection | null;
-  
+
   mapLoading: boolean;
   mapError: Error | null;
 };
 
+/**
+ * マップに必要な複数データソースを統合し、表示用の loading/error を返します。
+ * @returns 地図描画に必要な GeoJSON と統合状態。
+ */
 export function useMapGeoData(): MapGeoData {
-  const venueId = `venue_venue`;
-  const studyhallId = `studyhall_footprint`;
-  const interactId = `interact_footprint`;
-  const stairId = `studyhall_stairs`;
+  const venue = useGeoDataByLogicalId(MAP_LOGICAL_IDS.venue);
+  const studyhall = useGeoDataByLogicalId(MAP_LOGICAL_IDS.studyhall);
+  const interact = useGeoDataByLogicalId(MAP_LOGICAL_IDS.interact);
+  const stairs = useGeoDataByLogicalId(MAP_LOGICAL_IDS.stair);
 
-  const venue = useGeoDataByLogicalId(venueId);
-  const studyhall = useGeoDataByLogicalId(studyhallId);
-  const interact = useGeoDataByLogicalId(interactId);
-  const stairs = useGeoDataByLogicalId(stairId);
+  const sources = [venue, studyhall, interact, stairs];
 
   const buildings: BuildingsData = {
     studyhall: studyhall.data,
     interact: interact.data,
-  }
-
-  // console.log(venue.data);
+  };
 
   return {
     venue: venue.data,
-    buildings: buildings,
+    buildings,
     stairs: stairs.data,
-    mapLoading: venue.loading || studyhall.loading || interact.loading || stairs.loading,
-    mapError: venue.error ?? studyhall.error ?? interact.error ?? stairs.error,
+    mapLoading: sources.some((source) => source.loading),
+    mapError: sources.find((source) => source.error)?.error ?? null,
   };
 }

@@ -2,16 +2,7 @@
 name: orchestrator
 description: タスクを分解して最適なサブエージェントへ委譲し、結果を統合して報告します。
 tools:
-  [
-    "execute/runInTerminal",
-    "execute/runTask",
-    "read/readFile",
-    "read/getTaskOutput",
-    "search",
-    "web",
-    "obsidian/*",
-    "todo",
-  ]
+  ['execute/runTask', 'execute/runInTerminal', 'read/getTaskOutput', 'read/readFile', 'search', 'web', 'obsidian/*', 'todo']
 ---
 
 <!-- 変更: 旧設計から Obsidian 根幹中継モデル（分散アクセス型）へ移行 -->
