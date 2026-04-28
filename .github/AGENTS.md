@@ -11,6 +11,15 @@
 - Obsidian 永久ノート群は全エージェントが読み取り可能、書き込みは Knowledge Manager のみとする。
 - Notion への正式ドキュメント化は Knowledge Manager のみが実行する。
 
+## Git操作ルール
+
+- 実装・修正・デバッグ・テストなど、1つのサブタスクが完了した段階で `git add -A && git commit -m "<type>: <summary>"` を実行する。
+- commit は Implementation / Debugger / Tester が各自の担当作業完了時に行う。
+- Orchestrator はフェーズ完了時にまとめて commit せず、各エージェントに委譲する。
+- Reviewer / Knowledge Manager は原則 commit を行わない。
+- 未完成・動作未確認・検証未通過の変更は commit しない。
+- `git push` はユーザーの明示的許可がある場合のみ実行する。
+
 ## タスク完了時の標準出力フォーマット（全エージェント必須）
 
 - 対象: `Orchestrator` / `Implementation` / `Debugger` / `Tester` / `Reviewer` / `Knowledge Manager`
