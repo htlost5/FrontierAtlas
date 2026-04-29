@@ -1,3 +1,4 @@
+// AppInit の公開エクスポートをまとめる。
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";

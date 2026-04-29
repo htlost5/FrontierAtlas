@@ -1,3 +1,4 @@
+// 建物レイヤーの描画コンポーネントを定義する。
 import { PolygonLayer } from "../../components/mapComp/PolygonLayer";
 import { buildingsFillStyle, buildingsLineStyle } from "./style";
 import { BUILDING_KEYS, BuildingsProps } from "./types";

@@ -1,3 +1,4 @@
+// useMapContext 用のカスタムHookを定義する。
 import { useContext } from "react";
 import { MapContext, MapContextValue } from "../../context/MapContext";
 

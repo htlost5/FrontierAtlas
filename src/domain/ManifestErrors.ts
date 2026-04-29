@@ -1,3 +1,4 @@
+// ManifestErrors のドメインエラー/型を定義する。
 export class ManifestError extends Error {
     constructor(message: string) {
         super(message);

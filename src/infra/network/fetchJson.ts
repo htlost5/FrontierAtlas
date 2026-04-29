@@ -1,3 +1,4 @@
+// fetchJson のインフラ層実装を提供する。
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import { safeFetch } from "./fetchWrapper";
 

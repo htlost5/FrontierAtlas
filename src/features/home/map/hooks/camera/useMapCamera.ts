@@ -1,3 +1,4 @@
+// useMapCamera 用のカスタムHookを定義する。
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 import { useEffect, useRef } from "react";
 

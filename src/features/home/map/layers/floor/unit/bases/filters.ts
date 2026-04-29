@@ -1,3 +1,4 @@
+// filters レイヤ描画を定義する。
 import { filterMaker } from "../../../../renderers/expressions/filterMaker";
 
 export const BASE_CATEGORIES = {

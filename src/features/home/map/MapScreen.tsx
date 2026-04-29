@@ -1,3 +1,4 @@
+// マップ画面の描画とデータ読み込みを統合するコンポーネント。
 import React, { useCallback, useEffect } from "react";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";

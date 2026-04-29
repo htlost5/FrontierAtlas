@@ -1,3 +1,4 @@
+// geojsonRegistry のインフラ層実装を提供する。
 import type { FeatureCollection } from "geojson";
 
 export const registry = new Map<string, FeatureCollection>();

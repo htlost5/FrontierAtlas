@@ -1,3 +1,4 @@
+// unit の公開エクスポートをまとめる。
 import { GeoLayerProps } from "../../../types";
 import { BaseView } from "./bases";
 import { RoomView } from "./rooms";

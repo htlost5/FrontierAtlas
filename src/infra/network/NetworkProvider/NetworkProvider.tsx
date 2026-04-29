@@ -1,3 +1,4 @@
+// NetworkProvider のインフラ層実装を提供する。
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 

@@ -1,3 +1,4 @@
+// zoomBound 用のカスタムHookを定義する。
 import { mapConfig } from "../../../constants/mapConfig";
 import { CameraAction } from "./types";
 

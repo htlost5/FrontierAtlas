@@ -1,3 +1,4 @@
+// fileSystem のインフラ層実装を提供する。
 import { File } from "expo-file-system";
 import { BASEDIR_PATH } from "./FileConfig";
 import expoWalk from "./walk";

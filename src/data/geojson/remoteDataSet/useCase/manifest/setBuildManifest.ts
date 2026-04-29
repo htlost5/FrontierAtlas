@@ -1,3 +1,4 @@
+// setBuildManifest のGeoJSONデータ処理を定義する。
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import { RELEASES_URL } from "../../../../urls";
 import { BuildManifest } from "../../../manifestType";

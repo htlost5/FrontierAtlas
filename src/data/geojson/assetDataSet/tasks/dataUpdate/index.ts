@@ -1,3 +1,4 @@
+// dataUpdate の公開エクスポートをまとめる。
 import { BuildManifest, LocalManifest } from "../../../manifestType";
 import { UpdateType } from "../../../tasks/setUpdatePlan/types";
 import { sortFilesById } from "../../../useCase/utils/sortFilesById";

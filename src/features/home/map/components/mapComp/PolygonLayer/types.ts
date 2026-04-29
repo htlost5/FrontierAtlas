@@ -1,3 +1,4 @@
+// types の型定義をまとめる。
 import {
   Expression,
   FillLayerStyle,

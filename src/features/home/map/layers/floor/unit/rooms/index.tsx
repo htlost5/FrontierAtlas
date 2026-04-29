@@ -1,3 +1,4 @@
+// rooms の公開エクスポートをまとめる。
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
 import { ROOM_CONFIGS } from "./configs";

@@ -1,3 +1,4 @@
+// getLatestVersion のGeoJSONデータ処理を定義する。
 import { LATEST_URL } from "@/src/data/urls";
 import { fetchJsonWithRetry } from "@/src/infra/network/fetchJson";
 

@@ -1,3 +1,4 @@
+// レジストリから GeoJSON を取得するサービスを提供する。
 import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import type { FeatureCollection } from "geojson";

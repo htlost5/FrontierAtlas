@@ -1,3 +1,4 @@
+// useNetwork のインフラ層実装を提供する。
 import { useContext } from "react";
 import { NetworkContext } from "./NetworkProvider";
 

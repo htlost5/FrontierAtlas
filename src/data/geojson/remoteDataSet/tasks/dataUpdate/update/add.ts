@@ -1,3 +1,4 @@
+// add のGeoJSONデータ処理を定義する。
 import { MapId } from "../../../../geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "../../../../manifestType";
 import { saveJson } from "../../../useCase/download/saveWithVerify";

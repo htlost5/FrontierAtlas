@@ -1,3 +1,4 @@
+// configs レイヤ描画を定義する。
 import { LayerConfig } from "../../../../components/mapComp/PolygonLayer/types";
 import { BASE_FILTERS, BaseKey } from "./filters";
 

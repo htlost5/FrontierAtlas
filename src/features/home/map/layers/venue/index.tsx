@@ -1,3 +1,4 @@
+// venue の公開エクスポートをまとめる。
 import React from "react";
 
 // MapLibreのレイヤーコンポーネントとGeoJSON型をインポート

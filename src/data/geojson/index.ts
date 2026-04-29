@@ -1,3 +1,4 @@
+// geojson の公開エクスポートをまとめる。
 import { DataSource } from "@/src/AppInit/hooks/usePrepareData";
 import {
   Sha256MismatchError,

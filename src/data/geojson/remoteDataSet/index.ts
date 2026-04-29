@@ -1,3 +1,4 @@
+// remoteDataSet の公開エクスポートをまとめる。
 import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import { BuildManifest, LocalManifest } from "../manifestType";

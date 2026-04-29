@@ -1,3 +1,4 @@
+// 建物レイヤーの型定義をまとめる。
 import { GeoLayerProps } from "../../types";
 
 export const BUILDING_KEYS = ["studyhall", "interact"] as const;

@@ -1,3 +1,4 @@
+// useGeoDataByLogicalId 用のカスタムHookを定義する。
 import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import type { FeatureCollection } from "geojson";
 import { useEffect, useState } from "react";

@@ -1,3 +1,4 @@
+// useCameraController の公開エクスポートをまとめる。
 import { CameraRef } from "@maplibre/maplibre-react-native";
 import { useCallback } from "react";
 import { CameraAction, CameraRegion } from "./types";

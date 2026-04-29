@@ -1,3 +1,4 @@
+// bases の公開エクスポートをまとめる。
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
 import { BASE_CONFIGS } from "./configs";

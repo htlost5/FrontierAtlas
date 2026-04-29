@@ -1,3 +1,4 @@
+// add のGeoJSONデータ処理を定義する。
 import { geoJsonMap, MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { BuildManifest, LocalManifest } from "@/src/data/geojson/manifestType";
 import { atomicWrite } from "@/src/infra/FileSystem/fileSystem";

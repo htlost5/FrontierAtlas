@@ -1,3 +1,4 @@
+// MapView とカメラ設定をラップするコンテナコンポーネント。
 import {
   BackgroundLayer,
   Camera,

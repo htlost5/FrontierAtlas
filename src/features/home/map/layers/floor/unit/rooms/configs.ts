@@ -1,3 +1,4 @@
+// configs レイヤ描画を定義する。
 import {
     FillLayerStyle,
     LineLayerStyle,

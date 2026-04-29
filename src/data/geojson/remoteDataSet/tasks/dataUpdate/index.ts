@@ -1,3 +1,4 @@
+// dataUpdate の公開エクスポートをまとめる。
 import { RELEASES_URL } from "@/src/data/urls";
 import { BuildManifest, LocalManifest } from "../../../manifestType";
 import { UpdateType } from "../../../tasks/setUpdatePlan/types";

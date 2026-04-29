@@ -1,3 +1,4 @@
+// PolygonLayer の公開エクスポートをまとめる。
 import {
   FillLayer,
   FillLayerStyle,

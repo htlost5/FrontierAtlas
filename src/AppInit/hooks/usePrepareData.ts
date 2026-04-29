@@ -1,3 +1,4 @@
+// usePrepareData 用のカスタムHookを定義する。
 import { loadAllGeoJson } from "@/src/data/geojson";
 import { basePath } from "@/src/data/paths";
 import expoWalk from "@/src/infra/FileSystem/walk";

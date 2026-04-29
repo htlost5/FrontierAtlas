@@ -1,3 +1,4 @@
+// Header コンポーネントを定義する。
 import { Image, StyleSheet, View } from "react-native";
 
 import FrontierAtlasLogo from "@/assets/images/appLogo/FrontierAtlasLogo_white.png"; // リネームに合わせて修正

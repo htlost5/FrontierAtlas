@@ -1,3 +1,4 @@
+// cleanupTmp のGeoJSONデータ処理を定義する。
 import { basePath } from "@/src/data/paths";
 import { expoAllRemove } from "@/src/infra/FileSystem/fileSystem";
 

@@ -1,3 +1,4 @@
+// resolveFileInfo のGeoJSONデータ処理を定義する。
 import { MapId } from "../../../geojsonAssetMap";
 import { BuildManifest } from "../../../manifestType";
 

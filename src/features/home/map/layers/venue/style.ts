@@ -1,3 +1,4 @@
+// style のスタイル定義をまとめる。
 import type {
     FillLayerStyle,
     LineLayerStyle,

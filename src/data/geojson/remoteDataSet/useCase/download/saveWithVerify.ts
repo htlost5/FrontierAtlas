@@ -1,3 +1,4 @@
+// saveWithVerify のGeoJSONデータ処理を定義する。
 import {
   DownloadVerifyOptions,
   downloadWithVerify,

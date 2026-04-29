@@ -1,3 +1,4 @@
+// components の公開エクスポートをまとめる。
 import { StyleSheet, View } from "react-native";
 import { HeaderTabs } from "./Header/Header";
 import { BottomTabs } from "./bottomTabBar";

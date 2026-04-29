@@ -1,3 +1,4 @@
+// downloadWithVerify のGeoJSONデータ処理を定義する。
 import {
   Sha256MismatchError,
   SizeMismatchError,

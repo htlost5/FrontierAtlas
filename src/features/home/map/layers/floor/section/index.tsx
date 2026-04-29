@@ -1,3 +1,4 @@
+// section の公開エクスポートをまとめる。
 import { PolygonLayer } from "../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../types";
 import { sectionFillStyle, sectionLineStyle } from "./style";

@@ -1,3 +1,4 @@
+// jsonParser のインフラ層実装を提供する。
 export function stringifyJson(data: any): string {
   try {
     return JSON.stringify(data);

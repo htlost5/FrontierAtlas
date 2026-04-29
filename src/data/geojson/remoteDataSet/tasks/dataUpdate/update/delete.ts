@@ -1,3 +1,4 @@
+// delete のGeoJSONデータ処理を定義する。
 import { expoExists, expoRemove } from "@/src/infra/FileSystem/fileSystem";
 import { MapId } from "../../../../geojsonAssetMap";
 import { LocalManifest } from "../../../../manifestType";

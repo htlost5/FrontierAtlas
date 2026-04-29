@@ -1,3 +1,4 @@
+// filter レイヤ描画を定義する。
 import { filterMaker } from "@/src/features/home/map/renderers/expressions/filterMaker";
 
 const ROOM_CATEGORIES = {

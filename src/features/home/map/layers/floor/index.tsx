@@ -1,3 +1,4 @@
+// フロアレイヤーの描画コンポーネントを定義する。
 import { SectionView } from "./section";
 import { FloorProps } from "./types";
 import { UnitView } from "./unit";

@@ -1,3 +1,4 @@
+// assetDataSet の公開エクスポートをまとめる。
 import assetManifest from "@/assets/data/manifest.json";
 import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";

@@ -1,3 +1,4 @@
+// types の型定義をまとめる。
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
 export type CameraRegion = {

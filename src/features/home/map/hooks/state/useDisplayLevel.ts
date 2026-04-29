@@ -1,3 +1,4 @@
+// useDisplayLevel 用のカスタムHookを定義する。
 import { useMemo } from "react";
 
 export const DisplayMode = {

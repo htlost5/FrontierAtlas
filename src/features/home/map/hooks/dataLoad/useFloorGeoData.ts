@@ -1,3 +1,4 @@
+// useFloorGeoData 用のカスタムHookを定義する。
 import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import type { FeatureCollection } from "geojson";
 import { useGeoDataByLogicalId } from "./useGeoDataByLogicalId";
