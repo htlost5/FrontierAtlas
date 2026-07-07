@@ -1,0 +1,8 @@
+{
+  "name": "frontieratlas-monorepo",
+  "private": true,
+  "workspaces": [
+    "mobile",
+    "tools/map-assets"
+  ]
+}
