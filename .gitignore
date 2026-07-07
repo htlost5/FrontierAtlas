@@ -5,3 +5,6 @@ node_modules
 # Build artifacts (uploaded to R2, not git)
 tools/map-assets/build/
 tools/map-assets/releases/
+
+# macOS metadata
+__MACOSX/

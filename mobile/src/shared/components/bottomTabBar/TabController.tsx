@@ -33,7 +33,6 @@ export function TabController({ isVisible }: BottomTabsProps) {
   const handleAfterAnimation = React.useCallback(
     async (name: RouteName) => {
       if (name === "classroom") {
-        console.log("classroom pressed! -> launch after animation")
         await launchApp("classroom");
         return;
       }

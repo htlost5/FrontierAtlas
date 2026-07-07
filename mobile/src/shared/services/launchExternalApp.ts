@@ -13,7 +13,7 @@ export async function launchApp (key: ExternalAppKey) {
       });
       return;
     } catch {
-      console.log("classroom error")
+      // fallback to web URL below
     }
   }
 

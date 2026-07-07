@@ -30,11 +30,4 @@ export type LocalManifest = {
   files: LocalManifestFiles;
 };
 
-// assetManifest
-export type AssetItem = {
-  logicalId: string;
-  relativePath: string;
-  content: Feature | FeatureCollection;
-};
-
-export type AssetFiles = Record<string, AssetItem>;
+// NOTE: AssetItem/AssetFiles removed (unused in current codebase)

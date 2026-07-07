@@ -6,6 +6,3 @@ export const REMOTE_BASE_URL = "https://pub-d8f5948d1eee41aea5ea49d6578710cb.r2.
 
 export const LATEST_URL = `${REMOTE_BASE_URL}/meta/latest.json`;
 export const RELEASES_URL = `${REMOTE_BASE_URL}/releases`;
-
-// プッシュ通知 Worker URL
-export const PUSH_WORKER_URL = "https://geo-data-push.htlost8.workers.dev";

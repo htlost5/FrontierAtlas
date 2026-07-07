@@ -1,7 +1,5 @@
 // domain 層の公開エクスポートをまとめる。
 export {
-  ManifestError,
-  ValidationError,
   SizeMismatchError,
   Sha256MismatchError,
   VersionMismatchError,
@@ -15,6 +13,4 @@ export type {
   LocalManifestItem,
   LocalManifestFiles,
   LocalManifest,
-  AssetItem,
-  AssetFiles,
 } from "./manifestTypes";

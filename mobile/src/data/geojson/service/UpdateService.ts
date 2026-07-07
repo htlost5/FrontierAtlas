@@ -19,7 +19,6 @@ import {
   Sha256MismatchError,
   SizeMismatchError,
   VersionMismatchError,
-  ValidationError,
 } from "@/src/domain/ManifestErrors";
 import { LATEST_URL, RELEASES_URL } from "@/src/data/urls";
 import { fetchJsonWithRetry, fetchTextWithRetry } from "@/src/infra/network/fetchJson";
