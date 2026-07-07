@@ -1,5 +1,5 @@
 // fetchJson のインフラ層実装を提供する。
-import { NetworkError } from "@/src/domain/NetworkErrors";
+import { NetworkError, QuotaExceededError } from "@/src/domain/NetworkErrors";
 import { safeFetch } from "./fetchWrapper";
 
 type ResponseReader<T> = (res: Response) => Promise<T>;
@@ -13,6 +13,14 @@ async function fetchWithRetryCore<T>(
     try {
       const res = await safeFetch(url);
 
+      // クォータ超過 (Cloudflare Worker 503 + X-Quota-Exceeded header)
+      if (res.status === 503 && res.headers.get("X-Quota-Exceeded") === "true") {
+        const usage = res.headers.get("X-Quota-Usage") || "unknown";
+        throw new QuotaExceededError(
+          `Cloudflare quota exceeded. Usage: ${usage}. Service paused until next cycle.`
+        );
+      }
+
       // 404即終了
       if (res.status === 404) {
         console.warn(`404: ${url}`);
@@ -20,6 +28,11 @@ async function fetchWithRetryCore<T>(
       }
 
       if (res.ok) {
+        // クォータ警告ログ
+        if (res.headers.get("X-Quota-Warning") === "true") {
+          const daily = res.headers.get("X-Quota-Daily") || "?";
+          console.warn(`[QuotaWarning] Approaching limit (daily: ${daily})`);
+        }
         return await readResponse(res);
       }
 
@@ -28,7 +41,8 @@ async function fetchWithRetryCore<T>(
       } else {
         return null;
       }
-    } catch {
+    } catch (e) {
+      if (e instanceof QuotaExceededError) throw e; // 再スロー
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 

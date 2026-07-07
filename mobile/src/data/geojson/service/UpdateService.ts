@@ -13,7 +13,7 @@ import type {
   BuildManifest,
   LocalManifest,
 } from "@/src/domain/manifestTypes";
-import { NetworkError } from "@/src/domain/NetworkErrors";
+import { NetworkError, QuotaExceededError } from "@/src/domain/NetworkErrors";
 import { VersionFetchError } from "@/src/domain/VersionErrors";
 import {
   Sha256MismatchError,
@@ -61,6 +61,7 @@ export class UpdateService {
 
       return versionInfo;
     } catch (e) {
+      if (e instanceof QuotaExceededError) throw e;
       if (e instanceof VersionFetchError || e instanceof NetworkError) {
         console.warn("[UpdateService] Failed to fetch version info:", e);
         return null;
@@ -105,6 +106,7 @@ export class UpdateService {
 
       return remoteManifest;
     } catch (e) {
+      if (e instanceof QuotaExceededError) throw e;
       if (
         e instanceof NetworkError ||
         e instanceof SizeMismatchError ||
