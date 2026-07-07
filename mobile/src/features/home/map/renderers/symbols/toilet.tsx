@@ -1,4 +1,5 @@
 // トイレ表示コンポーネント: 男性・女性・多機能トイレアイコンをマップ上に表示
+// source/labels/iconSources/unit/symbols/toilet.tsx から移植
 import {
   Images,
   ShapeSource,
@@ -6,32 +7,29 @@ import {
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
-/**
- * トイレ表示コンポーネントのプロパティ定義
- * @property data - トイレのポイントGeoJSONデータ
- * @property isVisible - 表示詳細度レベル（0: 非表示, 1以上: 表示）
- * @property floor_num - フロア番号
- */
 type Props = {
   data: FeatureCollection;
   isVisible: number;
-  floor_num: number;
 };
 
-export function Toilet({ data, isVisible, floor_num }: Props) {
+/**
+ * トイレ表示コンポーネント
+ * - 男性・女性・多機能トイレのアイコンを表示
+ */
+export function Toilet({ data, isVisible }: Props) {
   return (
     <>
       <Images
-        id={`toilet_icons-images`}
+        id="toilet_icons-images"
         images={{
           male: require("@/assets/images/icons/MapView/MapLogo/toilet/male.png"),
           female: require("@/assets/images/icons/MapView/MapLogo/toilet/female.png"),
           wheelchair: require("@/assets/images/icons/MapView/MapLogo/toilet/wheelchair.png"),
         }}
       />
-      <ShapeSource id={`toilet-shape`} shape={data}>
+      <ShapeSource id="toilet-shape" shape={data}>
         <SymbolLayer
-          id={`male-symbol`}
+          id="male-symbol"
           filter={["==", ["get", "category"], "restroom_male"]}
           style={{
             iconImage: "male",
@@ -51,7 +49,7 @@ export function Toilet({ data, isVisible, floor_num }: Props) {
           }}
         />
         <SymbolLayer
-          id={`female-symbol`}
+          id="female-symbol"
           filter={["==", ["get", "category"], "restroom_female"]}
           style={{
             iconImage: "female",
@@ -71,7 +69,7 @@ export function Toilet({ data, isVisible, floor_num }: Props) {
           }}
         />
         <SymbolLayer
-          id={`wheelChair-symbol`}
+          id="wheelChair-symbol"
           filter={["==", ["get", "category"], "restroom_accessible"]}
           style={{
             iconImage: "wheelchair",

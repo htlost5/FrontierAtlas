@@ -21,6 +21,6 @@
     "svg.d.ts",
     "assets/**/*",
     "types/**/*",
-    "source/views/floor/unit/unitComp"
-, "scripts/generate_geojsonAssetMap.js"  ]
+    "scripts/generate_geojsonAssetMap.js"
+  ]
 }

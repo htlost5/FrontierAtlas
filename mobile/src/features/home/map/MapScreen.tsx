@@ -16,6 +16,7 @@ import type { CameraRegion } from "./types";
 import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
+import { MapIconLabel } from "./renderers/MapIconLabel";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
@@ -81,6 +82,15 @@ export function MapScreen({ cameraRef }: Props) {
 
       {isFloorReady && (
         <FloorView floorData={floorGeoData} stairsData={stairs} />
+      )}
+
+      {/* ラベル表示: 詳細表示モード（detail）の場合のみ */}
+      {isFloorReady && (
+        <MapIconLabel
+          floor_num={floor}
+          data={floorGeoData.units}
+          isVisible={displayMode === "detail"}
+        />
       )}
       
       {isVenueReady && (

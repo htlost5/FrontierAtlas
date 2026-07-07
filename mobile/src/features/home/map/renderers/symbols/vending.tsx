@@ -1,4 +1,5 @@
 // 自販機表示コンポーネント: 自販機アイコンをマップ上に表示
+// source/labels/iconSources/unit/symbols/vending.tsx から移植
 import {
   Images,
   ShapeSource,
@@ -6,39 +7,27 @@ import {
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 
-/**
- * 自販機表示コンポーネントのプロパティ定義
- * @property data - 自販機のポイントGeoJSONデータ
- * @property isVisible - 表示詳細度レベル（0: 非表示, 1以上: 表示）
- * @property floor_num - フロア番号
- */
 type Props = {
   data: FeatureCollection;
   isVisible: number;
-  floor_num: number;
 };
 
 /**
  * 自販機表示コンポーネント
  * - 自販機アイコンをズームレベルに応じたサイズで表示
- * - isVisible フラグで表示/非表示を制御
- * @param data - ポイントGeoJSONデータ
- * @param isVisible - 表示詳細度
- * @param floor_num - フロア番号
- * @returns 自販機シンボルレイヤー
  */
-export function Vending({ data, isVisible, floor_num }: Props) {
+export function Vending({ data, isVisible }: Props) {
   return (
     <>
       <Images
-        id={`vending_icons-images`}
+        id="vending_icons-images"
         images={{
           vending: require("@/assets/images/icons/MapView/MapLogo/vending/vending-machine.png"),
         }}
       />
-      <ShapeSource id={`vending-shape`} shape={data}>
+      <ShapeSource id="vending-shape" shape={data}>
         <SymbolLayer
-          id={`vending-symbol`}
+          id="vending-symbol"
           filter={["==", ["get", "category"], "vending_area"]}
           style={{
             iconImage: "vending",
