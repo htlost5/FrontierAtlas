@@ -1,4 +1,4 @@
-// manifestType の型定義をまとめる。
+// manifestTypes のドメイン型定義をまとめる。
 import type { Feature, FeatureCollection } from "geojson";
 
 // buildManifest

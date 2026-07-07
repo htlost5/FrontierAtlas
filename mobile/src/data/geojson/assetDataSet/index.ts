@@ -3,7 +3,7 @@ import assetManifest from "@/assets/maps/manifest.json";
 import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import { LOCAL_MANFEST_PATH } from "../../paths";
-import { BuildManifest, LocalManifest } from "../manifestType";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import setUpdatePlan from "../tasks/setUpdatePlan";
 import { UpdateType } from "../tasks/setUpdatePlan/types";
 import cleanupTmp from "../useCase/file/cleanupTmp";
@@ -50,7 +50,7 @@ export async function loadAssetGeoJson() {
   const localManifestTxt = stringifyJson(localManifest);
   atomicWrite(LOCAL_MANFEST_PATH, localManifestTxt);
 
-  await updateRegistry(buildManifest);
+  await updateRegistry(buildManifest, updatePlan);
 
   console.log("asset all succeed")
 }

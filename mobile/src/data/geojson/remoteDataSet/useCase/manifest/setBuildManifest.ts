@@ -1,7 +1,7 @@
 // setBuildManifest のGeoJSONデータ処理を定義する。
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import { RELEASES_URL } from "../../../../urls";
-import { BuildManifest } from "../../../manifestType";
+import { BuildManifest } from "@/src/domain/manifestTypes";
 
 import { downloadWithVerify } from "@/src/data/geojson/remoteDataSet/useCase/download/downloadWithVerify";
 import { VersionMismatchError } from "@/src/domain/ManifestErrors";

@@ -8,19 +8,33 @@ import {
 } from "@/src/domain/ManifestErrors";
 import { NetworkError } from "@/src/domain/NetworkErrors";
 import { VersionFetchError } from "@/src/domain/VersionErrors";
-import expoWalk from "@/src/infra/FileSystem/walk";
-import { basePath } from "../paths";
 import { loadAssetGeoJson } from "./assetDataSet";
 import loadRemoteGeoJson from "./remoteDataSet";
+
+function handleLoadError(e: unknown): "fallback_asset" | "abort" {
+  if (
+    e instanceof NetworkError ||
+    e instanceof VersionFetchError ||
+    e instanceof SizeMismatchError ||
+    e instanceof Sha256MismatchError ||
+    e instanceof ValidationError
+  ) {
+    return "fallback_asset";
+  }
+
+  if (e instanceof VersionMismatchError) {
+    console.error("Server version mismatch. Abort.");
+    return "abort";
+  }
+
+  console.error("Unexpected error: ", e);
+  return "abort";
+}
 
 export async function loadAllGeoJson(
   isOffline: boolean,
   onSourceChange?: (source: DataSource) => void,
 ) {
-  // ディレクトリ内ファイル確認
-  console.log(`files: ${expoWalk(basePath)}`);
-
-  // 最初にネットを確認　-> offlineだったらアセットから読み込み
   if (isOffline) {
     await loadAssetGeoJson();
     onSourceChange?.("asset");
@@ -32,25 +46,12 @@ export async function loadAllGeoJson(
     onSourceChange?.("remote");
   } catch (e) {
     console.warn("remote load failed:", e);
-    if (
-      e instanceof NetworkError ||
-      e instanceof VersionFetchError ||
-      e instanceof SizeMismatchError ||
-      e instanceof Sha256MismatchError ||
-      e instanceof ValidationError
-    ) {
+    const action = handleLoadError(e);
+    if (action === "fallback_asset") {
       await loadAssetGeoJson();
       onSourceChange?.("asset");
-    } else if (e instanceof VersionMismatchError) {
-      console.error("Server version mismatch. Abort.");
-      throw e;
     } else {
-      console.error("Unexpected error: ", e);
       throw e;
     }
   }
 }
-
-// geoDataloader 別関数を作る
-// network, datasource, lastUpdateの情報を保持
-// 必要となったときにのみ更新する

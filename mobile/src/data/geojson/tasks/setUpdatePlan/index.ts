@@ -1,6 +1,6 @@
 // build manifest と local manifest の差分から、追加・更新・削除の更新計画を作成する処理です。
 import { MapId } from "../../geojsonAssetMap";
-import { BuildManifest, LocalManifest } from "../../manifestType";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import { addDetect } from "./detect/addDetect";
 import { deleteDetect } from "./detect/deleteDetect";
 import { updateDetect } from "./detect/updateDetect";

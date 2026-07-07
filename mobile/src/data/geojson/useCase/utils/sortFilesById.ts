@@ -1,5 +1,5 @@
 // sortFilesById のGeoJSONデータ処理を定義する。
-import { BuildManifestFiles, LocalManifestFiles } from "../../manifestType";
+import { BuildManifestFiles, LocalManifestFiles } from "@/src/domain/manifestTypes";
 
 export function sortFilesById(
   localFiles: LocalManifestFiles,

@@ -1,5 +1,5 @@
 // dataUpdate の公開エクスポートをまとめる。
-import { BuildManifest, LocalManifest } from "../../../manifestType";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import { UpdateType } from "../../../tasks/setUpdatePlan/types";
 import { sortFilesById } from "../../../useCase/utils/sortFilesById";
 import { assetDataAdd } from "./update/add";

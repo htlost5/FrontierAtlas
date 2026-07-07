@@ -1,6 +1,4 @@
-// フェッチ処理に共通オプションを適用し、必要時にオフライン疑似再現できるネットワークラッパーです。
-const SIMULATE_OFFLINE = false;
-
+// フェッチ処理に共通オプションを適用するネットワークラッパーです。
 /**
  * fetch に no-cache を既定適用した共通ラッパーを返します。
  * @param url 取得対象 URL。
@@ -11,10 +9,6 @@ export async function safeFetch(
   url: string,
   options?: RequestInit,
 ): Promise<Response> {
-  if (SIMULATE_OFFLINE) {
-    throw new Error("Simulated offline network error");
-  }
-
   const overrideOption: RequestInit = {
     cache: "no-cache",
     ...options,

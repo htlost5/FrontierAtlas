@@ -1,7 +1,7 @@
 // Header コンポーネントを定義する。
 import { Image, StyleSheet, View } from "react-native";
 
-import FrontierAtlasLogo from "@/assets/images/appLogo/FrontierAtlasLogo_white.png"; // リネームに合わせて修正
+import FrontierAtlasLogo from "@/assets/images/appLogo/FrontierAtlasLogo_white.png";
 
 type Props = {
   isVisible: boolean;
@@ -22,24 +22,6 @@ export function HeaderTabs({ isVisible }: Props) {
   );
 }
 
-// interface HeaderProps {}
-
-// const Header: React.FC<HeaderProps> = () => {
-//   return (
-//     <View style={[styles.headerContainer]}>
-//       <View style={styles.logoWrapper}>
-//         <Image
-//           source={FrontierAtlasLogo}
-//           style={styles.logoStyle}
-//           resizeMode="contain"
-//         />
-//       </View>
-//     </View>
-//   );
-// };
-
-const account_size = "80%";
-
 const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "white",
@@ -56,7 +38,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   logoStyle: {
-    width: account_size || "80%",
-    height: account_size || "80%",
+    width: "80%",
+    height: "80%",
   },
 });

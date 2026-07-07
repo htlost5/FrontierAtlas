@@ -1,7 +1,7 @@
 // add のGeoJSONデータ処理を定義する。
 import { MapId } from "../../../../geojsonAssetMap";
-import { BuildManifest, LocalManifest } from "../../../../manifestType";
-import { saveJson } from "../../../useCase/download/saveWithVerify";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
+import { downloadWithVerify } from "../../../useCase/download/downloadWithVerify";
 import { resolveFileInfo } from "../../../useCase/manifest/resolveFileInfo";
 
 export async function remoteDataAdd(
@@ -13,7 +13,7 @@ export async function remoteDataAdd(
   for (const id of addList) {
     const info = resolveFileInfo(id, DATA_SOURCE_URL, buildManifest);
 
-    const { size, hash } = await saveJson({
+    const { size, hash } = await downloadWithVerify({
       ...info,
       maxRetry: 3,
     });

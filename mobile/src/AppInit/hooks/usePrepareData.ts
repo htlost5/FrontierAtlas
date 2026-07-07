@@ -3,7 +3,7 @@ import { loadAllGeoJson } from "@/src/data/geojson";
 import { basePath } from "@/src/data/paths";
 import expoWalk from "@/src/infra/FileSystem/walk";
 import { useNetwork } from "@/src/infra/network/NetworkProvider/useNetwork";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type DataSource = "remote" | "asset";
 
@@ -11,7 +11,8 @@ export default function usePrepareData(baseReady: boolean) {
   const [ready, setReady] = useState(false);
 
   const { isOffline } = useNetwork();
-  const [geoDataSource, setGeoDataSource] = useState<DataSource>();
+  const geoDataSourceRef = useRef<DataSource | undefined>(undefined);
+  const [, setGeoDataSource] = useState<DataSource>();
 
   useEffect(() => {
     if (!baseReady) return;
@@ -22,8 +23,12 @@ export default function usePrepareData(baseReady: boolean) {
 
     (async () => {
       try {
-        await loadAllGeoJson(isOffline, setGeoDataSource);
-        console.log(geoDataSource);
+        const onSourceChange = (source: DataSource) => {
+          geoDataSourceRef.current = source;
+          setGeoDataSource(source);
+        };
+        await loadAllGeoJson(isOffline, onSourceChange);
+        console.log(geoDataSourceRef.current);
         if (!cancelled) setReady(true);
       } catch (e) {
         console.error("Failed to load geo data:", e);
@@ -34,7 +39,7 @@ export default function usePrepareData(baseReady: boolean) {
     return () => {
       cancelled = true;
     };
-  }, [baseReady, isOffline, geoDataSource]);
+  }, [baseReady, isOffline]);
 
   return ready;
 }

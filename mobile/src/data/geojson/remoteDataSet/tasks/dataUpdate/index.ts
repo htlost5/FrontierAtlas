@@ -1,6 +1,6 @@
 // dataUpdate の公開エクスポートをまとめる。
 import { RELEASES_URL } from "@/src/data/urls";
-import { BuildManifest, LocalManifest } from "../../../manifestType";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import { UpdateType } from "../../../tasks/setUpdatePlan/types";
 import { sortFilesById } from "../../../useCase/utils/sortFilesById";
 import { remoteDataAdd } from "./update/add";

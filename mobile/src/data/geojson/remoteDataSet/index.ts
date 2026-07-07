@@ -1,7 +1,7 @@
 // remoteDataSet の公開エクスポートをまとめる。
 import { atomicWrite, expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
-import { BuildManifest, LocalManifest } from "../manifestType";
+import { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import cleanupTmp from "../useCase/file/cleanupTmp";
 import setBuildManifest from "./useCase/manifest/setBuildManifest";
 
@@ -66,7 +66,7 @@ export default async function loadRemoteGeoJson() {
   atomicWrite(LOCAL_MANFEST_PATH, localManifestTxt);
 
   // アプリレジストリへの登録
-  await updateRegistry(buildManifest);
+  await updateRegistry(buildManifest, updatePlan);
 
   console.log("remote all succeed");
 }

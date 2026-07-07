@@ -1,6 +1,6 @@
 // resolveFileInfo のGeoJSONデータ処理を定義する。
 import { MapId } from "../../../geojsonAssetMap";
-import { BuildManifest } from "../../../manifestType";
+import { BuildManifest } from "@/src/domain/manifestTypes";
 
 type FileInfo = {
   url: string;

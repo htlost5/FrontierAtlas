@@ -3,7 +3,7 @@ import { MapId } from "../../../geojsonAssetMap";
 import {
   BuildManifestFiles,
   LocalManifestFiles
-} from "../../../manifestType";
+} from "@/src/domain/manifestTypes";
 
 export function updateDetect(
   buildFiles: BuildManifestFiles,
