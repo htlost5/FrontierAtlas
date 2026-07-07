@@ -1,37 +1,36 @@
 // usePrepareData 用のカスタムHookを定義する。
-import { loadAllGeoJson } from "@/src/data/geojson";
-import { basePath } from "@/src/data/paths";
-import expoWalk from "@/src/infra/FileSystem/walk";
-import { useNetwork } from "@/src/infra/network/NetworkProvider/useNetwork";
-import { useEffect, useRef, useState } from "react";
-
-export type DataSource = "remote" | "asset";
+import {
+  initializeGeoData,
+  checkAndUpdate,
+} from "@/src/data/geojson";
+import { useEffect, useState } from "react";
 
 export default function usePrepareData(baseReady: boolean) {
   const [ready, setReady] = useState(false);
 
-  const { isOffline } = useNetwork();
-  const geoDataSourceRef = useRef<DataSource | undefined>(undefined);
-  const [, setGeoDataSource] = useState<DataSource>();
-
   useEffect(() => {
     if (!baseReady) return;
-
-    console.log(`files: ${expoWalk(basePath)}`);
 
     let cancelled = false;
 
     (async () => {
       try {
-        const onSourceChange = (source: DataSource) => {
-          geoDataSourceRef.current = source;
-          setGeoDataSource(source);
-        };
-        await loadAllGeoJson(isOffline, onSourceChange);
-        console.log(geoDataSourceRef.current);
+        // 1. SQLite キャッシュからの即時表示（初回はアセットからリストア）
+        await initializeGeoData();
         if (!cancelled) setReady(true);
+
+        // 2. バックグラウンドで更新チェック（起動をブロックしない）
+        checkAndUpdate().then((results) => {
+          const failed = results.filter((r) => r.status === "failed");
+          if (failed.length > 0) {
+            console.warn(
+              "Partial update failures:",
+              failed.map((r) => r.mapId),
+            );
+          }
+        });
       } catch (e) {
-        console.error("Failed to load geo data:", e);
+        console.error("Failed to initialize geo data:", e);
         if (!cancelled) setReady(false);
       }
     })();
@@ -39,7 +38,7 @@ export default function usePrepareData(baseReady: boolean) {
     return () => {
       cancelled = true;
     };
-  }, [baseReady, isOffline]);
+  }, [baseReady]);
 
   return ready;
 }

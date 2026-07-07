@@ -55,6 +55,7 @@
     "expo-navigation-bar": "~55.0.14",
     "expo-router": "~55.0.16",
     "expo-splash-screen": "~55.0.22",
+    "expo-sqlite": "~15.2.0",
     "expo-status-bar": "~55.0.6",
     "expo-symbols": "~55.0.9",
     "expo-system-ui": "~55.0.19",

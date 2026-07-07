@@ -18,17 +18,19 @@ export function useGeoDataByLogicalId(id: MapId): GeoDataByLogicalId {
   useEffect(() => {
     let cancelled = false;
 
-    setLoading(true);
-    setError(null);
+    (async () => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const res = getGeoDataByLogicalId(id);
-      if (!cancelled) setData(res);
-    } catch (e) {
-      if (!cancelled) setError(e as Error);
-    } finally {
-      if (!cancelled) setLoading(false);
-    }
+      try {
+        const res = await getGeoDataByLogicalId(id);
+        if (!cancelled) setData(res);
+      } catch (e) {
+        if (!cancelled) setError(e as Error);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
 
     return () => {
       cancelled = true;
