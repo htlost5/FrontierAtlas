@@ -34,7 +34,7 @@ import wasteRoom from "@/assets/images/icons/MapView/map/unitIcons/wasteRoom.png
  * - value: インポートした画像アセット
  * - エイリアス（homeEconomicsRoom→classroom, studioRoom→preparationRoom, office→preparationRoom）も含む
  */
-const ICON_IMAGES: Record<string, any> = {
+const ICON_IMAGES: Record<string, number> = {
   classroom: classroom,
   studyRoom: studyRoom,
   library: library,

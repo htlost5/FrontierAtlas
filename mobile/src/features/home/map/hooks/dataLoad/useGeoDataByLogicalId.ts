@@ -21,16 +21,14 @@ export function useGeoDataByLogicalId(id: MapId): GeoDataByLogicalId {
     setLoading(true);
     setError(null);
 
-    getGeoDataByLogicalId(id)
-      .then((res) => {
-        if (!cancelled) setData(res);
-      })
-      .catch((e) => {
-        if (!cancelled) setError(e);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+    try {
+      const res = getGeoDataByLogicalId(id);
+      if (!cancelled) setData(res);
+    } catch (e) {
+      if (!cancelled) setError(e as Error);
+    } finally {
+      if (!cancelled) setLoading(false);
+    }
 
     return () => {
       cancelled = true;

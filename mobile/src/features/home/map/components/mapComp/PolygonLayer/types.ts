@@ -13,7 +13,6 @@ export type LayerConfig = {
 };
 
 export type PolygonProps = {
-  key?: string;
   prefixId: string;
   showLabel?: boolean;
 } & GeoLayerProps &

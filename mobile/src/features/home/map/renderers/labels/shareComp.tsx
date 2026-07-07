@@ -1,6 +1,6 @@
 // ラベルレイヤー共通コンポーネント: ラベル設定をMaplibreシンボルレイヤーに変換して描画
 import { SymbolLayer } from "@maplibre/maplibre-react-native";
-import { LavelConfig } from "./LavelConfig";
+import { LabelConfig } from "./LabelConfig";
 
 /**
  * ラベルレイヤーのプロパティ定義
@@ -11,12 +11,12 @@ import { LavelConfig } from "./LavelConfig";
 type Props = {
   floor_num: number;
   sourceId: string;
-  config: LavelConfig;
+  config: LabelConfig;
 };
 
 /**
  * ラベルレイヤーコンポーネント
- * - LavelConfigに基づいてMaplibreのシンボルレイヤーを生成
+ * - LabelConfigに基づいてMaplibreのシンボルレイヤーを生成
  * - アイコンとテキスト（部屋名）の表示/非表示を制御
  * - ズームレベルに応じたアイコンとテキストサイズの自動調整
  * @param floor_num - フロア番号
@@ -24,7 +24,7 @@ type Props = {
  * @param config - ラベル表示設定
  * @returns SymbolLayerコンポーネント
  */
-export function LavelLayer({ floor_num, sourceId, config }: Props) {
+export function LabelLayer({ floor_num, sourceId, config }: Props) {
   return (
     <>
       <SymbolLayer

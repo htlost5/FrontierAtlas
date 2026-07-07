@@ -9,9 +9,9 @@ import type { GeoJSON } from "geojson";
  */
 export function useMapEvents(
   callback: (feature: GeoJSON.Feature) => void,
-): { onPress: (e: any) => void } {
+): { onPress: (e: { features?: GeoJSON.Feature[] }) => void } {
   const onPress = useCallback(
-    (e: any) => {
+    (e: { features?: GeoJSON.Feature[] }) => {
       const feature = e?.features?.[0] as GeoJSON.Feature | undefined;
       if (feature) {
         callback(feature);

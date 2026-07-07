@@ -3,9 +3,9 @@ import { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
 import type { FeatureCollection } from "geojson";
 
-export async function getGeoDataByLogicalId(
+export function getGeoDataByLogicalId(
   id: MapId,
-): Promise<FeatureCollection> {
+): FeatureCollection {
   if (!geojsonRegistry.has(id)) {
     throw new Error(`Not found ${id} in registry`)
   }

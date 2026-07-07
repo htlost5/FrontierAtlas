@@ -4,8 +4,8 @@
 import { ShapeSource } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { MapIconRegistry } from "./MapIconRegistry";
-import { LavelLayer } from "./labels/shareComp";
-import { LAVEL_CONFIGS, LavelKey } from "./labels/LavelConfigs";
+import { LabelLayer } from "./labels/shareComp";
+import { LABEL_CONFIGS, LabelKey } from "./labels/LabelConfigs";
 import { UnitSymbol } from "./UnitSymbol";
 
 type Props = {
@@ -46,12 +46,12 @@ export function MapIconLabel({ floor_num, data, isVisible }: Props) {
       {/* GeoJSONデータをMapLibreのデータソースとして登録 */}
       <ShapeSource id={labelSourceId} shape={processedGeoJson}>
         {/* すべてのラベルタイプに対してレイヤーを生成 */}
-        {(Object.keys(LAVEL_CONFIGS) as LavelKey[]).map((key) => (
-          <LavelLayer
+        {(Object.keys(LABEL_CONFIGS) as LabelKey[]).map((key) => (
+          <LabelLayer
             key={key}
             floor_num={floor_num}
             sourceId={labelSourceId}
-            config={LAVEL_CONFIGS[key]}
+            config={LABEL_CONFIGS[key]}
           />
         ))}
       </ShapeSource>

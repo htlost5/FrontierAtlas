@@ -34,7 +34,7 @@ const overrides: Partial<Record<RoomKey, Partial<LayerConfig>>> = {
   terrace: {
     fillStyle: TRANSPARENT_FILL,
     lineStyle: {
-      lineColor: "rgba(0,0,0,2)",
+      lineColor: "rgba(0,0,0,0.2)",
     },
   },
   informationLounge: {

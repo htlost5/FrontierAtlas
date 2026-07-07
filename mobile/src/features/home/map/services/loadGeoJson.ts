@@ -9,8 +9,7 @@ export async function loadGeoJson(id: string, path: string) {
   if (cached) return cached;
 
   // 2. ない場合ディスクから読む
-  const text = await expoRead("imdf/" + path); // -> エラー場所
-  // console.log(text);
+  const text = await expoRead("imdf/" + path);
   const parsed = parseJson(text);
 
   // 3. メモリに保存

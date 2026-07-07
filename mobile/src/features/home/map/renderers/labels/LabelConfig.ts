@@ -7,7 +7,7 @@
  * @property textVisible - テキスト（部屋名）表示フラグ
  * @property textColor - テキスト色（オプション、デフォルト: 黒）
  */
-export type LavelConfig = {
+export type LabelConfig = {
   key: string;
   filter: any;
   iconVisible: boolean;
