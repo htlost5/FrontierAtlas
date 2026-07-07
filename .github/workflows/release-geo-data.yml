@@ -1,0 +1,84 @@
+name: Release GeoJSON Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (e.g. v0.1.0)'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Transform GeoJSON -> JSON
+        run: node tools/map-assets/transformer/transform.js
+
+      - name: Generate Manifest & Version
+        run: |
+          node tools/map-assets/builder/build-release.js ${{ inputs.version }}
+
+      - name: Update latest.json
+        run: node tools/map-assets/builder/update-latest.js ${{ inputs.version }}
+
+      - name: Upload meta/latest.json to R2
+        run: |
+          wrangler r2 object put geo-data-frontieratlas/meta/latest.json \
+            --file=tools/map-assets/meta/latest.json \
+            --contentType="application/json; charset=utf-8" --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Upload version.json to R2
+        run: |
+          wrangler r2 object put "geo-data-frontieratlas/releases/${{ inputs.version }}/data/version.json" \
+            --file="tools/map-assets/releases/${{ inputs.version }}/data/version.json" \
+            --contentType="application/json; charset=utf-8" --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Upload manifest.json to R2
+        run: |
+          wrangler r2 object put "geo-data-frontieratlas/releases/${{ inputs.version }}/data/manifest.json" \
+            --file="tools/map-assets/releases/${{ inputs.version }}/data/manifest.json" \
+            --contentType="application/json; charset=utf-8" --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Upload imdf files to R2
+        run: |
+          find tools/map-assets/releases/${{ inputs.version }}/data/imdf -type f | while read -r f; do
+            r2_path="releases/${{ inputs.version }}/data/imdf/${f#*releases/${{ inputs.version }}/data/imdf/}"
+            r2_path=$(echo "$r2_path" | sed 's|\\|/|g')
+            wrangler r2 object put "geo-data-frontieratlas/$r2_path" \
+              --file="$f" --contentType="application/json; charset=utf-8" --remote &
+          done
+          wait
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Notify Worker (push trigger)
+        if: vars.PUSH_WORKER_URL != ''
+        run: |
+          curl -s -X POST "${{ vars.PUSH_WORKER_URL }}/api/notify-update" \
+            -H "Authorization: Bearer ${{ secrets.PUSH_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"type\":\"geojson-update\",\"version\":\"${{ inputs.version }}\"}"
+
+      - name: Summary
+        run: |
+          echo "## Release Complete" >> $GITHUB_STEP_SUMMARY
+          echo "- Version: \`${{ inputs.version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Worker URL: ${{ vars.PUSH_WORKER_URL }}" >> $GITHUB_STEP_SUMMARY

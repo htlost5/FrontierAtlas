@@ -1,0 +1,18 @@
+# d:/htlost5-workspace/projects/frontieratlas/wrangler.toml
+name = "geo-data-push"
+main = "tools/worker-push/index.js"
+compatibility_date = "2025-07-01"
+
+# R2 バケットバインディング
+[[r2_buckets]]
+binding = "GEO_DATA"
+bucket_name = "geo-data-frontieratlas"
+
+# KV Store バインディング
+[[kv_namespaces]]
+binding = "DEVICE_TOKENS"
+id = "bd635816e6e24677a3d63e5c7461dcc0"  # Step 5 で取得
+
+# 環境変数
+[vars]
+EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send"

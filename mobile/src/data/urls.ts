@@ -1,3 +1,11 @@
-export const REMOTE_BASE_URL = "https://htlost5.github.io/geo-data-repo";
-export const LATEST_URL = `${REMOTE_BASE_URL}/meta/latest.json`
+// R2 + Worker 経由のURL
+// Worker が R2 バケットへのプロキシとして機能する
+export const REMOTE_BASE_URL = "https://pub-d8f5948d1eee41aea5ea49d6578710cb.r2.dev";
+// R2 公開アクセス有効化後はカスタムドメインに切り替え:
+// export const REMOTE_BASE_URL = "https://geo-data.frontieratlas.dev";
+
+export const LATEST_URL = `${REMOTE_BASE_URL}/meta/latest.json`;
 export const RELEASES_URL = `${REMOTE_BASE_URL}/releases`;
+
+// プッシュ通知 Worker URL
+export const PUSH_WORKER_URL = "https://geo-data-push.htlost8.workers.dev";

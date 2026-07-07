@@ -1,1 +1,7 @@
 node_modules
+# Cloudflare Wrangler
+.wrangler/
+
+# Build artifacts (uploaded to R2, not git)
+tools/map-assets/build/
+tools/map-assets/releases/
