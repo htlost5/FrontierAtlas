@@ -4,6 +4,7 @@ import React, { useCallback, useEffect } from "react";
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
 import { MapContainer } from "./components/MapContainer";
+import { LoadingOverlay } from "./components/LoadingOverlay";
 
 import { useDisplayLevel } from "./hooks/state/useDisplayLevel";
 import { useMapContext } from "./hooks/state/useMapContext";
@@ -11,7 +12,7 @@ import { useMapContext } from "./hooks/state/useMapContext";
 import { useFloorGeoData } from "./hooks/dataLoad/useFloorGeoData";
 import { useMapGeoData } from "./hooks/dataLoad/useMapGeoData";
 
-import { CameraRegion } from "./hooks/camera/useCameraController/types";
+import type { CameraRegion } from "./types";
 import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
@@ -42,25 +43,22 @@ export function MapScreen({ cameraRef }: Props) {
     [setZoom],
   );
 
-  // 操作完了後の動作
-  // const handleCamera = useCameraController(cameraRef, [zoomBoundary]);
-  // const handleRegionDidChange = useCallback(
-  //   (region: CameraRegion) => {
-  //     handleCamera(region);
-  //   },
-  //   [handleCamera],
-  // );
+  // TODO: 操作完了後の動作（zoomBoundary 使用時は useCameraController + handleRegionDidChange を有効化）
 
   // エラー出力 -> エラー時のスクリーンを実装する（フォールバック）
+  const [hasFatalError, setHasFatalError] = React.useState(false);
+
   useEffect(() => {
     if (floorError) {
       console.error("Floor Error:", floorError);
+      setHasFatalError(true);
     }
   }, [floorError]);
 
   useEffect(() => {
     if (mapError) {
       console.error("Map Error:", mapError);
+      setHasFatalError(true);
     }
   }, [mapError]);
 
@@ -74,6 +72,11 @@ export function MapScreen({ cameraRef }: Props) {
       cameraRef={cameraRef}
       onRegionIsChanging={handleRegionIsChanging}
     >
+      <LoadingOverlay
+        visible={mapLoading || floorLoading}
+        message={hasFatalError ? "データ読み込みエラー" : "読み込み中..."}
+      />
+
       {isVenueReady && <VenueView data={venue} />}
 
       {isFloorReady && (

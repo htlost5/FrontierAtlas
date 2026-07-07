@@ -1,11 +1,11 @@
 // マップ上で1階から5階までのフロアを切り替えるUIコンポーネント
 import {
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from "react-native";
+import { mapControlShadow } from "@/src/shared/constants/shadowStyles";
 import { useMapContext } from "../../hooks/state/useMapContext";
 
 // 個別の階層ボタンのプロパティ定義
@@ -78,24 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     width: 46,
     height: 200,
-    ...Platform.select({
-      android: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 4,
-      },
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-      },
-      web: {
-        boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
-      },
-    }),
+    ...mapControlShadow,
   },
   block: {
     width: 40,

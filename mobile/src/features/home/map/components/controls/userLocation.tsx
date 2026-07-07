@@ -1,12 +1,14 @@
 // ユーザー位置表示ボタン: マップ上で特定座標へカメラをジャンプするコンポーネント
 import React from "react";
-import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { mapControlShadow } from "@/src/shared/constants/shadowStyles";
+import { mapConfig } from "../../constants/mapConfig";
 import { useMapContext } from "../../hooks/state/useMapContext";
 
 export function UserLocation() {
   const { cameraRef } = useMapContext();
   const handlePress = () => {
-    cameraRef.current?.flyTo([139.6784895108818, 35.49777179199512], 750);
+    cameraRef.current?.flyTo(mapConfig.default.center, mapConfig.animation.duration.flyTo);
   };
 
   return (
@@ -30,24 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     width: 50,
-    ...Platform.select({
-      android: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 4,
-      },
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-      },
-      web: {
-        boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
-      },
-    }),
+    ...mapControlShadow,
   },
   out1: {
     position: "absolute",

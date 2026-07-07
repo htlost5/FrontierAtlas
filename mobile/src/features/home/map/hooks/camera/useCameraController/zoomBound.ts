@@ -11,7 +11,7 @@ export const zoomBoundary: CameraAction = (camera, region) => {
   if (z < mapConfig.zoom.softMin - EPSILON) {
     camera.setCamera({
       zoomLevel: mapConfig.zoom.softMin,
-      animationDuration: 250,
+      animationDuration: mapConfig.animation.duration.zoomBound,
     });
   }
 };

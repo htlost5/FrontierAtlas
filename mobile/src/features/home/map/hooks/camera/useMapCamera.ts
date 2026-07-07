@@ -1,6 +1,7 @@
 // useMapCamera 用のカスタムHookを定義する。
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 import { useEffect, useRef } from "react";
+import { mapConfig } from "../../constants/mapConfig";
 
 export function useMapCamera(
   cameraRef: React.RefObject<CameraRef | null>,
@@ -16,11 +17,9 @@ export function useMapCamera(
         return;
       }
       cameraRef.current.setCamera({
-        centerCoordinate: initial?.center ?? [
-          139.6784895108818, 35.49777179199512,
-        ],
-        zoomLevel: initial?.zoom ?? 17.2,
-        animationDuration: 1000,
+        centerCoordinate: initial?.center ?? mapConfig.default.center,
+        zoomLevel: initial?.zoom ?? mapConfig.default.zoom,
+        animationDuration: mapConfig.animation.duration.cameraInit,
       });
       initializedRef.current = true;
     };

@@ -5,14 +5,15 @@ import {
   CameraRef,
   MapView,
 } from "@maplibre/maplibre-react-native";
+import type { CameraRegion } from "../hooks/camera/useCameraController/types";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { mapConfig } from "../constants/mapConfig";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
-  onRegionIsChanging?: (region: any) => void;
-  onRegionDidChange?: (region: any) => void;
+  onRegionIsChanging?: (region: CameraRegion) => void;
+  onRegionDidChange?: (region: CameraRegion) => void;
   children?: React.ReactNode;
 };
 

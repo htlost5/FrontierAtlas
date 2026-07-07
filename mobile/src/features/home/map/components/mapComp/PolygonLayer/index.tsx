@@ -21,6 +21,7 @@ export function PolygonLayer({
   filter,
   fillStyle,
   lineStyle,
+  showLabel = false,
 }: PolygonProps) {
   if (!data) return null;
 
@@ -32,7 +33,7 @@ export function PolygonLayer({
 
   const finalLineStyle: LineLayerStyle = {
     ...lineStyle,
-    lineOpacity: visible === false ? 0 : (fillStyle.fillOpacity ?? 1),
+    lineOpacity: visible === false ? 0 : (lineStyle.lineOpacity ?? fillStyle.fillOpacity ?? 1),
     lineOpacityTransition: OPACITY_TRANSITION,
   };
 
@@ -48,13 +49,15 @@ export function PolygonLayer({
         filter={filter}
         style={finalLineStyle}
       />
-      <SymbolLayer
-        id={`symbolLayer_${prefixId}`}
-        style={{
-          textField: ["get", "name_en"],
-          textSize: 12,
-        }}
-      />
+      {showLabel && (
+        <SymbolLayer
+          id={`symbolLayer_${prefixId}`}
+          style={{
+            textField: ["get", "name_en"],
+            textSize: 12,
+          }}
+        />
+      )}
     </ShapeSource>
   );
 }

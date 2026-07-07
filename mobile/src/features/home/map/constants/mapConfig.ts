@@ -24,4 +24,17 @@ export const mapConfig = {
       sw: [139.67751547790088, 35.49628365306419],
     },
   },
+
+  displayThresholds: {
+    building: 17.9,
+    entrance: 19.4,
+  },
+
+  animation: {
+    duration: {
+      flyTo: 750,
+      cameraInit: 1000,
+      zoomBound: 250,
+    },
+  },
 };
