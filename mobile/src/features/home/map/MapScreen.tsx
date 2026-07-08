@@ -124,7 +124,10 @@ export function MapScreen({ cameraRef }: Props) {
 
       {/* W20: FloorView renders based on floorGeoData availability, not stairs */}
       {isFloorDataReady && (
-        <FloorView floorData={floorGeoData} stairsData={stairs} />
+        <FloorView
+          floorData={floorGeoData}
+          stairsData={stairs}
+        />
       )}
 
       {/* ラベル表示: 詳細表示モード（detail）の場合のみ */}
