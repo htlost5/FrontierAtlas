@@ -15,4 +15,5 @@ id = "bd635816e6e24677a3d63e5c7461dcc0"  # Step 5 で取得
 
 # 環境変数
 [vars]
+# API_KEY must be set via `wrangler secret put API_KEY` — do NOT hardcode here
 EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send"

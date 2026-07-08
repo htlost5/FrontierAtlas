@@ -1,7 +1,6 @@
 // レジストリから GeoJSON を取得するサービスを提供する。
-import { MapId } from "@/src/data/geojson/geojsonAssetMap";
+import { MapId, geoJsonMap } from "@/src/data/geojson/geojsonAssetMap";
 import { geojsonRegistry } from "@/src/infra/geojson/geojsonRegistry";
-import { geoJsonMap } from "@/src/data/geojson/geojsonAssetMap";
 import type { FeatureCollection } from "geojson";
 
 export async function getGeoDataByLogicalId(

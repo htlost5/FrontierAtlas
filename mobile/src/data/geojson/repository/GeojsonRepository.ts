@@ -10,12 +10,10 @@ import { sha256 } from "@/src/infra/sha256/hashCheck";
 import { parseJson, stringifyJson } from "@/src/infra/jsonParse/jsonParser";
 import type {
   GeoJsonRow,
-  MapId,
 } from "@/src/data/geojson/types";
 import type {
   BuildManifest,
   LocalManifest,
-  LocalManifestFiles,
 } from "@/src/domain/manifestTypes";
 import { expoRead } from "@/src/infra/FileSystem/fileSystem";
 import { LOCAL_MANFEST_PATH } from "@/src/data/paths";
@@ -174,11 +172,11 @@ export class GeojsonRepository {
 
   /** トランザクション内で一括 upsert */
   async upsertMany(
-    rows: Array<{
+    rows: {
       mapId: string;
       data: FeatureCollection;
       meta: UpsertMeta;
-    }>,
+    }[],
   ): Promise<void> {
     const db = this.getDb();
     await db.withTransactionAsync(async () => {
@@ -268,7 +266,7 @@ export class GeojsonRepository {
 
   /** 失敗一覧取得 */
   async getFailures(): Promise<
-    Array<{ mapId: string; version: string; error: string; failedAt: number }>
+    { mapId: string; version: string; error: string; failedAt: number }[]
   > {
     const db = this.getDb();
     const rows = await db.getAllAsync<{

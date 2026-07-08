@@ -1,5 +1,6 @@
 // マップ画面の描画とデータ読み込みを統合するコンポーネント。
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import { View, Pressable, Text } from "react-native";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
@@ -33,12 +34,19 @@ export function MapScreen({ cameraRef }: Props) {
   const { venue, buildings, stairs, mapLoading, mapError } = useMapGeoData();
   const { floorGeoData, floorLoading, floorError } = useFloorGeoData(floor);
 
+  // W19: 前回のズーム値を追跡し、実際に変更があったときだけ setZoom を呼ぶ
+  const prevZoomRef = useRef<number | null>(null);
+
   // ズーム変更時の値更新
   const handleRegionIsChanging = useCallback(
     (region: CameraRegion) => {
       const z = region?.properties?.zoomLevel;
       if (typeof z === "number") {
-        setZoom(z);
+        // W19: Only update if zoom actually changed
+        if (prevZoomRef.current !== z) {
+          prevZoomRef.current = z;
+          setZoom(z);
+        }
       }
     },
     [setZoom],
@@ -63,10 +71,46 @@ export function MapScreen({ cameraRef }: Props) {
     }
   }, [mapError]);
 
+  // W16: Retry handler — resets error state to trigger reload
+  const handleRetry = useCallback(() => {
+    setHasFatalError(false);
+  }, []);
+
   const isVenueReady = !mapLoading && venue && buildings;
 
-  const isFloorReady =
-    !floorLoading && floorGeoData?.units && floorGeoData?.sections && stairs;
+  // W20: Separate floor readiness from stairs — floor renders even if stairs fail
+  const isFloorDataReady =
+    !floorLoading && floorGeoData?.units && floorGeoData?.sections;
+  const isFloorReady = isFloorDataReady && !!stairs; // original combined check kept for transition
+
+  // C3: If fatal error, block all child rendering and show only error overlay
+  if (hasFatalError) {
+    return (
+      <MapContainer
+        cameraRef={cameraRef}
+        onRegionIsChanging={handleRegionIsChanging}
+      >
+        <LoadingOverlay
+          visible={true}
+          message="データ読み込みエラー"
+        />
+        {/* W16: Retry button to re-trigger data loading */}
+        <View style={{
+          position: 'absolute',
+          bottom: 100,
+          alignSelf: 'center',
+          backgroundColor: '#007AFF',
+          paddingHorizontal: 24,
+          paddingVertical: 12,
+          borderRadius: 8,
+        }}>
+          <Pressable onPress={handleRetry}>
+            <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>再試行</Text>
+          </Pressable>
+        </View>
+      </MapContainer>
+    );
+  }
 
   return (
     <MapContainer
@@ -80,12 +124,13 @@ export function MapScreen({ cameraRef }: Props) {
 
       {isVenueReady && <VenueView data={venue} />}
 
-      {isFloorReady && (
+      {/* W20: FloorView renders based on floorGeoData availability, not stairs */}
+      {isFloorDataReady && (
         <FloorView floorData={floorGeoData} stairsData={stairs} />
       )}
 
       {/* ラベル表示: 詳細表示モード（detail）の場合のみ */}
-      {isFloorReady && (
+      {isFloorDataReady && (
         <MapIconLabel
           floor_num={floor}
           data={floorGeoData.units}

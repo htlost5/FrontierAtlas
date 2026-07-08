@@ -1,5 +1,4 @@
 // manifestTypes のドメイン型定義をまとめる。
-import type { Feature, FeatureCollection } from "geojson";
 
 // buildManifest
 export type BuildManifestItem = {
