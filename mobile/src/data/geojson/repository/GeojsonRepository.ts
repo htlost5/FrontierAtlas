@@ -12,7 +12,6 @@ import type {
   GeoJsonRow,
 } from "@/src/data/geojson/types";
 import type {
-  BuildManifest,
   LocalManifest,
 } from "@/src/domain/manifestTypes";
 import { expoRead } from "@/src/infra/FileSystem/fileSystem";

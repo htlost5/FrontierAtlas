@@ -81,8 +81,6 @@ export function MapScreen({ cameraRef }: Props) {
   // W20: Separate floor readiness from stairs — floor renders even if stairs fail
   const isFloorDataReady =
     !floorLoading && floorGeoData?.units && floorGeoData?.sections;
-  const isFloorReady = isFloorDataReady && !!stairs; // original combined check kept for transition
-
   // C3: If fatal error, block all child rendering and show only error overlay
   if (hasFatalError) {
     return (

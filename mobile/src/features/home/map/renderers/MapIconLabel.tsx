@@ -1,4 +1,4 @@
-﻿// MapIconLabel component - derived from source/labels/label.tsx + source/labels/labelUI/labelView.tsx
+// MapIconLabel component - derived from source/labels/label.tsx + source/labels/labelUI/labelView.tsx
 // Uses display_point, zoomLabel, unitSymbol for rendering.
 // File saved as UTF-8 without BOM.
 import { ShapeSource } from "@maplibre/maplibre-react-native";
