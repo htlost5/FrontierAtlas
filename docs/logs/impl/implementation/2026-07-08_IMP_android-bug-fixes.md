@@ -64,8 +64,26 @@ tags:
 - When `name_ja` exists but `name` is null, creates `name: { ja, en }` object
 - Ensures `shareComp.tsx` expression always receives a valid `name` object
 
+## Bug 3: NullPointerException on onUserLeaveHint() (React Native 0.83.x)
+
+### Root Cause
+- `ReactActivityDelegate.onUserLeaveHint()` calls `Objects.requireNonNull(getReactDelegate())`
+- `getReactDelegate()` returns `null` when the RN instance hasn't fully initialized
+- Crash occurs when the app is backgrounded before RN initialization completes
+
+### Changes
+
+#### 3A — `mobile/android/app/src/main/java/com/htlost/frontieratlas/dev/MainActivity.kt`
+- Added `override fun onUserLeaveHint()` with try-catch to silently catch `NullPointerException`
+- Prevents crash when `getReactDelegate()` is null during early lifecycle
+
+### Verification
+- File passes Kotlin compilation (zero errors)
+- Minimal change — only wraps `super.onUserLeaveHint()` in try-catch
+- No side effects on iOS (Android-specific fix)
+
 ## Verification
-- All 5 edited files pass TypeScript/lint checks (zero errors)
+- All 6 edited files pass TypeScript/lint/Kotlin checks (zero errors)
 - New `network_security_config.xml` created at expected path
 - Android paths handled via `Platform.OS` check — iOS/Web paths are unaffected
 

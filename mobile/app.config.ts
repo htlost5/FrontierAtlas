@@ -22,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     slug: "FrontierAtlas",
     scheme: "frontieratlas",
-    version: config.version || "0.16.1",
+    version: config.version || "0.16.2",
 
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
@@ -64,7 +64,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           android: {
             compileSdkVersion: 36,
             targetSdkVersion: 36,
-            networkSecurityConfig: "@xml/network_security_config",
           },
         },
       ],

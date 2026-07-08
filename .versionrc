@@ -1,22 +1,56 @@
 {
   "header": "# Changelog\n\nAll notable changes to FrontierAtlas will be documented in this file.\nSee [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.\n",
   "types": [
-    { "type": "feat", "section": "Features" },
-    { "type": "fix", "section": "Bug Fixes" },
-    { "type": "perf", "section": "Performance Improvements" },
-    { "type": "refactor", "section": "Code Refactoring" },
-    { "type": "docs", "section": "Documentation" },
-    { "type": "style", "section": "Styles", "hidden": true },
-    { "type": "chore", "section": "Chores", "hidden": true },
-    { "type": "test", "section": "Tests", "hidden": true },
-    { "type": "build", "section": "Build System" },
-    { "type": "ci", "section": "CI/CD", "hidden": true }
+    {
+      "type": "feat",
+      "section": "Features"
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fixes"
+    },
+    {
+      "type": "perf",
+      "section": "Performance Improvements"
+    },
+    {
+      "type": "refactor",
+      "section": "Code Refactoring"
+    },
+    {
+      "type": "docs",
+      "section": "Documentation"
+    },
+    {
+      "type": "style",
+      "section": "Styles",
+      "hidden": true
+    },
+    {
+      "type": "chore",
+      "section": "Chores",
+      "hidden": true
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "hidden": true
+    },
+    {
+      "type": "build",
+      "section": "Build System"
+    },
+    {
+      "type": "ci",
+      "section": "CI/CD",
+      "hidden": true
+    }
   ],
   "preMajor": true,
   "commitUrlFormat": "https://github.com/htlost/frontieratlas/commit/{{hash}}",
   "compareUrlFormat": "https://github.com/htlost/frontieratlas/compare/{{previousTag}}...{{currentTag}}",
   "issueUrlFormat": "https://github.com/htlost/frontieratlas/issues/{{id}}",
   "scripts": {
-    "postbump": "node mobile/scripts/updateAppJsonVersion.cjs"
+    "postbump": "node scripts/updateAppJsonVersion.cjs"
   }
 }

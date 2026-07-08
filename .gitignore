@@ -8,3 +8,6 @@ tools/map-assets/releases/
 
 # macOS metadata
 __MACOSX/
+
+# Expo build cache
+.expo/
