@@ -86,6 +86,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           root: "./app",
         },
       ],
+      "expo-sqlite",
     ],
 
     experiments: {
