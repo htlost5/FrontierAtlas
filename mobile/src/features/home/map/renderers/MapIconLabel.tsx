@@ -30,10 +30,21 @@ export function MapIconLabel({ floor_num, data, isVisible }: Props) {
       const dp = f.properties?.display_point;
       return dp != null && Array.isArray(dp.coordinates) && dp.coordinates.length === 2;
     })
-    .map((f) => ({
-      ...f,
-      geometry: f.properties.display_point,
-    }));
+    .map((f) => {
+      // Normalize name structure: name_ja/name_en → name.ja/name.en
+      const normalizedProperties = { ...f.properties };
+      if (normalizedProperties.name_ja != null && normalizedProperties.name == null) {
+        normalizedProperties.name = {
+          ja: normalizedProperties.name_ja,
+          en: normalizedProperties.name_en ?? "",
+        };
+      }
+      return {
+        ...f,
+        geometry: f.properties.display_point,
+        properties: normalizedProperties,
+      };
+    });
 
   // 蜃ｦ逅・ｸ医∩繝・・繧ｿ縺ｧGeoJSON繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ蜀肴ｧ区・
   const processedGeoJson: FeatureCollection = {

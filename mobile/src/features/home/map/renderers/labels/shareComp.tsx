@@ -48,7 +48,13 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
           iconRotationAlignment: "viewport",
           iconAllowOverlap: false,
 
-          textField: config.textVisible ? ["get", "ja", ["get", "name"]] : "",
+          textField: config.textVisible
+            ? ["case",
+                ["has", "name"], ["get", "ja", ["get", "name"]],
+                ["has", "name_ja"], ["get", "name_ja"],
+                ""
+              ]
+            : "",
           textSize: [
             "interpolate",
             ["linear"],

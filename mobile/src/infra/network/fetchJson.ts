@@ -46,7 +46,7 @@ async function fetchWithRetryCore<T>(
       console.warn(`Network error (retry ${i + 1}): ${url}`);
     }
 
-    await new Promise((r) => setTimeout(r, 300 * 2 ** i));
+    await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
   }
 
   throw new NetworkError(`Failed to fetch ${url}`);

@@ -64,6 +64,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           android: {
             compileSdkVersion: 36,
             targetSdkVersion: 36,
+            networkSecurityConfig: "@xml/network_security_config",
           },
         },
       ],
