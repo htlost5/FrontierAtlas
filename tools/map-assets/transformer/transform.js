@@ -51,6 +51,67 @@ function copyBaseFiles() {
 }
 
 // -----------------------------
+// Coordinate deduplication (fixes MapLibre earcut crash)
+// -----------------------------
+function coordinatesEqual(a, b) {
+  return Math.abs(a[0] - b[0]) < 1e-12 && Math.abs(a[1] - b[1]) < 1e-12;
+}
+
+function removeConsecutiveDuplicates(coords) {
+  if (coords.length < 4) return coords; // minimum valid ring
+  const result = [coords[0]];
+  for (let i = 1; i < coords.length; i++) {
+    if (!coordinatesEqual(coords[i], result[result.length - 1])) {
+      result.push(coords[i]);
+    }
+  }
+  // Ensure ring is closed
+  if (result.length >= 3 && !coordinatesEqual(result[0], result[result.length - 1])) {
+    result.push([...result[0]]);
+  }
+  return result;
+}
+
+function sanitizeGeometry(geometry) {
+  if (!geometry || !geometry.type) return geometry;
+
+  if (geometry.type === 'Polygon') {
+    const cleaned = [removeConsecutiveDuplicates(geometry.coordinates[0])];
+    // Skip outer ring if < 3 unique points → invalid polygon
+    if (cleaned[0].length < 4) return null;
+    for (let i = 1; i < geometry.coordinates.length; i++) {
+      const ring = removeConsecutiveDuplicates(geometry.coordinates[i]);
+      if (ring.length >= 4) {
+        cleaned.push(ring);
+      }
+    }
+    return { ...geometry, coordinates: cleaned };
+  }
+
+  if (geometry.type === 'MultiPolygon') {
+    const cleaned = [];
+    for (const polygon of geometry.coordinates) {
+      const sanitized = sanitizeGeometry({ type: 'Polygon', coordinates: polygon });
+      if (sanitized) {
+        cleaned.push(sanitized.coordinates);
+      }
+    }
+    if (cleaned.length === 0) return null;
+    return { ...geometry, coordinates: cleaned };
+  }
+
+  // Point, LineString, MultiPoint, MultiLineString, GeometryCollection — pass through
+  return geometry;
+}
+
+function sanitizeFeature(feature) {
+  if (!feature || !feature.geometry) return feature;
+  const sanitized = sanitizeGeometry(feature.geometry);
+  if (!sanitized) return null; // geometry became invalid
+  return { ...feature, geometry: sanitized };
+}
+
+// -----------------------------
 // GeoJSON -> JSON
 // -----------------------------
 function transformGeoJSONFile(inputPath, outputPath) {
@@ -63,6 +124,11 @@ function transformGeoJSONFile(inputPath, outputPath) {
         delete feature.properties.fid;
       }
     }
+
+    // Sanitize features: remove consecutive duplicate coordinates
+    data.features = data.features
+      .map(sanitizeFeature)
+      .filter(Boolean);
   }
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
