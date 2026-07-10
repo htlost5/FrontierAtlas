@@ -22,6 +22,7 @@ const mapStyle = {
   version: 8,
   sources: {},
   layers: [],
+  glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   metadata: {
     "maplibre:localIdeographFontFamily": "sans-serif",
   },
