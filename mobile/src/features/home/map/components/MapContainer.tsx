@@ -18,6 +18,15 @@ type Props = {
   children?: React.ReactNode;
 };
 
+const mapStyle = {
+  version: 8,
+  sources: {},
+  layers: [],
+  metadata: {
+    "maplibre:localIdeographFontFamily": "sans-serif",
+  },
+};
+
 export function MapContainer({
   cameraRef,
   onRegionIsChanging,
@@ -28,6 +37,7 @@ export function MapContainer({
   return (
     <MapView
       style={styles.container}
+      mapStyle={mapStyle}
       attributionEnabled={false}
       onRegionIsChanging={onRegionIsChanging}
       regionDidChangeDebounceTime={50}
