@@ -1,28 +1,40 @@
 // rooms の公開エクスポートをまとめる。
+// 6つの機能ゾーン別に動的に PolygonLayer を生成する。
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
-import { GROUP_STYLE_CONFIGS } from "./configs";
+import { ROOM_ZONE_MAP, buildZoneFilter } from "./configs";
+import type { ColorTheme, ZoneType } from "../../../../constants/colorPalette";
 
-/** 描画対象グループ（transparent はスキップ） */
-const VISIBLE_GROUPS = Object.keys(
-  GROUP_STYLE_CONFIGS,
-) as (keyof typeof GROUP_STYLE_CONFIGS)[];
+type Props = GeoLayerProps & {
+  colorTheme: ColorTheme;
+};
 
-export function RoomView({ data }: GeoLayerProps) {
+const ZONES: ZoneType[] = [
+  "classroom",
+  "specialized",
+  "administration",
+  "common",
+  "sanitary",
+  "other",
+];
+
+export function RoomView({ data, colorTheme, visible = true }: Props) {
   if (!data) return null;
 
   return (
     <>
-      {VISIBLE_GROUPS.map((group) => {
-        const config = GROUP_STYLE_CONFIGS[group];
+      {ZONES.map((zone) => {
+        const palette = colorTheme.zones[zone];
+        const filter = buildZoneFilter(zone);
         return (
           <PolygonLayer
-            key={group}
-            prefixId={`units_room_group_${group}`}
+            key={zone}
+            prefixId={`room_zone_${zone}`}
             data={data}
-            filter={config.filter}
-            fillStyle={config.fillStyle}
-            lineStyle={config.lineStyle}
+            visible={visible}
+            filter={filter}
+            fillStyle={{ fillColor: palette.fill, fillOpacity: palette.opacity }}
+            lineStyle={{ lineColor: palette.line }}
           />
         );
       })}

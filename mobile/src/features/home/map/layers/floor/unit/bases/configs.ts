@@ -1,24 +1,19 @@
 // configs レイヤ描画を定義する。
 import { LayerConfig } from "../../../../components/mapComp/PolygonLayer/types";
 import { BASE_FILTERS, BaseKey } from "./filters";
+import type { ColorTheme } from "../../../../constants/colorPalette";
 
-export const BASE_CONFIGS: Record<BaseKey, LayerConfig> = {
-  atrium: {
-    filter: BASE_FILTERS.atrium,
-    fillStyle: {
-      fillColor: "#C9D2B0",
+export function getBaseConfigs(colorTheme: ColorTheme): Record<BaseKey, LayerConfig> {
+  return {
+    atrium: {
+      filter: BASE_FILTERS.atrium,
+      fillStyle: { fillColor: colorTheme.atrium.fill },
+      lineStyle: { lineColor: colorTheme.atrium.line, lineWidth: 1 },
     },
-    lineStyle: {
-      lineColor: "rgba(0,0,0,0.2)",
+    wall: {
+      filter: BASE_FILTERS.wall,
+      fillStyle: { fillColor: colorTheme.walls.fill },
+      lineStyle: { lineColor: colorTheme.walls.line, lineWidth: 1 },
     },
-  },
-  wall: {
-    filter: BASE_FILTERS.wall,
-    fillStyle: {
-      fillColor: "#B0B0B0",
-    },
-    lineStyle: {
-      lineColor: "rgba(0,0,0,0.2)",
-    },
-  },
-} as const;
+  } as const;
+}

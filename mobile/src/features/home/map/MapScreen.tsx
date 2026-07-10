@@ -24,7 +24,7 @@ type Props = {
 };
 
 export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
-  const { floor, zoom, setZoom } = useMapContext();
+  const { floor, zoom, setZoom, colorTheme } = useMapContext();
   const displayMode = useDisplayLevel(zoom);
   const showBuildings = displayMode === "building";
 
@@ -107,13 +107,14 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
       )}
 
       {/* Venue レイヤー — floor 非依存 */}
-      {batchData.venue && <VenueView data={batchData.venue} />}
+      {batchData.venue && <VenueView data={batchData.venue} colorTheme={colorTheme} />}
 
       {/* Floor レイヤー — floor 依存（stale-while-revalidate） */}
       {batchData.floorData && (
         <FloorView
           floorData={batchData.floorData}
           stairsData={batchData.stairs}
+          colorTheme={colorTheme}
         />
       )}
 
@@ -123,12 +124,13 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
           floor_num={batchData.currentFloor}
           data={batchData.floorData.units}
           isVisible={displayMode === "detail"}
+          colorTheme={colorTheme}
         />
       )}
 
       {/* Buildings レイヤー — floor 非依存 */}
       {batchData.buildings && (
-        <BuildingsView data={batchData.buildings} visible={showBuildings} />
+        <BuildingsView data={batchData.buildings} visible={showBuildings} colorTheme={colorTheme} />
       )}
     </MapContainer>
   );

@@ -1,5 +1,6 @@
 // フロアレイヤーの型定義をまとめる。
 import { GeoLayerProps } from "../../types";
+import type { ColorTheme } from "../../constants/colorPalette";
 
 export type FloorProps = {
   floorData: {
@@ -7,4 +8,5 @@ export type FloorProps = {
     sections: GeoLayerProps["data"];
   };
   stairsData: GeoLayerProps["data"];
+  colorTheme: ColorTheme;
 };

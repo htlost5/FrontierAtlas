@@ -10,6 +10,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { mapConfig } from "../constants/mapConfig";
 import { MapIconRegistry } from "../renderers/MapIconRegistry";
+import { useMapContext } from "../hooks/state/useMapContext";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
@@ -22,6 +23,8 @@ export function MapContainer({
   onRegionIsChanging,
   children,
 }: Props) {
+  const { colorTheme } = useMapContext();
+
   return (
     <MapView
       style={styles.container}
@@ -33,7 +36,7 @@ export function MapContainer({
       <MapIconRegistry />
       <BackgroundLayer
         id="index-back"
-        style={{ backgroundColor: "#F6F7F9", backgroundOpacity: 1 }}
+        style={{ backgroundColor: colorTheme.background, backgroundOpacity: 1 }}
       />
       <Camera
         ref={cameraRef}

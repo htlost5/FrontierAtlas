@@ -1,17 +1,22 @@
 // section の公開エクスポートをまとめる。
 import { PolygonLayer } from "../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../types";
-import { sectionFillStyle, sectionLineStyle } from "./style";
+import { getSectionFillStyle, getSectionLineStyle } from "./style";
+import type { ColorTheme } from "../../../constants/colorPalette";
 
-export function SectionView({ data }: GeoLayerProps) {
+type Props = GeoLayerProps & {
+  colorTheme: ColorTheme;
+};
+
+export function SectionView({ data, colorTheme }: Props) {
   if (!data) return null;
 
   return (
     <PolygonLayer
       prefixId="section"
       data={data}
-      fillStyle={sectionFillStyle}
-      lineStyle={sectionLineStyle}
+      fillStyle={getSectionFillStyle(colorTheme.sections)}
+      lineStyle={getSectionLineStyle(colorTheme.sections)}
     />
   );
 }

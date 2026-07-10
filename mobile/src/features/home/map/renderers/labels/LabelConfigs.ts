@@ -2,6 +2,7 @@
 // source/labels/lavelUI/configs/lavelConfigs.ts から移植
 import { LabelConfig } from "@/src/features/home/map/renderers/labels/LabelConfig";
 import { ROOM_FILTERS } from "@/src/features/home/map/layers/floor/unit/rooms/filter";
+import type { ColorTheme } from "@/src/features/home/map/constants/colorPalette";
 
 export type LabelKey = keyof typeof ROOM_FILTERS;
 
@@ -51,15 +52,20 @@ const overrides: Partial<Record<LabelKey, Partial<LabelConfig>>> = {
  * ラベル設定生成関数
  * - ROOM_FILTERS の各キーに対応するラベル設定を動的に生成
  * - overrides で特定のラベルタイプの設定をカスタマイズ
+ * - colorTheme からテキスト色・ハロー色を反映
  */
-function createLabelConfigs(): Record<LabelKey, LabelConfig> {
+export function createLabelConfigs(
+  colorTheme: ColorTheme,
+): Record<LabelKey, LabelConfig> {
   return Object.fromEntries(
     (Object.keys(ROOM_FILTERS) as LabelKey[]).map((key) => [
       key,
       {
         key,
         filter: ROOM_FILTERS[key],
-        textColor: "#000000",
+        textColor: colorTheme.label.textColor,
+        textHaloColor: colorTheme.label.textHaloColor,
+        textHaloWidth: colorTheme.label.textHaloWidth,
         iconVisible: true,
         textVisible: true,
         ...overrides[key],
@@ -69,7 +75,9 @@ function createLabelConfigs(): Record<LabelKey, LabelConfig> {
 }
 
 /**
- * 全ラベルの最終的な設定オブジェクト
+ * 全ラベルの最終的な設定オブジェクト（デフォルトライトテーマ）
+ * 動的テーマが必要な場合は createLabelConfigs(colorTheme) を使用
  */
+import { LIGHT_THEME } from "@/src/features/home/map/constants/colorPalette";
 export const LABEL_CONFIGS: Record<LabelKey, LabelConfig> =
-  createLabelConfigs();
+  createLabelConfigs(LIGHT_THEME);

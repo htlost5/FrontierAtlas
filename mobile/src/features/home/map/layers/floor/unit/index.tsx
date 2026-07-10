@@ -2,12 +2,17 @@
 import { GeoLayerProps } from "../../../types";
 import { BaseView } from "./bases";
 import { RoomView } from "./rooms";
+import type { ColorTheme } from "../../../constants/colorPalette";
 
-export function UnitView({ data }: GeoLayerProps) {
+type Props = GeoLayerProps & {
+  colorTheme: ColorTheme;
+};
+
+export function UnitView({ data, colorTheme }: Props) {
   return (
     <>
-      <BaseView data={data} />
-      <RoomView data={data} />
+      <BaseView data={data} colorTheme={colorTheme} />
+      <RoomView data={data} colorTheme={colorTheme} />
     </>
   );
 }

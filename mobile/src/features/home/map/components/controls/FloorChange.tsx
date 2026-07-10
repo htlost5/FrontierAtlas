@@ -7,29 +7,44 @@ import {
 } from "react-native";
 import { mapControlShadow } from "@/src/shared/constants/shadowStyles";
 import { useMapContext } from "../../hooks/state/useMapContext";
+import * as Haptics from "expo-haptics";
 
 // 個別の階層ボタンのプロパティ定義
 type Props = {
   floor: number;
   onPress: (floor: number) => void;
   isFocused: boolean;
+  theme: {
+    bg: string;
+    selectedBg: string;
+    text: string;
+    selectedText: string;
+  };
 };
 
 // 単一の階層ボタンを描画するコンポーネント（選択状態で背景色を変更）
-function FloorChoose({ floor, onPress, isFocused }: Props) {
+function FloorChoose({ floor, onPress, isFocused, theme }: Props) {
   return (
     <TouchableOpacity
       style={[
         styles.block,
         {
-          backgroundColor: isFocused
-            ? "rgba(0,140,255,0.45)"
-            : "rgba(0, 0, 0, 0)",
+          backgroundColor: isFocused ? theme.selectedBg : "rgba(0, 0, 0, 0)",
         },
       ]}
       onPress={() => onPress(floor)}
     >
-      <Text style={styles.textFont}>{floor}</Text>
+      <Text
+        style={[
+          styles.textFont,
+          {
+            color: isFocused ? theme.selectedText : theme.text,
+            fontWeight: isFocused ? "700" : "400",
+          },
+        ]}
+      >
+        {`${floor}F`}
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -38,17 +53,20 @@ const floors = [5, 4, 3, 2, 1];
 
 // 全フロアのボタンリストを表示し、選択された階層を管理するメインコンポーネント
 export function FloorChange() {
-  const { floor, setFloor } = useMapContext();
+  const { floor, setFloor, colorTheme } = useMapContext();
 
   const handlePress = (f: number) => {
     if (f !== floor) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       setFloor(f);
     }
   };
 
+  const theme = colorTheme.controls;
+
   return (
     <ScrollView
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.floorBg }]}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         justifyContent: "center",
@@ -60,7 +78,8 @@ export function FloorChange() {
           key={f}
           floor={f}
           onPress={handlePress}
-          isFocused={f === floor} // 選択中かどうか
+          isFocused={f === floor}
+          theme={theme}
         />
       ))}
     </ScrollView>
@@ -73,7 +92,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginVertical: 15,
     bottom: 65,
-    backgroundColor: "white",
     left: 20,
     borderRadius: 100,
     width: 46,
@@ -89,7 +107,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   textFont: {
-    color: "black",
-    fontSize: 16,
+    fontSize: 14,
   },
 });

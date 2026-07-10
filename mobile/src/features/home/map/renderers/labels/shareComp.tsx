@@ -64,13 +64,15 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
             19,
             12,
             21,
-            14,
+            15,
           ],
-          textFont: ["Noto Sans Regular"],
+          textFont: ["Noto Sans Medium"],
           textColor: config.textColor,
+          textHaloColor: config.textHaloColor ?? "rgba(255,255,255,0.7)",
+          textHaloWidth: config.textHaloWidth ?? 1.5,
           textAnchor: config.iconVisible ? "left" : "center",
           textOffset: config.iconVisible ? [1.4, 0] : [0, 0],
-          textAllowOverlap: false,
+          textAllowOverlap: ["step", ["zoom"], false, 18.5, true],
           textIgnorePlacement: false,
         }}
       />

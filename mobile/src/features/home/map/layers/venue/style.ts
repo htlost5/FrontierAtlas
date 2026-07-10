@@ -3,12 +3,14 @@ import type {
     FillLayerStyle,
     LineLayerStyle,
 } from "@maplibre/maplibre-react-native";
+import type { ZonePalette } from "../../constants/colorPalette";
 
-export const venueFillStyle: FillLayerStyle = {
-  fillColor: "#E8F0FF",
-};
+export const getVenueFillStyle = (palette: ZonePalette): FillLayerStyle => ({
+  fillColor: palette.fill,
+  fillOpacity: palette.opacity,
+});
 
-export const venueLineStyle: LineLayerStyle = {
-  lineColor: "#B8D1FF",
+export const getVenueLineStyle = (palette: ZonePalette): LineLayerStyle => ({
+  lineColor: palette.line,
   lineWidth: 1,
-};
+});

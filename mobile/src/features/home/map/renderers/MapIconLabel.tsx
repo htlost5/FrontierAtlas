@@ -5,13 +5,15 @@ import React, { useMemo } from "react";
 import { ShapeSource } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { LabelLayer } from "./labels/shareComp";
-import { LABEL_CONFIGS, LabelKey } from "./labels/LabelConfigs";
+import { createLabelConfigs, LabelKey } from "./labels/LabelConfigs";
 import { UnitSymbol } from "./UnitSymbol";
+import type { ColorTheme } from "../constants/colorPalette";
 
 type Props = {
   floor_num: number;
   data: FeatureCollection | null;
   isVisible: boolean;
+  colorTheme: ColorTheme;
 };
 
 /**
@@ -21,7 +23,7 @@ type Props = {
  * - Renders labels via LabelLayer
  * - Renders unit symbols, arrows, elevators, etc. via UnitSymbol
  */
-export function MapIconLabel({ floor_num, data, isVisible }: Props) {
+export function MapIconLabel({ floor_num, data, isVisible, colorTheme }: Props) {
   // DD-05: processedFeatures を useMemo でメモ化（Hooks は早期リターン前に配置）
   const processedGeoJson: FeatureCollection | null = useMemo(() => {
     if (!data) return null;
@@ -64,6 +66,11 @@ export function MapIconLabel({ floor_num, data, isVisible }: Props) {
     };
   }, [data]);
 
+  const labelConfigs = useMemo(
+    () => createLabelConfigs(colorTheme),
+    [colorTheme],
+  );
+
   if (!data || !processedGeoJson) return null;
 
   const labelSourceId = "lavelView";
@@ -74,18 +81,18 @@ export function MapIconLabel({ floor_num, data, isVisible }: Props) {
 
       {/* GeoJSONデータをMapLibreのデータソースとして登録 */}
       <ShapeSource id={labelSourceId} shape={processedGeoJson}>
-        {/* 縺吶∋縺ｦ縺ｮ繝ｩ繝吶Ν繧ｿ繧､繝励↓蟇ｾ縺励※繝ｬ繧､繝､繝ｼ繧堤函謌・*/}
-        {(Object.keys(LABEL_CONFIGS) as LabelKey[]).map((key) => (
+        {/* 全てのラベルタイプに対してレイヤーを生成 */}
+        {(Object.keys(labelConfigs) as LabelKey[]).map((key) => (
           <LabelLayer
             key={key}
             floor_num={floor_num}
             sourceId={labelSourceId}
-            config={LABEL_CONFIGS[key]}
+            config={labelConfigs[key]}
           />
         ))}
       </ShapeSource>
 
-      {/* 繝医う繝ｬ繝ｻ繧ｨ繝ｬ繝吶・繧ｿ繝ｻ閾ｪ雋ｩ讖溘↑縺ｩ縺ｮ迚ｹ谿翫す繝ｳ繝懊Ν繧呈緒逕ｻ */}
+      {/* 矢印・エレベータ・階段などのユニットシンボルを描画 */}
       <UnitSymbol pointData={processedGeoJson} isVisible={isVisible ? 1 : 0} />
     </>
   );

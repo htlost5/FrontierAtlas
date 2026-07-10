@@ -6,6 +6,8 @@
  * @property iconVisible - アイコン表示フラグ
  * @property textVisible - テキスト（部屋名）表示フラグ
  * @property textColor - テキスト色（オプション、デフォルト: 黒）
+ * @property textHaloColor - テキストハロー色（オプション）
+ * @property textHaloWidth - テキストハロー幅（オプション）
  */
 export type LabelConfig = {
   key: string;
@@ -13,4 +15,6 @@ export type LabelConfig = {
   iconVisible: boolean;
   textVisible: boolean;
   textColor?: string;
+  textHaloColor?: string;
+  textHaloWidth?: number;
 };
