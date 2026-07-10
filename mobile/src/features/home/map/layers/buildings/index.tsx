@@ -1,9 +1,13 @@
 // 建物レイヤーの描画コンポーネントを定義する。
+import React from "react";
 import { PolygonLayer } from "../../components/mapComp/PolygonLayer";
 import { buildingsFillStyle, buildingsLineStyle } from "./style";
 import { BUILDING_KEYS, BuildingsProps } from "./types";
 
-export function BuildingsView({ data, visible }: BuildingsProps) {
+export const BuildingsView = React.memo(function BuildingsView({
+  data,
+  visible,
+}: BuildingsProps) {
   return (
     <>
       {BUILDING_KEYS.map((key) => {
@@ -23,4 +27,4 @@ export function BuildingsView({ data, visible }: BuildingsProps) {
       })}
     </>
   );
-}
+});

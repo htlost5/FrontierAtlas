@@ -1,6 +1,6 @@
 // MapRoot.tsx
 import { CameraRef } from "@maplibre/maplibre-react-native";
-import React, { memo, useCallback, useRef, useState } from "react";
+import React, { memo, useCallback, useRef, useState, startTransition } from "react";
 import { StyleSheet, View } from "react-native";
 import { MapScreen } from "./MapScreen";
 import { MapContext } from "./context/MapContext";
@@ -15,6 +15,13 @@ const MapRootBase = ({ children }: Props) => {
   const [floor, setFloor] = useState(mapConfig.default.floor);
   const [zoom, setZoom] = useState(mapConfig.default.zoom);
 
+  // startTransition でラップした setFloor — フロア切替を非同期更新にし UI 応答性を維持
+  const wrappedSetFloor = useCallback((n: number) => {
+    startTransition(() => {
+      setFloor(n);
+    });
+  }, []);
+
   const moveTo = useCallback((center: [number, number], nextZoom?: number) => {
     cameraRef.current?.setCamera({
       centerCoordinate: center,
@@ -25,7 +32,7 @@ const MapRootBase = ({ children }: Props) => {
 
   return (
     <MapContext.Provider
-      value={{ cameraRef, floor, setFloor, zoom, setZoom, moveTo }}
+      value={{ cameraRef, floor, setFloor: wrappedSetFloor, zoom, setZoom, moveTo }}
     >
       <View style={styles.root}>
         {/* Map は完全に背景 */}

@@ -4,6 +4,19 @@ import type { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import type { BuildingsData } from "../../layers/buildings/types";
 import { getGeoDataByLogicalId } from "../../services/getGeoDataByLogicalId";
 
+// ---- プリロードキャッシュ ----
+// モジュールスコープに保持。コンポーネントのアンマウント/マウントを超えて生存。
+
+type PreloadCache = {
+  data: Map<number, FloorGeoData>;
+  status: "idle" | "loading" | "ready" | "error";
+};
+
+const preloadCache: PreloadCache = {
+  data: new Map(),
+  status: "idle",
+};
+
 // ---- 公開型 ----
 export type FloorGeoData = {
   readonly units: FeatureCollection | null;
@@ -26,6 +39,7 @@ export type BatchMapData = {
   readonly isInitialLoading: boolean;
   readonly isFloorSwitching: boolean;
   readonly floorError: Error | null;
+  readonly isPreloaded: boolean;
 };
 
 // ---- 内部型 ----
@@ -48,6 +62,40 @@ function floorUnitId(floor: number): MapId {
 }
 function floorSectionId(floor: number): MapId {
   return `studyhall_sections_floor${floor}` as MapId;
+}
+
+// ---- プリロード関数 ----
+// 全5フロアの units + sections を並列プリロード
+async function preloadAllFloors(
+  onProgress?: (loaded: number, total: number) => void
+): Promise<void> {
+  if (preloadCache.status === "ready" || preloadCache.status === "loading") {
+    return;
+  }
+  preloadCache.status = "loading";
+
+  const floors = [1, 2, 3, 4, 5];
+  const floorIds = floors.map((f) => [floorUnitId(f), floorSectionId(f)] as const);
+  const allIds = floorIds.flat();
+
+  try {
+    const results = await Promise.all(
+      allIds.map((id) => getGeoDataByLogicalId(id))
+    );
+
+    floors.forEach((floor, i) => {
+      preloadCache.data.set(floor, {
+        units: results[i * 2],
+        sections: results[i * 2 + 1],
+      });
+      onProgress?.(i + 1, floors.length);
+    });
+
+    preloadCache.status = "ready";
+  } catch (e) {
+    preloadCache.status = "error";
+    console.warn("[preloadAllFloors] Preload failed:", e);
+  }
 }
 
 export function useBatchMapData(floor: number, retryKey?: number): BatchMapData {
@@ -108,14 +156,21 @@ export function useBatchMapData(floor: number, retryKey?: number): BatchMapData 
           s = cacheRef.current.stairs;
         }
 
-        // --- 2. floor 依存データ（毎回取得） ---
-        const [units, sections] = await Promise.all([
-          getGeoDataByLogicalId(floorUnitId(floor)),
-          getGeoDataByLogicalId(floorSectionId(floor)),
-        ]);
-        if (signal.aborted) return;
+        // --- 2. floor 依存データ ---
+        // プリロードキャッシュがあれば SQLite I/O をスキップ
+        let newFloorData: FloorGeoData;
 
-        const newFloorData: FloorGeoData = { units, sections };
+        if (preloadCache.data.has(floor)) {
+          newFloorData = preloadCache.data.get(floor)!;
+        } else {
+          const [units, sections] = await Promise.all([
+            getGeoDataByLogicalId(floorUnitId(floor)),
+            getGeoDataByLogicalId(floorSectionId(floor)),
+          ]);
+          if (signal.aborted) return;
+          newFloorData = { units, sections };
+        }
+
         prevFloorDataRef.current = newFloorData;
         currentFloorRef.current = floor;
 
@@ -138,11 +193,21 @@ export function useBatchMapData(floor: number, retryKey?: number): BatchMapData 
 
   // 派生フラグ
   const isInitialLoading = state.status === "loading" && state.isInitial === true;
-  const isFloorSwitching = state.status === "loading" && state.isInitial === false;
+  // プリロードキャッシュヒット時はフロア切替中扱いにしない（瞬時切替）
+  const isFloorSwitching = state.status === "loading"
+    && state.isInitial === false
+    && !preloadCache.data.has(floor);
   const floorError = state.status === "error" && !state.isInitial ? (state as Extract<BatchState, { status: "error" }>).error : null;
 
   // stale-while-revalidate: 前フロアデータを floorData が null のときに表示用として返す
   const displayFloorData = floorData ?? prevFloorDataRef.current;
+
+  // 初回ロード完了後にプリロード開始
+  useEffect(() => {
+    if (state.status === "ready" && preloadCache.status === "idle") {
+      preloadAllFloors();
+    }
+  }, [state.status]);
 
   return {
     venue,
@@ -154,5 +219,6 @@ export function useBatchMapData(floor: number, retryKey?: number): BatchMapData 
     isInitialLoading,
     isFloorSwitching,
     floorError,
+    isPreloaded: preloadCache.status === "ready",
   };
 }

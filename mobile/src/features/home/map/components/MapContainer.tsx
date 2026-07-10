@@ -9,6 +9,7 @@ import type { CameraRegion } from "../hooks/camera/useCameraController/types";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { mapConfig } from "../constants/mapConfig";
+import { MapIconRegistry } from "../renderers/MapIconRegistry";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
@@ -28,6 +29,8 @@ export function MapContainer({
       onRegionIsChanging={onRegionIsChanging}
       regionDidChangeDebounceTime={50}
     >
+      {/* DD-04: MapIconRegistry moved from MapIconLabel to MapContainer level */}
+      <MapIconRegistry />
       <BackgroundLayer
         id="index-back"
         style={{ backgroundColor: "#F6F7F9", backgroundOpacity: 1 }}

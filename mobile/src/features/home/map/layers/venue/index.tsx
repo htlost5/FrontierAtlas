@@ -7,7 +7,9 @@ import { GeoLayerProps } from "../../types";
 import { venueFillStyle, venueLineStyle } from "./style";
 
 // 施設全体の外枠（敷地境界）を塗りつぶしと枠線で描画するコンポーネント
-export function VenueView({ data }: GeoLayerProps) {
+export const VenueView = React.memo(function VenueView({
+  data,
+}: GeoLayerProps) {
   if (!data) return null;
 
   return (
@@ -18,4 +20,4 @@ export function VenueView({ data }: GeoLayerProps) {
       lineStyle={venueLineStyle}
     />
   );
-}
+});

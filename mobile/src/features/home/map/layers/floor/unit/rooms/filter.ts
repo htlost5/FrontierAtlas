@@ -1,7 +1,7 @@
 // filter レイヤ描画を定義する。
 import { filterMaker } from "@/src/features/home/map/renderers/expressions/filterMaker";
 
-const ROOM_CATEGORIES = {
+export const ROOM_CATEGORIES = {
   // 教室系
   classroom: "classroom",
   studyRoom: "study_room",
