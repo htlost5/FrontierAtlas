@@ -14,7 +14,11 @@ export type MapContextValue = {
   zoom: number;
   setZoom: (z: number) => void;
 
-  moveTo: (center: [number, number], zoom?: number, padding?: { top: number; bottom: number; left: number; right: number }) => void;
+  moveTo: (
+    center: [number, number],
+    zoom?: number,
+    padding?: { top: number; bottom: number; left: number; right: number },
+  ) => void;
 
   colorTheme: ColorTheme;
   flyToSearchResult: (center: [number, number], zoom?: number) => void;

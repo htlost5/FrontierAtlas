@@ -67,7 +67,10 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
   }
 
   // State 2: 初回エラー（MapContainer 非マウント）
-  if (batchData.state.status === "error" && batchData.state.isInitial === true) {
+  if (
+    batchData.state.status === "error" &&
+    batchData.state.isInitial === true
+  ) {
     const state = batchData.state as Extract<
       typeof batchData.state,
       { status: "error" }
@@ -107,7 +110,9 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
       )}
 
       {/* Venue レイヤー — floor 非依存 */}
-      {batchData.venue && <VenueView data={batchData.venue} colorTheme={colorTheme} />}
+      {batchData.venue && (
+        <VenueView data={batchData.venue} colorTheme={colorTheme} />
+      )}
 
       {/* Floor レイヤー — floor 依存（stale-while-revalidate） */}
       {batchData.floorData && (
@@ -130,7 +135,11 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
 
       {/* Buildings レイヤー — floor 非依存 */}
       {batchData.buildings && (
-        <BuildingsView data={batchData.buildings} visible={showBuildings} colorTheme={colorTheme} />
+        <BuildingsView
+          data={batchData.buildings}
+          visible={showBuildings}
+          colorTheme={colorTheme}
+        />
       )}
     </MapContainer>
   );

@@ -11,7 +11,10 @@ const PIN_COLOR = "#007AFF";
 export function UserLocation() {
   const { cameraRef, colorTheme } = useMapContext();
   const handlePress = () => {
-    cameraRef.current?.flyTo(mapConfig.default.center, mapConfig.animation.duration.flyTo);
+    cameraRef.current?.flyTo(
+      mapConfig.default.center,
+      mapConfig.animation.duration.flyTo,
+    );
   };
 
   return (

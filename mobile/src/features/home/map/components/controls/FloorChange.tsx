@@ -1,10 +1,5 @@
 // マップ上で1階から5階までのフロアを切り替えるUIコンポーネント
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { mapControlShadow } from "@/src/shared/constants/shadowStyles";
 import { useMapContext } from "../../hooks/state/useMapContext";
 import * as Haptics from "expo-haptics";

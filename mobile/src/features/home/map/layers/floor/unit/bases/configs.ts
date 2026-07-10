@@ -3,7 +3,9 @@ import { LayerConfig } from "../../../../components/mapComp/PolygonLayer/types";
 import { BASE_FILTERS, BaseKey } from "./filters";
 import type { ColorTheme } from "../../../../constants/colorPalette";
 
-export function getBaseConfigs(colorTheme: ColorTheme): Record<BaseKey, LayerConfig> {
+export function getBaseConfigs(
+  colorTheme: ColorTheme,
+): Record<BaseKey, LayerConfig> {
   return {
     atrium: {
       filter: BASE_FILTERS.atrium,

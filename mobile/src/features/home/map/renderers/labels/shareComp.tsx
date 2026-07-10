@@ -49,10 +49,13 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
           iconAllowOverlap: false,
 
           textField: config.textVisible
-            ? ["case",
-                ["has", "name"], ["get", "ja", ["get", "name"]],
-                ["has", "name_ja"], ["get", "name_ja"],
-                ""
+            ? [
+                "case",
+                ["has", "name"],
+                ["get", "ja", ["get", "name"]],
+                ["has", "name_ja"],
+                ["get", "name_ja"],
+                "",
               ]
             : "",
           textSize: [

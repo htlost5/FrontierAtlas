@@ -1,11 +1,11 @@
 // 機能別ゾーン配色 + 基盤レイヤー配色 + UI配色を定義する。
 export type ZoneType =
-  | "classroom"       // 講義・学習
-  | "specialized"     // 専門教室
-  | "administration"  // 管理・職員
-  | "common"          // 共用・交流
-  | "sanitary"        // 衛生・更衣
-  | "other";          // 設備・その他
+  | "classroom" // 講義・学習
+  | "specialized" // 専門教室
+  | "administration" // 管理・職員
+  | "common" // 共用・交流
+  | "sanitary" // 衛生・更衣
+  | "other"; // 設備・その他
 
 export type ZonePalette = {
   fill: string;
@@ -44,12 +44,12 @@ export const LIGHT_THEME: ColorTheme = {
   walls: { fill: "#B8B8BD", line: "rgba(0,0,0,0.18)" },
   atrium: { fill: "#D5D9C5", line: "rgba(0,0,0,0.15)" },
   zones: {
-    classroom:       { fill: "#C8DFC5", line: "#A3BFA0", opacity: 1.0 },
-    specialized:     { fill: "#C5D1E8", line: "#A0AECB", opacity: 1.0 },
-    administration:  { fill: "#DDD6D0", line: "#BFB8B2", opacity: 1.0 },
-    common:          { fill: "#F2DCC2", line: "#D9C4A8", opacity: 1.0 },
-    sanitary:        { fill: "#C5D5DF", line: "#A7BAC7", opacity: 1.0 },
-    other:           { fill: "#D8D8DC", line: "#B8B8BE", opacity: 1.0 },
+    classroom: { fill: "#C8DFC5", line: "#A3BFA0", opacity: 1.0 },
+    specialized: { fill: "#C5D1E8", line: "#A0AECB", opacity: 1.0 },
+    administration: { fill: "#DDD6D0", line: "#BFB8B2", opacity: 1.0 },
+    common: { fill: "#F2DCC2", line: "#D9C4A8", opacity: 1.0 },
+    sanitary: { fill: "#C5D5DF", line: "#A7BAC7", opacity: 1.0 },
+    other: { fill: "#D8D8DC", line: "#B8B8BE", opacity: 1.0 },
   },
   label: {
     textColor: "#1A1A2E",
@@ -73,12 +73,12 @@ export const DARK_THEME: ColorTheme = {
   walls: { fill: "#4A4C52", line: "rgba(255,255,255,0.10)" },
   atrium: { fill: "#2E3028", line: "rgba(255,255,255,0.08)" },
   zones: {
-    classroom:       { fill: "#2A3A28", line: "#3E543B", opacity: 1.0 },
-    specialized:     { fill: "#262D3D", line: "#384158", opacity: 1.0 },
-    administration:  { fill: "#322E2B", line: "#48433D", opacity: 1.0 },
-    common:          { fill: "#362E24", line: "#4E4234", opacity: 1.0 },
-    sanitary:        { fill: "#242C33", line: "#36414A", opacity: 1.0 },
-    other:           { fill: "#2B2C30", line: "#404248", opacity: 1.0 },
+    classroom: { fill: "#2A3A28", line: "#3E543B", opacity: 1.0 },
+    specialized: { fill: "#262D3D", line: "#384158", opacity: 1.0 },
+    administration: { fill: "#322E2B", line: "#48433D", opacity: 1.0 },
+    common: { fill: "#362E24", line: "#4E4234", opacity: 1.0 },
+    sanitary: { fill: "#242C33", line: "#36414A", opacity: 1.0 },
+    other: { fill: "#2B2C30", line: "#404248", opacity: 1.0 },
   },
   label: {
     textColor: "#E8E8EC",

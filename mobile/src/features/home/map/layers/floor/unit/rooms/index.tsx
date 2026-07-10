@@ -33,7 +33,10 @@ export function RoomView({ data, colorTheme, visible = true }: Props) {
             data={data}
             visible={visible}
             filter={filter}
-            fillStyle={{ fillColor: palette.fill, fillOpacity: palette.opacity }}
+            fillStyle={{
+              fillColor: palette.fill,
+              fillOpacity: palette.opacity,
+            }}
             lineStyle={{ lineColor: palette.line }}
           />
         );

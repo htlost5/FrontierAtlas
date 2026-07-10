@@ -58,7 +58,15 @@ export function buildZoneFilter(zone: RoomZoneGroup): Expression {
     .filter(([_, z]) => z === zone)
     .map(([key]) => ROOM_CATEGORIES[key as RoomKey] ?? key);
   if (keys.length === 0) {
-    return ["in", ["get", "category"], ["literal", [""]]] as unknown as Expression;
+    return [
+      "in",
+      ["get", "category"],
+      ["literal", [""]],
+    ] as unknown as Expression;
   }
-  return ["in", ["get", "category"], ["literal", keys]] as unknown as Expression;
+  return [
+    "in",
+    ["get", "category"],
+    ["literal", keys],
+  ] as unknown as Expression;
 }

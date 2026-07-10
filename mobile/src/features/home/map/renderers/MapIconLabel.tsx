@@ -23,7 +23,12 @@ type Props = {
  * - Renders labels via LabelLayer
  * - Renders unit symbols, arrows, elevators, etc. via UnitSymbol
  */
-export function MapIconLabel({ floor_num, data, isVisible, colorTheme }: Props) {
+export function MapIconLabel({
+  floor_num,
+  data,
+  isVisible,
+  colorTheme,
+}: Props) {
   // DD-05: processedFeatures を useMemo でメモ化（Hooks は早期リターン前に配置）
   const processedGeoJson: FeatureCollection | null = useMemo(() => {
     if (!data) return null;

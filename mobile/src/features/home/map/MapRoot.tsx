@@ -37,30 +37,46 @@ const MapRootBase = ({ children }: Props) => {
   }, []);
 
   const moveTo = useCallback(
-    (center: [number, number], nextZoom?: number, padding?: { top: number; bottom: number; left: number; right: number }) => {
+    (
+      center: [number, number],
+      nextZoom?: number,
+      padding?: { top: number; bottom: number; left: number; right: number },
+    ) => {
       cameraRef.current?.setCamera({
         centerCoordinate: center,
         ...(nextZoom !== undefined ? { zoomLevel: nextZoom } : {}),
         animationDuration: 600,
-        ...(padding ? { padding: {
-          paddingTop: padding.top,
-          paddingBottom: padding.bottom,
-          paddingLeft: padding.left,
-          paddingRight: padding.right,
-        }} : {}),
+        ...(padding
+          ? {
+              padding: {
+                paddingTop: padding.top,
+                paddingBottom: padding.bottom,
+                paddingLeft: padding.left,
+                paddingRight: padding.right,
+              },
+            }
+          : {}),
       });
     },
     [],
   );
 
-  const flyToSearchResult = useCallback((center: [number, number], zoom = 19.5) => {
-    cameraRef.current?.setCamera({
-      centerCoordinate: center,
-      zoomLevel: zoom,
-      animationDuration: 600,
-      padding: { paddingTop: 100, paddingBottom: 220, paddingLeft: 60, paddingRight: 20 },
-    });
-  }, []);
+  const flyToSearchResult = useCallback(
+    (center: [number, number], zoom = 19.5) => {
+      cameraRef.current?.setCamera({
+        centerCoordinate: center,
+        zoomLevel: zoom,
+        animationDuration: 600,
+        padding: {
+          paddingTop: 100,
+          paddingBottom: 220,
+          paddingLeft: 60,
+          paddingRight: 20,
+        },
+      });
+    },
+    [],
+  );
 
   return (
     <MapContext.Provider

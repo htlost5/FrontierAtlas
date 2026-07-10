@@ -1,7 +1,7 @@
 // style のスタイル定義をまとめる。
 import type {
-    FillLayerStyle,
-    LineLayerStyle,
+  FillLayerStyle,
+  LineLayerStyle,
 } from "@maplibre/maplibre-react-native";
 import type { ZonePalette } from "../../constants/colorPalette";
 
