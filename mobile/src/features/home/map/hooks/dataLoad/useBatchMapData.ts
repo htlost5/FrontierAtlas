@@ -27,7 +27,11 @@ export type BatchState =
   | { readonly status: "loading"; readonly isInitial: true }
   | { readonly status: "loading"; readonly isInitial: false }
   | { readonly status: "ready" }
-  | { readonly status: "error"; readonly error: Error; readonly isInitial: boolean };
+  | {
+      readonly status: "error";
+      readonly error: Error;
+      readonly isInitial: boolean;
+    };
 
 export type BatchMapData = {
   readonly venue: FeatureCollection | null;
@@ -67,7 +71,7 @@ function floorSectionId(floor: number): MapId {
 // ---- プリロード関数 ----
 // 全5フロアの units + sections を並列プリロード
 async function preloadAllFloors(
-  onProgress?: (loaded: number, total: number) => void
+  onProgress?: (loaded: number, total: number) => void,
 ): Promise<void> {
   if (preloadCache.status === "ready" || preloadCache.status === "loading") {
     return;
@@ -75,12 +79,14 @@ async function preloadAllFloors(
   preloadCache.status = "loading";
 
   const floors = [1, 2, 3, 4, 5];
-  const floorIds = floors.map((f) => [floorUnitId(f), floorSectionId(f)] as const);
+  const floorIds = floors.map(
+    (f) => [floorUnitId(f), floorSectionId(f)] as const,
+  );
   const allIds = floorIds.flat();
 
   try {
     const results = await Promise.all(
-      allIds.map((id) => getGeoDataByLogicalId(id))
+      allIds.map((id) => getGeoDataByLogicalId(id)),
     );
 
     floors.forEach((floor, i) => {
@@ -98,12 +104,18 @@ async function preloadAllFloors(
   }
 }
 
-export function useBatchMapData(floor: number, retryKey?: number): BatchMapData {
+export function useBatchMapData(
+  floor: number,
+  retryKey?: number,
+): BatchMapData {
   const cacheRef = useRef<VenueCache | null>(null);
   const prevFloorDataRef = useRef<FloorGeoData | null>(null);
   const currentFloorRef = useRef<number>(floor);
 
-  const [state, setState] = useState<BatchState>({ status: "loading", isInitial: true });
+  const [state, setState] = useState<BatchState>({
+    status: "loading",
+    isInitial: true,
+  });
   const [venue, setVenue] = useState<FeatureCollection | null>(null);
   const [buildings, setBuildings] = useState<BuildingsData | null>(null);
   const [stairs, setStairs] = useState<FeatureCollection | null>(null);
@@ -192,12 +204,17 @@ export function useBatchMapData(floor: number, retryKey?: number): BatchMapData 
   }, [floor, retryKey]);
 
   // 派生フラグ
-  const isInitialLoading = state.status === "loading" && state.isInitial === true;
+  const isInitialLoading =
+    state.status === "loading" && state.isInitial === true;
   // プリロードキャッシュヒット時はフロア切替中扱いにしない（瞬時切替）
-  const isFloorSwitching = state.status === "loading"
-    && state.isInitial === false
-    && !preloadCache.data.has(floor);
-  const floorError = state.status === "error" && !state.isInitial ? (state as Extract<BatchState, { status: "error" }>).error : null;
+  const isFloorSwitching =
+    state.status === "loading" &&
+    state.isInitial === false &&
+    !preloadCache.data.has(floor);
+  const floorError =
+    state.status === "error" && !state.isInitial
+      ? (state as Extract<BatchState, { status: "error" }>).error
+      : null;
 
   // stale-while-revalidate: 前フロアデータを floorData が null のときに表示用として返す
   const displayFloorData = floorData ?? prevFloorDataRef.current;

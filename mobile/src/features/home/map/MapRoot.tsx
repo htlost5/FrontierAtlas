@@ -1,6 +1,12 @@
 // MapRoot.tsx
 import { CameraRef } from "@maplibre/maplibre-react-native";
-import React, { memo, useCallback, useRef, useState, startTransition } from "react";
+import React, {
+  memo,
+  useCallback,
+  useRef,
+  useState,
+  startTransition,
+} from "react";
 import { StyleSheet, View } from "react-native";
 import { MapScreen } from "./MapScreen";
 import { MapContext } from "./context/MapContext";
@@ -32,7 +38,14 @@ const MapRootBase = ({ children }: Props) => {
 
   return (
     <MapContext.Provider
-      value={{ cameraRef, floor, setFloor: wrappedSetFloor, zoom, setZoom, moveTo }}
+      value={{
+        cameraRef,
+        floor,
+        setFloor: wrappedSetFloor,
+        zoom,
+        setZoom,
+        moveTo,
+      }}
     >
       <View style={styles.root}>
         {/* Map は完全に背景 */}
