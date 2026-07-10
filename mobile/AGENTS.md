@@ -19,6 +19,7 @@
 
 - 現状の自動テストスクリプト: 未定義（`package.json` に `test` script なし）
 - 最低検証:
+  - doctor: `npx expo-doctor`
   - Lint: `npx expo lint`
 - 将来 `test` script 追加時: `npm run test` を標準化する
 

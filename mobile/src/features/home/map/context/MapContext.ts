@@ -2,6 +2,7 @@
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 import { createContext } from "react";
 
+// MapScreen で使用する MapContext の型定義とコンテキストの作成
 export type MapContextValue = {
   cameraRef: React.RefObject<CameraRef | null>;
 
