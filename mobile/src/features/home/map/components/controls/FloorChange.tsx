@@ -58,11 +58,16 @@ export function FloorChange() {
     }
   };
 
-  const theme = colorTheme.controls;
+  const theme = {
+    bg: colorTheme.controls.floorBg,
+    selectedBg: colorTheme.controls.floorSelectedBg,
+    text: colorTheme.controls.floorText,
+    selectedText: colorTheme.controls.floorSelectedText,
+  };
 
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: theme.floorBg }]}
+      style={[styles.container, { backgroundColor: theme.bg }]}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         justifyContent: "center",

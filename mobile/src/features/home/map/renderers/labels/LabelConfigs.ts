@@ -1,83 +1,49 @@
-// ラベル設定定義ファイル: マップ上のすべてのラベル表示設定を管理
-// source/labels/lavelUI/configs/lavelConfigs.ts から移植
+// カテゴリ別ラベル表示設定
 import { LabelConfig } from "@/src/features/home/map/renderers/labels/LabelConfig";
-import { ROOM_FILTERS } from "@/src/features/home/map/layers/floor/unit/rooms/filter";
+import type { RoomCategory } from "@/src/features/home/map/constants/colorPalette";
 import type { ColorTheme } from "@/src/features/home/map/constants/colorPalette";
+import { buildCategoryFilter } from "@/src/features/home/map/layers/floor/unit/rooms/configs";
 
-export type LabelKey = keyof typeof ROOM_FILTERS;
+export type LabelKey = RoomCategory;
 
-// 特定のラベルタイプの表示設定をカスタマイズするオーバーライド設定
 const overrides: Partial<Record<LabelKey, Partial<LabelConfig>>> = {
-  // 公共スペース：シンボルのみ表示、テキスト非表示
-  lobby: {
+  sanitary: {
     iconVisible: false,
-  },
-  lounge: {
-    iconVisible: false,
-  },
-  informationLounge: {
-    iconVisible: false,
-  },
-  courtyard: {
-    iconVisible: false,
-  },
-
-  // テキストとアイコン両方非表示：トイレ、エレベータ、自販機、避難系
-  restroomMale: {
     textVisible: false,
-    iconVisible: false,
-  },
-  restroomFemale: {
-    textVisible: false,
-    iconVisible: false,
-  },
-  restroomAccessible: {
-    textVisible: false,
-    iconVisible: false,
-  },
-  elevator: {
-    textVisible: false,
-    iconVisible: false,
-  },
-  vendingArea: {
-    textVisible: false,
-    iconVisible: false,
-  },
-  emergencyArea: {
-    iconVisible: false,
   },
 };
 
-/**
- * ラベル設定生成関数
- * - ROOM_FILTERS の各キーに対応するラベル設定を動的に生成
- * - overrides で特定のラベルタイプの設定をカスタマイズ
- * - colorTheme からテキスト色・ハロー色を反映
- */
 export function createLabelConfigs(
   colorTheme: ColorTheme,
 ): Record<LabelKey, LabelConfig> {
+  const categories: RoomCategory[] = [
+    "learning",
+    "laboratory",
+    "creative",
+    "meeting",
+    "staff",
+    "social",
+    "sanitary",
+    "circulation",
+  ];
+
   return Object.fromEntries(
-    (Object.keys(ROOM_FILTERS) as LabelKey[]).map((key) => [
-      key,
+    categories.map((cat) => [
+      cat,
       {
-        key,
-        filter: ROOM_FILTERS[key],
+        key: cat,
+        filter: buildCategoryFilter(cat),
         textColor: colorTheme.label.textColor,
         textHaloColor: colorTheme.label.textHaloColor,
         textHaloWidth: colorTheme.label.textHaloWidth,
         iconVisible: true,
         textVisible: true,
-        ...overrides[key],
+        ...overrides[cat],
       },
     ]),
   ) as Record<LabelKey, LabelConfig>;
 }
 
-/**
- * 全ラベルの最終的な設定オブジェクト（デフォルトライトテーマ）
- * 動的テーマが必要な場合は createLabelConfigs(colorTheme) を使用
- */
 import { LIGHT_THEME } from "@/src/features/home/map/constants/colorPalette";
 export const LABEL_CONFIGS: Record<LabelKey, LabelConfig> =
   createLabelConfigs(LIGHT_THEME);

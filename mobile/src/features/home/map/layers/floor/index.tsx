@@ -3,8 +3,8 @@ import { SectionView } from "./section";
 import { FloorProps } from "./types";
 import { UnitView } from "./unit";
 
-export function FloorView({ floorData, stairsData, colorTheme }: FloorProps) {
-  if (!(floorData && stairsData)) return null;
+export function FloorView({ floorData, colorTheme }: FloorProps) {
+  if (!floorData) return null;
 
   return (
     <>

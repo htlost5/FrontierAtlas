@@ -7,6 +7,5 @@ export type FloorProps = {
     units: GeoLayerProps["data"];
     sections: GeoLayerProps["data"];
   };
-  stairsData: GeoLayerProps["data"];
   colorTheme: ColorTheme;
 };

@@ -1,35 +1,29 @@
 // rooms の公開エクスポートをまとめる。
-// 6つの機能ゾーン別に動的に PolygonLayer を生成する。
+// 8つの RoomCategory 別に動的に PolygonLayer を生成する。
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
-import { ROOM_ZONE_MAP, buildZoneFilter } from "./configs";
-import type { ColorTheme, ZoneType } from "../../../../constants/colorPalette";
+import { CATEGORIES, buildCategoryFilter } from "./configs";
+import type {
+  ColorTheme,
+  RoomCategory,
+} from "../../../../constants/colorPalette";
 
 type Props = GeoLayerProps & {
   colorTheme: ColorTheme;
 };
-
-const ZONES: ZoneType[] = [
-  "classroom",
-  "specialized",
-  "administration",
-  "common",
-  "sanitary",
-  "other",
-];
 
 export function RoomView({ data, colorTheme, visible = true }: Props) {
   if (!data) return null;
 
   return (
     <>
-      {ZONES.map((zone) => {
-        const palette = colorTheme.zones[zone];
-        const filter = buildZoneFilter(zone);
+      {CATEGORIES.map((category) => {
+        const palette = colorTheme.rooms[category];
+        const filter = buildCategoryFilter(category);
         return (
           <PolygonLayer
-            key={zone}
-            prefixId={`room_zone_${zone}`}
+            key={category}
+            prefixId={`room_category_${category}`}
             data={data}
             visible={visible}
             filter={filter}

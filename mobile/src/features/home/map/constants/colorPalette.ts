@@ -1,13 +1,15 @@
 // 機能別ゾーン配色 + 基盤レイヤー配色 + UI配色を定義する。
-export type ZoneType =
-  | "classroom" // 講義・学習
-  | "specialized" // 専門教室
-  | "administration" // 管理・職員
-  | "common" // 共用・交流
-  | "sanitary" // 衛生・更衣
-  | "other"; // 設備・その他
+export type RoomCategory =
+  | "learning" // 学習
+  | "laboratory" // 実験・研究
+  | "creative" // 創作
+  | "meeting" // 会議・集会
+  | "staff" // 職員
+  | "social" // 交流
+  | "sanitary" // 衛生
+  | "circulation"; // 移動・設備
 
-export type ZonePalette = {
+export type RoomCategoryPalette = {
   fill: string;
   line: string;
   opacity: number;
@@ -16,12 +18,12 @@ export type ZonePalette = {
 export type ColorTheme = {
   id: "light" | "dark";
   background: string;
-  buildings: ZonePalette;
-  venue: ZonePalette;
-  sections: ZonePalette;
+  buildings: RoomCategoryPalette;
+  venue: RoomCategoryPalette;
+  sections: RoomCategoryPalette;
   walls: { fill: string; line: string };
   atrium: { fill: string; line: string };
-  zones: Record<ZoneType, ZonePalette>;
+  rooms: Record<RoomCategory, RoomCategoryPalette>;
   label: {
     textColor: string;
     textHaloColor: string;
@@ -43,13 +45,15 @@ export const LIGHT_THEME: ColorTheme = {
   sections: { fill: "#F7F2EA", line: "#E0D8C8", opacity: 1.0 },
   walls: { fill: "#B8B8BD", line: "rgba(0,0,0,0.18)" },
   atrium: { fill: "#D5D9C5", line: "rgba(0,0,0,0.15)" },
-  zones: {
-    classroom: { fill: "#C8DFC5", line: "#A3BFA0", opacity: 1.0 },
-    specialized: { fill: "#C5D1E8", line: "#A0AECB", opacity: 1.0 },
-    administration: { fill: "#DDD6D0", line: "#BFB8B2", opacity: 1.0 },
-    common: { fill: "#F2DCC2", line: "#D9C4A8", opacity: 1.0 },
-    sanitary: { fill: "#C5D5DF", line: "#A7BAC7", opacity: 1.0 },
-    other: { fill: "#D8D8DC", line: "#B8B8BE", opacity: 1.0 },
+  rooms: {
+    learning: { fill: "#BBDEFB", line: "#90CAF9", opacity: 1.0 },
+    laboratory: { fill: "#E1BEE7", line: "#CE93D8", opacity: 1.0 },
+    creative: { fill: "#FFE0B2", line: "#FFCC80", opacity: 1.0 },
+    meeting: { fill: "#FFF9C4", line: "#FFF176", opacity: 1.0 },
+    staff: { fill: "#D7CCC8", line: "#BCAAA4", opacity: 1.0 },
+    social: { fill: "#B2DFDB", line: "#80CBC4", opacity: 1.0 },
+    sanitary: { fill: "#F8BBD0", line: "#F48FB1", opacity: 1.0 },
+    circulation: { fill: "#C8E6C9", line: "#A5D6A7", opacity: 1.0 },
   },
   label: {
     textColor: "#1A1A2E",
@@ -72,13 +76,15 @@ export const DARK_THEME: ColorTheme = {
   sections: { fill: "#262320", line: "#3D3830", opacity: 1.0 },
   walls: { fill: "#4A4C52", line: "rgba(255,255,255,0.10)" },
   atrium: { fill: "#2E3028", line: "rgba(255,255,255,0.08)" },
-  zones: {
-    classroom: { fill: "#2A3A28", line: "#3E543B", opacity: 1.0 },
-    specialized: { fill: "#262D3D", line: "#384158", opacity: 1.0 },
-    administration: { fill: "#322E2B", line: "#48433D", opacity: 1.0 },
-    common: { fill: "#362E24", line: "#4E4234", opacity: 1.0 },
-    sanitary: { fill: "#242C33", line: "#36414A", opacity: 1.0 },
-    other: { fill: "#2B2C30", line: "#404248", opacity: 1.0 },
+  rooms: {
+    learning: { fill: "#1A3A5C", line: "#2A5290", opacity: 1.0 },
+    laboratory: { fill: "#2D1B4E", line: "#4A2C7A", opacity: 1.0 },
+    creative: { fill: "#4A2800", line: "#7A4400", opacity: 1.0 },
+    meeting: { fill: "#4A4200", line: "#7A6E00", opacity: 1.0 },
+    staff: { fill: "#3E2723", line: "#5D4037", opacity: 1.0 },
+    social: { fill: "#004D40", line: "#00695C", opacity: 1.0 },
+    sanitary: { fill: "#4A1530", line: "#7A2048", opacity: 1.0 },
+    circulation: { fill: "#1B3A1B", line: "#2E5A2E", opacity: 1.0 },
   },
   label: {
     textColor: "#E8E8EC",

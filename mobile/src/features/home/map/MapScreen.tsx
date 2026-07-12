@@ -116,11 +116,7 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
 
       {/* Floor レイヤー — floor 依存（stale-while-revalidate） */}
       {batchData.floorData && (
-        <FloorView
-          floorData={batchData.floorData}
-          stairsData={batchData.stairs}
-          colorTheme={colorTheme}
-        />
+        <FloorView floorData={batchData.floorData} colorTheme={colorTheme} />
       )}
 
       {/* MapIconLabel — currentFloor を使用 */}

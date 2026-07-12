@@ -3,14 +3,18 @@ import type {
   FillLayerStyle,
   LineLayerStyle,
 } from "@maplibre/maplibre-react-native";
-import type { ZonePalette } from "../../constants/colorPalette";
+import type { RoomCategoryPalette } from "../../constants/colorPalette";
 
-export const getVenueFillStyle = (palette: ZonePalette): FillLayerStyle => ({
+export const getVenueFillStyle = (
+  palette: RoomCategoryPalette,
+): FillLayerStyle => ({
   fillColor: palette.fill,
   fillOpacity: palette.opacity,
 });
 
-export const getVenueLineStyle = (palette: ZonePalette): LineLayerStyle => ({
+export const getVenueLineStyle = (
+  palette: RoomCategoryPalette,
+): LineLayerStyle => ({
   lineColor: palette.line,
   lineWidth: 1,
 });
