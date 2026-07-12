@@ -5,7 +5,7 @@
  * 依存: npm install @tabler/icons sharp
  * 実行: npx tsx tools/map-assets/scripts/convert-tabler-icons.ts
  *
- * 出力先: mobile/src/assets/images/icons/MapView/map/categoryIcons/
+ * 出力先: mobile/assets/images/icons/MapView/map/categoryIcons/
  *
  * 仕様:
  * - 24x24px → 出力 96x96px（@4x Retina 対応）
@@ -19,12 +19,29 @@ import * as path from "path";
 import sharp from "sharp";
 
 const TABLER_ICONS_DIR = path.resolve(
-  __dirname, "..", "..", "..", "node_modules", "@tabler", "icons", "icons", "outline",
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "node_modules",
+  "@tabler",
+  "icons",
+  "icons",
+  "outline",
 );
 
 const OUTPUT_DIR = path.resolve(
-  __dirname, "..", "..", "..", "mobile", "src", "assets",
-  "images", "icons", "MapView", "map", "categoryIcons",
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "mobile",
+  "assets",
+  "images",
+  "icons",
+  "MapView",
+  "map",
+  "categoryIcons",
 );
 
 interface ConversionConfig {
@@ -59,10 +76,7 @@ async function main() {
 
     const pngPath = path.join(OUTPUT_DIR, `${outputName}.png`);
     try {
-      await sharp(Buffer.from(svgContent))
-        .resize(96, 96)
-        .png()
-        .toFile(pngPath);
+      await sharp(Buffer.from(svgContent)).resize(96, 96).png().toFile(pngPath);
       console.log(`[OK] ${outputName}.png (96x96)`);
     } catch (err) {
       console.error(`[ERROR] Failed to convert ${tablerName}:`, err);
