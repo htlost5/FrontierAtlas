@@ -118,9 +118,19 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         />
       )}
 
-      {/* Venue レイヤー — floor 非依存 */}
+      {/* Venue レイヤー — floor 非依存（最背面） */}
       {batchData.venue && (
         <VenueView data={batchData.venue} colorTheme={colorTheme} />
+      )}
+
+      {/* Buildings レイヤー（床色）— section の下、venue の上 */}
+      {batchData.buildings && (
+        <BuildingsView
+          data={batchData.buildings}
+          visible={displayMode !== "building"}
+          colorTheme={colorTheme}
+          variant="floor"
+        />
       )}
 
       {/* Floor レイヤー — floor 依存（stale-while-revalidate）
@@ -151,7 +161,7 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         />
       )}
 
-      {/* Buildings レイヤー — floor 非依存 */}
+      {/* Buildings レイヤー（グレーアウト用）— 最前面（building モードのみ表示） */}
       {batchData.buildings && (
         <BuildingsView
           data={batchData.buildings}

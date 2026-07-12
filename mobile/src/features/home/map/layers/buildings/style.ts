@@ -18,3 +18,17 @@ export const getBuildingsLineStyle = (
   lineColor: palette.line,
   lineWidth: 1.5,
 });
+
+export const getBuildingFloorFillStyle = (
+  palette: RoomCategoryPalette,
+): FillLayerStyle => ({
+  fillColor: palette.fill,
+  fillOpacity: palette.opacity,
+});
+
+export const getBuildingFloorLineStyle = (
+  palette: RoomCategoryPalette,
+): LineLayerStyle => ({
+  lineColor: palette.line,
+  lineWidth: 1,
+});

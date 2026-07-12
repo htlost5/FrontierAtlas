@@ -20,6 +20,7 @@ export type ColorTheme = {
   id: "light" | "dark";
   background: string;
   buildings: RoomCategoryPalette;
+  buildingFloor: RoomCategoryPalette;
   venue: RoomCategoryPalette;
   sections: RoomCategoryPalette;
   walls: { fill: string; line: string };
@@ -42,6 +43,7 @@ export const LIGHT_THEME: ColorTheme = {
   id: "light",
   background: "#F0F1F3",
   buildings: { fill: "#E8E8EC", line: "#D4D4D8", opacity: 0.8 },
+  buildingFloor: { fill: "#EDE8DC", line: "#D5CFC0", opacity: 0.9 },
   venue: { fill: "#E3EBF7", line: "#B0C4DE", opacity: 1.0 },
   sections: { fill: "#F7F2EA", line: "#E0D8C8", opacity: 1.0 },
   walls: { fill: "#B8B8BD", line: "rgba(0,0,0,0.18)" },
@@ -113,6 +115,7 @@ export const DARK_THEME: ColorTheme = {
   id: "dark",
   background: "#1A1C1E",
   buildings: { fill: "#24262B", line: "#3A3C42", opacity: 0.8 },
+  buildingFloor: { fill: "#2A2620", line: "#3D3830", opacity: 0.9 },
   venue: { fill: "#1E2430", line: "#2A3548", opacity: 1.0 },
   sections: { fill: "#262320", line: "#3D3830", opacity: 1.0 },
   walls: { fill: "#4A4C52", line: "rgba(255,255,255,0.10)" },
