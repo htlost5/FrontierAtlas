@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import { useSearch } from "@/src/features/home/search/Context/SearchContext";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 // 検索バー本体：フォーカス状態に応じてUI切り替えとテキスト入力を処理
 export function SearchBar() {
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontSize: 22,
+    fontSize: FONT_SIZE.searchBar,
     lineHeight: 50,
   },
 });

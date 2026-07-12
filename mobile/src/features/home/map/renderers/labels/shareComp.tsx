@@ -1,6 +1,7 @@
 // ラベルレイヤー共通コンポーネント: ラベル設定をMaplibreシンボルレイヤーに変換して描画
 import { SymbolLayer } from "@maplibre/maplibre-react-native";
 import { LabelConfig } from "./LabelConfig";
+import { FONT_STACK } from "@/src/shared/constants/typography";
 
 /**
  * ラベルレイヤーのプロパティ定義
@@ -69,7 +70,7 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
             21,
             15,
           ],
-          textFont: ["Noto Sans Medium"],
+          textFont: FONT_STACK.MEDIUM,
           textColor: config.textColor,
           textHaloColor: config.textHaloColor ?? "rgba(255,255,255,0.7)",
           textHaloWidth: config.textHaloWidth ?? 1.5,

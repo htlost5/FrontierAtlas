@@ -6,13 +6,14 @@
  * @returns フォント読み込み完了フラグ（true: 完了, false: 読み込み中）
  */
 import { useFonts } from "expo-font";
+import { APP_FONTS } from "@/src/shared/constants/typography";
 /**
  * Y1LunaChord フォントを読み込むカスタムフック
  * @returns フォント読み込み完了フラグ
  */
 export function useLoadFonts(): boolean {
   const [loaded] = useFonts({
-    Y1LunaChord: require("@/assets/fonts/Y1LunaChord.otf"),
+    [APP_FONTS.lunaChord]: require("@/assets/fonts/Y1LunaChord.otf"),
   });
 
   return loaded;

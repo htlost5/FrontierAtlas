@@ -1,4 +1,5 @@
 // ツール画面: タブバーの「tools」ボタンに対応したダミー画面
+import { APP_FONTS, FONT_SIZE } from "@/src/shared/constants/typography";
 import { StyleSheet, Text, View } from "react-native";
 
 /**
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "black",
-    fontSize: 20,
-    fontFamily: "Y1LunaChord",
+    fontSize: FONT_SIZE.heading,
+    fontFamily: APP_FONTS.lunaChord,
   },
 });

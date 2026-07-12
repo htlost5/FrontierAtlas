@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import type { MapId } from "@/src/data/geojson/geojsonAssetMap";
 import type { BuildingsData } from "../../layers/buildings/types";
 import { getGeoDataByLogicalId } from "../../services/getGeoDataByLogicalId";
+import { GeojsonRepository } from "@/src/data/geojson/repository/GeojsonRepository";
+import { sanitizeFeatureCollection } from "@/src/infra/geojson/sanitizeGeoJSON";
+import { geoJsonMap } from "@/src/data/geojson/geojsonAssetMap";
 
 // ---- プリロードキャッシュ ----
 // モジュールスコープに保持。コンポーネントのアンマウント/マウントを超えて生存。
@@ -69,7 +72,8 @@ function floorSectionId(floor: number): MapId {
 }
 
 // ---- プリロード関数 ----
-// 全5フロアの units + sections を並列プリロード
+// 全5フロアの units + sections をバッチプリロード
+// getMany() を使用し、1回のネイティブ呼び出しに集約（同時実行による NativeDatabase クラッシュ対策）
 async function preloadAllFloors(
   onProgress?: (loaded: number, total: number) => void,
 ): Promise<void> {
@@ -79,21 +83,40 @@ async function preloadAllFloors(
   preloadCache.status = "loading";
 
   const floors = [1, 2, 3, 4, 5];
-  const floorIds = floors.map(
-    (f) => [floorUnitId(f), floorSectionId(f)] as const,
-  );
-  const allIds = floorIds.flat();
+  const allIds = floors.flatMap((f) => [floorUnitId(f), floorSectionId(f)]);
 
   try {
-    const results = await Promise.all(
-      allIds.map((id) => getGeoDataByLogicalId(id)),
-    );
+    // バッチ取得: 全フロア × 2（units + sections）= 10 レコードを 1 回の SQLite 呼び出しで取得
+    const repo = GeojsonRepository.getInstance();
+    const batchResult = await repo.getMany(allIds);
 
     floors.forEach((floor, i) => {
-      preloadCache.data.set(floor, {
-        units: results[i * 2],
-        sections: results[i * 2 + 1],
-      });
+      const unitId = floorUnitId(floor);
+      const sectionId = floorSectionId(floor);
+
+      let units = batchResult.get(unitId) ?? null;
+      let sections = batchResult.get(sectionId) ?? null;
+
+      // SQLite ミス時のアセットバンドルフォールバック
+      if (!units) {
+        const asset = geoJsonMap[unitId];
+        if (asset)
+          units = sanitizeFeatureCollection(asset.content as FeatureCollection);
+      } else {
+        units = sanitizeFeatureCollection(units);
+      }
+
+      if (!sections) {
+        const asset = geoJsonMap[sectionId];
+        if (asset)
+          sections = sanitizeFeatureCollection(
+            asset.content as FeatureCollection,
+          );
+      } else {
+        sections = sanitizeFeatureCollection(sections);
+      }
+
+      preloadCache.data.set(floor, { units, sections });
       onProgress?.(i + 1, floors.length);
     });
 

@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { mapControlShadow } from "@/src/shared/constants/shadowStyles";
 import { useMapContext } from "../../hooks/state/useMapContext";
 import * as Haptics from "expo-haptics";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 // 個別の階層ボタンのプロパティ定義
 type Props = {
@@ -102,6 +103,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   textFont: {
-    fontSize: 14,
+    fontSize: FONT_SIZE.floorControl,
   },
 });

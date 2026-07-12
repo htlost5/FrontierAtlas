@@ -1,6 +1,7 @@
 // 初回ロード中に MapContainer の代わりに表示するフルスクリーンローディング
 import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 type Props = {
   message?: string;
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 16,
-    fontSize: 16,
+    fontSize: FONT_SIZE.body,
     color: "#666",
   },
 });

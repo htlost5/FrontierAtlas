@@ -9,6 +9,7 @@ import type { CameraRegion } from "../hooks/camera/useCameraController/types";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { mapConfig } from "../constants/mapConfig";
+import { mapStyle } from "../constants/mapStyle";
 import { MapIconRegistry } from "../renderers/MapIconRegistry";
 import { useMapContext } from "../hooks/state/useMapContext";
 
@@ -16,16 +17,6 @@ type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
   onRegionIsChanging?: (region: CameraRegion) => void;
   children?: React.ReactNode;
-};
-
-const mapStyle = {
-  version: 8,
-  sources: {},
-  layers: [],
-  glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
-  metadata: {
-    "maplibre:localIdeographFontFamily": "sans-serif",
-  },
 };
 
 export function MapContainer({

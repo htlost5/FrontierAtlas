@@ -4,6 +4,7 @@ import { IconProps } from "@expo/vector-icons/build/createIconSet";
 import React from "react";
 import { Animated, TouchableOpacity } from "react-native";
 import { RouteName } from "../../navigation/routes";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 type Props = {
   name: RouteName;
@@ -75,7 +76,7 @@ export const TabItem = React.memo(function TabItem({
       <Animated.Text
         style={{
           transform: [{ scale: textScale }],
-          fontSize: 10,
+          fontSize: FONT_SIZE.tab,
           color: isFocused ? "blue" : "gray",
         }}
       >

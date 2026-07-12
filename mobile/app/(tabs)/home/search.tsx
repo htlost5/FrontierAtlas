@@ -1,6 +1,7 @@
 // 検索結果表示画面: 検索文字列と検索結果を表示するビュー
 import { useSearch } from "@/src/features/home/search/Context/SearchContext";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 /**
  * 検索結果表示コンポーネント
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textFirst: {
-    fontSize: 22,
+    fontSize: FONT_SIZE.searchBar,
   },
   textBoxSecond: {
     // backgroundColor: "lightblue",
@@ -88,6 +89,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textSecond: {
-    fontSize: 18,
+    fontSize: FONT_SIZE.bodyLarge,
   },
 });

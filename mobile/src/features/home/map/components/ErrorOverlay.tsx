@@ -1,6 +1,7 @@
 // 初回エラー（fullscreen）とフロア切替エラー（overlay）の両方に対応する統合エラーコンポーネント
 import React, { useCallback, useRef } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FONT_SIZE } from "@/src/shared/constants/typography";
 
 type Props = {
   message: string;
@@ -77,11 +78,11 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   errorIcon: {
-    fontSize: 48,
+    fontSize: FONT_SIZE.errorIcon,
     marginBottom: 16,
   },
   errorMessage: {
-    fontSize: 16,
+    fontSize: FONT_SIZE.body,
     color: "#333",
     textAlign: "center",
     marginBottom: 24,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   },
   retryText: {
     color: "white",
-    fontSize: 16,
+    fontSize: FONT_SIZE.body,
     fontWeight: "600",
   },
   overlayContainer: {
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   },
   overlayMessage: {
     color: "white",
-    fontSize: 14,
+    fontSize: FONT_SIZE.overlay,
     flex: 1,
     marginRight: 8,
   },
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   },
   overlayButtonText: {
     color: "white",
-    fontSize: 14,
+    fontSize: FONT_SIZE.overlay,
     fontWeight: "600",
   },
 });
