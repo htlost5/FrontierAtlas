@@ -1,5 +1,12 @@
 // 特殊シンボル統合コンポーネント（角丸四角背景＋白アイコン）
-import { ShapeSource, SymbolLayer } from "@maplibre/maplibre-react-native";
+// MapLibre 公式仕様: symbolSortKey は同一 SymbolLayer 内のフィーチャー間でのみ有効。
+// iconAllowOverlap=false 時は値が小さいほど優先表示。
+// 7個の個別レイヤーから1個の統合レイヤーに集約し、match expression でデータ駆動化。
+import {
+  Expression,
+  ShapeSource,
+  SymbolLayer,
+} from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { iconSizeExpression } from "./expressions/expressionHelpers";
 
@@ -8,60 +15,72 @@ type Props = {
   isVisible: number;
 };
 
-/** 特殊シンボル定義: MapLibre Imagesキー → GeoJSON category値 */
-// sortKey: iconAllowOverlap=false 時は値が小さいほど優先表示
-const SPECIAL_SYMBOLS: {
-  imageKey: string;
-  category: string;
-  sortKey: number;
-}[] = [
-  { imageKey: "special-toilet-male", category: "restroom_male", sortKey: 1 },
-  {
-    imageKey: "special-toilet-female",
-    category: "restroom_female",
-    sortKey: 1,
-  },
-  {
-    imageKey: "special-toilet-accessible",
-    category: "restroom_accessible",
-    sortKey: 1,
-  },
-  { imageKey: "special-elevator", category: "elevator", sortKey: 2 },
-  { imageKey: "special-vending", category: "vending_machine", sortKey: 3 },
-  { imageKey: "special-locker", category: "locker", sortKey: 3 },
-  {
-    imageKey: "special-emergency-exit",
-    category: "emergency_exit",
-    sortKey: 3,
-  },
-];
+/** category → iconImage マッピング（match expression） */
+const iconImageExpression: Expression = [
+  "match",
+  ["get", "category"],
+  "restroom_male",
+  "special-toilet-male",
+  "restroom_female",
+  "special-toilet-female",
+  "restroom_accessible",
+  "special-toilet-accessible",
+  "elevator",
+  "special-elevator",
+  "vending_machine",
+  "special-vending",
+  "locker",
+  "special-locker",
+  "emergency_exit",
+  "special-emergency-exit",
+  "",
+] as unknown as Expression;
+
+/**
+ * category → symbolSortKey マッピング（match expression）
+ * 値が小さいほど優先表示（iconAllowOverlap=false 時）
+ */
+const sortKeyExpression: Expression = [
+  "match",
+  ["get", "category"],
+  "restroom_male",
+  1,
+  "restroom_female",
+  1,
+  "restroom_accessible",
+  1, // トイレ系: 最高優先
+  "elevator",
+  2, // エレベータ: 中優先
+  "vending_machine",
+  3,
+  "locker",
+  3,
+  "emergency_exit",
+  3, // その他: 最低優先
+  999, // fallback（最低優先）
+] as unknown as Expression;
 
 export function UnitSymbol({ pointData, isVisible }: Props) {
   if (!pointData) return null;
   const visible = isVisible ? "visible" : "none";
 
-  // 特殊シンボル設定
   return (
     <ShapeSource id="unit-symbols-source" shape={pointData}>
-      {SPECIAL_SYMBOLS.map(({ imageKey, category, sortKey }) => (
-        <SymbolLayer
-          key={imageKey}
-          id={`${imageKey}-layer`}
-          filter={["==", ["get", "category"], category]}
-          style={{
-            iconImage: imageKey,
-            iconSize: iconSizeExpression([
-              [17, 0.15],
-              [21, 0.35],
-            ]),
-            iconRotationAlignment: "auto",
-            textRotationAlignment: "auto",
-            visibility: visible,
-            iconAllowOverlap: false,
-            symbolSortKey: sortKey,
-          }}
-        />
-      ))}
+      <SymbolLayer
+        id="unit-symbol-layer"
+        style={{
+          iconImage: iconImageExpression,
+          iconSize: iconSizeExpression([
+            [17, 0.15],
+            [21, 0.35],
+          ]),
+          iconRotationAlignment: "auto",
+          textRotationAlignment: "auto",
+          visibility: visible,
+          iconAllowOverlap: false,
+          symbolSortKey: sortKeyExpression,
+        }}
+      />
     </ShapeSource>
   );
 }
