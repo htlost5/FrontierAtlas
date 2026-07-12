@@ -11,3 +11,6 @@ __MACOSX/
 
 # Expo build cache
 .expo/
+
+# Vscode
+.vscode/
