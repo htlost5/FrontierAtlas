@@ -11,6 +11,7 @@ const overrides: Partial<Record<LabelKey, Partial<LabelConfig>>> = {
     iconVisible: false,
     textVisible: false,
   },
+  circulation: { iconVisible: false, textVisible: false },
 };
 
 export function createLabelConfigs(
@@ -27,11 +28,14 @@ export function createLabelConfigs(
     "circulation",
   ];
 
+  const themeSuffix = colorTheme.id; // "light" | "dark"
+
   return Object.fromEntries(
     categories.map((cat) => [
       cat,
       {
         key: cat,
+        iconKey: `${cat}-${themeSuffix}`,
         filter: buildCategoryFilter(cat),
         textColor: colorTheme.label.textColor,
         textHaloColor: colorTheme.label.textHaloColor,

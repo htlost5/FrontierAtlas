@@ -6,9 +6,7 @@ import type { Expression } from "@maplibre/maplibre-react-native";
  * @param zoomStops - [zoomLevel, outputValue] のタプル配列
  * @returns 補間式
  */
-export function zoomInterpolate(
-  zoomStops: [number, number][],
-): Expression {
+export function zoomInterpolate(zoomStops: [number, number][]): Expression {
   if (zoomStops.length < 2) {
     throw new Error("zoomInterpolate requires at least 2 stops");
   }
@@ -20,6 +18,21 @@ export function zoomInterpolate(
   }
 
   return stops as unknown as Expression;
+}
+
+/**
+ * 指数補間（exponential, base 1.5）によるアイコンサイズの Maplibre Expression を生成。
+ * @param stops - [zoomLevel, iconSize] のタプル配列（2点以上必須）
+ */
+export function iconSizeExpression(stops: [number, number][]): Expression {
+  if (stops.length < 2) {
+    throw new Error("iconSizeExpression requires at least 2 stops");
+  }
+  const result: any[] = ["interpolate", ["exponential", 1.5], ["zoom"]];
+  for (const [zoom, size] of stops) {
+    result.push(zoom, size);
+  }
+  return result as unknown as Expression;
 }
 
 /**

@@ -2,6 +2,7 @@
 import { SymbolLayer } from "@maplibre/maplibre-react-native";
 import { LabelConfig } from "./LabelConfig";
 import { FONT_STACK } from "@/src/shared/constants/typography";
+import { iconSizeExpression } from "../expressions/expressionHelpers";
 
 /**
  * ラベルレイヤーのプロパティ定義
@@ -34,20 +35,14 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
         filter={config.filter}
         style={{
           symbolPlacement: "point",
-          iconImage: config.iconVisible ? config.key : "",
-          iconSize: [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            17,
-            0.35,
-            19,
-            0.45,
-            21,
-            0.55,
-          ],
-          iconRotationAlignment: "viewport",
-          iconAllowOverlap: false,
+          iconImage: config.iconVisible ? (config.iconKey ?? config.key) : "",
+          iconSize: iconSizeExpression([
+            [17, 0.23],
+            [20, 0.35],
+          ]),
+          iconRotationAlignment: "auto",
+          textRotationAlignment: "auto",
+          iconAllowOverlap: true,
 
           textField: config.textVisible
             ? [

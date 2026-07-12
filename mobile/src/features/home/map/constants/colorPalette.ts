@@ -12,6 +12,7 @@ export type RoomCategory =
 export type RoomCategoryPalette = {
   fill: string;
   line: string;
+  circleFill?: string;
   opacity: number;
 };
 
@@ -46,14 +47,54 @@ export const LIGHT_THEME: ColorTheme = {
   walls: { fill: "#B8B8BD", line: "rgba(0,0,0,0.18)" },
   atrium: { fill: "#D5D9C5", line: "rgba(0,0,0,0.15)" },
   rooms: {
-    learning: { fill: "#BBDEFB", line: "#90CAF9", opacity: 1.0 },
-    laboratory: { fill: "#E1BEE7", line: "#CE93D8", opacity: 1.0 },
-    creative: { fill: "#FFE0B2", line: "#FFCC80", opacity: 1.0 },
-    meeting: { fill: "#FFF9C4", line: "#FFF176", opacity: 1.0 },
-    staff: { fill: "#D7CCC8", line: "#BCAAA4", opacity: 1.0 },
-    social: { fill: "#B2DFDB", line: "#80CBC4", opacity: 1.0 },
-    sanitary: { fill: "#F8BBD0", line: "#F48FB1", opacity: 1.0 },
-    circulation: { fill: "#C8E6C9", line: "#A5D6A7", opacity: 1.0 },
+    learning: {
+      fill: "#BBDEFB",
+      line: "#90CAF9",
+      circleFill: "#42A5F5",
+      opacity: 1.0,
+    },
+    laboratory: {
+      fill: "#E1BEE7",
+      line: "#CE93D8",
+      circleFill: "#AB47BC",
+      opacity: 1.0,
+    },
+    creative: {
+      fill: "#FFE0B2",
+      line: "#FFCC80",
+      circleFill: "#FF9800",
+      opacity: 1.0,
+    },
+    meeting: {
+      fill: "#FFF9C4",
+      line: "#FFF176",
+      circleFill: "#FBC02D",
+      opacity: 1.0,
+    },
+    staff: {
+      fill: "#D7CCC8",
+      line: "#BCAAA4",
+      circleFill: "#8D6E63",
+      opacity: 1.0,
+    },
+    social: {
+      fill: "#B2DFDB",
+      line: "#80CBC4",
+      circleFill: "#4DB6AC",
+      opacity: 1.0,
+    },
+    sanitary: {
+      fill: "#F8BBD0",
+      line: "#F48FB1",
+      circleFill: "#EC407A",
+      opacity: 1.0,
+    },
+    circulation: {
+      fill: "#C8E6C9",
+      line: "#A5D6A7",
+      circleFill: "#66BB6A",
+      opacity: 1.0,
+    },
   },
   label: {
     textColor: "#1A1A2E",
@@ -77,14 +118,54 @@ export const DARK_THEME: ColorTheme = {
   walls: { fill: "#4A4C52", line: "rgba(255,255,255,0.10)" },
   atrium: { fill: "#2E3028", line: "rgba(255,255,255,0.08)" },
   rooms: {
-    learning: { fill: "#1A3A5C", line: "#2A5290", opacity: 1.0 },
-    laboratory: { fill: "#2D1B4E", line: "#4A2C7A", opacity: 1.0 },
-    creative: { fill: "#4A2800", line: "#7A4400", opacity: 1.0 },
-    meeting: { fill: "#4A4200", line: "#7A6E00", opacity: 1.0 },
-    staff: { fill: "#3E2723", line: "#5D4037", opacity: 1.0 },
-    social: { fill: "#004D40", line: "#00695C", opacity: 1.0 },
-    sanitary: { fill: "#4A1530", line: "#7A2048", opacity: 1.0 },
-    circulation: { fill: "#1B3A1B", line: "#2E5A2E", opacity: 1.0 },
+    learning: {
+      fill: "#1A3A5C",
+      line: "#2A5290",
+      circleFill: "#2A5290",
+      opacity: 1.0,
+    },
+    laboratory: {
+      fill: "#2D1B4E",
+      line: "#4A2C7A",
+      circleFill: "#4A2C7A",
+      opacity: 1.0,
+    },
+    creative: {
+      fill: "#4A2800",
+      line: "#7A4400",
+      circleFill: "#7A4400",
+      opacity: 1.0,
+    },
+    meeting: {
+      fill: "#4A4200",
+      line: "#7A6E00",
+      circleFill: "#7A6E00",
+      opacity: 1.0,
+    },
+    staff: {
+      fill: "#3E2723",
+      line: "#5D4037",
+      circleFill: "#5D4037",
+      opacity: 1.0,
+    },
+    social: {
+      fill: "#004D40",
+      line: "#00695C",
+      circleFill: "#00695C",
+      opacity: 1.0,
+    },
+    sanitary: {
+      fill: "#4A1530",
+      line: "#7A2048",
+      circleFill: "#7A2048",
+      opacity: 1.0,
+    },
+    circulation: {
+      fill: "#1B3A1B",
+      line: "#2E5A2E",
+      circleFill: "#2E5A2E",
+      opacity: 1.0,
+    },
   },
   label: {
     textColor: "#E8E8EC",

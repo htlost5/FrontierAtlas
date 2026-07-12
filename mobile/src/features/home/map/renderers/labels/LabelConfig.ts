@@ -11,6 +11,8 @@
  */
 export type LabelConfig = {
   key: string;
+  /** MapLibre Images登録キー（テーマ依存）。未設定時はkeyにフォールバック */
+  iconKey?: string;
   filter: any;
   iconVisible: boolean;
   textVisible: boolean;
