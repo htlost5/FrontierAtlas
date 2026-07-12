@@ -8,13 +8,14 @@ type Props = GeoLayerProps & {
   colorTheme: ColorTheme;
 };
 
-export function SectionView({ data, colorTheme }: Props) {
+export function SectionView({ data, colorTheme, visible = true }: Props) {
   if (!data) return null;
 
   return (
     <PolygonLayer
       prefixId="section"
       data={data}
+      visible={visible}
       fillStyle={getSectionFillStyle(colorTheme.sections)}
       lineStyle={getSectionLineStyle(colorTheme.sections)}
     />

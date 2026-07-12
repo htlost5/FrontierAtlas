@@ -2,11 +2,11 @@
 // Uses display_point, zoomLabel, unitSymbol for rendering.
 // File saved as UTF-8 without BOM.
 import React, { useMemo } from "react";
-import { ShapeSource } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
+import { ShapeSource } from "@maplibre/maplibre-react-native";
 import { LabelLayer } from "./labels/shareComp";
 import { createLabelConfigs, LabelKey } from "./labels/LabelConfigs";
-import { UnitSymbol } from "./UnitSymbol";
+import { useProcessedUnitData } from "./processUnitData";
 import type { ColorTheme } from "../constants/colorPalette";
 
 type Props = {
@@ -17,11 +17,10 @@ type Props = {
 };
 
 /**
- * MapIconLabel component that renders icons on the map.
- * - Registers custom icons for MapLibre via MapIconRegistry (moved to MapContainer)
+ * MapIconLabel component that renders labels on the map.
  * - Extracts display_point geometry from feature properties (useMemo memoized)
  * - Renders labels via LabelLayer
- * - Renders unit symbols, arrows, elevators, etc. via UnitSymbol
+ * - UnitSymbol (special symbols) is now rendered separately in MapScreen
  */
 export function MapIconLabel({
   floor_num,
@@ -30,53 +29,15 @@ export function MapIconLabel({
   colorTheme,
 }: Props) {
   // DD-05: processedFeatures を useMemo でメモ化（Hooks は早期リターン前に配置）
-  const processedGeoJson: FeatureCollection | null = useMemo(() => {
-    if (!data) return null;
-
-    const processedFeatures = data.features
-      .filter(
-        (
-          f,
-        ): f is typeof f & { properties: NonNullable<typeof f.properties> } => {
-          const dp = f.properties?.display_point;
-          return (
-            dp != null &&
-            Array.isArray(dp.coordinates) &&
-            dp.coordinates.length === 2
-          );
-        },
-      )
-      .map((f) => {
-        // Normalize name structure: name_ja/name_en → name.ja/name.en
-        const normalizedProperties = { ...f.properties };
-        if (
-          normalizedProperties.name_ja != null &&
-          normalizedProperties.name == null
-        ) {
-          normalizedProperties.name = {
-            ja: normalizedProperties.name_ja,
-            en: normalizedProperties.name_en ?? "",
-          };
-        }
-        return {
-          ...f,
-          geometry: f.properties.display_point,
-          properties: normalizedProperties,
-        };
-      });
-
-    return {
-      ...data,
-      features: processedFeatures,
-    };
-  }, [data]);
+  const processedGeoJson: FeatureCollection | null = useProcessedUnitData(data);
 
   const labelConfigs = useMemo(
     () => createLabelConfigs(colorTheme),
     [colorTheme],
   );
 
-  if (!data || !processedGeoJson) return null;
+  // REV-CRITICAL-2 fix: isVisible が false の場合は非表示
+  if (!data || !processedGeoJson || !isVisible) return null;
 
   const labelSourceId = "lavelView";
 
@@ -96,9 +57,6 @@ export function MapIconLabel({
           />
         ))}
       </ShapeSource>
-
-      {/* 矢印・エレベータ・階段などのユニットシンボルを描画 */}
-      <UnitSymbol pointData={processedGeoJson} isVisible={1} />
     </>
   );
 }

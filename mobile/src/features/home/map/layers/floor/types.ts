@@ -8,4 +8,5 @@ export type FloorProps = {
     sections: GeoLayerProps["data"];
   };
   colorTheme: ColorTheme;
+  visible?: boolean;
 };

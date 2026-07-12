@@ -8,11 +8,11 @@ type Props = GeoLayerProps & {
   colorTheme: ColorTheme;
 };
 
-export function UnitView({ data, colorTheme }: Props) {
+export function UnitView({ data, colorTheme, visible = true }: Props) {
   return (
     <>
-      <BaseView data={data} colorTheme={colorTheme} />
-      <RoomView data={data} colorTheme={colorTheme} />
+      <BaseView data={data} colorTheme={colorTheme} visible={visible} />
+      <RoomView data={data} colorTheme={colorTheme} visible={visible} />
     </>
   );
 }

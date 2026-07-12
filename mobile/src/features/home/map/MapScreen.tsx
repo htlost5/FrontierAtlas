@@ -1,5 +1,5 @@
 // マップ画面の描画とデータ読み込みを統合するコンポーネント。
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
@@ -17,6 +17,8 @@ import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
 import { MapIconLabel } from "./renderers/MapIconLabel";
+import { UnitSymbol } from "./renderers/UnitSymbol";
+import { processUnitData } from "./renderers/processUnitData";
 
 type Props = {
   cameraRef: React.RefObject<CameraRef | null>;
@@ -45,6 +47,13 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
   const handleDismiss = useCallback(() => {
     setErrorDismissed(true);
   }, []);
+
+  // processedGeoJson: UnitSymbol 用の表示ポイントデータ（MapIconLabel と共有）
+  // REV-CRITICAL-1 fix: 早期リターン前に配置（Hooks ルール遵守）
+  const processedUnitGeoJson = useMemo(
+    () => processUnitData(batchData.floorData?.units ?? null),
+    [batchData.floorData?.units],
+  );
 
   // W19: 前回のズーム値を追跡
   const prevZoomRef = useRef<number | null>(null);
@@ -114,17 +123,30 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         <VenueView data={batchData.venue} colorTheme={colorTheme} />
       )}
 
-      {/* Floor レイヤー — floor 依存（stale-while-revalidate） */}
+      {/* Floor レイヤー — floor 依存（stale-while-revalidate）
+          グレーアウト制御: building モード時は visible=false → opacity 0 + 200ms transition */}
       {batchData.floorData && (
-        <FloorView floorData={batchData.floorData} colorTheme={colorTheme} />
+        <FloorView
+          floorData={batchData.floorData}
+          colorTheme={colorTheme}
+          visible={displayMode !== "building"}
+        />
       )}
 
-      {/* MapIconLabel — currentFloor を使用 */}
+      {/* 特殊シンボル（トイレ・EV・階段など）— 地物描画の上 */}
+      {batchData.floorData && (
+        <UnitSymbol
+          pointData={processedUnitGeoJson}
+          isVisible={displayMode !== "building" ? 1 : 0}
+        />
+      )}
+
+      {/* ラベル — 通常の地物シンボル（特殊シンボル・ポリゴンの上に描画） */}
       {batchData.floorData && (
         <MapIconLabel
           floor_num={batchData.currentFloor}
           data={batchData.floorData.units}
-          isVisible={displayMode === "detail"}
+          isVisible={displayMode !== "building"}
           colorTheme={colorTheme}
         />
       )}

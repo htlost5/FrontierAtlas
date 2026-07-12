@@ -3,13 +3,25 @@ import { SectionView } from "./section";
 import { FloorProps } from "./types";
 import { UnitView } from "./unit";
 
-export function FloorView({ floorData, colorTheme }: FloorProps) {
+export function FloorView({
+  floorData,
+  colorTheme,
+  visible = true,
+}: FloorProps) {
   if (!floorData) return null;
 
   return (
     <>
-      <SectionView data={floorData.sections} colorTheme={colorTheme} />
-      <UnitView data={floorData.units} colorTheme={colorTheme} />
+      <SectionView
+        data={floorData.sections}
+        colorTheme={colorTheme}
+        visible={visible}
+      />
+      <UnitView
+        data={floorData.units}
+        colorTheme={colorTheme}
+        visible={visible}
+      />
     </>
   );
 }

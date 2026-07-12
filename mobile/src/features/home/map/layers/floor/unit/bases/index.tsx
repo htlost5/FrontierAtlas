@@ -8,7 +8,7 @@ type Props = GeoLayerProps & {
   colorTheme: ColorTheme;
 };
 
-export function BaseView({ data, colorTheme }: Props) {
+export function BaseView({ data, colorTheme, visible = true }: Props) {
   if (!data) return null;
 
   const configs = getBaseConfigs(colorTheme);
@@ -21,6 +21,7 @@ export function BaseView({ data, colorTheme }: Props) {
             key={key}
             prefixId={`units_base_${key}`}
             data={data}
+            visible={visible}
             filter={config.filter}
             fillStyle={config.fillStyle}
             lineStyle={config.lineStyle}

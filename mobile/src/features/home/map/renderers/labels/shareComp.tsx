@@ -37,7 +37,7 @@ export function LabelLayer({ floor_num, sourceId, config }: Props) {
           symbolPlacement: "point",
           iconImage: config.iconVisible ? (config.iconKey ?? config.key) : "",
           iconSize: iconSizeExpression([
-            [17, 0.23],
+            [17, 0.17],
             [20, 0.35],
           ]),
           iconRotationAlignment: "auto",
