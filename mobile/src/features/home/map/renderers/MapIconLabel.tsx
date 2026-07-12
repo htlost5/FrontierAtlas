@@ -98,7 +98,7 @@ export function MapIconLabel({
       </ShapeSource>
 
       {/* 矢印・エレベータ・階段などのユニットシンボルを描画 */}
-      <UnitSymbol pointData={processedGeoJson} isVisible={isVisible ? 1 : 0} />
+      <UnitSymbol pointData={processedGeoJson} isVisible={1} />
     </>
   );
 }
