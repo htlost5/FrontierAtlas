@@ -13,6 +13,5 @@ type IconDef = {
 export const TAB_ICONS: Record<RouteName, IconDef> = {
   home: { lib: Feather, name: "home" },
   tools: { lib: Entypo, name: "tools" },
-  calendar: { lib: Entypo, name: "calendar" },
   classroom: { lib: MaterialCommunityIcons, name: "google-classroom" },
 };
