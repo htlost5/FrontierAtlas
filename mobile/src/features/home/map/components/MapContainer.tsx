@@ -33,6 +33,9 @@ export function MapContainer({
       attributionEnabled={false}
       onRegionIsChanging={onRegionIsChanging}
       regionDidChangeDebounceTime={50}
+      compassEnabled={true}
+      compassViewPosition={1}
+      compassViewMargins={{ x: 10, y: 85 }}
     >
       {/* DD-04: MapIconRegistry moved from MapIconLabel to MapContainer level */}
       <MapIconRegistry />
