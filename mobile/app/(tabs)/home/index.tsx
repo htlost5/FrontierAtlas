@@ -1,18 +1,17 @@
-// ホーム画面: 屋内マップの表示と階層切り替え、現在位置表示を統合
+// ホーム画面: 屋内マップと検索機能を統合したメイン画面
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
+import { MapRoot } from "@/src/features/home/map/MapRoot";
 import { MapControlsFC } from "@/src/features/home/map/components/controls";
 
-// web実装時、ここにMapScreenWebを実装
-
-// web実装時、MapScreenをプラットフォームにより選択可能に
-
-// マップホーム画面: 階層選択と地図表示を統合したメイン画面
+// ホーム画面: マップルートでラップしたマップコントロールを表示
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <MapControlsFC />
+      <MapRoot>
+        <MapControlsFC />
+      </MapRoot>
     </View>
   );
 }
