@@ -20,8 +20,8 @@ export const mapConfig = {
 
   restrict: {
     bounds: {
-      ne: [139.679274, 35.499189],
-      sw: [139.677515, 35.496284],
+      ne: [139.679714, 35.499915],
+      sw: [139.677075, 35.495558],
     },
 
     dynamicCenter: {
