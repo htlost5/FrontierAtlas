@@ -4,8 +4,5 @@
   "workspaces": [
     "mobile",
     "tools/map-assets"
-  ],
-  "dependencies": {
-    "@maplibre/maplibre-gl-style-spec": "^25.0.2"
-  }
+  ]
 }
