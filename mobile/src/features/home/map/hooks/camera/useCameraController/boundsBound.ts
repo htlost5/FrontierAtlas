@@ -3,12 +3,13 @@
 // breakpoints の inset（メートル）から ne/sw を動的計算する。
 import { mapConfig } from "../../../constants/mapConfig";
 import { CameraAction } from "./types";
+import {
+  toLocalXY,
+  fromLocalXY,
+} from "../../../../../../utils/coordinateTransform";
 
 const { dynamicCenter } = mapConfig.restrict;
 const { bounds } = mapConfig.restrict;
-
-// メートル → 度 変換用の定数
-const METERS_PER_DEG_LAT = 111_320;
 
 function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
@@ -19,17 +20,15 @@ function insetToBounds(inset: number): {
   ne: [number, number];
   sw: [number, number];
 } {
+  const centerLng = (bounds.ne[0] + bounds.sw[0]) / 2;
   const centerLat = (bounds.ne[1] + bounds.sw[1]) / 2;
-  const metersPerDegLng =
-    METERS_PER_DEG_LAT * Math.cos(centerLat * (Math.PI / 180));
 
-  const insetDegLat = inset / METERS_PER_DEG_LAT;
-  const insetDegLng = inset / metersPerDegLng;
+  // 中心をローカルXYに変換し、inset 分拡大した後、緯度経度に戻す
+  const [cx, cy] = toLocalXY(centerLng, centerLat);
+  const ne = fromLocalXY(cx + inset, cy + inset);
+  const sw = fromLocalXY(cx - inset, cy - inset);
 
-  return {
-    ne: [bounds.ne[0] - insetDegLng, bounds.ne[1] - insetDegLat],
-    sw: [bounds.sw[0] + insetDegLng, bounds.sw[1] + insetDegLat],
-  };
+  return { ne, sw };
 }
 
 export const boundsBoundary: CameraAction = (camera, region) => {
