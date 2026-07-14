@@ -1,5 +1,5 @@
 // マップ画面の描画とデータ読み込みを統合するコンポーネント。
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import type { CameraRef } from "@maplibre/maplibre-react-native";
 
@@ -11,6 +11,9 @@ import { useDisplayLevel } from "./hooks/state/useDisplayLevel";
 import { useMapContext } from "./hooks/state/useMapContext";
 
 import { useBatchMapData } from "./hooks/dataLoad/useBatchMapData";
+
+import { useCameraController } from "./hooks/camera/useCameraController";
+import { boundsBoundary } from "./hooks/camera/useCameraController/boundsBound";
 
 import type { CameraRegion } from "./types";
 import { BuildingsView } from "./layers/buildings";
@@ -32,21 +35,19 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
 
   // 再試行用の内部カウンタ（useBatchMapData に渡して再フェッチをトリガー）
   const [retryCount, setRetryCount] = React.useState(0);
-  // REV-CRITICAL-1 fix: dismiss 用の独立した状態
-  const [errorDismissed, setErrorDismissed] = React.useState(false);
-  const batchData = useBatchMapData(floor, retryCount);
+  // 派生状態 — floor / retryCount の組み合わせキーで dismiss を管理
+  const [dismissedAtKey, setDismissedAtKey] = useState(0);
+  const currentKey = floor * 1_000_000 + retryCount;
+  const errorDismissed = dismissedAtKey === currentKey;
 
-  // floor または retry 変更時に dismiss 状態をリセット
-  useEffect(() => {
-    setErrorDismissed(false);
-  }, [floor, retryCount]);
+  const batchData = useBatchMapData(floor, retryCount);
 
   const handleRetry = useCallback(() => {
     setRetryCount((c) => c + 1);
   }, []);
   const handleDismiss = useCallback(() => {
-    setErrorDismissed(true);
-  }, []);
+    setDismissedAtKey(currentKey);
+  }, [currentKey]);
 
   // processedGeoJson: UnitSymbol 用の表示ポイントデータ（MapIconLabel と共有）
   // REV-CRITICAL-1 fix: 早期リターン前に配置（Hooks ルール遵守）
@@ -57,15 +58,18 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
 
   // W19: 前回のズーム値を追跡
   const prevZoomRef = useRef<number | null>(null);
+  const cameraActions = useCameraController(cameraRef, [boundsBoundary]);
   const handleRegionIsChanging = useCallback(
     (region: CameraRegion) => {
+      cameraActions(region);
       const z = region?.properties?.zoomLevel;
       if (typeof z === "number" && prevZoomRef.current !== z) {
         prevZoomRef.current = z;
+        console.log("[zoom]", z);
         setZoom(z);
       }
     },
-    [setZoom],
+    [cameraActions, setZoom],
   );
 
   // --- 3-State Rendering ---
