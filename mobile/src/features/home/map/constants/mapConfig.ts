@@ -28,8 +28,8 @@ export const mapConfig = {
       enabled: true,
       animationDuration: 0,
       breakpoints: [
-        { zoom: 17.3, inset: 0 },
-        { zoom: 20.8, inset: 80 },
+        { zoom: 17.3, narrowBy: 0 },
+        { zoom: 20.8, narrowBy: 80 },
       ],
     },
   },
