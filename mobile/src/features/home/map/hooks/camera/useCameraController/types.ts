@@ -5,10 +5,8 @@ export type CameraRegion = {
   properties?: {
     zoomLevel?: number;
     center?: [number, number];
+    visibleBounds?: [[number, number], [number, number]]; // [northEast, southWest]
   };
 };
 
-export type CameraAction = (
-  camera: CameraRef,
-  region: CameraRegion,
-) => void;
+export type CameraAction = (camera: CameraRef, region: CameraRegion) => void;

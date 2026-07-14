@@ -63,9 +63,12 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
     (region: CameraRegion) => {
       cameraActions(region);
       const z = region?.properties?.zoomLevel;
+      const vb = region?.properties?.visibleBounds;
       if (typeof z === "number" && prevZoomRef.current !== z) {
         prevZoomRef.current = z;
-        console.log("[zoom]", z);
+        const ne = vb?.[0];
+        const sw = vb?.[1];
+        console.log("[zoom]", z, "bounds:", { ne, sw });
         setZoom(z);
       }
     },
