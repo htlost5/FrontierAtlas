@@ -12,9 +12,6 @@ import { useMapContext } from "./hooks/state/useMapContext";
 
 import { useBatchMapData } from "./hooks/dataLoad/useBatchMapData";
 
-import { useCameraController } from "./hooks/camera/useCameraController";
-import { boundsBoundary } from "./hooks/camera/useCameraController/boundsBound";
-
 import type { CameraRegion } from "./types";
 import { BuildingsView } from "./layers/buildings";
 import { FloorView } from "./layers/floor";
@@ -58,10 +55,8 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
 
   // W19: 前回のズーム値を追跡
   const prevZoomRef = useRef<number | null>(null);
-  const cameraActions = useCameraController(cameraRef, [boundsBoundary]);
   const handleRegionIsChanging = useCallback(
     (region: CameraRegion) => {
-      cameraActions(region);
       const z = region?.properties?.zoomLevel;
       const vb = region?.properties?.visibleBounds;
       if (typeof z === "number" && prevZoomRef.current !== z) {
@@ -72,7 +67,7 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         setZoom(z);
       }
     },
-    [cameraActions, setZoom],
+    [setZoom],
   );
 
   // --- 3-State Rendering ---

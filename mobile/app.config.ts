@@ -22,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     slug: "FrontierAtlas",
     scheme: "frontieratlas",
-    version: config.version || "0.16.2",
+    version: config.version || "0.17.0",
 
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",

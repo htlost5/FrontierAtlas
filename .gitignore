@@ -2,6 +2,9 @@ node_modules
 # Cloudflare Wrangler
 .wrangler/
 
+#Qgis
+tools/map-assets/QGIS/
+
 # Build artifacts (uploaded to R2, not git)
 tools/map-assets/build/
 tools/map-assets/releases/
