@@ -48,36 +48,3 @@ UnitSymbol と FloorView の JSX レンダリング順序を入れ替え。
 | 2 | UnitSymbol | 特殊シンボル（トイレ・EV・階段） |
 | 3 | MapIconLabel | 通常シンボル（ラベル） |
 | 4 (最上層) | BuildingsView | グレーアウト |
-
-→ **要求を完全に満たす** ✅
-
-### 観点3: 可視性ロジック不変 ✅
-3 コンポーネントとも `displayMode !== "building"` 条件を維持:
-
-| コンポーネント | 条件 | 行 |
-|---------------|------|----|
-| `FloorView visible` | `displayMode !== "building"` | 132 |
-| `UnitSymbol isVisible` | `displayMode !== "building" ? 1 : 0` | 140 |
-| `MapIconLabel isVisible` | `displayMode !== "building"` | 149 |
-
-→ **変更なし、すべて同一条件** ✅
-
-### 観点4: TypeScript コンパイル ✅
-- コマンド: `npx tsc --noEmit --pretty`
-- 結果: **エラーなし**（出力なし = 正常）
-
-### 観点5: UnitSymbol 表示問題の解消 ✅
-**問題**: FloorView の FillLayer（ポリゴン）が UnitSymbol のシンボルを覆っていた
-**対策**: FloorView を UnitSymbol より前に（JSX 下層に）配置
-
-→ 地物描画層(FillLayer)がシンボル層より下層になるため、UnitSymbol が FloorView に覆われることはない ✅
-
-## 総合判定: ✅ 合格
-
-| 観点 | 結果 |
-|------|------|
-| 1. JSX 順序確認 | ✅ |
-| 2. 要求との一致 | ✅ |
-| 3. 可視性ロジック不変 | ✅ |
-| 4. TypeScript コンパイル | ✅ |
-| 5. UnitSymbol 表示問題の解消 | ✅ |
