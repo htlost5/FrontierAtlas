@@ -1,7 +1,7 @@
 // マップ表示の初期設定とズーム・制限設定をまとめる。
 const zoom = {
   max: 20.8,
-  min: 16.8,
+  min: 17.3,
   buffer: 0.1,
 };
 
@@ -20,8 +20,17 @@ export const mapConfig = {
 
   restrict: {
     bounds: {
-      ne: [139.67927425082215, 35.499188538841245],
-      sw: [139.67751547790088, 35.49628365306419],
+      ne: [139.679274, 35.499189],
+      sw: [139.677515, 35.496284],
+    },
+
+    dynamicCenter: {
+      enabled: true,
+      animationDuration: 0,
+      breakpoints: [
+        { zoom: 17.3, inset: 0 },
+        { zoom: 20.8, inset: 80 },
+      ],
     },
   },
 
