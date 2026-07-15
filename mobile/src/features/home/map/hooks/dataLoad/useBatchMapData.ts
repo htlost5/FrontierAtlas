@@ -23,7 +23,6 @@ const preloadCache: PreloadCache = {
 // ---- 公開型 ----
 export type FloorGeoData = {
   readonly units: FeatureCollection | null;
-  readonly sections: FeatureCollection | null;
   readonly surface: FeatureCollection | null; // [NEW]
   readonly underlaySurface: FeatureCollection | null; // [NEW] 4F/5F only
 };
@@ -69,15 +68,12 @@ const MAP_LOGICAL_IDS = {
 function floorUnitId(floor: number): MapId {
   return `studyhall_units_floor${floor}` as MapId;
 }
-function floorSectionId(floor: number): MapId {
-  return `studyhall_sections_floor${floor}` as MapId;
-}
 function floorSurfaceId(floor: number): MapId {
   return `studyhall_surface_floor${floor}` as MapId;
 }
 
 // ---- プリロード関数 ----
-// 全5フロアの units + sections をバッチプリロード
+// 全5フロアの units + surface をバッチプリロード
 // getMany() を使用し、1回のネイティブ呼び出しに集約（同時実行による NativeDatabase クラッシュ対策）
 async function preloadAllFloors(
   onProgress?: (loaded: number, total: number) => void,
@@ -88,25 +84,19 @@ async function preloadAllFloors(
   preloadCache.status = "loading";
 
   const floors = [1, 2, 3, 4, 5];
-  const allIds = floors.flatMap((f) => [
-    floorUnitId(f),
-    floorSectionId(f),
-    floorSurfaceId(f),
-  ]);
-  // 15 records: 5 floors × (units + sections + surface)
+  const allIds = floors.flatMap((f) => [floorUnitId(f), floorSurfaceId(f)]);
+  // 10 records: 5 floors × (units + surface)
 
   try {
-    // バッチ取得: 全フロア × 3（units + sections + surface）= 15 レコードを 1 回の SQLite 呼び出しで取得
+    // バッチ取得: 全フロア × 2（units + surface）= 10 レコードを 1 回の SQLite 呼び出しで取得
     const repo = GeojsonRepository.getInstance();
     const batchResult = await repo.getMany(allIds);
 
     floors.forEach((floor, i) => {
       const unitId = floorUnitId(floor);
-      const sectionId = floorSectionId(floor);
       const surfaceId = floorSurfaceId(floor);
 
       let units = batchResult.get(unitId) ?? null;
-      let sections = batchResult.get(sectionId) ?? null;
       let surface = batchResult.get(surfaceId) ?? null;
 
       // SQLite ミス時のアセットバンドルフォールバック
@@ -116,16 +106,6 @@ async function preloadAllFloors(
           units = sanitizeFeatureCollection(asset.content as FeatureCollection);
       } else {
         units = sanitizeFeatureCollection(units);
-      }
-
-      if (!sections) {
-        const asset = geoJsonMap[sectionId];
-        if (asset)
-          sections = sanitizeFeatureCollection(
-            asset.content as FeatureCollection,
-          );
-      } else {
-        sections = sanitizeFeatureCollection(sections);
       }
 
       if (!surface) {
@@ -140,7 +120,6 @@ async function preloadAllFloors(
 
       preloadCache.data.set(floor, {
         units,
-        sections,
         surface,
         underlaySurface: null,
       });
@@ -173,8 +152,6 @@ export function useBatchMapData(
   retryKey?: number,
 ): BatchMapData {
   const cacheRef = useRef<VenueCache | null>(null);
-  const prevFloorDataRef = useRef<FloorGeoData | null>(null);
-  const currentFloorRef = useRef<number>(floor);
 
   const [state, setState] = useState<BatchState>({
     status: "loading",
@@ -184,6 +161,9 @@ export function useBatchMapData(
   const [buildings, setBuildings] = useState<BuildingsData | null>(null);
   const [stairs, setStairs] = useState<FeatureCollection | null>(null);
   const [floorData, setFloorData] = useState<FloorGeoData | null>(null);
+  // stale-while-revalidate: 前フロアデータを保持
+  const [previousFloorData, setPreviousFloorData] =
+    useState<FloorGeoData | null>(null);
 
   // retryKey 変更時にキャッシュをリセット
   const prevRetryKeyRef = useRef<number | undefined>(retryKey);
@@ -194,7 +174,7 @@ export function useBatchMapData(
       prevRetryKeyRef.current !== retryKey
     ) {
       cacheRef.current = null;
-      prevFloorDataRef.current = null;
+      setPreviousFloorData(null);
     }
     prevRetryKeyRef.current = retryKey;
   }, [retryKey]);
@@ -239,9 +219,8 @@ export function useBatchMapData(
         if (preloadCache.data.has(floor)) {
           newFloorData = preloadCache.data.get(floor)!;
         } else {
-          const [units, sections, surface] = await Promise.all([
+          const [units, surface] = await Promise.all([
             getGeoDataByLogicalId(floorUnitId(floor)),
-            getGeoDataByLogicalId(floorSectionId(floor)),
             getGeoDataByLogicalId(floorSurfaceId(floor)),
           ]);
           if (signal.aborted) return;
@@ -254,14 +233,12 @@ export function useBatchMapData(
               underlaySurface = floor3Surface;
             }
           }
-          newFloorData = { units, sections, surface, underlaySurface };
+          newFloorData = { units, surface, underlaySurface };
         }
-
-        prevFloorDataRef.current = newFloorData;
-        currentFloorRef.current = floor;
 
         // --- 3. 状態更新 ---
         if (!signal.aborted) {
+          setPreviousFloorData(newFloorData);
           setVenue(v);
           setBuildings(b);
           setStairs(s);
@@ -291,7 +268,7 @@ export function useBatchMapData(
       : null;
 
   // stale-while-revalidate: 前フロアデータを floorData が null のときに表示用として返す
-  const displayFloorData = floorData ?? prevFloorDataRef.current;
+  const displayFloorData = floorData ?? previousFloorData;
 
   // 初回ロード完了後にプリロード開始
   useEffect(() => {
@@ -305,7 +282,7 @@ export function useBatchMapData(
     buildings,
     stairs,
     floorData: displayFloorData,
-    currentFloor: currentFloorRef.current,
+    currentFloor: floor,
     state,
     isInitialLoading,
     isFloorSwitching,

@@ -5,7 +5,6 @@ import type { ColorTheme } from "../../constants/colorPalette";
 export type FloorProps = {
   floorData: {
     units: GeoLayerProps["data"];
-    sections: GeoLayerProps["data"];
     surface: GeoLayerProps["data"];
     underlaySurface?: GeoLayerProps["data"] | null;
   };
