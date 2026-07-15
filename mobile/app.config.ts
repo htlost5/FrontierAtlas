@@ -4,16 +4,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   const profile = process.env.EAS_BUILD_PROFILE || "development";
 
   const isDev = profile === "development";
-  const isPreview = profile === "preview";
   const isProd = profile === "production";
 
-  const bundleSuffix = isDev ? ".dev" : isPreview ? ".preview" : "";
+  const bundleSuffix = isDev ? ".dev" : "";
 
-  const appName = isDev
-    ? "FrontierAtlas (Dev)"
-    : isPreview
-      ? "FrontierAtlas (Preview)"
-      : "FrontierAtlas";
+  const appName = isDev ? "FrontierAtlas (Dev)" : "FrontierAtlas";
 
   return {
     ...config,
@@ -27,7 +22,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     orientation: "portrait",
     icon: "./assets/images/startup/FrontierAtlasLogo_Splash_white.png",
     userInterfaceStyle: "automatic",
-    jsEngine: "hermes",
 
     ios: {
       ...config.ios,
@@ -52,6 +46,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
 
     plugins: [
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser",
       [
         "expo-font",
         {
@@ -107,7 +104,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     updates: {
       url: "https://u.expo.dev/1b6e78b6-c7c3-4760-b085-bb85043c0650",
-      enabled: isProd || isPreview,
+      enabled: isProd,
     },
   };
 };
