@@ -24,6 +24,8 @@ const preloadCache: PreloadCache = {
 export type FloorGeoData = {
   readonly units: FeatureCollection | null;
   readonly sections: FeatureCollection | null;
+  readonly surface: FeatureCollection | null;        // [NEW]
+  readonly underlaySurface: FeatureCollection | null; // [NEW] 4F/5F only
 };
 
 export type BatchState =
@@ -70,6 +72,9 @@ function floorUnitId(floor: number): MapId {
 function floorSectionId(floor: number): MapId {
   return `studyhall_sections_floor${floor}` as MapId;
 }
+function floorSurfaceId(floor: number): MapId {
+  return `studyhall_surface_floor${floor}` as MapId;
+}
 
 // ---- プリロード関数 ----
 // 全5フロアの units + sections をバッチプリロード
@@ -83,19 +88,26 @@ async function preloadAllFloors(
   preloadCache.status = "loading";
 
   const floors = [1, 2, 3, 4, 5];
-  const allIds = floors.flatMap((f) => [floorUnitId(f), floorSectionId(f)]);
+  const allIds = floors.flatMap((f) => [
+    floorUnitId(f),
+    floorSectionId(f),
+    floorSurfaceId(f),
+  ]);
+  // 15 records: 5 floors × (units + sections + surface)
 
   try {
-    // バッチ取得: 全フロア × 2（units + sections）= 10 レコードを 1 回の SQLite 呼び出しで取得
+    // バッチ取得: 全フロア × 3（units + sections + surface）= 15 レコードを 1 回の SQLite 呼び出しで取得
     const repo = GeojsonRepository.getInstance();
     const batchResult = await repo.getMany(allIds);
 
     floors.forEach((floor, i) => {
       const unitId = floorUnitId(floor);
       const sectionId = floorSectionId(floor);
+      const surfaceId = floorSurfaceId(floor);
 
       let units = batchResult.get(unitId) ?? null;
       let sections = batchResult.get(sectionId) ?? null;
+      let surface = batchResult.get(surfaceId) ?? null;
 
       // SQLite ミス時のアセットバンドルフォールバック
       if (!units) {
@@ -116,9 +128,30 @@ async function preloadAllFloors(
         sections = sanitizeFeatureCollection(sections);
       }
 
-      preloadCache.data.set(floor, { units, sections });
+      if (!surface) {
+        const asset = geoJsonMap[surfaceId];
+        if (asset)
+          surface = sanitizeFeatureCollection(
+            asset.content as FeatureCollection,
+          );
+      } else {
+        surface = sanitizeFeatureCollection(surface);
+      }
+
+      preloadCache.data.set(floor, { units, sections, surface, underlaySurface: null });
       onProgress?.(i + 1, floors.length);
     });
+
+    // 4F / 5F の underlaySurface を 3F の surface で設定
+    const floor3Data = preloadCache.data.get(3);
+    if (floor3Data?.surface) {
+      for (const f of [4, 5]) {
+        const existing = preloadCache.data.get(f);
+        if (existing) {
+          preloadCache.data.set(f, { ...existing, underlaySurface: floor3Data.surface });
+        }
+      }
+    }
 
     preloadCache.status = "ready";
   } catch (e) {
@@ -198,12 +231,22 @@ export function useBatchMapData(
         if (preloadCache.data.has(floor)) {
           newFloorData = preloadCache.data.get(floor)!;
         } else {
-          const [units, sections] = await Promise.all([
+          const [units, sections, surface] = await Promise.all([
             getGeoDataByLogicalId(floorUnitId(floor)),
             getGeoDataByLogicalId(floorSectionId(floor)),
+            getGeoDataByLogicalId(floorSurfaceId(floor)),
           ]);
           if (signal.aborted) return;
-          newFloorData = { units, sections };
+
+          // 4F/5F の underlaySurface を 3F surface で設定
+          let underlaySurface: FeatureCollection | null = null;
+          if (floor === 4 || floor === 5) {
+            const floor3Surface = preloadCache.data.get(3)?.surface;
+            if (floor3Surface) {
+              underlaySurface = floor3Surface;
+            }
+          }
+          newFloorData = { units, sections, surface, underlaySurface };
         }
 
         prevFloorDataRef.current = newFloorData;

@@ -1,12 +1,7 @@
 // フロアレイヤーの描画コンポーネントを定義する。
-import { SectionView } from "./section";
 import { FloorProps } from "./types";
 import { UnitView } from "./unit";
-import { PolygonLayer } from "../../components/mapComp/PolygonLayer";
-import {
-  getBuildingsFillStyle,
-  getBuildingsLineStyle,
-} from "../buildings/style";
+import { SurfaceLayer } from "./surface";
 
 export function FloorView({
   floorData,
@@ -17,19 +12,21 @@ export function FloorView({
 
   return (
     <>
-      {/* Floor surface — rendered below unit/section, above venue */}
-      <PolygonLayer
-        prefixId="floorSurface"
-        data={floorData.sections}
+      {/* 3F surface underlay (4F/5F only) */}
+      {floorData.underlaySurface && (
+        <SurfaceLayer
+          data={floorData.underlaySurface}
+          palette={{ ...colorTheme.surface, opacity: 0.5 }}
+          visible={visible}
+        />
+      )}
+      {/* Current floor surface */}
+      <SurfaceLayer
+        data={floorData.surface}
+        palette={colorTheme.surface}
         visible={visible}
-        fillStyle={getBuildingsFillStyle(colorTheme.buildings)}
-        lineStyle={getBuildingsLineStyle(colorTheme.buildings)}
       />
-      <SectionView
-        data={floorData.sections}
-        colorTheme={colorTheme}
-        visible={visible}
-      />
+      {/* Rooms */}
       <UnitView
         data={floorData.units}
         colorTheme={colorTheme}

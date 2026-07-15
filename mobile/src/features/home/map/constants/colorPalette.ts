@@ -23,6 +23,7 @@ export type ColorTheme = {
   buildingFloor: RoomCategoryPalette;
   venue: RoomCategoryPalette;
   sections: RoomCategoryPalette;
+  surface: RoomCategoryPalette;
   walls: { fill: string; line: string };
   atrium: { fill: string; line: string };
   rooms: Record<RoomCategory, RoomCategoryPalette>;
@@ -46,6 +47,7 @@ export const LIGHT_THEME: ColorTheme = {
   buildingFloor: { fill: "#EDE8DC", line: "#D5CFC0", opacity: 0.9 },
   venue: { fill: "#E3EBF7", line: "#B0C4DE", opacity: 1.0 },
   sections: { fill: "#F7F2EA", line: "#E0D8C8", opacity: 1.0 },
+  surface: { fill: "#FBF8F2", line: "#E5DDD0", opacity: 1.0 },
   walls: { fill: "#B8B8BD", line: "rgba(0,0,0,0.18)" },
   atrium: { fill: "#D5D9C5", line: "rgba(0,0,0,0.15)" },
   rooms: {
@@ -118,6 +120,7 @@ export const DARK_THEME: ColorTheme = {
   buildingFloor: { fill: "#2A2620", line: "#3D3830", opacity: 0.9 },
   venue: { fill: "#1E2430", line: "#2A3548", opacity: 1.0 },
   sections: { fill: "#262320", line: "#3D3830", opacity: 1.0 },
+  surface: { fill: "#2C2824", line: "#4A443D", opacity: 1.0 },
   walls: { fill: "#4A4C52", line: "rgba(255,255,255,0.10)" },
   atrium: { fill: "#2E3028", line: "rgba(255,255,255,0.08)" },
   rooms: {

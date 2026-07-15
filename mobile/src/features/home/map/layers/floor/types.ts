@@ -6,6 +6,8 @@ export type FloorProps = {
   floorData: {
     units: GeoLayerProps["data"];
     sections: GeoLayerProps["data"];
+    surface: GeoLayerProps["data"];
+    underlaySurface?: GeoLayerProps["data"] | null;
   };
   colorTheme: ColorTheme;
   visible?: boolean;

@@ -18,6 +18,11 @@ import studyhall_sections_floor2 from "@/assets/maps/imdf/studyhall/sections/flo
 import studyhall_sections_floor3 from "@/assets/maps/imdf/studyhall/sections/floor3.json";
 import studyhall_sections_floor4 from "@/assets/maps/imdf/studyhall/sections/floor4.json";
 import studyhall_sections_floor5 from "@/assets/maps/imdf/studyhall/sections/floor5.json";
+import studyhall_surface_floor1 from "@/assets/maps/imdf/studyhall/surface/1F.json";
+import studyhall_surface_floor2 from "@/assets/maps/imdf/studyhall/surface/2F.json";
+import studyhall_surface_floor3 from "@/assets/maps/imdf/studyhall/surface/3F.json";
+import studyhall_surface_floor4 from "@/assets/maps/imdf/studyhall/surface/4F.json";
+import studyhall_surface_floor5 from "@/assets/maps/imdf/studyhall/surface/5F.json";
 import studyhall_stairs from "@/assets/maps/imdf/studyhall/stairs.json";
 import studyhall_units_floor1 from "@/assets/maps/imdf/studyhall/units/floor1.json";
 import studyhall_units_floor2 from "@/assets/maps/imdf/studyhall/units/floor2.json";
@@ -101,6 +106,31 @@ export const geoJsonMap = {
     logicalId: "studyhall_sections_floor5",
     relativePath: "data/imdf/studyhall/sections/floor5.json",
     content: studyhall_sections_floor5 as FeatureCollection,
+  },
+  studyhall_surface_floor1: {
+    logicalId: "studyhall_surface_floor1",
+    relativePath: "data/imdf/studyhall/surface/1F.json",
+    content: studyhall_surface_floor1 as FeatureCollection,
+  },
+  studyhall_surface_floor2: {
+    logicalId: "studyhall_surface_floor2",
+    relativePath: "data/imdf/studyhall/surface/2F.json",
+    content: studyhall_surface_floor2 as FeatureCollection,
+  },
+  studyhall_surface_floor3: {
+    logicalId: "studyhall_surface_floor3",
+    relativePath: "data/imdf/studyhall/surface/3F.json",
+    content: studyhall_surface_floor3 as FeatureCollection,
+  },
+  studyhall_surface_floor4: {
+    logicalId: "studyhall_surface_floor4",
+    relativePath: "data/imdf/studyhall/surface/4F.json",
+    content: studyhall_surface_floor4 as FeatureCollection,
+  },
+  studyhall_surface_floor5: {
+    logicalId: "studyhall_surface_floor5",
+    relativePath: "data/imdf/studyhall/surface/5F.json",
+    content: studyhall_surface_floor5 as FeatureCollection,
   },
   studyhall_stairs: {
     logicalId: "studyhall_stairs",
