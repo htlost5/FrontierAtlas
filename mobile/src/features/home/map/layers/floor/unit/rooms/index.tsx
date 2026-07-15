@@ -3,10 +3,7 @@
 import { PolygonLayer } from "../../../../components/mapComp/PolygonLayer";
 import { GeoLayerProps } from "../../../../types";
 import { CATEGORIES, buildCategoryFilter } from "./configs";
-import type {
-  ColorTheme,
-  RoomCategory,
-} from "../../../../constants/colorPalette";
+import type { ColorTheme } from "../../../../constants/colorPalette";
 
 type Props = GeoLayerProps & {
   colorTheme: ColorTheme;

@@ -9,6 +9,7 @@ import {
 } from "@maplibre/maplibre-react-native";
 import type { FeatureCollection } from "geojson";
 import { iconSizeExpression } from "./expressions/expressionHelpers";
+import { getPoiGeoJsonCategories } from "../config/categoryDisplayConfig";
 
 type Props = {
   pointData: FeatureCollection | null;
@@ -19,17 +20,17 @@ type Props = {
 const iconImageExpression: Expression = [
   "match",
   ["get", "category"],
-  "restroom_male",
+  "male_restroom",
   "special-toilet-male",
-  "restroom_female",
+  "female_restroom",
   "special-toilet-female",
-  "restroom_accessible",
+  "accessible_restroom",
   "special-toilet-accessible",
   "elevator",
   "special-elevator",
-  "vending_machine",
+  "vending",
   "special-vending",
-  "locker",
+  "locker_area",
   "special-locker",
   "emergency_exit",
   "special-emergency-exit",
@@ -43,22 +44,37 @@ const iconImageExpression: Expression = [
 const sortKeyExpression: Expression = [
   "match",
   ["get", "category"],
-  "restroom_male",
+  "male_restroom",
   1,
-  "restroom_female",
+  "female_restroom",
   1,
-  "restroom_accessible",
+  "accessible_restroom",
   1, // トイレ系: 最高優先
   "elevator",
   2, // エレベータ: 中優先
-  "vending_machine",
+  "vending",
   3,
-  "locker",
+  "locker_area",
   3,
   "emergency_exit",
   3, // その他: 最低優先
   999, // fallback（最低優先）
 ] as unknown as Expression;
+
+/** POI 表示対象の GeoJSON カテゴリ値を元に SymbolLayer 用フィルタを生成 */
+function buildPoiFilter(): Expression {
+  const poiCategories = getPoiGeoJsonCategories();
+  if (poiCategories.length === 0) {
+    return ["==", ["get", "category"], ""] as unknown as Expression;
+  }
+  return [
+    "in",
+    ["get", "category"],
+    ["literal", poiCategories],
+  ] as unknown as Expression;
+}
+
+const poiFilter = buildPoiFilter();
 
 export function UnitSymbol({ pointData, isVisible }: Props) {
   if (!pointData) return null;
@@ -68,6 +84,7 @@ export function UnitSymbol({ pointData, isVisible }: Props) {
     <ShapeSource id="unit-symbols-source" shape={pointData}>
       <SymbolLayer
         id="unit-symbol-layer"
+        filter={poiFilter}
         style={{
           iconImage: iconImageExpression,
           iconSize: iconSizeExpression([
