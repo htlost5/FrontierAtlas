@@ -31,7 +31,7 @@ function toRelative(base, target) {
 
 function toLogicalId(relativePath) {
   return relativePath
-    .replace(/^data\/imdf\//, "")
+    .replace(/^imdf\//, "")
     .replace(/\//g, "_")
     .replace(/\.json$/, "");
 }

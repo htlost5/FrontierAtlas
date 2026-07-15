@@ -10,10 +10,18 @@
 
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
-// JSでは型は不要
-const manifestPath = path.resolve("../mobile/assets/maps/manifest.json");
-const outPath = path.resolve("../mobile/src/data/geojson/geojsonAssetMap.ts");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// プロジェクトルートからの絶対パスを使用
+const projectRoot = path.resolve(__dirname, "../../mobile");
+const manifestPath = path.resolve(projectRoot, "assets/maps/manifest.json");
+const outPath = path.resolve(
+  projectRoot,
+  "src/data/geojson/geojsonAssetMap.ts",
+);
 
 function toPosix(p) {
   return p.split(path.sep).join("/");
@@ -53,7 +61,7 @@ function generate(manifest) {
       continue;
     }
 
-    const importPath = `@/assets/${toPosix(relPath)}`;
+    const importPath = `@/assets/maps/${toPosix(relPath)}`;
 
     let varName = makeIdentifier(logicalId);
     let counter = 1;

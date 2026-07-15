@@ -1,24 +1,24 @@
-const fs = require('fs');
-const path = require('path');
-const archiver = require('archiver');
-const { generateManifest } = require('./generate-manifest');
-const { generateVersion } = require('./generate-version');
+const fs = require("fs");
+const path = require("path");
+const archiver = require("archiver");
+const { generateManifest } = require("./generate-manifest");
+const { generateVersion } = require("./generate-version");
 
 const version = process.argv[2];
 if (!version) {
-  console.error('Version required');
+  console.error("Version required");
   process.exit(1);
 }
 
 // mainブランチ側のpath設定
-const SRC_DIR = path.join(__dirname, '..', 'build', 'imdf');
+const SRC_DIR = path.join(__dirname, "..", "build", "imdf");
 
 // gh-pages(releases)ブランチ側のpath設定
-const RELEASE_ROOT = path.join(__dirname, '..', 'releases', version);
-const DATA_DIR = path.join(RELEASE_ROOT, 'data');
-const DATA_IMDF_DIR = path.join(DATA_DIR, 'imdf');
-const MANIFEST_PATH = path.join(DATA_DIR, 'manifest.json');
-const VERSIONINFO_PATH = path.join(DATA_DIR, 'version.json');
+const RELEASE_ROOT = path.join(__dirname, "..", "releases", version);
+const DATA_DIR = path.join(RELEASE_ROOT, "data");
+const DATA_IMDF_DIR = path.join(DATA_DIR, "imdf");
+const MANIFEST_PATH = path.join(DATA_DIR, "manifest.json");
+const VERSIONINFO_PATH = path.join(DATA_DIR, "version.json");
 const ZIP_PATH = path.join(RELEASE_ROOT, `imdf-${version}.zip`);
 
 function copyRecursive(src, dest) {
@@ -41,29 +41,30 @@ function copyRecursive(src, dest) {
 function createZip(zipPath, dataDir) {
   return new Promise((resolve, reject) => {
     const output = fs.createWriteStream(zipPath);
-    const archive = archiver('zip', { zlib: { level: 9 } });
+    const archive = archiver("zip", { zlib: { level: 9 } });
 
-    output.on('close', () => resolve());
-    output.on('error', reject);
-    archive.on('error', reject);
+    output.on("close", () => resolve());
+    output.on("error", reject);
+    archive.on("error", reject);
 
     archive.pipe(output);
 
-    archive.file(path.join(dataDir, 'manifest.json'), { name: 'manifest.json' });
-    archive.directory(path.join(dataDir, 'imdf'), 'imdf');
+    archive.file(path.join(dataDir, "manifest.json"), {
+      name: "manifest.json",
+    });
+    archive.directory(path.join(dataDir, "imdf"), "imdf");
 
     archive.finalize();
-  })
+  });
 }
-
 
 async function main() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   copyRecursive(SRC_DIR, DATA_IMDF_DIR);
 
-  const manifest = generateManifest(RELEASE_ROOT, version);
+  const manifest = generateManifest(DATA_DIR, version);
   fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2));
-  
+
   const versionInfo = generateVersion(version, MANIFEST_PATH);
   fs.writeFileSync(VERSIONINFO_PATH, JSON.stringify(versionInfo, null, 2));
 
@@ -72,7 +73,7 @@ async function main() {
   console.log(`Release ${version} built.`);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });

@@ -1,169 +1,157 @@
 {
   "version": "v1.0.0",
-  "count": 27,
-  "totalSize": 624941,
+  "count": 25,
+  "totalSize": 588628,
   "files": {
     "address": {
       "logicalId": "address",
-      "relativePath": "maps/imdf/address.json",
-      "sha256": "2f311501337efbecc70e38caf7a530bc874bd378f36b349d461d3e615a1c1b23",
-      "size": 343
+      "relativePath": "imdf/address.json",
+      "sha256": "c3dbc3fd718dcf1ee6f82a0c02d68a13bd48238a2a61d4429eb9e515fad3d507",
+      "size": 358
     },
-    "interact_footprint": {
-      "logicalId": "interact_footprint",
-      "relativePath": "maps/imdf/interact/footprint.json",
-      "sha256": "b2bd8cdc03b8249eea3867232534687d99dc57a096e0490096fa121ccfd099e8",
-      "size": 895
+    "interact_rooms_1F": {
+      "logicalId": "interact_rooms_1F",
+      "relativePath": "imdf/interact/rooms/1F.json",
+      "sha256": "799911a771c7b85bf2c5a228f8ace95ea30c13ed90ff8f9e2fb4020b510b0cd8",
+      "size": 29593
     },
-    "interact_levels_floor1": {
-      "logicalId": "interact_levels_floor1",
-      "relativePath": "maps/imdf/interact/levels/floor1.json",
-      "sha256": "dceaf8701b434e6f382414696fbd259b01e17c146487c304f6feaca99f5dd8d9",
-      "size": 3695
+    "interact_rooms_2F": {
+      "logicalId": "interact_rooms_2F",
+      "relativePath": "imdf/interact/rooms/2F.json",
+      "sha256": "7e20ca7c23d51215f5be77516b82f77857f0b0764ab7f11e4170d7d3fd84be50",
+      "size": 38362
     },
-    "interact_levels_floor2": {
-      "logicalId": "interact_levels_floor2",
-      "relativePath": "maps/imdf/interact/levels/floor2.json",
-      "sha256": "1a0d583136d5f517f4948c22d08bdf4fa423649aa19beb63f7c1f86d4e780768",
-      "size": 3969
+    "interact_surface_1F": {
+      "logicalId": "interact_surface_1F",
+      "relativePath": "imdf/interact/surface/1F.json",
+      "sha256": "6998d76c1d663ec19e1834f72fd7d16d27558593b6d69cabf03576b61ccc0ae3",
+      "size": 3888
     },
-    "interact_units_floor1": {
-      "logicalId": "interact_units_floor1",
-      "relativePath": "maps/imdf/interact/units/floor1.json",
-      "sha256": "7cdce473a6323087470b5a301b79004e326b28f41567659a49315f9b6a6072c4",
-      "size": 26904
+    "interact_surface_2F": {
+      "logicalId": "interact_surface_2F",
+      "relativePath": "imdf/interact/surface/2F.json",
+      "sha256": "878eca5fe06f9a55862ca9be39988ea2be42dcb9ee20abd3bd37b248c34ee550",
+      "size": 4259
     },
-    "interact_units_floor2": {
-      "logicalId": "interact_units_floor2",
-      "relativePath": "maps/imdf/interact/units/floor2.json",
-      "sha256": "2b69f7f3b63036368e24736831dd9d90f66755c4c21a71e5d853fa3ce88b77cb",
-      "size": 35117
+    "interact_surface_3F": {
+      "logicalId": "interact_surface_3F",
+      "relativePath": "imdf/interact/surface/3F.json",
+      "sha256": "878eca5fe06f9a55862ca9be39988ea2be42dcb9ee20abd3bd37b248c34ee550",
+      "size": 4259
     },
-    "interact_units_floor3": {
-      "logicalId": "interact_units_floor3",
-      "relativePath": "maps/imdf/interact/units/floor3.json",
-      "sha256": "450ea383353d26f3ba6ba2c0654df7bd54d1595f79452f50e649f25146069a11",
-      "size": 178
+    "interact_surface": {
+      "logicalId": "interact_surface",
+      "relativePath": "imdf/interact/surface.json",
+      "sha256": "878eca5fe06f9a55862ca9be39988ea2be42dcb9ee20abd3bd37b248c34ee550",
+      "size": 4259
     },
-    "studyhall_footprint": {
-      "logicalId": "studyhall_footprint",
-      "relativePath": "maps/imdf/studyhall/footprint.json",
-      "sha256": "ab9bf2a3114d7771e03b7ae382d38442faf664a23f1c0882742c419c26756fc4",
-      "size": 2041
+    "studyhall_rooms_1F": {
+      "logicalId": "studyhall_rooms_1F",
+      "relativePath": "imdf/studyhall/rooms/1F.json",
+      "sha256": "374888bb7f363fe0da610e1732e93a3b10064846acce7fb04d4b5f7855ba6eb3",
+      "size": 90137
     },
-    "studyhall_levels_floor1$3": {
-      "logicalId": "studyhall_levels_floor1$3",
-      "relativePath": "maps/imdf/studyhall/levels/floor1$3.json",
-      "sha256": "89693fad0fac9cb0d026c92b3cadd3f2e33ac55d39b13a02e2ac5e4475b2f68a",
-      "size": 2302
+    "studyhall_rooms_2F": {
+      "logicalId": "studyhall_rooms_2F",
+      "relativePath": "imdf/studyhall/rooms/2F.json",
+      "sha256": "c8d98e4201393e1efdc0ca15db852b9fafb604677748124a1534730c62d33a07",
+      "size": 99204
     },
-    "studyhall_levels_floor4$5": {
-      "logicalId": "studyhall_levels_floor4$5",
-      "relativePath": "maps/imdf/studyhall/levels/floor4$5.json",
-      "sha256": "41b984e9fa76a3d2627a41c6633c0912ced39f8f26587090ff6387c5e5a5677d",
-      "size": 961
+    "studyhall_rooms_3F": {
+      "logicalId": "studyhall_rooms_3F",
+      "relativePath": "imdf/studyhall/rooms/3F.json",
+      "sha256": "5125da0a378fb621f9c652f0982f4cd744da38968f2b0b1c3137e8266572a53b",
+      "size": 101720
     },
-    "studyhall_sections_floor1": {
-      "logicalId": "studyhall_sections_floor1",
-      "relativePath": "maps/imdf/studyhall/sections/floor1.json",
-      "sha256": "d6ec05ebb4f08c089833d95774f149d41e16709d66a2840117ae72cd11cfd2c8",
-      "size": 12281
+    "studyhall_rooms_4F": {
+      "logicalId": "studyhall_rooms_4F",
+      "relativePath": "imdf/studyhall/rooms/4F.json",
+      "sha256": "1eb2da8094366d62ad137c0d7b983b3f465824554ebb527ff36a7e322aaba912",
+      "size": 34768
     },
-    "studyhall_sections_floor2": {
-      "logicalId": "studyhall_sections_floor2",
-      "relativePath": "maps/imdf/studyhall/sections/floor2.json",
-      "sha256": "3c712e8c0344c517da36ab0260e1de015665187027062c2bf082d40221d41108",
-      "size": 22817
-    },
-    "studyhall_sections_floor3": {
-      "logicalId": "studyhall_sections_floor3",
-      "relativePath": "maps/imdf/studyhall/sections/floor3.json",
-      "sha256": "4dfe3a1b8a32d09f7a4572c142679d9c2338d59efa40f18d387ca9c7b4f4c484",
-      "size": 20653
-    },
-    "studyhall_sections_floor4": {
-      "logicalId": "studyhall_sections_floor4",
-      "relativePath": "maps/imdf/studyhall/sections/floor4.json",
-      "sha256": "b0e878cafe6f60de8d7a36281ee96a09f414872c6f363ee0d20762a5b529233d",
-      "size": 5390
-    },
-    "studyhall_sections_floor5": {
-      "logicalId": "studyhall_sections_floor5",
-      "relativePath": "maps/imdf/studyhall/sections/floor5.json",
-      "sha256": "da65d87b135041dbcb2dd0b3ddc9d4f4a129ffc3093cf0a089428a2a68d692bc",
-      "size": 6103
-    },
-    "studyhall_surface_floor1": {
-      "logicalId": "studyhall_surface_floor1",
-      "relativePath": "maps/imdf/studyhall/surface/1F.json",
-      "sha256": "af26c36754ff6dd0d4cd43860dd5a3181e69e5e59ba8c0f18d7389f4d3e4519b",
-      "size": 7315
-    },
-    "studyhall_surface_floor2": {
-      "logicalId": "studyhall_surface_floor2",
-      "relativePath": "maps/imdf/studyhall/surface/2F.json",
-      "sha256": "50020c4d7af422eee0f0898b7680de954e766cc1d86a58396b1bea833a4fa3c7",
-      "size": 7315
-    },
-    "studyhall_surface_floor3": {
-      "logicalId": "studyhall_surface_floor3",
-      "relativePath": "maps/imdf/studyhall/surface/3F.json",
-      "sha256": "8c7eb357b05bbb46e364be05ab23fa11cb5fd7404e300819d918e344bb6e532f",
-      "size": 6905
-    },
-    "studyhall_surface_floor4": {
-      "logicalId": "studyhall_surface_floor4",
-      "relativePath": "maps/imdf/studyhall/surface/4F.json",
-      "sha256": "1281975e4b614353711ba6a910ea29f2f383699dd02a8bb6d8679b0609abe907",
-      "size": 1055
-    },
-    "studyhall_surface_floor5": {
-      "logicalId": "studyhall_surface_floor5",
-      "relativePath": "maps/imdf/studyhall/surface/5F.json",
-      "sha256": "1281975e4b614353711ba6a910ea29f2f383699dd02a8bb6d8679b0609abe907",
-      "size": 1055
+    "studyhall_rooms_5F": {
+      "logicalId": "studyhall_rooms_5F",
+      "relativePath": "imdf/studyhall/rooms/5F.json",
+      "sha256": "336ce900bc9d4c592350177da8f830340e65203f77c2d322be896eddbaf1680d",
+      "size": 36039
     },
     "studyhall_stairs": {
       "logicalId": "studyhall_stairs",
-      "relativePath": "maps/imdf/studyhall/stairs.json",
-      "sha256": "53cd7da1be18689c3152188dddcccc871d134076a6fef3bad456a2dda2b1fe5c",
-      "size": 53658
+      "relativePath": "imdf/studyhall/stairs.json",
+      "sha256": "c23d96ad26168b0744845efce06b1233a9dc235a4c9c88cb135cddfd95d33f06",
+      "size": 61813
     },
-    "studyhall_units_floor1": {
-      "logicalId": "studyhall_units_floor1",
-      "relativePath": "maps/imdf/studyhall/units/floor1.json",
-      "sha256": "0546d007a3a53c281e6f5ed904113e1f430a67d9173bfa790a6f4a172316c693",
-      "size": 97572
+    "studyhall_surface_1F": {
+      "logicalId": "studyhall_surface_1F",
+      "relativePath": "imdf/studyhall/surface/1F.json",
+      "sha256": "af26c36754ff6dd0d4cd43860dd5a3181e69e5e59ba8c0f18d7389f4d3e4519b",
+      "size": 7315
     },
-    "studyhall_units_floor2": {
-      "logicalId": "studyhall_units_floor2",
-      "relativePath": "maps/imdf/studyhall/units/floor2.json",
-      "sha256": "87c7c3f86f656200d06eeb6394a12fa458419ce3ec72196d9636fb30feccf8e7",
-      "size": 106861
+    "studyhall_surface_2F": {
+      "logicalId": "studyhall_surface_2F",
+      "relativePath": "imdf/studyhall/surface/2F.json",
+      "sha256": "50020c4d7af422eee0f0898b7680de954e766cc1d86a58396b1bea833a4fa3c7",
+      "size": 7315
     },
-    "studyhall_units_floor3": {
-      "logicalId": "studyhall_units_floor3",
-      "relativePath": "maps/imdf/studyhall/units/floor3.json",
-      "sha256": "d86a417e4201d2a9e46b8af982c14916c57dcd60e1f278ec7d014461c47639c8",
-      "size": 110120
+    "studyhall_surface_3F": {
+      "logicalId": "studyhall_surface_3F",
+      "relativePath": "imdf/studyhall/surface/3F.json",
+      "sha256": "8c7eb357b05bbb46e364be05ab23fa11cb5fd7404e300819d918e344bb6e532f",
+      "size": 6905
     },
-    "studyhall_units_floor4": {
-      "logicalId": "studyhall_units_floor4",
-      "relativePath": "maps/imdf/studyhall/units/floor4.json",
-      "sha256": "215c34414f967d9c5d65d6e14b291a0def18b122ff6a90babada6649fd72bee7",
-      "size": 38044
+    "studyhall_surface_4F": {
+      "logicalId": "studyhall_surface_4F",
+      "relativePath": "imdf/studyhall/surface/4F.json",
+      "sha256": "1281975e4b614353711ba6a910ea29f2f383699dd02a8bb6d8679b0609abe907",
+      "size": 1055
     },
-    "studyhall_units_floor5": {
-      "logicalId": "studyhall_units_floor5",
-      "relativePath": "maps/imdf/studyhall/units/floor5.json",
-      "sha256": "9560c91d43c51b3ba2a63effd0a5585f713d8c7de7ad3300b352df5bbaebb5e4",
-      "size": 50020
+    "studyhall_surface_5F": {
+      "logicalId": "studyhall_surface_5F",
+      "relativePath": "imdf/studyhall/surface/5F.json",
+      "sha256": "1281975e4b614353711ba6a910ea29f2f383699dd02a8bb6d8679b0609abe907",
+      "size": 1055
+    },
+    "studyhall_surface": {
+      "logicalId": "studyhall_surface",
+      "relativePath": "imdf/studyhall/surface.json",
+      "sha256": "3a44fe34271d65b8bb470292b65e3b704e99b07d5ceddaf4acb5ee68890b1616",
+      "size": 2134
+    },
+    "studyhall_walkable_1F": {
+      "logicalId": "studyhall_walkable_1F",
+      "relativePath": "imdf/studyhall/walkable/1F.json",
+      "sha256": "6e8ddadfedab299e6b8d569b60a5092ed8bc9f36b30dc07907eb0d5502b8ec37",
+      "size": 12173
+    },
+    "studyhall_walkable_2F": {
+      "logicalId": "studyhall_walkable_2F",
+      "relativePath": "imdf/studyhall/walkable/2F.json",
+      "sha256": "ce13ea3c5e0efa5b1eff9584edad52cf353e40cebe6ad7d048826f0fb4abfd5a",
+      "size": 16734
+    },
+    "studyhall_walkable_3F": {
+      "logicalId": "studyhall_walkable_3F",
+      "relativePath": "imdf/studyhall/walkable/3F.json",
+      "sha256": "4f47930b7a4c1766ab2a42d156e523b4f9a098b1e5581c7300d804264ff00cb6",
+      "size": 15374
+    },
+    "studyhall_walkable_4F": {
+      "logicalId": "studyhall_walkable_4F",
+      "relativePath": "imdf/studyhall/walkable/4F.json",
+      "sha256": "7fb5c4464997e3a8bf07357c20e2320acdd4af8caaa3e25499463cf3025b111a",
+      "size": 3939
+    },
+    "studyhall_walkable_5F": {
+      "logicalId": "studyhall_walkable_5F",
+      "relativePath": "imdf/studyhall/walkable/5F.json",
+      "sha256": "6644fc0c386d34898e0488b8970139a6036c56b042587f4d08728f74f958ace7",
+      "size": 4555
     },
     "venue_venue": {
       "logicalId": "venue_venue",
-      "relativePath": "maps/imdf/venue/venue.json",
-      "sha256": "1d2c9727b37155e82399ad3520f69d1741ab432d0a7de9c91cafa5606be4a808",
-      "size": 1372
+      "relativePath": "imdf/venue/venue.json",
+      "sha256": "d304b1f17b98d4fcb9032a5ece0f8c954ae5e5d0e84d5da5dd883e8139465a01",
+      "size": 1415
     }
   }
 }

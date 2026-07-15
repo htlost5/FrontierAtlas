@@ -1,4 +1,7 @@
 {
   "type": "module",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "unzipper": "^0.12.5"
+  }
 }

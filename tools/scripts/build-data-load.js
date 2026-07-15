@@ -7,7 +7,9 @@ import { fileURLToPath } from "url";
 import { generateGeojsonAssetMap } from "./generate_geojsonAssetMap.js";
 
 const versionConfig = JSON.parse(
-  fs.readFileSync(new URL("../../mobile/config/geo-data-version.json", import.meta.url))
+  fs.readFileSync(
+    new URL("../../mobile/config/geo-data-version.json", import.meta.url),
+  ),
 );
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,13 +22,13 @@ if (!version) {
   process.exit(1);
 }
 
-const BASE_URL = "https://htlost5.github.io/geo-data-repo";
+const BASE_URL = "https://geo-data-push.htlost8.workers.dev/data";
 
 if (version === "latest") {
-  const LATEST_URL = `${BASE_URL}/meta/latest.json`
+  const LATEST_URL = `${BASE_URL}/meta/latest.json`;
   const latestRes = await fetch(LATEST_URL);
   if (!latestRes.ok) {
-    throw new Error(`Failed to fetch ${LATEST_URL}`)
+    throw new Error(`Failed to fetch ${LATEST_URL}`);
   }
   const latestConfig = await latestRes.json();
   version = latestConfig.version;
@@ -34,14 +36,14 @@ if (version === "latest") {
 
 const ZIP_URL = `${BASE_URL}/releases/${version}/imdf-${version}.zip`;
 
-const storagePath = path.join(__dirname, "../mobile/assets", "maps")
+const storagePath = path.join(__dirname, "../../mobile/assets", "maps");
 
 async function resetDir() {
   if (fs.existsSync(storagePath)) {
-    fs.rmSync(storagePath, {recursive: true, force: true});
+    fs.rmSync(storagePath, { recursive: true, force: true });
     console.log(`[RESET] ${storagePath} deleted`);
   }
-  fs.mkdirSync(storagePath, {recursive: true});
+  fs.mkdirSync(storagePath, { recursive: true });
 }
 
 async function getData() {
@@ -62,10 +64,10 @@ async function main() {
     await resetDir();
     await getData();
     await generateGeojsonAssetMap();
-  } catch(e) {
+  } catch (e) {
     console.error(e);
     process.exit(1);
   }
 }
 
-main()
+main();

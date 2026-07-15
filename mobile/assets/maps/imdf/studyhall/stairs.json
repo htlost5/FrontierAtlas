@@ -12,7 +12,11 @@
       "type": "Feature",
       "properties": {
         "id": "fa2db44a-f7bd-4d7d-9075-a52d2715",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6780358785686,
+          35.49824104317024
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -86,7 +90,11 @@
       "type": "Feature",
       "properties": {
         "id": "7e1912cd-ec00-4437-b290-737f82ea",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628801965,
+          35.49825735185518
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -112,7 +120,11 @@
       "type": "Feature",
       "properties": {
         "id": "4b79711e-9caa-4dd1-9426-e0bfb11d",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628793985,
+          35.498224734483514
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -138,7 +150,11 @@
       "type": "Feature",
       "properties": {
         "id": "e96313ab-80e9-49a6-9d5a-a397e37d",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628801298,
+          35.498254633741695
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -164,7 +180,11 @@
       "type": "Feature",
       "properties": {
         "id": "1a0a05f4-0c92-466c-a26d-6e7cda3b",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6780362880063,
+          35.49825191562818
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -190,7 +210,11 @@
       "type": "Feature",
       "properties": {
         "id": "588c5840-6506-4ae8-a801-8b448be8",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628799962,
+          35.498249197514696
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -216,7 +240,11 @@
       "type": "Feature",
       "properties": {
         "id": "4844152f-1355-48c9-9060-948360f2",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628799294,
+          35.49824647940114
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -242,7 +270,11 @@
       "type": "Feature",
       "properties": {
         "id": "d80fc9cf-66eb-4a4b-a060-fb5d148f",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628798632,
+          35.498243761287604
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -268,7 +300,11 @@
       "type": "Feature",
       "properties": {
         "id": "1e2b7d26-8f05-453b-8892-d5e412cb",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628797964,
+          35.49824104317407
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -294,7 +330,11 @@
       "type": "Feature",
       "properties": {
         "id": "1041df5c-19cc-4cf3-8f60-b64cbad5",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628797301,
+          35.49823832506051
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -320,7 +360,11 @@
       "type": "Feature",
       "properties": {
         "id": "f33ad383-3453-4a75-8d36-c89936d8",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628796636,
+          35.49823560694694
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -346,7 +390,11 @@
       "type": "Feature",
       "properties": {
         "id": "d2fb74c1-1bd2-42a9-92e6-6f2c4a80",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6780362879597,
+          35.49823288883336
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -372,7 +420,11 @@
       "type": "Feature",
       "properties": {
         "id": "59f168ca-ef0d-4b23-bc5e-d6b5cfef",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6780362879531,
+          35.49823017071977
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -398,7 +450,11 @@
       "type": "Feature",
       "properties": {
         "id": "51f71b91-5d01-42d0-9aba-a0911c8f",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67803628794647,
+          35.498227452606166
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -424,7 +480,11 @@
       "type": "Feature",
       "properties": {
         "id": "bad50afe-f997-467e-9bbb-bbc9718b",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858981812327,
+          35.49824104104771
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -498,7 +558,11 @@
       "type": "Feature",
       "properties": {
         "id": "e987c4ab-522f-46cb-8460-b5b1557b",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937041007,
+          35.49825734973861
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -524,7 +588,11 @@
       "type": "Feature",
       "properties": {
         "id": "a26ff7d2-1ebc-42e7-83a1-4eada1ab",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937011079,
+          35.498224732362246
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -550,7 +618,11 @@
       "type": "Feature",
       "properties": {
         "id": "f8845b0f-26b0-4555-a6d3-d0af2e03",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937038514,
+          35.49825463162467
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -576,7 +648,11 @@
       "type": "Feature",
       "properties": {
         "id": "685b8552-496b-46cb-b3b3-a66152c6",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6785893703602,
+          35.49825191351075
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -602,7 +678,11 @@
       "type": "Feature",
       "properties": {
         "id": "3d7d7738-bda0-4365-945a-36f54424",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937033526,
+          35.498249195396795
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -628,7 +708,11 @@
       "type": "Feature",
       "properties": {
         "id": "9d545ebe-744f-485f-a1bc-988ce831",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937031033,
+          35.49824647728285
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -654,7 +738,11 @@
       "type": "Feature",
       "properties": {
         "id": "c1f14e7f-0fd5-4a61-afb2-a695c75d",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6785893702854,
+          35.4982437591689
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -680,7 +768,11 @@
       "type": "Feature",
       "properties": {
         "id": "cddf189c-fa27-4577-ac53-6b46c6fa",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937026043,
+          35.49824104105497
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -706,7 +798,11 @@
       "type": "Feature",
       "properties": {
         "id": "ad03fcf4-7cfa-4a47-ab73-35575324",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6785893702355,
+          35.498238322941006
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -732,7 +828,11 @@
       "type": "Feature",
       "properties": {
         "id": "b7d2a613-a5b1-4d1e-959d-065d5975",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937021057,
+          35.49823560482706
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -758,7 +858,11 @@
       "type": "Feature",
       "properties": {
         "id": "caee459a-8332-417a-a33e-5d9e5349",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937018562,
+          35.49823288671311
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -784,7 +888,11 @@
       "type": "Feature",
       "properties": {
         "id": "85f1c070-9879-4dc0-8ea9-59ea53d5",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.6785893701607,
+          35.49823016859917
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -810,7 +918,11 @@
       "type": "Feature",
       "properties": {
         "id": "5b600f3e-1a5f-41fa-b7b2-0099aed8",
-        "category": "4-5"
+        "category": "4-5",
+        "display_point": [
+          139.67858937013574,
+          35.49822745048521
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -836,7 +948,11 @@
       "type": "Feature",
       "properties": {
         "id": "c8226d4b-94e6-4377-aaba-fc63fb79",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795446855163,
+          35.49831742499952
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -910,7 +1026,11 @@
       "type": "Feature",
       "properties": {
         "id": "6457af1b-0793-4cfb-ae85-3dbd5417",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779374688771,
+          35.498317557798465
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -936,7 +1056,11 @@
       "type": "Feature",
       "properties": {
         "id": "79c5d5f2-4961-4e20-8119-a26a9f1f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67794030546239,
+          35.49831755779606
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -962,7 +1086,11 @@
       "type": "Feature",
       "properties": {
         "id": "ebf661d8-cb47-44ad-b50f-9a61b2b9",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779431387412,
+          35.49831755779357
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -988,7 +1116,11 @@
       "type": "Feature",
       "properties": {
         "id": "0f7b7be4-7f90-4c99-a3b6-57a83f0c",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67794597202004,
+          35.498317557791005
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1014,7 +1146,11 @@
       "type": "Feature",
       "properties": {
         "id": "59c449f6-828d-4c9d-8fe4-53a0fe31",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67794880529885,
+          35.49831755778837
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1040,7 +1176,11 @@
       "type": "Feature",
       "properties": {
         "id": "db8d571a-4224-40c7-8a5a-19c3afaa",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779516385777,
+          35.49831755778563
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1066,7 +1206,11 @@
       "type": "Feature",
       "properties": {
         "id": "7e59cd29-fab8-40ab-911a-b8fe71db",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779544718565,
+          35.49831755778285
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1092,7 +1236,11 @@
       "type": "Feature",
       "properties": {
         "id": "447288a9-6938-483f-b738-84ebfe63",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795730513538,
+          35.498317557779984
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1118,7 +1266,11 @@
       "type": "Feature",
       "properties": {
         "id": "05ed09a2-e70d-4ad8-ada3-60a7a864",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67796013841425,
+          35.49831755777705
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1144,7 +1296,11 @@
       "type": "Feature",
       "properties": {
         "id": "3a65cf9e-b1c9-4a7e-9146-6a6e4b4f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779629716931,
+          35.498317557774016
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1170,7 +1326,11 @@
       "type": "Feature",
       "properties": {
         "id": "ab210dd3-12e1-451b-9e98-ad7e5108",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67796580497193,
+          35.498317557770925
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1196,7 +1356,11 @@
       "type": "Feature",
       "properties": {
         "id": "19912093-8a59-45ff-b8a3-d6de4e2f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779686382508,
+          35.49831755776775
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1222,7 +1386,11 @@
       "type": "Feature",
       "properties": {
         "id": "fe87bb8b-8a08-4258-a601-28ad1146",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67797146822667,
+          35.4983175577645
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1248,7 +1416,11 @@
       "type": "Feature",
       "properties": {
         "id": "2dd67c0c-07cf-49d6-954c-24663343",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795446886555,
+          35.49856303272665
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1322,7 +1494,11 @@
       "type": "Feature",
       "properties": {
         "id": "63072541-9f9b-43e6-a5a7-55cdc44f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67793746914109,
+          35.49856316552369
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1348,7 +1524,11 @@
       "type": "Feature",
       "properties": {
         "id": "ef38514b-1ee0-474e-840b-5fabbb59",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779403057347,
+          35.498563165521574
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1374,7 +1554,11 @@
       "type": "Feature",
       "properties": {
         "id": "c625b590-4010-4e28-956b-00c59f48",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67794313902186,
+          35.49856316551941
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1400,7 +1584,11 @@
       "type": "Feature",
       "properties": {
         "id": "1f1e4dba-299e-4f01-82c1-616a7eef",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.677945972309,
+          35.498563165517155
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1426,7 +1614,11 @@
       "type": "Feature",
       "properties": {
         "id": "834fd79a-6f93-46dc-9208-3b64b3ab",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67794880559617,
+          35.49856316551484
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1452,7 +1644,11 @@
       "type": "Feature",
       "properties": {
         "id": "9450cc8d-3360-4b14-a26f-ddf3f0a5",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795163888331,
+          35.49856316551246
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1478,7 +1674,11 @@
       "type": "Feature",
       "properties": {
         "id": "c4c11a6e-caed-4df6-b522-897ef287",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795447217048,
+          35.498563165510014
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1504,7 +1704,11 @@
       "type": "Feature",
       "properties": {
         "id": "d0539a66-9b12-4103-97f1-d1594aef",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67795730545765,
+          35.49856316550751
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1530,7 +1734,11 @@
       "type": "Feature",
       "properties": {
         "id": "0584abab-87a8-43bd-ab71-595f7b52",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779601387448,
+          35.49856316550492
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1556,7 +1764,11 @@
       "type": "Feature",
       "properties": {
         "id": "920da873-016f-4dba-bb97-e4bdec88",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.677962972032,
+          35.49856316550229
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1582,7 +1794,11 @@
       "type": "Feature",
       "properties": {
         "id": "f460511d-7947-4a4d-801c-05846e68",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67796580531913,
+          35.49856316549959
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1608,7 +1824,11 @@
       "type": "Feature",
       "properties": {
         "id": "b5934d43-ebb6-4f92-adcb-b71ca506",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67796863860627,
+          35.4985631654968
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1634,7 +1854,11 @@
       "type": "Feature",
       "properties": {
         "id": "d921403f-c372-4630-8301-6bf6e9be",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6779714685904,
+          35.498563165493955
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1660,7 +1884,11 @@
       "type": "Feature",
       "properties": {
         "id": "c076fa67-8f40-41a2-882e-c9a388c9",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67837936348593,
+          35.49856303160701
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1734,7 +1962,11 @@
       "type": "Feature",
       "properties": {
         "id": "4d2b9719-76fe-4059-9126-7c44d12f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67836236376215,
+          35.49856316446391
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1760,7 +1992,11 @@
       "type": "Feature",
       "properties": {
         "id": "700c802b-ba6d-4379-8dd1-9743bab6",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67836520035578,
+          35.49856316445182
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1786,7 +2022,11 @@
       "type": "Feature",
       "properties": {
         "id": "043cdd14-4dbd-48a3-8f5c-b4ffc997",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67836803364293,
+          35.49856316443966
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1812,7 +2052,11 @@
       "type": "Feature",
       "properties": {
         "id": "77979a8f-f413-4b1d-a656-7b16b682",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67837086693007,
+          35.49856316442743
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1838,7 +2082,11 @@
       "type": "Feature",
       "properties": {
         "id": "bd0bef9e-a94a-4a33-882a-068a3b55",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67837370021724,
+          35.498563164415145
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1864,7 +2112,11 @@
       "type": "Feature",
       "properties": {
         "id": "16bccea7-25e3-428f-a022-2eb3acd2",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67837653350438,
+          35.498563164402796
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1890,7 +2142,11 @@
       "type": "Feature",
       "properties": {
         "id": "13ddad8b-6587-4346-bd1c-2d61298b",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67837936679155,
+          35.498563164390376
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1916,7 +2172,11 @@
       "type": "Feature",
       "properties": {
         "id": "f761356b-da6e-4ec2-9198-d182118f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6783822000787,
+          35.4985631643779
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1942,7 +2202,11 @@
       "type": "Feature",
       "properties": {
         "id": "64e57c87-ffda-4b6c-9235-4086e1e4",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67838503336586,
+          35.498563164365336
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1968,7 +2232,11 @@
       "type": "Feature",
       "properties": {
         "id": "c2d9ba88-2c7f-4046-a467-10cd9c9a",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67838786665305,
+          35.49856316435271
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -1994,7 +2262,11 @@
       "type": "Feature",
       "properties": {
         "id": "d927d7e5-0038-46e2-a8fc-c33e424b",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67839069994017,
+          35.49856316434003
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2020,7 +2292,11 @@
       "type": "Feature",
       "properties": {
         "id": "5f62a038-4d16-4675-9c79-07a5d3aa",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6783935332273,
+          35.49856316432727
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2046,7 +2322,11 @@
       "type": "Feature",
       "properties": {
         "id": "a366b565-5440-44c9-9882-391d24ef",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67839636321148,
+          35.49856316431446
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2072,7 +2352,11 @@
       "type": "Feature",
       "properties": {
         "id": "cdf5034d-6d63-4b94-a448-9b41dd59",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67867771975622,
+          35.498563029926714
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2146,7 +2430,11 @@
       "type": "Feature",
       "properties": {
         "id": "4353446f-b121-4e10-90f3-9505e72f",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6786607200329,
+          35.49856316282563
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2172,7 +2460,11 @@
       "type": "Feature",
       "properties": {
         "id": "1205fb63-913a-454d-8124-3829da03",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67866355662656,
+          35.498563162806526
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2198,7 +2490,11 @@
       "type": "Feature",
       "properties": {
         "id": "abfcdf28-bb20-419b-b2c0-d44bd5e0",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67866638991373,
+          35.49856316278736
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2224,7 +2520,11 @@
       "type": "Feature",
       "properties": {
         "id": "0b7b9886-53a6-4de4-b0d3-30e619fd",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67866922320087,
+          35.49856316276814
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2250,7 +2550,11 @@
       "type": "Feature",
       "properties": {
         "id": "d3d7923c-76bb-4a2f-a01c-273aa531",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67867205648804,
+          35.49856316274883
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2276,7 +2580,11 @@
       "type": "Feature",
       "properties": {
         "id": "0b552ef6-95e9-4d32-b960-961742dd",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67867488977518,
+          35.498563162729496
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2302,7 +2610,11 @@
       "type": "Feature",
       "properties": {
         "id": "bf7b9ad0-6487-4f90-8927-63715c71",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67867772306235,
+          35.49856316271006
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2328,7 +2640,11 @@
       "type": "Feature",
       "properties": {
         "id": "1b3465e8-887d-4ba1-a157-53766e37",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67868055634952,
+          35.49856316269056
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2354,7 +2670,11 @@
       "type": "Feature",
       "properties": {
         "id": "945c0370-a208-4fc0-bd9d-bd244189",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67868338963666,
+          35.49856316267101
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2380,7 +2700,11 @@
       "type": "Feature",
       "properties": {
         "id": "2e79d0f1-492a-4208-987a-0426282a",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6786862229238,
+          35.49856316265139
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2406,7 +2730,11 @@
       "type": "Feature",
       "properties": {
         "id": "f2526cd2-0d10-4be8-8c59-a5de4faf",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67868905621097,
+          35.49856316263168
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2432,7 +2760,11 @@
       "type": "Feature",
       "properties": {
         "id": "b37c37c7-e7a2-4487-8a2d-7a2e52c7",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67869188949814,
+          35.49856316261193
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2458,7 +2790,11 @@
       "type": "Feature",
       "properties": {
         "id": "4fb939d0-0fd4-4ccb-a9c4-62dc0917",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.67869471948225,
+          35.498563162592134
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
@@ -2484,7 +2820,11 @@
       "type": "Feature",
       "properties": {
         "id": "25f90f8b-dc7d-4894-b595-0c7e32c2",
-        "category": null
+        "category": null,
+        "display_point": [
+          139.6785654621052,
+          35.49824104119477
+        ]
       },
       "geometry": {
         "type": "MultiLineString",
