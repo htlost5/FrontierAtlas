@@ -5,7 +5,7 @@ export type CameraRegion = {
   properties?: {
     zoomLevel?: number;
     center?: [number, number];
-    visibleBounds?: [[number, number], [number, number]]; // [northEast, southWest]
+    visibleBounds?: [GeoJSON.Position, GeoJSON.Position]; // [northEast, southWest]
   };
 };
 

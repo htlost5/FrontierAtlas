@@ -9,10 +9,7 @@ import type {
   VersionInfo,
   MapId,
 } from "@/src/data/geojson/types";
-import type {
-  BuildManifest,
-  LocalManifest,
-} from "@/src/domain/manifestTypes";
+import type { BuildManifest, LocalManifest } from "@/src/domain/manifestTypes";
 import { NetworkError, QuotaExceededError } from "@/src/domain/NetworkErrors";
 import { VersionFetchError } from "@/src/domain/VersionErrors";
 import {
@@ -21,7 +18,10 @@ import {
   VersionMismatchError,
 } from "@/src/domain/ManifestErrors";
 import { LATEST_URL, RELEASES_URL } from "@/src/data/urls";
-import { fetchJsonWithRetry, fetchTextWithRetry } from "@/src/infra/network/fetchJson";
+import {
+  fetchJsonWithRetry,
+  fetchTextWithRetry,
+} from "@/src/infra/network/fetchJson";
 import { sha256 } from "@/src/infra/sha256/hashCheck";
 import { parseJson } from "@/src/infra/jsonParse/jsonParser";
 
@@ -50,9 +50,7 @@ export class UpdateService {
 
       // version.json から詳細情報を取得
       const versionInfoUrl = `${RELEASES_URL}/${config.version}/data/version.json`;
-      const versionInfo = await fetchJsonWithRetry<VersionInfo>(
-        versionInfoUrl,
-      );
+      const versionInfo = await fetchJsonWithRetry<VersionInfo>(versionInfoUrl);
 
       if (!versionInfo) {
         throw new VersionFetchError();
@@ -74,7 +72,9 @@ export class UpdateService {
    * ビルドマニフェストを取得・検証
    * 現行の setBuildManifest を移植
    */
-  async fetchBuildManifest(versionInfo: VersionInfo): Promise<BuildManifest | null> {
+  async fetchBuildManifest(
+    versionInfo: VersionInfo,
+  ): Promise<BuildManifest | null> {
     try {
       const manifestUrl = `${RELEASES_URL}/${versionInfo.version}/data/manifest.json`;
 
@@ -146,14 +146,10 @@ export class UpdateService {
     const localIds = Object.keys(localFiles) as MapId[];
 
     // add detect
-    const addList: MapId[] = buildIds.filter(
-      (id) => !localIds.includes(id),
-    );
+    const addList: MapId[] = buildIds.filter((id) => !localIds.includes(id));
 
     // delete detect
-    const deleteList: MapId[] = localIds.filter(
-      (id) => !buildIds.includes(id),
-    );
+    const deleteList: MapId[] = localIds.filter((id) => !buildIds.includes(id));
 
     // update detect (sha256 or size mismatch)
     const intersection = localIds.filter((id) => buildIds.includes(id));
@@ -190,7 +186,7 @@ export class UpdateService {
     buildManifest: BuildManifest,
   ): Promise<UpdateResult[]> {
     const results: UpdateResult[] = [];
-    const baseUrl = `${RELEASES_URL}/${version}`;
+    const baseUrl = `${RELEASES_URL}/${version}/data`;
 
     // delete: 先に削除
     for (const mapId of plan.delete) {
@@ -250,9 +246,7 @@ export class UpdateService {
         results.push({ mapId, status: "success" });
       } catch (e) {
         const errMsg = e instanceof Error ? e.message : String(e);
-        console.warn(
-          `[UpdateService] Failed to update ${mapId}: ${errMsg}`,
-        );
+        console.warn(`[UpdateService] Failed to update ${mapId}: ${errMsg}`);
         results.push({ mapId, status: "failed", error: errMsg });
         await this.repo.recordFailure(mapId, version, errMsg);
         // 部分成功: 1ファイル失敗しても続行

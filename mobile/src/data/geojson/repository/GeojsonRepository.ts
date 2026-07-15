@@ -15,7 +15,7 @@ import type {
   LocalManifest,
 } from "@/src/domain/manifestTypes";
 import { expoRead } from "@/src/infra/FileSystem/fileSystem";
-import { LOCAL_MANFEST_PATH } from "@/src/data/paths";
+import { LOCAL_MANIFEST_PATH } from "@/src/data/paths";
 
 const DB_NAME = "geojson.db";
 
@@ -325,7 +325,7 @@ export class GeojsonRepository {
       // expo-file-system 経由で旧 localManifest.json をチェック
       let legacyText: string;
       try {
-        legacyText = await expoRead(LOCAL_MANFEST_PATH);
+        legacyText = await expoRead(LOCAL_MANIFEST_PATH);
       } catch {
         // 旧ファイルが存在しない => マイグレーション不要
         return;
