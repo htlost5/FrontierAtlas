@@ -24,7 +24,7 @@ const preloadCache: PreloadCache = {
 export type FloorGeoData = {
   readonly units: FeatureCollection | null;
   readonly sections: FeatureCollection | null;
-  readonly surface: FeatureCollection | null;        // [NEW]
+  readonly surface: FeatureCollection | null; // [NEW]
   readonly underlaySurface: FeatureCollection | null; // [NEW] 4F/5F only
 };
 
@@ -138,7 +138,12 @@ async function preloadAllFloors(
         surface = sanitizeFeatureCollection(surface);
       }
 
-      preloadCache.data.set(floor, { units, sections, surface, underlaySurface: null });
+      preloadCache.data.set(floor, {
+        units,
+        sections,
+        surface,
+        underlaySurface: null,
+      });
       onProgress?.(i + 1, floors.length);
     });
 
@@ -148,7 +153,10 @@ async function preloadAllFloors(
       for (const f of [4, 5]) {
         const existing = preloadCache.data.get(f);
         if (existing) {
-          preloadCache.data.set(f, { ...existing, underlaySurface: floor3Data.surface });
+          preloadCache.data.set(f, {
+            ...existing,
+            underlaySurface: floor3Data.surface,
+          });
         }
       }
     }

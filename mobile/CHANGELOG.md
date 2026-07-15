@@ -3,6 +3,15 @@
 All notable changes to FrontierAtlas will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+### [0.17.1](https://github.com/htlost/frontieratlas/compare/v0.17.0...v0.17.1) (2026-07-15)
+
+
+### Features
+
+* **map:** add visibleBounds logging alongside zoom level ([8b2aadf](https://github.com/htlost/frontieratlas/commit/8b2aadfec6e3641080b8eb2de00458285a267b79))
+* **mobile:** add floor-specific surface layers to studyhall MapLibre rendering ([01cd7cf](https://github.com/htlost/frontieratlas/commit/01cd7cf947c3340330919d25dd5afbbd976c3965))
+* **mobile:** expand map restrict.bounds by 1.5x ([ecffa89](https://github.com/htlost/frontieratlas/commit/ecffa895aab35a1d77008eed62d3564cd5115d23))
+
 ## [0.17.0](https://github.com/htlost/frontieratlas/compare/v0.16.3...v0.17.0) (2026-07-14)
 
 

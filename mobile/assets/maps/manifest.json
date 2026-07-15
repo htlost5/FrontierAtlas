@@ -92,7 +92,8 @@
       "relativePath": "maps/imdf/studyhall/sections/floor5.json",
       "sha256": "da65d87b135041dbcb2dd0b3ddc9d4f4a129ffc3093cf0a089428a2a68d692bc",
       "size": 6103
-    },    "studyhall_surface_floor1": {
+    },
+    "studyhall_surface_floor1": {
       "logicalId": "studyhall_surface_floor1",
       "relativePath": "maps/imdf/studyhall/surface/1F.json",
       "sha256": "af26c36754ff6dd0d4cd43860dd5a3181e69e5e59ba8c0f18d7389f4d3e4519b",
@@ -121,7 +122,8 @@
       "relativePath": "maps/imdf/studyhall/surface/5F.json",
       "sha256": "1281975e4b614353711ba6a910ea29f2f383699dd02a8bb6d8679b0609abe907",
       "size": 1055
-    },    "studyhall_stairs": {
+    },
+    "studyhall_stairs": {
       "logicalId": "studyhall_stairs",
       "relativePath": "maps/imdf/studyhall/stairs.json",
       "sha256": "53cd7da1be18689c3152188dddcccc871d134076a6fef3bad456a2dda2b1fe5c",

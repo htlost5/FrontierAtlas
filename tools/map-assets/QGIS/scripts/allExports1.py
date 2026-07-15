@@ -19,6 +19,9 @@ TRANSFORM_CONTEXT = QgsProject.instance().transformContext()
 
 TARGET_ROOTS = {"studyhall", "interact"}
 
+BUILDING_LEVEL_NAMES = {"surface", "stairs"}
+FLOOR_LEVEL_NAMES = {"rooms", "surface", "walkable"}
+
 
 # -----------------------------
 # 初期化（完全削除）
@@ -91,7 +94,7 @@ def convert_gpkg_to_geojson(gpkg_path, output_path):
 
 
 # -----------------------------
-# パス変換
+# パス変換（新 exports/build 構造対応）
 # -----------------------------
 def map_output_path(input_path):
     rel = os.path.relpath(input_path, INPUT_ROOT)
@@ -112,29 +115,23 @@ def map_output_path(input_path):
     if parts[0] in TARGET_ROOTS:
         root = parts[0]
 
-        # studyhall/footprint.gpkg, studyhall/stairs.gpkg, interact/footprint.gpkg など
-        if len(parts) == 2:
-            if parts[1].lower() in {"footprint.gpkg", "stairs.gpkg"}:
-                return os.path.join(OUTPUT_ROOT, root, filename)
+        # len(parts)==3: 新しい二層構造
+        if len(parts) == 3:
+            if parts[1] == "levels":
+                # studyhall/levels/{name}.gpkg（変更なし）
+                return os.path.join(OUTPUT_ROOT, root, "levels", filename)
 
-        # studyhall/floors/floor1/units.gpkg
-        if len(parts) == 4 and parts[1] == "floors":
-            return os.path.join(
-                OUTPUT_ROOT,
-                root,
-                "floors",
-                parts[2],
-                filename
-            )
+            if parts[1] == "building":
+                # building-level: surface / stairs
+                base_name = os.path.splitext(parts[2])[0]
+                if base_name in BUILDING_LEVEL_NAMES:
+                    return os.path.join(OUTPUT_ROOT, root, "building", filename)
 
-        # studyhall/levels/floor1-3.gpkg
-        if len(parts) == 3 and parts[1] == "levels":
-            return os.path.join(
-                OUTPUT_ROOT,
-                root,
-                "levels",
-                filename
-            )
+            else:
+                # floor-level: rooms / surface / walkable
+                base_name = os.path.splitext(parts[2])[0]
+                if base_name in FLOOR_LEVEL_NAMES:
+                    return os.path.join(OUTPUT_ROOT, root, parts[1], filename)
 
     return None
 

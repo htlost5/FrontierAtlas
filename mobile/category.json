@@ -1,0 +1,316 @@
+{
+  "categories": {
+    "classroom": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "emergency_exit": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "male_restroom": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "female_restroom": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "accessible_restroom": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "vending": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "structure": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    },
+    "outdoor_space": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    },
+    "stairs": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "elevator": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "locker_area": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "information_lounge": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    },
+    "lounge": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    },
+    "storage": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "laboratory": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "prep_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "staff_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "meeting_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "study_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "courtyard": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": true
+      },
+      "poi": false
+    },
+    "fire_door": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "library": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "it_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "listening_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "atrium": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    },
+    "nursery_officce": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "studio_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "broadcasting_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "printing_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "music_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "japanese_style_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "cooking_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "sewing_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "art_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "calligraphy_room": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "workshop": {
+      "visible": true,
+      "label": {
+        "icon": true,
+        "text": true
+      },
+      "poi": false
+    },
+    "changing_room": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "waste_room": {
+      "visible": true,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": true
+    },
+    "lobby": {
+      "visible": false,
+      "label": {
+        "icon": false,
+        "text": false
+      },
+      "poi": false
+    }
+  }
+}
