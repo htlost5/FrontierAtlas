@@ -200,7 +200,7 @@
       },
       "poi": false
     },
-    "nursery_officce": {
+    "nursery_room": {
       "visible": true,
       "label": {
         "icon": true,
