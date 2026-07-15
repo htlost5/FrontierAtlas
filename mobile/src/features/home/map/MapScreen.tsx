@@ -18,6 +18,7 @@ import { FloorView } from "./layers/floor";
 import { VenueView } from "./layers/venue";
 import { MapIconLabel } from "./renderers/MapIconLabel";
 import { UnitSymbol } from "./renderers/UnitSymbol";
+import { StairsLayer } from "./layers/stairs";
 import { processUnitData } from "./renderers/processUnitData";
 
 type Props = {
@@ -125,7 +126,7 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         <VenueView data={batchData.venue} colorTheme={colorTheme} />
       )}
 
-      {/* Buildings レイヤー（床色）— section の下、venue の上 */}
+      {/* Buildings レイヤー（床色）— venue の上 */}
       {batchData.buildings && (
         <BuildingsView
           data={batchData.buildings}
@@ -141,6 +142,16 @@ export function MapScreen({ cameraRef, retryKey = 0 }: Props) {
         <FloorView
           floorData={batchData.floorData}
           colorTheme={colorTheme}
+          visible={displayMode !== "building"}
+        />
+      )}
+
+      {/* Stairs レイヤー — FloorView の上、UnitSymbol の下 */}
+      {batchData.stairs && (
+        <StairsLayer
+          data={batchData.stairs}
+          currentFloor={batchData.currentFloor}
+          palette={colorTheme.stairs}
           visible={displayMode !== "building"}
         />
       )}
