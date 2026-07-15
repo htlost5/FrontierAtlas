@@ -19,7 +19,7 @@ export default function SearchView() {
           <View style={styles.iconWrapper}>
             <Image
               style={styles.icon}
-              source={require("@/assets/images/icons/MapView/map/unitIcons/classroom.png")}
+              source={require("@/assets/images/icons/tabs/classroom.png")}
             />
           </View>
           <View style={styles.textWrapper}>
